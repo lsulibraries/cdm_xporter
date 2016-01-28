@@ -1,1 +1,2 @@
 *.xml
+/cdm_metadata_text/*.xml
