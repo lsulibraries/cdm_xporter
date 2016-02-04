@@ -77,12 +77,13 @@ Collections
 if __name__ == '__main__':
     pass
 
-    # write_xml_to_file(retrieve_collections_list(), 'Collections', 'List')
-    # write_xml_to_file(retrieve_collection_metadata(alias), alias, pointer)
-    # write_xml_to_file(retrieve_collection_fields(alias), alias, pointer)
-    # write_xml_to_file(retrieve_elems_in_collection(alias, ['dmrecord', 'fullrs', 'title', 'a', 'covera']), alias, pointer)
-    # write_xml_to_file(retrieve_item_metadata(alias, pointer), alias, pointer)
-    # write_binary_to_file(retrieve_binaries(alias, pointer, file_type), alias, pointer, file_type)
+    #  Sample commands:
+    #  write_xml_to_file(retrieve_collections_list(), 'Collections', 'List')
+    #  write_xml_to_file(retrieve_collection_metadata(alias), alias, pointer)
+    #  write_xml_to_file(retrieve_collection_fields(alias), alias, pointer)
+    #  write_xml_to_file(retrieve_elems_in_collection(alias, ['dmrecord', 'fullrs', 'title', 'a', 'covera']), alias, pointer)
+    #  write_xml_to_file(retrieve_item_metadata(alias, pointer), alias, pointer)
+    #  write_binary_to_file(retrieve_binaries(alias, pointer, file_type), alias, pointer, file_type)
 
 
 
