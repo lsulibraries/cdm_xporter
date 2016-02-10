@@ -25,9 +25,9 @@ pointers_list = [item_pointer.findtext('.') for item_pointer in elems_in_coll_tr
 for pointer in pointers_list:
     item_metadata = p.retrieve_item_metadata(alias, pointer)
     for key, value in nickname_dict.items():
-        item_metadata = item_metadata.replace('<{}>'.format(key), '<{}>'.format(value.replace(' ', '_')))
-        item_metadata = item_metadata.replace('</{}>'.format(key), '</{}>'.format(value.replace(' ', '_')))
-        item_metadata = item_metadata.replace('<{}/>'.format(key), '<{}/>'.format(value.replace(' ', '_')))
+        item_metadata = item_metadata.replace('<{}>'.format(key), '<{}>'.format(value.replace(' ', '_').lower()))
+        item_metadata = item_metadata.replace('</{}>'.format(key), '</{}>'.format(value.replace(' ', '_').lower()))
+        item_metadata = item_metadata.replace('<{}/>'.format(key), '<{}/>'.format(value.replace(' ', '_').lower()))
 
     p.write_xml_to_file(item_metadata, alias, pointer)
 
