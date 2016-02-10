@@ -58,6 +58,20 @@ def write_xml_to_file(xml_text, collection_alias, item_pointer):
 def find_item_pointers(item_pointers_etree):
     return [item_pointer.findtext('.') for item_pointer in item_pointers_etree.findall('.//pointer')]
 
+
+def make_nickname_dict(collection_fields_etree):
+    nickname_dict = dict()
+    for group in collection_fields_etree.findall('field'):
+        nick, name = None, None
+        for child in group.getchildren():
+            if child.tag == 'name':
+                name = child.text
+            if child.tag == 'nick':
+                nick = child.text
+        if nick and name:
+            nickname_dict[nick] = name
+    return nickname_dict
+
 '''
 Collections
   Collection
