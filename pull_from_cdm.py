@@ -72,6 +72,9 @@ def make_nickname_dict(collection_fields_etree):
             nickname_dict[nick] = name
     return nickname_dict
 
+
+
+
 '''
 Collections
   Collection
@@ -90,31 +93,3 @@ Collections
 
 if __name__ == '__main__':
     pass
-
-    #  Sample commands:
-    #  write_xml_to_file(retrieve_collections_list(), 'Collections', 'List')
-    #  write_xml_to_file(retrieve_collection_metadata(alias), alias, pointer)
-    #  write_xml_to_file(retrieve_collection_fields(alias), alias, pointer)
-    #  write_xml_to_file(retrieve_elems_in_collection(alias, ['dmrecord', 'fullrs', 'title', 'a', 'covera']), alias, pointer)
-    #  write_xml_to_file(retrieve_item_metadata(alias, pointer), alias, pointer)
-    #  write_binary_to_file(retrieve_binaries(alias, pointer, file_type), alias, pointer, file_type)
-
-
-
-
-
-
-
-
-
-
-
-
-    # collection_alias = 'p16313coll54'
-    # item_pointer = '64'
-    # temp_binary = retrieve_binaries_and_rename(collection_alias, item_pointer, 'you_can_rename', 'jp2')
-    # write_binary_to_file(temp_binary, 'other_filename', 'jp2')
-    # item_pointers_etree_elem = export_item_pointers_from_contentdm(collection_alias)
-    # for item_pointer in find_item_pointers(item_pointers_etree):
-    #     metadata_xml = retrieve_item_metadata(collection_alias, item_pointer)
-    #     write_to_file(metadata_xml, collection_alias, item_pointer)

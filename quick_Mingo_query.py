@@ -3,9 +3,10 @@
 import pull_from_cdm as p
 import xml.etree.ElementTree as ET
 
+# p.write_xml_to_file(p.retrieve_collections_list(), 'Collections', 'List')
+
 alias = 'p16313coll54'  # Mingo Family ...
 
-# p.write_xml_to_file(p.retrieve_collections_list(), 'Collections', 'List')
 p.write_xml_to_file(p.retrieve_collection_metadata(alias), alias, 'Collection_Metadata')
 
 collection_fields = p.retrieve_collection_fields(alias)
@@ -22,7 +23,12 @@ elems_in_coll_tree = ET.fromstring(xml_elems_in_coll)
 
 pointers_list = [item_pointer.findtext('.') for item_pointer in elems_in_coll_tree.findall('.//pointer')]
 
-for pointer in pointers_list:
+pointers_filetypes = [(single_record.find('dmrecord').text,
+                       single_record.find('filetype').text,
+                       ) for single_record in elems_in_coll_tree.findall('.//record')
+                      ]
+
+for pointer, filetype in pointers_filetypes:
     item_metadata = p.retrieve_item_metadata(alias, pointer)
     for key, value in nickname_dict.items():
         item_metadata = item_metadata.replace('<{}>'.format(key), '<{}>'.format(value.replace(' ', '_').lower()))
@@ -31,4 +37,4 @@ for pointer in pointers_list:
 
     p.write_xml_to_file(item_metadata, alias, pointer)
 
-    p.write_binary_to_file(p.retrieve_binaries(alias, pointer, 'jp2'), alias, pointer, 'jp2')
+    p.write_binary_to_file(p.retrieve_binaries(alias, pointer, filetype), alias, pointer, filetype)
