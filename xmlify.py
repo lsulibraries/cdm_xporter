@@ -22,13 +22,13 @@ def xmlify_a_collection(alias):
 
     collection_etree = ET.Element(alias)
     for pointer, filetype in pointers_filetypes:
-        object_xml = xmlifiy_an_object(alias, pointer)
+        object_xml = xmlify_an_object(alias, pointer)
         collection_etree.append(ET.fromstring(object_xml))
 
-    p.write_xml_to_file(collection_etree, alias)
+    p.write_xml_to_file(ET.tostring(collection_etree, encoding="unicode", method="xml"), alias)
 
 
-def xmlifiy_an_object(alias, pointer):
+def xmlify_an_object(alias, pointer):
     item_metadata = p.retrieve_item_metadata(alias, pointer)
     for key, value in lookup_coll_nicknames(alias).items():
         value = value.replace(' ', '_').lower()

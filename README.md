@@ -8,4 +8,4 @@ git clone https://github.com/lsulibraries/cdm_xporter/
 
 python3 quick_Mingo_query.py
 
-Development is currently halted until a use-case presents itself.  
+else, one can call up the function xmlify.xmlify_a_collection(contentdm_alias) -- This outputs one xml file of all the collection's objects' metadata.  
