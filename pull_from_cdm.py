@@ -40,17 +40,17 @@ def retrieve_compound_object(collection_alias, item_pointer):
     with urllib.request.urlopen(url) as response:
         return response.read().decode(encoding='utf-8')
 
-def write_binary_to_file(binary, collection_alias, item_pointer, filetype):
+def write_binary_to_file(binary, new_filename, filetype):
     if 'cdm_binaries' not in os.listdir(os.getcwd()):
         os.mkdir('cdm_binaries')
-    filename = 'cdm_binaries/{}_{}.{}'.format(collection_alias, item_pointer, filetype)
+    filename = 'cdm_binaries/{}.{}'.format(new_filename, filetype)
     with open(filename, 'bw') as f:
         f.write(binary)
 
-def write_xml_to_file(xml_text, collection_alias, item_pointer):
+def write_xml_to_file(xml_text, new_filename):
     if 'cdm_metadata_text' not in os.listdir(os.getcwd()):
         os.mkdir('cdm_metadata_text')
-    filename = 'cdm_metadata_text/{}_{}.xml'.format(collection_alias, item_pointer)
+    filename = 'cdm_metadata_text/{}.xml'.format(new_filename)
     with open(filename, 'w') as f:
         f.write(xml_text)
 
