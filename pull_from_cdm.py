@@ -65,7 +65,8 @@ def make_nickname_dict(collection_fields_etree):
         nick, name = None, None
         for child in group.getchildren():
             if child.tag == 'name':
-                name = child.text
+                name = child.text.replace('/', '_')
+                name = name.replace('(', '_').replace(')', ' ')
             if child.tag == 'nick':
                 nick = child.text
         if nick and name:

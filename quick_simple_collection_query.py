@@ -3,9 +3,10 @@
 import pull_from_cdm as p
 import xml.etree.ElementTree as ET
 
-# p.write_xml_to_file(p.retrieve_collections_list(), '{}_{}'.format('Collections', 'List'))
-
-alias = 'p16313coll54'  # Mingo Family ...
+p.write_xml_to_file(p.retrieve_collections_list(), '{}_{}'.format('Collections', 'List'))
+# alias = 'p16313coll54'  # Mingo Family ...
+# alias = 'p16313coll38'  # some collection with non-xml-compliant nicknames
+alias = 'p120701coll15'  # some compound objects
 
 p.write_xml_to_file(p.retrieve_collection_metadata(alias), '{}_{}'.format(alias, 'Collection_Metadata'))
 
