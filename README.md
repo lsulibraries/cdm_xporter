@@ -7,7 +7,6 @@ xmlify.py is a group of functions useful for pulling all the metadata/binaries f
 Commenting/Uncommenting some lines will result in downloading binaries.  
 
 git clone https://github.com/lsulibraries/cdm_xporter/
-
 python3 xmlify
 
 else, one can import the functions into other scripts for your custom project. 
