@@ -12,6 +12,8 @@ def list_all_aliases():
 
 
 def xmlify_a_collection(alias):
+    if os.path.isfile("cdm_metadata_text/{}.xml".format(alias)):
+        return    
     collection_etree = ET.Element('collection', attrib={'alias': alias})
     elems_in_coll_xml = p.retrieve_elems_in_collection(alias, ['source', 'dmrecord', 'dmimage', 'find'])
     elems_in_coll_etree = ET.fromstring(elems_in_coll_xml)
@@ -25,6 +27,7 @@ def xmlify_a_collection(alias):
         if filetype == 'cpd':
             print(alias, pointer)
             local_etree = ET.fromstring(p.retrieve_item_metadata(alias, pointer))
+            local_etree = clean_up_compound_tags(alias, pointer, local_etree)
             local_etree.append(xmlify_a_compound(alias, pointer))
             collection_etree.append(local_etree)
         else:
@@ -73,13 +76,8 @@ def lookup_coll_nicknames(alias):
     nickname_dict = p.make_nickname_dict(collection_fields_tree)
     return nickname_dict
 
-
-def clean_up_tags(alias, pointer, xml_etree):
+def clean_up_compound_tags(alias, pointer, xml_etree):
     for xml_tag in xml_etree.iter('xml'):
-        xml_tag.tag = 'simple_object'
-        xml_tag.set('pointer', pointer)
-        xml_tag.set('alias', alias)
-    for xml_tag in xml_etree.iter('cpd'):
         xml_tag.tag = 'compound_object'
         xml_tag.set('pointer', pointer)
         xml_tag.set('alias', alias)
@@ -88,16 +86,28 @@ def clean_up_tags(alias, pointer, xml_etree):
             xml_tag.tag = v
     return xml_etree
 
+def clean_up_tags(alias, pointer, xml_etree):
+    for xml_tag in xml_etree.iter('xml'):
+        xml_tag.tag = 'simple_object'
+        xml_tag.set('pointer', pointer)
+        xml_tag.set('alias', alias)
+    for xml_tag in xml_etree.iter('cpd'):
+        xml_tag.tag = 'compound_object_wrapper'
+    for k, v in lookup_coll_nicknames(alias).items():
+        for xml_tag in xml_etree.iter(k):
+            xml_tag.tag = v
+    return xml_etree
+
 
 if __name__ == '__main__':
-    alias = 'p16313coll81'
-    try:
-        xmlify_a_collection(alias)
-    except OSError:
-        print("Error:", sys.exc_info()[0].with_traceback())
+    # alias = 'p16313coll81'
+    # try:
+    #     xmlify_a_collection(alias)
+    # except OSError:
+    #     print("Error:", sys.exc_info()[0].with_traceback())
 
-    # for alias in list_all_aliases():
-    #     try:
-    #         xmlify_a_collection(alias)
-    #     except OSError:
-    #         print("Error:", sys.exc_info()[0])
+    for alias in list_all_aliases():
+        try:
+            xmlify_a_collection(alias)
+        except OSError:
+            print("Error:", sys.exc_info()[0])
