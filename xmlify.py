@@ -13,7 +13,7 @@ def list_all_aliases():
 
 def xmlify_a_collection(alias):
     if os.path.isfile("cdm_metadata_text/{}.xml".format(alias)):
-        return    
+        return
     collection_etree = ET.Element('collection', attrib={'alias': alias})
     elems_in_coll_xml = p.retrieve_elems_in_collection(alias, ['source', 'dmrecord', 'dmimage', 'find'])
     elems_in_coll_etree = ET.fromstring(elems_in_coll_xml)
@@ -76,6 +76,7 @@ def lookup_coll_nicknames(alias):
     nickname_dict = p.make_nickname_dict(collection_fields_tree)
     return nickname_dict
 
+
 def clean_up_compound_tags(alias, pointer, xml_etree):
     for xml_tag in xml_etree.iter('xml'):
         xml_tag.tag = 'compound_object'
@@ -85,6 +86,7 @@ def clean_up_compound_tags(alias, pointer, xml_etree):
         for xml_tag in xml_etree.iter(k):
             xml_tag.tag = v
     return xml_etree
+
 
 def clean_up_tags(alias, pointer, xml_etree):
     for xml_tag in xml_etree.iter('xml'):
