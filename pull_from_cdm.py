@@ -52,20 +52,25 @@ def retrieve_compound_object(collection_alias, item_pointer):
         return response.read().decode(encoding='utf-8')
 
 
-def write_binary_to_file(binary, new_filename, filetype):
-    if 'cdm_binaries' not in os.listdir(os.getcwd()):
-        os.mkdir('cdm_binaries')
-    filename = 'cdm_binaries/{}.{}'.format(new_filename, filetype)
+def write_binary_to_file(binary, alias, new_filename, filetype):
+    make_directory_tree(alias)
+    filename = 'Collections/{}/{}.{}'.format(alias, new_filename, filetype)
     with open(filename, 'bw') as f:
         f.write(binary)
 
 
-def write_xml_to_file(xml_text, new_filename):
-    if 'cdm_metadata_text' not in os.listdir(os.getcwd()):
-        os.mkdir('cdm_metadata_text')
-    filename = 'cdm_metadata_text/{}.xml'.format(new_filename)
+def write_xml_to_file(xml_text, alias, new_filename):
+    make_directory_tree(alias)
+    filename = 'Collections/{}/{}.xml'.format(alias, new_filename)
     with open(filename, 'w') as f:
         f.write(xml_text)
+
+
+def make_directory_tree(alias):
+    if 'Collections' not in os.listdir(os.getcwd()):
+        os.mkdir('Collections')
+    if alias not in os.listdir(os.getcwd() + '/Collections') and alias not in ('.', '..'):
+        os.mkdir('Collections/{}'.format(alias))
 
 
 def find_item_pointers(item_pointers_etree):

@@ -40,6 +40,10 @@ def xmlify_a_compound(alias, pointer):
     xml_text = p.retrieve_compound_object(alias, pointer)
     local_etree = ET.fromstring(xml_text)
     local_etree = clean_up_tags(alias, pointer, local_etree)
+    #  write binary to file if compound object has a binary at root level.
+    if local_etree.find('find'):  # find is contentdm's abbr for 'contentdm file name'
+        p.write_binary_to_file(p.retrieve_binaries(alias, pointer, "something"))
+
     for page_elem in local_etree.findall('.//page'):
         filename = page_elem.find('./pagefile').text
         local_pointer = page_elem.find('./pageptr').text
@@ -51,9 +55,6 @@ def xmlify_a_compound(alias, pointer):
             print(alias, name, filetype)
             item_etree = xmlify_an_item(alias, local_pointer, filetype)
             local_etree.append(item_etree)
-            # optional pull binary off content dm website
-            # if not os.path.isfile("cdm_binaries/{}_{}.{}".format(alias, local_pointer, filetype)):
-            #     p.write_binary_to_file(p.retrieve_binaries(alias, local_pointer, filetype), '{}_{}'.format(alias, local_pointer), filetype)
     return local_etree
 
 
@@ -65,7 +66,7 @@ def xmlify_an_item(alias, pointer, filetype):
     # p.write_xml_to_file(xml_text, '{}_{}'.format(alias, pointer))
     if not os.path.isfile("cdm_binaries/{}_{}.{}".format(alias, pointer, filetype)):
         pass
-        # This write the binary to file
+        # This write the binary on the simple object level to file
         # p.write_binary_to_file(p.retrieve_binaries(alias, pointer, filetype), '{}_{}'.format(alias, pointer), filetype)
     return local_etree
 
