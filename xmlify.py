@@ -22,22 +22,25 @@ def grab_elems_in_coll(alias):
 
 
 def xmlify_a_collection(alias):
-    if os.path.isfile("cdm_metadata_text/{}.xml".format(alias)):
+    if os.path.isfile("Collections/{}/Whole_Collection.xml".format(alias)):
         return  # skip collection if an xml already computed & saved there.
-
-    collection_etree = ET.Element('collection', attrib={'alias': alias})
     elems_in_coll_etree = grab_elems_in_coll(alias)
     collection_fields_etree = grab_collection_fields(alias)
-    pointers_filetypes_sources = [(single_record.find('pointer').text,
-                                   single_record.find('filetype').text,
-                                   single_record.find('source').text)
-                                  for single_record in elems_in_coll_etree.findall('.//record')
-                                  ]
-    for pointer, filetype, source in pointers_filetypes_sources:
+    pointers_filetypes = [(single_record.find('pointer').text,
+                           single_record.find('filetype').text,)
+                          for single_record in elems_in_coll_etree.findall('.//record')
+                          ]
+    collection_etree = ET.Element('collection', attrib={'alias': alias})
+    for pointer, filetype in pointers_filetypes:
         if filetype == 'cpd':
-            print(alias, pointer)
             local_etree = ET.fromstring(p.retrieve_item_metadata(alias, pointer))
-            local_etree = clean_up_compound_tags(alias, pointer, local_etree)
+            # following if clause catches weird case when binary is in root of compound object.
+            if 'object' in [i.tag for i in local_etree.getchildren()]:
+                bin_name, bin_ext = os.path.splitext(local_etree.find('object').text)
+                bin_ext = bin_ext.strip('.')
+                binary = p.retrieve_binaries(alias, pointer, bin_ext)
+                p.write_binary_to_file(binary, alias, pointer, bin_ext)
+            local_etree = clean_up_compound_tags(alias, pointer, local_etree, collection_fields_etree)
             local_etree.append(xmlify_a_compound(alias, pointer, collection_fields_etree))
             collection_etree.append(local_etree)
         else:
@@ -50,11 +53,7 @@ def xmlify_a_compound(alias, pointer, collection_fields_etree):
     xml_text = p.retrieve_compound_object(alias, pointer)
     local_etree = ET.fromstring(xml_text)
     local_etree = add_tag_attributes(collection_fields_etree, local_etree)
-    local_etree = clean_up_tags(alias, pointer, local_etree)
-    #  write binary to file if compound object has a binary at root level.
-    #  THIS DOESN"T WORK YET
-    # if local_etree.find('find'):  # find is contentdm's abbr for 'contentdm file name'
-    #     p.write_binary_to_file(p.retrieve_binaries(alias, pointer, "something"))
+    local_etree = clean_up_tags(alias, pointer, local_etree, collection_fields_etree)
 
     for page_elem in local_etree.findall('.//page'):
         filename = page_elem.find('./pagefile').text
@@ -73,10 +72,9 @@ def xmlify_a_compound(alias, pointer, collection_fields_etree):
 def xmlify_an_item(alias, pointer, filetype, collection_fields_etree):
     xml_text = p.retrieve_item_metadata(alias, pointer)
     local_etree = ET.fromstring(xml_text)
-    local_etree = clean_up_tags(alias, pointer, local_etree)
     local_etree = add_tag_attributes(local_etree, collection_fields_etree)
-    # This writes an xml file for each item.
-    # p.write_xml_to_file(xml_text, '{}_{}'.format(alias, pointer))
+    local_etree = clean_up_tags(alias, pointer, local_etree, collection_fields_etree)
+
     if not os.path.isfile("cdm_binaries/{}_{}.{}".format(alias, pointer, filetype)):
         pass
         # This write the binary on the simple object level to file
@@ -85,27 +83,27 @@ def xmlify_an_item(alias, pointer, filetype, collection_fields_etree):
     return local_etree
 
 
-def clean_up_compound_tags(alias, pointer, xml_etree):
+def clean_up_compound_tags(alias, pointer, xml_etree, collection_fields_etree):
     for xml_tag in xml_etree.iter('xml'):
         xml_tag.tag = 'compound_object'
         xml_tag.set('pointer', pointer)
         xml_tag.set('alias', alias)
-    # for k, v in lookup_coll_nicknames(alias, collection_fields_etree).items():
-    #     for xml_tag in xml_etree.iter(k):
-    #         xml_tag.tag = v
+    for k, v in lookup_coll_nicknames(alias, collection_fields_etree).items():
+        for xml_tag in xml_etree.iter(k):
+            xml_tag.tag = v
     return xml_etree
 
 
-def clean_up_tags(alias, pointer, xml_etree):
+def clean_up_tags(alias, pointer, xml_etree, collection_fields_etree):
     for xml_tag in xml_etree.iter('xml'):
         xml_tag.tag = 'simple_object'
         xml_tag.set('pointer', pointer)
         xml_tag.set('alias', alias)
     for xml_tag in xml_etree.iter('cpd'):
         xml_tag.tag = 'compound_object_wrapper'
-    # for k, v in lookup_coll_nicknames(alias, collection_fields_etree).items():
-    #     for xml_tag in xml_etree.iter(k):
-    #         xml_tag.tag = v
+    for k, v in lookup_coll_nicknames(alias, collection_fields_etree).items():
+        for xml_tag in xml_etree.iter(k):
+            xml_tag.tag = v
     return xml_etree
 
 
@@ -116,24 +114,19 @@ def lookup_coll_nicknames(alias, collection_fields_etree):
 
 def add_tag_attributes(xml_etree, collection_fields_etree):
     for tag in xml_etree.iter():
-        print('xmlify tag:', tag.tag, tag.items())
         fieldname_dict = p.make_fieldnames_dict(tag.tag, collection_fields_etree)
-        print('xmlify fieldname_dict:', fieldname_dict)
         if fieldname_dict:
-            print('if run')
             for k, v in fieldname_dict.items():
-                print('key, value', k, v)
                 tag.set(k, v)
-    print('after add_tag_attributes', ET.tostring(xml_etree))
     return xml_etree
 
 
 if __name__ == '__main__':
-    alias = 'p16313coll47'
-    try:
-        xmlify_a_collection(alias)
-    except OSError:
-        print("Error:", sys.exc_info()[0].with_traceback())
+    alias = 'p15140coll44'
+    # try:
+    xmlify_a_collection(alias)
+    # except OSError:
+    #     print("Error:", sys.exc_info()[0].with_traceback())
 
     # THIS RUNS THE WHOLE CONTENTDM
     # for alias in list_all_aliases():

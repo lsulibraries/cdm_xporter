@@ -84,8 +84,9 @@ def make_nickname_dict(collection_fields_etree):
         nick, name = None, None
         for child in group.getchildren():
             if child.tag == 'name':
-                name = child.text.replace('/', '_')
-                name = name.replace('(', '_').replace(')', '_').replace(' ', '_').replace("'", "_").lower()
+                name = child.text
+                for invalid in ('/', '(', ')', ' ', "'", '"',):
+                    name = name.replace(invalid, '_').lower()
             if child.tag == 'nick':
                 nick = child.text
         if nick and name:
@@ -98,10 +99,9 @@ def make_fieldnames_dict(nickname, collection_fields_etree):
     for field in collection_fields_etree.iter('field'):
         for elem in field.getchildren():
             if elem.text == nickname:
-                print('it ran', elem.text, elem.tag, elem.items())
                 for tag in field.findall('.//'):
                     if tag.tag and tag.text:
-                        if tag.tag in {'dc', 'find', 'name', 'nick', 'size', 'type', 'vocab'}:
+                        if tag.tag in {'dc', 'find', 'name', 'nick', 'size', 'type', 'vocab', 'req', 'search', 'vocab', 'vocdb', 'admin', 'readonly', }:
                             tag.text = escape(tag.text)
                             fieldnames_dict[tag.tag] = tag.text
     return fieldnames_dict
