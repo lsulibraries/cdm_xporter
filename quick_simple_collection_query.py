@@ -6,14 +6,21 @@ import xml.etree.ElementTree as ET
 p.write_xml_to_file(p.retrieve_collections_list(), '.', 'Collections_List')
 # alias = 'p16313coll54'  # Mingo Family ...
 # alias = 'p16313coll38'  # some collection with non-xml-compliant nicknames
+# alias = 'p15140coll44'  # missed pdf at root of compound object
 # alias = 'p120701coll15'  # some compound objects - some blocked from download
 # alias = 'p15140coll30'   # some compound objects
-# alias = 'p16313coll81'
+# alias = 'p16313coll81'   # compounds
+# alias = 'LSU_BRT'        # simple and compounds
 
-# alias = 'p15140coll44'  # missed pdf at root of compound object
+
 # alias = 'p15140coll15'  # simple objects
 # alias = 'p16313coll47'  # simple objects
-alias = 'LSU_BRT'
+# alias = 'p16313coll24'   # simple objects
+# alias = 'LSUHSCS_JCM'    # single simple object
+# alias = 'LSU_JJA'
+# alias = 'LSU_GFM'
+alias = 'p16313coll20'
+
 
 p.write_xml_to_file(p.retrieve_collection_metadata(alias), alias, 'Collection_Metadata')
 

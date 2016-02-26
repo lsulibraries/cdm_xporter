@@ -2,6 +2,7 @@
 
 import urllib.request
 import os
+from xml.sax.saxutils import escape
 
 
 def retrieve_collections_list():
@@ -91,6 +92,19 @@ def make_nickname_dict(collection_fields_etree):
             nickname_dict[nick] = name
     return nickname_dict
 
+
+def make_fieldnames_dict(nickname, collection_fields_etree):
+    fieldnames_dict = dict()
+    for field in collection_fields_etree.iter('field'):
+        for elem in field.getchildren():
+            if elem.text == nickname:
+                print('it ran', elem.text, elem.tag, elem.items())
+                for tag in field.findall('.//'):
+                    if tag.tag and tag.text:
+                        if tag.tag in {'dc', 'find', 'name', 'nick', 'size', 'type', 'vocab'}:
+                            tag.text = escape(tag.text)
+                            fieldnames_dict[tag.tag] = tag.text
+    return fieldnames_dict
 
 '''
 Collections
