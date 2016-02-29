@@ -2,7 +2,6 @@
 
 import urllib.request
 import os
-from xml.sax.saxutils import escape
 
 
 def retrieve_collections_list():
@@ -73,54 +72,6 @@ def make_directory_tree(alias):
     if alias not in os.listdir(os.getcwd() + '/Collections') and alias not in ('.', '..'):
         os.mkdir('Collections/{}'.format(alias))
 
-
-def find_item_pointers(item_pointers_etree):
-    return [item_pointer.findtext('.') for item_pointer in item_pointers_etree.findall('.//pointer')]
-
-
-def make_nickname_dict(collection_fields_etree):
-    nickname_dict = dict()
-    for group in collection_fields_etree.findall('field'):
-        nick, name = None, None
-        for child in group.getchildren():
-            if child.tag == 'name':
-                name = child.text
-                for invalid in ('/', '(', ')', ' ', "'", '"',):
-                    name = name.replace(invalid, '_').lower()
-            if child.tag == 'nick':
-                nick = child.text
-        if nick and name:
-            nickname_dict[nick] = name
-    return nickname_dict
-
-
-def make_fieldnames_dict(nickname, collection_fields_etree):
-    fieldnames_dict = dict()
-    for field in collection_fields_etree.iter('field'):
-        for elem in field.getchildren():
-            if elem.text == nickname:
-                for tag in field.findall('.//'):
-                    if tag.tag and tag.text:
-                        if tag.tag in {'dc', 'find', 'name', 'nick', 'size', 'type', 'vocab', 'req', 'search', 'vocab', 'vocdb', 'admin', 'readonly', }:
-                            tag.text = escape(tag.text)
-                            fieldnames_dict[tag.tag] = tag.text
-    return fieldnames_dict
-
-'''
-Collections
-  Collection
-    (("about this collection" paragraphs and info, not included in collection metadata))
-    item
-      item meta
-      binary
-    object (compound object)
-      object meta
-      item
-        item meta?
-        binary
-        binary
-        binary
-'''
 
 if __name__ == '__main__':
     pass
