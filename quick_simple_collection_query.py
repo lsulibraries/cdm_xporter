@@ -2,6 +2,7 @@
 
 import xmlify
 import pull_from_cdm as p
+# import pull_from_hd as p
 import xml.etree.ElementTree as ET
 
 
@@ -20,9 +21,9 @@ p.write_xml_to_file(p.retrieve_collections_list(), '.', 'Collections_List')
 # alias = 'p16313coll24'   # simple objects
 # alias = 'LSUHSCS_JCM'    # single simple object
 # alias = 'LSU_JJA'
-# alias = 'LSU_GFM'
+alias = 'LSU_GFM'
 # alias = 'p16313coll20'
-alias = 'LSU_MRF'
+# alias = 'LSU_MRF'
 
 
 p.write_xml_to_file(p.retrieve_collection_metadata(alias), alias, 'Collection_Metadata')
@@ -48,18 +49,12 @@ pointers_filetypes = [(single_record.find('dmrecord').text,
 
 for pointer, filetype in pointers_filetypes:
     item_metadata = p.retrieve_item_metadata(alias, pointer)
-
-    # for key, value in nickname_dict.items():
-    #     item_metadata = item_metadata.replace('<{}>'.format(key), '<{}>'.format(value.replace(' ', '_').lower()))
-    #     item_metadata = item_metadata.replace('</{}>'.format(key), '</{}>'.format(value.replace(' ', '_').lower()))
-    #     item_metadata = item_metadata.replace('<{}/>'.format(key), '<{}/>'.format(value.replace(' ', '_').lower()))
     local_etree = ET.fromstring(item_metadata)
     local_etree = xmlify.add_tag_attributes(local_etree, local_etree)
     local_etree = xmlify.clean_up_tags(alias, pointer, local_etree, collection_fields_etree)
     p.write_xml_to_file(ET.tostring(local_etree, encoding="unicode", method="xml"), alias, pointer)
-    # p.write_xml_to_file(item_metadata, alias, pointer)
 
-    if ET.fromstring(item_metadata).find('object'):  # find is contentdm's abbr for 'contentdm file name'
+    if ET.fromstring(item_metadata).find('object'):  # "find" is contentdm's abbr for 'contentdm file name'
         binary = p.retrieve_binaries(alias, pointer, "something")
         # p.write_binary_to_file(binary, alias, pointer, filetype)
 

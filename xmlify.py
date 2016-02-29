@@ -3,7 +3,9 @@
 import os
 import sys
 import pull_from_cdm as p
+# import pull_from_hd as p
 import xml.etree.ElementTree as ET
+from xml.sax.saxutils import escape
 
 
 def list_all_aliases():
@@ -108,17 +110,46 @@ def clean_up_tags(alias, pointer, xml_etree, collection_fields_etree):
 
 
 def lookup_coll_nicknames(alias, collection_fields_etree):
-    nickname_dict = p.make_nickname_dict(collection_fields_etree)
+    nickname_dict = make_nickname_dict(collection_fields_etree)
+    return nickname_dict
+
+
+def make_nickname_dict(collection_fields_etree):
+    nickname_dict = dict()
+    for group in collection_fields_etree.findall('field'):
+        nick, name = None, None
+        for child in group.getchildren():
+            if child.tag == 'name':
+                name = child.text
+                for invalid in ('/', '(', ')', ' ', "'", '"',):
+                    name = name.replace(invalid, '_').lower()
+            if child.tag == 'nick':
+                nick = child.text
+        if nick and name:
+            nickname_dict[nick] = name
     return nickname_dict
 
 
 def add_tag_attributes(xml_etree, collection_fields_etree):
     for tag in xml_etree.iter():
-        fieldname_dict = p.make_fieldnames_dict(tag.tag, collection_fields_etree)
+        fieldname_dict = make_fieldnames_dict(tag.tag, collection_fields_etree)
         if fieldname_dict:
             for k, v in fieldname_dict.items():
                 tag.set(k, v)
     return xml_etree
+
+
+def make_fieldnames_dict(nickname, collection_fields_etree):
+    fieldnames_dict = dict()
+    for field in collection_fields_etree.iter('field'):
+        for elem in field.getchildren():
+            if elem.text == nickname:
+                for tag in field.findall('.//'):
+                    if tag.tag and tag.text:
+                        if tag.tag in {'dc', 'find', 'name', 'nick', 'size', 'type', 'vocab', 'req', 'search', 'vocab', 'vocdb', 'admin', 'readonly', }:
+                            tag.text = escape(tag.text)
+                            fieldnames_dict[tag.tag] = tag.text
+    return fieldnames_dict
 
 
 if __name__ == '__main__':
