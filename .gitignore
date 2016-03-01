@@ -1,3 +1,4 @@
 *.xml
+*.pyc
 /cdm_metadata_text/*.xml
 /cdm_binaries/*
