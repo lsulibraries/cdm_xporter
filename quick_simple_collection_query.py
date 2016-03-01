@@ -56,6 +56,6 @@ for pointer, filetype in pointers_filetypes:
 
     if ET.fromstring(item_metadata).find('object'):  # "find" is contentdm's abbr for 'contentdm file name'
         binary = p.retrieve_binaries(alias, pointer, "something")
-        # p.write_binary_to_file(binary, alias, pointer, filetype)
+        p.write_binary_to_file(binary, alias, pointer, filetype)
 
-    # p.write_binary_to_file(p.retrieve_binaries(alias, pointer, filetype), alias, pointer, filetype)
+    p.write_binary_to_file(p.retrieve_binaries(alias, pointer, filetype), alias, pointer, filetype)
