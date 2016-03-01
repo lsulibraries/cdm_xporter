@@ -24,8 +24,8 @@ def grab_elems_in_coll(alias):
 
 
 def xmlify_a_collection(alias):
-    if os.path.isfile("Collections/{}/Whole_Collection.xml".format(alias)):
-        return  # skip collection if an xml already computed & saved there.
+    # if os.path.isfile("Collections/{}/Whole_Collection.xml".format(alias)):
+        # return  # skip collection if an xml already computed & saved there.
     elems_in_coll_etree = grab_elems_in_coll(alias)
     collection_fields_etree = grab_collection_fields(alias)
     pointers_filetypes = [(single_record.find('pointer').text,
@@ -80,8 +80,8 @@ def xmlify_an_item(alias, pointer, filetype, collection_fields_etree):
     if not os.path.isfile("cdm_binaries/{}_{}.{}".format(alias, pointer, filetype)):
         pass
         # This write the binary on the simple object level to file
-        # binary = p.retrieve_binaries(alias, pointer, filetype)
-        # p.write_binary_to_file(binary, '{}_{}'.format(alias, pointer), filetype)
+        binary = p.retrieve_binaries(alias, pointer, filetype)
+        p.write_binary_to_file(binary, alias, pointer, filetype)
     return local_etree
 
 
@@ -153,7 +153,7 @@ def make_fieldnames_dict(nickname, collection_fields_etree):
 
 
 if __name__ == '__main__':
-    alias = 'p15140coll44'
+    alias = 'LSU_GFM'
     # try:
     xmlify_a_collection(alias)
     # except OSError:

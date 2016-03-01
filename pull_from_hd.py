@@ -33,8 +33,8 @@ def retrieve_item_metadata(collection_alias, item_pointer):
 
 
 def retrieve_binaries(collection_alias, item_pointer, filetype):
-    with open('Collections/{}/{}.{}'.format(collection_alias, item_pointer, filetype), 'r') as f:
-        return f
+    with open('Collections/{}/{}.{}'.format(collection_alias, item_pointer, filetype), 'rb') as f:
+        return f.read()
 
 
 def retrieve_compound_object(collection_alias, item_pointer):
