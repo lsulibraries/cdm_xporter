@@ -24,8 +24,8 @@ def grab_elems_in_coll(alias):
 
 
 def xmlify_a_collection(alias):
-    # if os.path.isfile("Collections/{}/Whole_Collection.xml".format(alias)):
-        # return  # skip collection if an xml already computed & saved there.
+    if os.path.isfile("Collections/{}/Whole_Collection.xml".format(alias)):
+        return  # skip collection if an xml already computed & saved there.
     elems_in_coll_etree = grab_elems_in_coll(alias)
     collection_fields_etree = grab_collection_fields(alias)
     pointers_filetypes = [(single_record.find('pointer').text,
