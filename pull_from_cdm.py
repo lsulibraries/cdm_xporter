@@ -71,7 +71,3 @@ def make_directory_tree(alias):
         os.mkdir('Collections')
     if alias not in os.listdir(os.getcwd() + '/Collections') and alias not in ('.', '..'):
         os.mkdir('Collections/{}'.format(alias))
-
-
-if __name__ == '__main__':
-    pass

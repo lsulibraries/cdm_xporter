@@ -1,5 +1,7 @@
 *.xml
 *.pyc
+/cdm_metadata_text/*.xml
 /cdm_binaries/*
-/Collections/*
+/Sourced_from_HD_Collections/*
 /Xmlified_Collections/*
+/Collections/*
