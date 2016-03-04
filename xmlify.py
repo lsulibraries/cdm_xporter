@@ -62,12 +62,9 @@ def xmlify_a_compound(alias, pointer, collection_fields_etree):
         local_pointer = page_elem.find('./pageptr').text
         name, filetype = os.path.splitext(filename)
         filetype = filetype.replace('.', '')
-        if filetype == 'cpd':
-            print('Script not built for nested compounds')
-        else:
-            print(alias, name, filetype)
-            item_etree = xmlify_an_item(alias, local_pointer, filetype, collection_fields_etree)
-            local_etree.append(item_etree)
+        print(alias, name, filetype)
+        item_etree = xmlify_an_item(alias, local_pointer, filetype, collection_fields_etree)
+        local_etree.append(item_etree)
     return local_etree
 
 
@@ -146,8 +143,8 @@ def make_fieldnames_dict(nickname, collection_fields_etree):
             if elem.text == nickname:
                 for tag in field.findall('.//'):
                     if tag.tag and tag.text:
-                        if tag.tag in {'dc', 'find', 'name', 'nick', 'size', 'type', 'vocab', 'req', 'search', 'vocab', 'vocdb', 'admin', 'readonly', }:
-                            tag.text = escape(tag.text)
+                        if tag.tag in {'dc', 'find', 'name', 'nick', 'size', 'type', 'vocab', 'req', 'search', 'vocab', 'vocdb', 'admin', 'readonly'}:
+                            tag.text = escape(tag.text).replace(';', '').replace('#', '').replace(',', '')
                             fieldnames_dict[tag.tag] = tag.text
     return fieldnames_dict
 
