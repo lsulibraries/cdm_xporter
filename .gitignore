@@ -4,3 +4,5 @@
 /cdm_binaries/*
 /Sourced_from_HD_Collections/*
 /Collections/*
+.cache/*
+test_xmlify.py
