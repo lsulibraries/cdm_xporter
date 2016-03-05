@@ -3,6 +3,9 @@
 /cdm_metadata_text/*.xml
 /cdm_binaries/*
 /Sourced_from_HD_Collections/*
+/Xmlified_Collections/*
 /Collections/*
 .cache/*
 test_xmlify.py
+/One-off-collection-pulls/*
+
