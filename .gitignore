@@ -8,4 +8,4 @@
 .cache/*
 test_xmlify.py
 /One-off-collection-pulls/*
-
+*.ipynb_checkpoints
