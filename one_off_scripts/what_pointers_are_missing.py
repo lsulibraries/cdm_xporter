@@ -40,23 +40,23 @@ with open('one_off_scripts/Alias_Name_Description.csv', 'r') as f:
         if alias and name:
             alias_name.append((alias.strip(), name.strip()))
 
-
 for alias, name in alias_name:
-    number_grabbed = len([
-                         filename for filename in os.listdir('Collections/{}'.format(alias)) 
-                         if filename not in ('Collection_Fields.xml', 'Collection_Metadata.xml', 'Elems_in_Collection.xml')
-                         ])
-    number_expected = expected_number_of_pointers(name)
-    if number_expected and number_grabbed:
-        number_expected, number_grabbed = int(number_expected), int(number_grabbed)
-        if number_grabbed != number_expected:
-            print(alias, name, number_expected, number_grabbed)
-            incomplete_collections.append((alias, name, number_expected, number_grabbed))
-            write_missing_pointers_status()
-            quick_simple_collection_query.success_checker(alias, int(number_expected - number_grabbed))
-    else:
-        print('ERROR: {} {}'.format(alias, name))
-        incomplete_collections.append('ERROR: {} {}'.format(alias, name))
+    if alias and name:
+        number_grabbed = len([
+                             filename for filename in os.listdir('Collections/{}'.format(alias)) 
+                             if filename[:-4].isnumeric()
+                             ])
+        number_expected = expected_number_of_pointers(name)
+        if number_expected and number_grabbed:
+            number_expected, number_grabbed = int(number_expected), int(number_grabbed)
+            if number_grabbed != number_expected:
+                print(alias, name, number_expected, number_grabbed)
+                incomplete_collections.append((alias, name, number_expected, number_grabbed))
+                write_missing_pointers_status()
+                # quick_simple_collection_query.success_checker(alias, int(number_expected - number_grabbed))
+        else:
+            print('ERROR: {} {}'.format(alias, name))
+            incomplete_collections.append('ERROR: {} {}'.format(alias, name))
 
 incomplete_collections = sorted(incomplete_collections, key=lambda x: x[0])
 write_missing_pointers_status()

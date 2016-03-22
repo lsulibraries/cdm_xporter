@@ -57,9 +57,11 @@ def just_so_i_can_call_it(alias):
                            single_record.find('filetype').text,
                            ) for single_record in elems_in_coll_tree.findall('.//record')]
     for pointer, filetype in pointers_filetypes:
-        print(pointer, filetype, 'about to get')
-        # if not pointer:  # skips file if binary not shared by collection owner
-        #     continue
+        if '{}.xml'.format(pointer) in os.listdir('{}/Mar22Overpull/{}/'.format(os.getcwd(), alias)):
+            os.rename('{}/Mar22Overpull/{}/{}.xml'.format(os.getcwd(), alias, pointer), "{}/Collections/{}/{}.xml".format(os.getcwd(), alias, pointer))
+            continue
+        if not pointer:  # skips file if a derivative -- only gets original versions
+            continue
         if '{}.xml'.format(pointer) not in os.listdir('{}/Collections/{}'.format(os.getcwd(), alias)):
             item_metadata = p.retrieve_item_metadata(alias, pointer)
             local_etree = ET.fromstring(item_metadata)
