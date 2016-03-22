@@ -53,42 +53,45 @@ def just_so_i_can_call_it(alias):
 
 
     """ Careful method of getting each object contentdm says is in a collection"""
-    # pointers_filetypes = [(single_record.find('dmrecord').text,
-    #                        single_record.find('filetype').text,
-    #                        ) for single_record in elems_in_coll_tree.findall('.//record')]
-    # for pointer, filetype in pointers_filetypes:
-    #     if not pointer:  # skips file if binary not shared by collection owner
-    #         continue
-    #     if '{}.xml'.format(pointer) not in os.listdir('{}/Collections/{}'.format(os.getcwd(), alias)):
-    #         item_metadata = p.retrieve_item_metadata(alias, pointer)
-    #         local_etree = ET.fromstring(item_metadata)
-    #         local_etree = xmlify.add_tag_attributes(local_etree, collection_fields_etree)
-    #         local_etree = xmlify.clean_up_tags(alias, pointer, local_etree, collection_fields_etree)
-    #         p.write_xml_to_file(ET.tostring(local_etree, encoding="unicode", method="xml"), alias, pointer)
-
-    """Brute force method of getting every possible object from a collection, even if contentdm doesn't say it's inside"""
-
-    blank_count = 0
-    for i in range(31000):
-        if '{}.xml'.format(i) not in os.listdir('{}/Collections/{}'.format(os.getcwd(), alias)):
-            url = 'https://server16313.contentdm.oclc.org/dmwebservices/index.php?q=dmGetItemInfo/{}/{}/xml'.format(alias, str(i))
-            with urllib.request.urlopen(url) as response:
-                html_text = response.read()
-                if '<message>Requested item not found</message>' in html_text.decode('utf-8'):
-                    print('found blank site', i)
-                    blank_count += 1
-                else:
-                    item_metadata = p.retrieve_item_metadata(alias, i)
-                    local_etree = ET.fromstring(item_metadata)
-                    p.write_xml_to_file(ET.tostring(local_etree, encoding="unicode", method="xml"), alias, i)
-                    print(alias, i)
-                    blank_count = 0
+    pointers_filetypes = [(single_record.find('dmrecord').text,
+                           single_record.find('filetype').text,
+                           ) for single_record in elems_in_coll_tree.findall('.//record')]
+    for pointer, filetype in pointers_filetypes:
+        print(pointer, filetype, 'about to get')
+        # if not pointer:  # skips file if binary not shared by collection owner
+        #     continue
+        if '{}.xml'.format(pointer) not in os.listdir('{}/Collections/{}'.format(os.getcwd(), alias)):
+            item_metadata = p.retrieve_item_metadata(alias, pointer)
+            local_etree = ET.fromstring(item_metadata)
+            # local_etree = xmlify.add_tag_attributes(local_etree, collection_fields_etree)
+            #local_etree = xmlify.clean_up_tags(alias, pointer, local_etree, collection_fields_etree)
+            p.write_xml_to_file(ET.tostring(local_etree, encoding="unicode", method="xml"), alias, pointer)
 
         # if ET.fromstring(item_metadata).find('object'):  # "find" is contentdm's abbr for 'contentdm file name'
         #     binary = p.retrieve_binaries(alias, pointer, "something")
         #     p.write_binary_to_file(binary, alias, pointer, filetype)
 
         # p.write_binary_to_file(p.retrieve_binaries(alias, pointer, filetype), alias, pointer, filetype)
+
+    # """Brute force method of getting every possible object from a collection, even if contentdm doesn't say it's inside"""
+
+    # blank_count = 0
+    # for i in range(31000):
+    #     if '{}.xml'.format(i) not in os.listdir('{}/Collections/{}'.format(os.getcwd(), alias)):
+    #         url = 'https://server16313.contentdm.oclc.org/dmwebservices/index.php?q=dmGetItemInfo/{}/{}/xml'.format(alias, str(i))
+    #         with urllib.request.urlopen(url) as response:
+    #             html_text = response.read()
+    #             if '<message>Requested item not found</message>' in html_text.decode('utf-8'):
+    #                 print('found blank site', i)
+    #                 blank_count += 1
+    #             else:
+    #                 item_metadata = p.retrieve_item_metadata(alias, i)
+    #                 local_etree = ET.fromstring(item_metadata)
+    #                 p.write_xml_to_file(ET.tostring(local_etree, encoding="unicode", method="xml"), alias, i)
+    #                 print(alias, i)
+    #                 blank_count = 0
+
+
 
 
 def read_file(filename):
