@@ -9,3 +9,4 @@
 test_xmlify.py
 /One-off-collection-pulls/*
 *.ipynb_checkpoints
+/one_off_scripts/coll_tags_as_files/
