@@ -17,6 +17,11 @@ def retrieve_collection_metadata(collection_alias):
         return f.read()
 
 
+def retrieve_collection_total_recs(collection_alias):
+    with open('Collections/{}/Collection_TotalRecs.xml'.format(collection_alias), 'r') as f:
+        return f.read()
+
+
 def retrieve_collection_fields(collection_alias):
     with open('Collections/{}/Collection_Fields.xml'.format(collection_alias), 'r') as f:
         return f.read()

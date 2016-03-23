@@ -28,14 +28,21 @@ import pull_from_cdm as p
 # alias = 'LSU_MRF'
 
 
+
 def just_so_i_can_call_it(alias):
-    if alias not in os.listdir('{}/Collections/'.format(os.getcwd())):
+    repo_dir = '{}/{}'.format(os.getcwd(), 'Collections')
+    alias_dir = '{}/{}'.format(repo_dir, alias)
+
+    if alias not in os.listdir(repo_dir):
         os.mkdir(str('{}/Collections/{}').format(os.getcwd(), alias))
 
-    if 'Collection_Metadata.xml' not in os.listdir('{}/Collections/{}'.format(os.getcwd(), alias)):
+    if 'Collection_Metadata.xml' not in os.listdir(alias_dir):
         p.write_xml_to_file(p.retrieve_collection_metadata(alias), alias, 'Collection_Metadata')
 
-    if 'Collection_Fields.xml' not in os.listdir('{}/Collections/{}'.format(os.getcwd(), alias)):
+    if 'Collection_TotalRecs.xml' not in os.listdir(alias_dir):
+        p.write_xml_to_file(p.retrieve_collection_total_recs(alias), alias, 'Collection_TotalRecs')
+
+    if 'Collection_Fields.xml' not in os.listdir(alias_dir):
         collection_fields = p.retrieve_collection_fields(alias)
         p.write_xml_to_file(collection_fields, alias, 'Collection_Fields')
     else:
@@ -57,9 +64,6 @@ def just_so_i_can_call_it(alias):
                            single_record.find('filetype').text,
                            ) for single_record in elems_in_coll_tree.findall('.//record')]
     for pointer, filetype in pointers_filetypes:
-        if '{}.xml'.format(pointer) in os.listdir('{}/Mar22Overpull/{}/'.format(os.getcwd(), alias)):
-            os.rename('{}/Mar22Overpull/{}/{}.xml'.format(os.getcwd(), alias, pointer), "{}/Collections/{}/{}.xml".format(os.getcwd(), alias, pointer))
-            continue
         if not pointer:  # skips file if a derivative -- only gets original versions
             continue
         if '{}.xml'.format(pointer) not in os.listdir('{}/Collections/{}'.format(os.getcwd(), alias)):
