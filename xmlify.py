@@ -19,7 +19,8 @@ def grab_collection_fields(alias):
 
 
 def grab_elems_in_coll(alias):
-    elems_in_coll_xml = p.retrieve_elems_in_collection(alias, ['source', 'dmrecord', 'dmimage', 'find'])
+    fields_to_retrieve = ['source', 'dmrecord', 'dmimage', 'find']
+    elems_in_coll_xml = p.retrieve_elems_in_collection(alias, fields_to_retrieve, starting_pointer)
     return ET.fromstring(elems_in_coll_xml)
 
 

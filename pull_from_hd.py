@@ -27,8 +27,8 @@ def retrieve_collection_fields(collection_alias):
         return f.read()
 
 
-def retrieve_elems_in_collection(collection_alias, fields_list):
-    with open('Collections/{}/Elems_in_Collection.xml'.format(collection_alias), 'r') as f:
+def retrieve_elems_in_collection(collection_alias, fields_list, starting_pointer):
+    with open('Collections/{}/Elems_in_Collection_{}.xml'.format(collection_alias, starting_pointer), 'r') as f:
         return f.read()
 
 
