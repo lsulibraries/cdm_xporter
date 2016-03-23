@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 
 import os
-import xml.etree.ElementTree as ET
+import lxml.etree as etree
 import urllib.request
 
 import xmlify
@@ -47,37 +47,41 @@ def just_so_i_can_call_it(alias):
         p.write_xml_to_file(collection_fields, alias, 'Collection_Fields')
     else:
         collection_fields = read_file('{}/Collections/{}/Collection_Fields.xml'.format(os.getcwd(), alias))
-    collection_fields_etree = ET.fromstring(collection_fields)
+    collection_fields_etree = etree.fromstring(bytes(bytearray(collection_fields, encoding='utf-8')))
 
-    if 'Elems_in_Collection.xml' not in os.listdir('{}/Collections/{}/'.format(os.getcwd(), alias)):
-        fields_to_retrieve = ['source', 'dmrecord', 'dmimage', 'find']
-        xml_elems_in_coll = p.retrieve_elems_in_collection(alias, fields_to_retrieve)
-        p.write_xml_to_file(xml_elems_in_coll, alias, 'Elems_in_Collection')
-    else:
-        xml_elems_in_coll = read_file('{}/Collections/{}/Elems_in_Collection.xml'.format(os.getcwd(), alias))
-    elems_in_coll_tree = ET.fromstring(xml_elems_in_coll)
+    total_recs_etree = etree.fromstring(bytes(bytearray(p.retrieve_collection_total_recs(alias), encoding='utf-8')))
+    num_of_pointers = int(total_recs_etree.xpath('.//total')[0].text)
+    groups_of_1024 = (num_of_pointers // 1024) + 1
 
+    for num in range(groups_of_1024):
+        starting_pointer = num * 1024
+        if 'Elems_in_Collection_{}.xml'.format(starting_pointer) not in os.listdir('{}/Collections/{}/'.format(os.getcwd(), alias)):
+            fields_to_retrieve = ['source', 'dmrecord', 'dmimage', 'find']
+            xml_elems_in_coll = p.retrieve_elems_in_collection(alias, fields_to_retrieve, starting_pointer)
+            p.write_xml_to_file(xml_elems_in_coll, alias, 'Elems_in_Collection_{}'.format(starting_pointer))
+        else:
+            xml_elems_in_coll = read_file('{}/Collections/{}/Elems_in_Collection_{}.xml'.format(os.getcwd(), alias, starting_pointer))
+        elems_in_coll_tree = etree.fromstring(bytes(bytearray(xml_elems_in_coll, encoding='utf-8')))
 
+        """ Careful method of getting each object contentdm says is in a collection"""
+        pointers_filetypes = [(single_record.find('dmrecord').text,
+                               single_record.find('filetype').text,
+                               ) for single_record in elems_in_coll_tree.findall('.//record')]
+        for pointer, filetype in pointers_filetypes:
+            if not pointer:  # skips file if a derivative -- only gets original versions
+                continue
+            if '{}.xml'.format(pointer) not in os.listdir('{}/Collections/{}'.format(os.getcwd(), alias)):
+                item_metadata = p.retrieve_item_metadata(alias, pointer)
+                local_etree = etree.fromstring(bytes(bytearray(item_metadata, encoding='utf-8')))
+                # local_etree = xmlify.add_tag_attributes(local_etree, collection_fields_etree)
+                #local_etree = xmlify.clean_up_tags(alias, pointer, local_etree, collection_fields_etree)
+                p.write_xml_to_file(etree.tostring(local_etree, encoding="unicode", method="xml"), alias, pointer)
 
-    """ Careful method of getting each object contentdm says is in a collection"""
-    pointers_filetypes = [(single_record.find('dmrecord').text,
-                           single_record.find('filetype').text,
-                           ) for single_record in elems_in_coll_tree.findall('.//record')]
-    for pointer, filetype in pointers_filetypes:
-        if not pointer:  # skips file if a derivative -- only gets original versions
-            continue
-        if '{}.xml'.format(pointer) not in os.listdir('{}/Collections/{}'.format(os.getcwd(), alias)):
-            item_metadata = p.retrieve_item_metadata(alias, pointer)
-            local_etree = ET.fromstring(item_metadata)
-            # local_etree = xmlify.add_tag_attributes(local_etree, collection_fields_etree)
-            #local_etree = xmlify.clean_up_tags(alias, pointer, local_etree, collection_fields_etree)
-            p.write_xml_to_file(ET.tostring(local_etree, encoding="unicode", method="xml"), alias, pointer)
+            # if etree.fromstring(item_metadata).find('object'):  # "find" is contentdm's abbr for 'contentdm file name'
+            #     binary = p.retrieve_binaries(alias, pointer, "something")
+            #     p.write_binary_to_file(binary, alias, pointer, filetype)
 
-        # if ET.fromstring(item_metadata).find('object'):  # "find" is contentdm's abbr for 'contentdm file name'
-        #     binary = p.retrieve_binaries(alias, pointer, "something")
-        #     p.write_binary_to_file(binary, alias, pointer, filetype)
-
-        # p.write_binary_to_file(p.retrieve_binaries(alias, pointer, filetype), alias, pointer, filetype)
+            # p.write_binary_to_file(p.retrieve_binaries(alias, pointer, filetype), alias, pointer, filetype)
 
     # """Brute force method of getting every possible object from a collection, even if contentdm doesn't say it's inside"""
 
@@ -92,8 +96,8 @@ def just_so_i_can_call_it(alias):
     #                 blank_count += 1
     #             else:
     #                 item_metadata = p.retrieve_item_metadata(alias, i)
-    #                 local_etree = ET.fromstring(item_metadata)
-    #                 p.write_xml_to_file(ET.tostring(local_etree, encoding="unicode", method="xml"), alias, i)
+    #                 local_etree = etree.fromstring(item_metadata)
+    #                 p.write_xml_to_file(etree.tostring(local_etree, encoding="unicode", method="xml"), alias, i)
     #                 print(alias, i)
     #                 blank_count = 0
 
@@ -112,7 +116,7 @@ if __name__ == '__main__':
     """ Call all collections, retrieve all metadata """
     coll_list_txt = p.retrieve_collections_list()
     p.write_xml_to_file(coll_list_txt, '.', 'Collections_List')
-    coll_list_xml = ET.fromstring(coll_list_txt)
+    coll_list_xml = etree.fromstring(bytes(bytearray(coll_list_txt, encoding='utf-8')))
     for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')]:
         print(alias)
         just_so_i_can_call_it(alias)
