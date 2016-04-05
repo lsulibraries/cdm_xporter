@@ -24,7 +24,7 @@ if __name__ == '__main__':
         print('\t\t],')
 
 owner_col_dict = {
-            "LSUHSCNO": [
+    "LSUHSCNO": [
         "LSUBK01",
         "LSUHSC_NCC",
         "p120701coll20",
