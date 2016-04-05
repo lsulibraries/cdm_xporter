@@ -2,9 +2,9 @@
 
 import os
 import lxml.etree as etree
-import urllib.request
+# import urllib.request
 
-import xmlify
+# import xmlify
 import pull_from_cdm as p
 # import pull_from_hd as p
 
@@ -27,6 +27,10 @@ import pull_from_cdm as p
 # alias = 'p16313coll20'
 # alias = 'LSU_MRF'
 
+
+def read_file(filename):
+    with open(filename) as f:
+        return f.read()
 
 
 def just_so_i_can_call_it(alias):
@@ -54,11 +58,13 @@ def just_so_i_can_call_it(alias):
     groups_of_1024 = (num_of_pointers // 1024) + 1
 
     for num in range(groups_of_1024):
-        starting_pointer = num * 1024
+        starting_pointer = (num * 1024) + 1                         # why the heavens does contentdm start counting at 1?
+                                                                    # also, why can't cdm cound above 10000??
         if 'Elems_in_Collection_{}.xml'.format(starting_pointer) not in os.listdir('{}/Collections/{}/'.format(os.getcwd(), alias)):
             fields_to_retrieve = ['source', 'dmrecord', 'dmimage', 'find']
             xml_elems_in_coll = p.retrieve_elems_in_collection(alias, fields_to_retrieve, starting_pointer)
             p.write_xml_to_file(xml_elems_in_coll, alias, 'Elems_in_Collection_{}'.format(starting_pointer))
+
         else:
             xml_elems_in_coll = read_file('{}/Collections/{}/Elems_in_Collection_{}.xml'.format(os.getcwd(), alias, starting_pointer))
         elems_in_coll_tree = etree.fromstring(bytes(bytearray(xml_elems_in_coll, encoding='utf-8')))
@@ -69,12 +75,13 @@ def just_so_i_can_call_it(alias):
                                ) for single_record in elems_in_coll_tree.findall('.//record')]
         for pointer, filetype in pointers_filetypes:
             if not pointer:  # skips file if a derivative -- only gets original versions
-                continue
-            if '{}.xml'.format(pointer) not in os.listdir('{}/Collections/{}'.format(os.getcwd(), alias)):
+                print('{} {} not pointer, filetype'.format(pointer, filetype))
+
+            elif '{}.xml'.format(pointer) not in os.listdir('{}/Collections/{}'.format(os.getcwd(), alias)):
                 item_metadata = p.retrieve_item_metadata(alias, pointer)
                 local_etree = etree.fromstring(bytes(bytearray(item_metadata, encoding='utf-8')))
                 # local_etree = xmlify.add_tag_attributes(local_etree, collection_fields_etree)
-                #local_etree = xmlify.clean_up_tags(alias, pointer, local_etree, collection_fields_etree)
+                # local_etree = xmlify.clean_up_tags(alias, pointer, local_etree, collection_fields_etree)
                 p.write_xml_to_file(etree.tostring(local_etree, encoding="unicode", method="xml"), alias, pointer)
 
             # if etree.fromstring(item_metadata).find('object'):  # "find" is contentdm's abbr for 'contentdm file name'
@@ -102,16 +109,9 @@ def just_so_i_can_call_it(alias):
     #                 blank_count = 0
 
 
-
-
-def read_file(filename):
-    with open(filename) as f:
-        return f.read()
-
 if __name__ == '__main__':
     """ Call just one collection, retrieve all metadata """
     # just_so_i_can_call_it('BRS')
-
 
     """ Call all collections, retrieve all metadata """
     coll_list_txt = p.retrieve_collections_list()

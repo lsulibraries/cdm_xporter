@@ -1,204 +1,257 @@
-('AAW', 'America at War', 1079, 450)
-('ABW', 'America Between the Wars 1920-1940', 153, 16)
-('ACC', 'Archives of Cajun and Creole Folklore', 163, 157)
-('AMA', 'American Missionary Association Photographs, 1839-1954', 3342, 1024)
-('APC', 'Antebellum Period', 235, 83)
-('AWW', 'Alfred and William Waud Collection', 2732, 1024)
-('BBA', 'Baby Boom American Collection', 36, 8)
-('BRS', 'Beachrock Research Slides of Richard J. Russell Collection', 497, 496)
-('BTW', 'Ben Treadaway WWII Shell Beach Collection', 64, 32)
-('CCA', 'New Orleans Chamber of Commerce Photographs', 982, 979)
-('CLF', 'Charles L. Franck and Franck-Bertacci', 10646, 1024)
-('CMPRT', 'Camp Ruston Collection', 246, 241)
-('CWD', 'Caroline Wogan Durieux Works of Art', 232, 231)
-ERROR: CRD Colville River Delta,  Alaska Collection
-ERROR: DUBLIN2 Generic Collection Template (Dublin 2)
-ERROR: p120701coll11 Israel Shreve Letters
-ERROR: p16313coll19 LSU Medical Center 1991 Commencement Address by Lindy Boggs
-ERROR: p16313coll67 Louisiana Documents of the State Library
-ERROR: LST Louisiana Science and Technology Collection
-ERROR: p120701coll14 Louisiana State Sovereignty Commission Pamphlets of the Civil Rights Era
-ERROR: p16313coll87 Loyola University New Orleans Community and Resilience Collection
-ERROR: p15140coll11 LSU Libraries Political Papers Collection
-ERROR: p15140coll57 Menus, restaurant brochures, and food advertising flyers from the Louisiana Re
-ERROR: p16313coll95 New Orleans Opera Association Archives
-ERROR: p16313coll61 Rene Grandjean Collection - Seance Registers
-ERROR: p16313coll49 The Daily Reveille - Louisiana State University
-ERROR: WIS Wiseman Photograph Collection
-ERROR: p16313coll90 World War I Maxillofacial Wounds Photo Album
-ERROR: p16313coll96 WYES Informed Sources Archive
-('FBM', 'Frank B. Moore Collection', 545, 543)
-('FJC', 'Frances B. Johnston Photograph Collection', 438, 437)
-('GFM', 'George Francois Mugnier Collection', 1174, 1024)
-('HIC', 'Higgins Industries', 639, 637)
-('HLM', 'Louisiana State Museum', 100, 94)
-('HPL', 'Huey P. Long Collection', 213, 37)
-('HTU', 'Tulane University', 241, 57)
-('HWJ', "Harper's Weekly Journal of Civilization and Frank Leslie's Illustrated Newspaper", 490, 488)
-('IBE', 'Integration and the Black Experience at LSU', 30, 3)
-('JAZ', 'Louisiana State Museum Jazz Collection', 3501, 1024)
-('JNT', 'John Norris Teunisson Photographs', 467, 466)
-('JSN', 'Jesuit scrapbooks from the New Orleans Province', 260, 172)
-('LCT', 'Louisiana State Museum Costumes and Textiles Collection', 274, 273)
-('LHC', 'Louisiana State Museum Historical Map Collection', 180, 179)
-('LHP', 'State Library of Louisiana Historic Photograph Collection', 10606, 1024)
-('LMNP01', 'Loyola University Maroon', 22059, 1024)
-('LMP', 'Maps of Louisiana Collection', 56, 23)
-('LOH', 'Natchitoches Cane River Civil Rights Oral Histories - Louisiana State Museum', 192, 191)
-('LOU', 'LCOC - LOUIS Collection of Collections', 204, 208)
-('LOYOLA_ETD', 'Loyola University New Orleans Electronic Theses', 195, 192)
-('LPC', 'Louisiana Purchase and Louisiana Colonial History', 337, 101)
-('LPH', 'Painting in Louisiana from the Historic New Orleans Collection', 1737, 1024)
-('LPS', 'Paintings from the Louisiana State Museum', 715, 714)
-('LSA', 'Center for Louisiana Studies Archive', 1237, 1024)
-('LSAP', 'Louisiana State Aerial Photographs', 4699, 1024)
-('LSM_CCC', 'Louisiana State Museum Carnival Collection', 668, 666)
-('LSM_FQA', 'Louisiana State Museum W.P.A. French Quarter Architectural Record', 321, 320)
-('LSM_KOH', 'Louisiana State Museum Hurricane Katrina Oral History Project', 41, 4)
-('LSM_MPC', 'Louisiana State Museum Photography Collection', 193, 183)
-('LSM_NAC', 'Louisiana State Museum Newcomb College Arts and Crafts', 387, 386)
-('LSM_NCC', 'Louisiana State Museum Currency Collection', 285, 284)
-('LSUBK01', 'Aristides Agramonte Yellow Fever Collection', 12058, 150)
-('LSUHSCS_GWM', 'LSU Health Sciences Center Shreveport Photograph Collection', 853, 740)
-('LSUHSC_NCC', 'LSU Health Sciences Center New Orleans Newspaper Clippings Collection', 7749, 1024)
-('LSUS_TBP', 'Tom Bell Papers, 1895-1999', 168, 115)
-('LSU_ACT', 'Actors and Musicians Photographs, 1880-1920', 192, 64)
-('LSU_BRT', 'Historic Images of Baton Rouge from LSU Libraries', 14, 8)
-('LSU_CFF', 'Early Louisiana French Correspondence', 527, 100)
-('LSU_CNP', 'Chickamauga and Chattanooga National Military Park Photographs', 87, 29)
-('LSU_CWP', 'Civil War Photograph Album, 1862-1900', 402, 134)
-('LSU_DYP', 'Donn Young Photographs', 285, 284)
-('LSU_GSC', 'G. H. Suydam Photograph Album', 60, 20)
-('LSU_LHC', "Louis Hasslemans' Musicians Photographs", 47, 41)
-('LSU_LNP', 'Louisiana Newspaper Access Program - LaNeAP', 3230, 85)
-('LSU_MDP', 'Marshall Dunham Photograph Album', 600, 200)
-('LSU_MRF', 'Mississippi River Flood of 1927 Photograph Album', 215, 214)
-('LSU_NMI', 'Natchez, MS', 35, 19)
-('LSU_NOE', 'New Orleans Centennial Exposition Stereoscopic Views', 195, 65)
-('LSU_PVC', 'Louisiana Ecology and Conservation, The Percy Viosca Jr. Collection', 1097, 1024)
-('LSU_RBC', "LSU Libraries' Rare Books Collection - Selected materials", 537, 2)
-('LSU_SCE', 'LSU Special Collections Online', 100, 48)
-('LSU_TJP', 'Thomas H. and Joan W. Gandy Photograph Collection', 161, 160)
-('LSU_UAP', 'LSU University Archives Photographs Collection', 1239, 481)
-('LSU_WLS', 'John Langdon Ward Lantern Slides', 107, 106)
-('LWP', 'Louisiana Works Progress Administration (WPA)', 10273, 1024)
-('MMF', 'Medieval Manuscript Facsimiles Inventory', 138, 29)
-('MPA', 'Millspaugh Photographs', 168, 167)
-('MPF', 'Martin-Pugh Family Papers', 6, 1)
-('MSW', 'Native Flora of Louisiana - Watercolor drawings by Margaret Stones', 238, 234)
-('NCC', 'Natchitoches Chamber of Commerce Collection', 400, 399)
-('OMSA', 'Ogden Museum of Southern Art', 486, 485)
-('OSC', 'Olide Schexnayder Collection', 187, 186)
-('PSL', 'Historic Photographs of Southwest Louisiana', 5636, 1024)
-('RJR', 'Louisiana Coastal Ecology, Richard J. Russell Collection', 210, 209)
-('RMC', 'Robert S.Maestri Photograph Collection', 830, 828)
-('RSP', 'Rowles Stereograph Collection', 381, 380)
-('RTC', 'Robert Tebbs Photograph', 345, 344)
-('SIP', 'Southwestern Louisiana Institute Photographs, 1923-1940', 2524, 1024)
-('TLD', 'LSU Architectural Drawings by Theodore Link', 163, 162)
-('UNO_ANI', 'University of New Orleans Anniversary', 277, 138)
-('UNO_JBF', 'Joseph Bauer Family Album', 222, 1)
-('UNO_SCC', 'UNO Historical Archives of the Supreme Court of Louisiana', 22846, 1024)
-('lapur', 'Louisiana Purchase Bicentennial Collection', 24553, 929)
-('p120701coll10', 'Griffin 1932 Flood Collection', 310, 309)
-('p120701coll12', 'LSU Libraries Louisiana and Lower Mississippi Valley Collections', 347, 19)
-('p120701coll13', 'Louisiana Hurricane Resources', 259, 220)
-('p120701coll15', 'Abe L. Shushan Collection', 424, 4)
-('p120701coll17', 'Anthony J. Stanonis Pamphlet Collection', 34, 20)
-('p120701coll18', 'Louisiana State Museum Trade Labels', 330, 329)
-('p120701coll19', 'Sidonie de la Houssaye Collection', 5279, 82)
-('p120701coll22', 'T. Harry Williams Center for Oral History Military History Collection', 10, 8)
-('p120701coll24', 'LSU University Archives Print Materials Collection', 218, 21)
-('p120701coll25', 'United States House and Senate Committee Hearings and Publications', 1569, 1024)
-('p120701coll26', 'Graduation Programs of the LSU Health Sciences Center, New Orleans', 2038, 149)
-('p120701coll27', 'Loyola University New Orleans Athletics Collection', 38, 100)
-('p120701coll28', 'Joseph-Aurélien Cornet, F.S.C. Collection', 7231, 41)
-('p120701coll29', 'Isidore Newman School Archives', 178, 22)
-('p120701coll7', 'LSU School of Dentistry Historic Photographs', 82, 6)
-('p120701coll8', 'Telling-Grandon Scrapbook', 156, 1)
-('p120701coll9', 'Lafcadio Hearn Correspondence', 61, 10)
-('p15140coll1', 'John T. Mendes Photograph Collection', 609, 607)
-('p15140coll10', 'Civil War Context and Conflict at LSU Libraries', 4314, 143)
-('p15140coll12', "'Andrew D. Lytle's Baton Rouge' Photograph Collection", 799, 797)
-('p15140coll14', 'T. Harry Williams Center for Oral History Political Collection', 17, 6)
-('p15140coll16', 'Tiger Rag – Student newspapers of LSU School of Medicine, New Orleans', 532, 530)
-('p15140coll17', 'LSU Libraries Mardi Gras Collection', 431, 41)
-('p15140coll18', 'Hermann Moyse, Sr. World War I Collection', 1414, 20)
-('p15140coll19', 'William Branks Stewart Collection', 29, 17)
-('p15140coll21', 'Louisiana Sea Grant Digital Images Collection', 2262, 1024)
-('p15140coll23', 'LSU Health Sciences Center Shreveport Newspaper Clippings', 3421, 1024)
-('p15140coll26', 'Edna Tiny Tarbutton Collection', 934, 13)
-('p15140coll27', 'Northeast Louisiana Historic Images Collection', 363, 254)
-('p15140coll30', 'Aleman Estate (Hathaway Gibbens) Collection', 214, 70)
-('p15140coll31', 'Judge John Minor Wisdom Collection', 1438, 306)
-('p15140coll34', 'Registre Du Comite Medical De La Nouvelle Orleans, 1816-1854', 234, 3)
-('p15140coll35', 'Louisiana Sea Grant Digital Maps Collection', 213, 212)
-('p15140coll37', 'Louisiana Political Ephemera, 1860-1920', 99, 46)
-('p15140coll38', 'Leon Trice Louisiana Political Photographs', 150, 149)
-('p15140coll39', 'Newcomb College Scrapbooks', 1706, 9)
-('p15140coll4', 'Orleans Parish School Board Meeting Minutes', 7528, 18)
-('p15140coll40', 'Carnival Collection', 5657, 1024)
-('p15140coll41', 'Louisiana Early English Corpus', 1161, 220)
-('p15140coll45', "Essai d'Anatomie", 28, 1)
-('p15140coll46', 'Fonville Winans’ Aerial Views of Baton Rouge', 459, 458)
-('p15140coll47', 'Louisiana Sheet Music', 630, 628)
-('p15140coll50', 'U.S. Army 64th General Hospital, organized by LSU Medical School', 1112, 532)
-('p15140coll51', 'Veterans of Southeast Louisiana', 369, 367)
-('p15140coll52', "The STAR- Radiating the Light of Truth on Hansen's Disease", 661, 431)
-('p15140coll58', 'Louisiana Menu and Restaurant Collection', 1046, 1024)
-('p15140coll6', 'Lettres de Louisiane', 174, 38)
-('p15140coll60', 'Records of the French Superior Council (1714-1769)', 723, 131)
-('p16313coll1', 'Andrew Augustus Gunby Photograph Collection', 419, 355)
-('p16313coll10', 'LSU Libraries Postcard Collections', 1824, 603)
-('p16313coll12', 'Tulane University Theses and Dissertations Archive', 4952, 1024)
-('p16313coll14', 'Tulane University Band Historical Collection', 296, 94)
-('p16313coll16', 'Early Images of Latin America', 1680, 1024)
-('p16313coll17', 'Gulf South Decorative and Fine Arts Database', 8533, 971)
-('p16313coll2', 'StoryCorps', 3261, 370)
-('p16313coll21', 'Clarence John Laughlin Photograph Collection', 1878, 1024)
-('p16313coll22', 'Louisiana Photographs Collection', 198, 131)
-('p16313coll23', 'Charles V. Booth Collection', 859, 857)
-('p16313coll25', "L'Acadien Yearbooks", 218, 2)
-('p16313coll26', 'Ernest J. Gaines Papers', 59, 3)
-('p16313coll28', 'Loyola University New Orleans University Photographs Collection', 6738, 1024)
-('p16313coll29', 'French Colonial, Spanish Colonial, and Nineteenth-Century Louisiana Documents', 1510, 1024)
-('p16313coll30', 'Guiseppe Ferrata Score Collection', 78, 31)
-('p16313coll31', 'Louisiana Sugar Resources Digital Collection', 2618, 1024)
-('p16313coll33', 'Hogan Jazz Archive Photography Collection', 2492, 1024)
-('p16313coll34', 'Armand Duplantier Family Letters, LSU Libraries', 655, 95)
-('p16313coll35', 'LSU Libraries Louisiana Waterways Management Collection', 267, 94)
-('p16313coll37', 'Mesoamerican Painted Manuscripts at the Latin American Library', 32, 18)
-('p16313coll38', '24th General Hospital in World War II', 134, 133)
-('p16313coll39', 'Bourbon Street, 1944-1952', 229, 228)
-('p16313coll4', 'Ralston Crawford Collection of Jazz Photography', 786, 784)
-('p16313coll41', 'Images from the Civil War and Reconstruction', 1061, 1024)
-('p16313coll42', 'Print Culture of the Civil Rights Movement, 1950-1980', 169, 168)
-('p16313coll43', 'Mary McMurran and Conner Family', 1416, 1024)
-('p16313coll44', 'Loyola University New Orleans Finding Aids', 102, 34)
-('p16313coll45', 'Louisiana Department of Wildlife and Fisheries Documents - LSU Libraries', 576, 574)
-('p16313coll5', 'Loyola University New Orleans Special Collections and Archives Online', 291, 26)
-('p16313coll51', 'Free People of Color in Louisiana', 31938, 1023)
-('p16313coll52', 'Louisiana images from the Standard Oil Collection, Univ. of Louisville', 2136, 1024)
-('p16313coll53', 'Cole Coleman Photographs', 560, 559)
-('p16313coll57', 'William Waller Survey Collection', 214, 153)
-('p16313coll58', 'William Barth Photographs of Mississippi and Atchafalaya River operations', 249, 248)
-('p16313coll59', 'M. O. Gershenzon Archive', 30, 10)
-('p16313coll63', 'The Crescent City Pictorial', 36, 1)
-('p16313coll64', 'Sounds of Louisiana', 35, 14)
-('p16313coll65', 'Louisiana Decoys and Wildfowl Artifacts', 426, 307)
-('p16313coll66', 'Sounding Translation', 12, 4)
-('p16313coll68', 'NOLA Hip Hop and Bounce Archive', 124, 47)
-('p16313coll69', 'LSU Music Resources Sheet Music Collection', 763, 729)
-('p16313coll72', 'Orleans Parish School Board Meeting Minutes -- Indexes', 117, 3)
-('p16313coll76', 'Doussan family papers, 1827-1872', 455, 93)
-('p16313coll77', 'Louisiana State University Agricultural Experiment Station Reports', 807, 810)
-('p16313coll79', 'Louisiana Railroad Depot Photograph Collection', 129, 128)
-('p16313coll8', 'Gras-Lauzin Family Papers', 357, 70)
-('p16313coll80', 'Louisiana Runaway Slave Advertisements, 1836-1865', 354, 1024)
-('p16313coll81', 'John B. Heroman, Sr. photograph collection, circa 1885-1940', 815, 15)
-('p16313coll83', 'Records of the Spanish Cabildo (1769-1803)', 251, 11)
-('p16313coll86', 'Ex Parte Plessy (Plessy v. Ferguson)', 159, 14)
-('p16313coll9', 'Edith Dabney Doll Collection', 416, 82)
-('p16313coll91', 'Loyola University New Orleans Scrapbook Collection', 773, 15)
-('p267101coll4', 'Louisiana State Documents Digital Archive', 15739, 1024)
-('wri-boy', 'Wright-Boyd Family Papers at LSU Libraries', 20, 16)
+All Grabbed:	133	Grabbed cpd:	0	CDM:	133	House:	134	Alias:	p16313coll38	Name:	24th General Hospital in World War II
+All Grabbed:	4	Grabbed cpd:	4	CDM:	4	House:	420	Alias:	p120701coll15	Name:	Abe L. Shushan Collection
+All Grabbed:	64	Grabbed cpd:	64	CDM:	64	House:	128	Alias:	LSU_ACT	Name:	Actors and Musicians Photographs, 1880-1920
+All Grabbed:	70	Grabbed cpd:	70	CDM:	70	House:	143	Alias:	p15140coll30	Name:	Aleman Estate (Hathaway Gibbens) Collection
+All Grabbed:	2486	Grabbed cpd:	4	CDM:	2486	House:	2728	Alias:	AWW	Name:	Alfred and William Waud Collection
+All Grabbed:	450	Grabbed cpd:	129	CDM:	450	House:	950	Alias:	AAW	Name:	America at War
+All Grabbed:	16	Grabbed cpd:	6	CDM:	16	House:	147	Alias:	ABW	Name:	America Between the Wars 1920-1940
+All Grabbed:	3325	Grabbed cpd:	0	CDM:	3325	House:	3342	Alias:	AMA	Name:	American Missionary Association Photographs, 1839-1954
+All Grabbed:	9	Grabbed cpd:	0	CDM:	9	House:	9	Alias:	p16313coll47	Name:	Amistad Research Center Oral History Collection
+All Grabbed:	355	Grabbed cpd:	30	CDM:	354	House:	389	Alias:	p16313coll1	Name:	Andrew Augustus Gunby Photograph Collection
+All Grabbed:	797	Grabbed cpd:	0	CDM:	793	House:	799	Alias:	p15140coll12	Name:	'Andrew D. Lytle's Baton Rouge' Photograph Collection
+All Grabbed:	83	Grabbed cpd:	10	CDM:	83	House:	225	Alias:	APC	Name:	Antebellum Period
+All Grabbed:	20	Grabbed cpd:	1	CDM:	20	House:	33	Alias:	p120701coll17	Name:	Anthony J. Stanonis Pamphlet Collection
+All Grabbed:	116	Grabbed cpd:	0	CDM:	116	House:	116	Alias:	p16313coll75	Name:	The Architect's Eye
+All Grabbed:	157	Grabbed cpd:	0	CDM:	162	House:	163	Alias:	ACC	Name:	Archives of Cajun and Creole Folklore
+All Grabbed:	150	Grabbed cpd:	136	CDM:	150	House:	11922	Alias:	LSUBK01	Name:	Aristides Agramonte Yellow Fever Collection
+All Grabbed:	95	Grabbed cpd:	95	CDM:	95	House:	560	Alias:	p16313coll34	Name:	Armand Duplantier Family Letters, LSU Libraries
+All Grabbed:	8	Grabbed cpd:	5	CDM:	8	House:	31	Alias:	BBA	Name:	Baby Boom American Collection
+All Grabbed:	496	Grabbed cpd:	0	CDM:	495	House:	497	Alias:	BRS	Name:	Beachrock Research Slides of Richard J. Russell Collection
+All Grabbed:	32	Grabbed cpd:	7	CDM:	32	House:	57	Alias:	BTW	Name:	Ben Treadaway WWII Shell Beach Collection
+All Grabbed:	1	Grabbed cpd:	0	CDM:	1	House:	1	Alias:	p16313coll73	Name:	Black Natchez
+All Grabbed:	228	Grabbed cpd:	0	CDM:	228	House:	229	Alias:	p16313coll39	Name:	Bourbon Street, 1944-1952
+All Grabbed:	242	Grabbed cpd:	2	CDM:	242	House:	244	Alias:	CMPRT	Name:	Camp Ruston Collection
+All Grabbed:	5517	Grabbed cpd:	56	CDM:	5517	House:	5601	Alias:	p15140coll40	Name:	Carnival Collection
+All Grabbed:	231	Grabbed cpd:	0	CDM:	231	House:	232	Alias:	CWD	Name:	Caroline Wogan Durieux Works of Art
+All Grabbed:	14	Grabbed cpd:	0	CDM:	14	House:	14	Alias:	p16313coll89	Name:	Cenobium - LSU School of Veterinary Medicine's Yearbook
+All Grabbed:	1230	Grabbed cpd:	0	CDM:	1230	House:	1237	Alias:	LSA	Name:	Center for Louisiana Studies Archive
+All Grabbed:	114	Grabbed cpd:	114	CDM:	114	House:	0	Alias:	p15140coll25	Name:	Charity Hospital Reports
+All Grabbed:	10591	Grabbed cpd:	0	CDM:	10591	House:	10646	Alias:	CLF	Name:	Charles L. Franck and Franck-Bertacci
+All Grabbed:	19	Grabbed cpd:	0	CDM:	19	House:	19	Alias:	LSU_CLT	Name:	Charles L. Thompson Photographs
+All Grabbed:	857	Grabbed cpd:	0	CDM:	855	House:	859	Alias:	p16313coll23	Name:	Charles V. Booth Collection
+All Grabbed:	29	Grabbed cpd:	29	CDM:	29	House:	58	Alias:	LSU_CNP	Name:	Chickamauga and Chattanooga National Military Park Photographs
+All Grabbed:	143	Grabbed cpd:	128	CDM:	143	House:	4186	Alias:	p15140coll10	Name:	Civil War Context and Conflict at LSU Libraries
+All Grabbed:	134	Grabbed cpd:	133	CDM:	133	House:	268	Alias:	LSU_CWP	Name:	Civil War Photograph Album, 1862-1900
+All Grabbed:	1939	Grabbed cpd:	0	CDM:	1939	House:	1878	Alias:	p16313coll21	Name:	Clarence John Laughlin Photograph Collection
+All Grabbed:	971	Grabbed cpd:	944	CDM:	969	House:	7584	Alias:	p16313coll17	Name:	Gulf South Decorative and Fine Arts Database
+All Grabbed:	103	Grabbed cpd:	0	CDM:	103	House:	103	Alias:	p16313coll56	Name:	Col. Joseph S. Tate Photograph Album
+All Grabbed:	559	Grabbed cpd:	0	CDM:	557	House:	560	Alias:	p16313coll53	Name:	Cole Coleman Photographs
+All Grabbed:	2131	Grabbed cpd:	0	CDM:	2131	House:	None	Alias:	CRD	Name:	Colville River Delta,  Alaska Collection
+All Grabbed:	1	Grabbed cpd:	1	CDM:	1	House:	35	Alias:	p16313coll63	Name:	The Crescent City Pictorial
+All Grabbed:	284	Grabbed cpd:	0	CDM:	284	House:	285	Alias:	LSU_DYP	Name:	Donn Young Photographs
+All Grabbed:	93	Grabbed cpd:	92	CDM:	92	House:	361	Alias:	p16313coll76	Name:	Doussan family papers, 1827-1872
+All Grabbed:	1672	Grabbed cpd:	0	CDM:	1672	House:	1680	Alias:	p16313coll16	Name:	Early Images of Latin America
+All Grabbed:	100	Grabbed cpd:	99	CDM:	99	House:	426	Alias:	LSU_CFF	Name:	Early Louisiana French Correspondence
+All Grabbed:	82	Grabbed cpd:	82	CDM:	82	House:	334	Alias:	p16313coll9	Name:	Edith Dabney Doll Collection
+All Grabbed:	13	Grabbed cpd:	13	CDM:	13	House:	921	Alias:	p15140coll26	Name:	Edna Tiny Tarbutton Collection
+All Grabbed:	3	Grabbed cpd:	3	CDM:	3	House:	56	Alias:	p16313coll26	Name:	Ernest J. Gaines Papers
+All Grabbed:	1	Grabbed cpd:	1	CDM:	1	House:	27	Alias:	p15140coll45	Name:	Essai d'Anatomie
+All Grabbed:	14	Grabbed cpd:	14	CDM:	14	House:	145	Alias:	p16313coll86	Name:	Ex Parte Plessy (Plessy v. Ferguson)
+All Grabbed:	458	Grabbed cpd:	0	CDM:	457	House:	459	Alias:	p15140coll46	Name:	Fonville Winans’ Aerial Views of Baton Rouge
+All Grabbed:	437	Grabbed cpd:	0	CDM:	436	House:	438	Alias:	FJC	Name:	Frances B. Johnston Photograph Collection
+All Grabbed:	543	Grabbed cpd:	0	CDM:	542	House:	545	Alias:	FBM	Name:	Frank B. Moore Collection
+All Grabbed:	1904	Grabbed cpd:	1876	CDM:	1899	House:	30053	Alias:	p16313coll51	Name:	Free People of Color in Louisiana
+All Grabbed:	1260	Grabbed cpd:	122	CDM:	1260	House:	1388	Alias:	p16313coll29	Name:	French Colonial, Spanish Colonial, and Nineteenth-Century Louisiana Documents
+All Grabbed:	20	Grabbed cpd:	20	CDM:	20	House:	40	Alias:	LSU_GSC	Name:	G. H. Suydam Photograph Album
+All Grabbed:	0	Grabbed cpd:	0	CDM:	0	House:	0	Alias:	DUBLIN2	Name:	Generic Collection Template (Dublin 2)
+All Grabbed:	49	Grabbed cpd:	0	CDM:	49	House:	49	Alias:	p16313coll20	Name:	Germany’s Wild Medicinal Plants (Deutschlands wildwachsende Arzney-Pflanzen)
+All Grabbed:	44	Grabbed cpd:	0	CDM:	44	House:	44	Alias:	LSU_GCS	Name:	George C. Strong Photograph Album
+All Grabbed:	1168	Grabbed cpd:	0	CDM:	1168	House:	1174	Alias:	GFM	Name:	George Francois Mugnier Collection
+All Grabbed:	61	Grabbed cpd:	0	CDM:	61	House:	61	Alias:	LSU_GFM	Name:	George Francois Mugnier New Orleans Scenes
+All Grabbed:	149	Grabbed cpd:	149	CDM:	149	House:	1889	Alias:	p120701coll26	Name:	Graduation Programs of the LSU Health Sciences Center, New Orleans
+All Grabbed:	70	Grabbed cpd:	70	CDM:	70	House:	287	Alias:	p16313coll8	Name:	Gras-Lauzin Family Papers
+All Grabbed:	128	Grabbed cpd:	0	CDM:	128	House:	128	Alias:	p16313coll92	Name:	Great Southern Lumber Company, 1924-1938
+All Grabbed:	309	Grabbed cpd:	0	CDM:	309	House:	310	Alias:	p120701coll10	Name:	Griffin 1932 Flood Collection
+All Grabbed:	31	Grabbed cpd:	12	CDM:	31	House:	66	Alias:	p16313coll30	Name:	Guiseppe Ferrata Score Collection
+All Grabbed:	488	Grabbed cpd:	0	CDM:	487	House:	490	Alias:	HWJ	Name:	Harper's Weekly Journal of Civilization and Frank Leslie's Illustrated Newspaper
+All Grabbed:	20	Grabbed cpd:	20	CDM:	20	House:	1394	Alias:	p15140coll18	Name:	Hermann Moyse, Sr. World War I Collection
+All Grabbed:	637	Grabbed cpd:	0	CDM:	636	House:	639	Alias:	HIC	Name:	Higgins Industries
+All Grabbed:	8	Grabbed cpd:	3	CDM:	8	House:	11	Alias:	LSU_BRT	Name:	Historic Images of Baton Rouge from LSU Libraries
+All Grabbed:	6089	Grabbed cpd:	2	CDM:	6089	House:	5634	Alias:	PSL	Name:	Historic Photographs of Southwest Louisiana
+All Grabbed:	100	Grabbed cpd:	61	CDM:	99	House:	38	Alias:	p120701coll27	Name:	Loyola University New Orleans Athletics Collection
+All Grabbed:	2987	Grabbed cpd:	0	CDM:	2987	House:	2492	Alias:	p16313coll33	Name:	Hogan Jazz Archive Photography Collection
+All Grabbed:	37	Grabbed cpd:	12	CDM:	37	House:	201	Alias:	HPL	Name:	Huey P. Long Collection
+All Grabbed:	31	Grabbed cpd:	0	CDM:	31	House:	31	Alias:	LSU_HPL	Name:	Huey P. Long Photograph Album, 1928-1935
+All Grabbed:	1102	Grabbed cpd:	1	CDM:	1102	House:	1060	Alias:	p16313coll41	Name:	Images from the Civil War and Reconstruction
+All Grabbed:	3	Grabbed cpd:	3	CDM:	3	House:	27	Alias:	IBE	Name:	Integration and the Black Experience at LSU
+All Grabbed:	22	Grabbed cpd:	22	CDM:	22	House:	155	Alias:	p120701coll29	Name:	Isidore Newman School Archives
+All Grabbed:	0	Grabbed cpd:	0	CDM:	0	House:	0	Alias:	p120701coll11	Name:	Israel Shreve Letters
+All Grabbed:	134	Grabbed cpd:	0	CDM:	134	House:	134	Alias:	p16313coll6	Name:	Jambalaya and T-Wave Yearbooks
+All Grabbed:	172	Grabbed cpd:	1	CDM:	172	House:	259	Alias:	JSN	Name:	Jesuit scrapbooks from the New Orleans Province
+All Grabbed:	37	Grabbed cpd:	0	CDM:	37	House:	37	Alias:	p16313coll24	Name:	John Gould's Birds of Great Britain
+All Grabbed:	39	Grabbed cpd:	0	CDM:	39	House:	39	Alias:	LSU_JJA	Name:	John James Audubon in Louisiana
+All Grabbed:	106	Grabbed cpd:	0	CDM:	106	House:	107	Alias:	LSU_WLS	Name:	John Langdon Ward Lantern Slides
+All Grabbed:	15	Grabbed cpd:	15	CDM:	15	House:	800	Alias:	p16313coll81	Name:	John B. Heroman, Sr. photograph collection, circa 1885-1940
+All Grabbed:	1	Grabbed cpd:	0	CDM:	1	House:	1	Alias:	LSUHSCS_JCM	Name:	John C. McDonald
+All Grabbed:	466	Grabbed cpd:	0	CDM:	465	House:	467	Alias:	JNT	Name:	John Norris Teunisson Photographs
+All Grabbed:	607	Grabbed cpd:	0	CDM:	606	House:	609	Alias:	p15140coll1	Name:	John T. Mendes Photograph Collection
+All Grabbed:	41	Grabbed cpd:	41	CDM:	41	House:	7190	Alias:	p120701coll28	Name:	Joseph-Aurélien Cornet, F.S.C. Collection
+All Grabbed:	1	Grabbed cpd:	1	CDM:	1	House:	221	Alias:	UNO_JBF	Name:	Joseph Bauer Family Album
+All Grabbed:	306	Grabbed cpd:	220	CDM:	306	House:	1217	Alias:	p15140coll31	Name:	Judge John Minor Wisdom Collection
+All Grabbed:	2	Grabbed cpd:	2	CDM:	2	House:	216	Alias:	p16313coll25	Name:	L'Acadien Yearbooks
+All Grabbed:	10	Grabbed cpd:	10	CDM:	10	House:	51	Alias:	p120701coll9	Name:	Lafcadio Hearn Correspondence
+All Grabbed:	208	Grabbed cpd:	0	CDM:	207	House:	204	Alias:	LOU	Name:	LCOC - LOUIS Collection of Collections
+All Grabbed:	98	Grabbed cpd:	0	CDM:	98	House:	98	Alias:	LOU_RANDOM	Name:	LCOC Random image generator
+All Grabbed:	149	Grabbed cpd:	0	CDM:	149	House:	150	Alias:	p15140coll38	Name:	Leon Trice Louisiana Political Photographs
+All Grabbed:	38	Grabbed cpd:	38	CDM:	38	House:	136	Alias:	p15140coll6	Name:	Lettres de Louisiane
+All Grabbed:	4	Grabbed cpd:	3	CDM:	4	House:	None	Alias:	p16313coll19	Name:	LSU Medical Center 1991 Commencement Address by Lindy Boggs
+All Grabbed:	40	Grabbed cpd:	0	CDM:	40	House:	40	Alias:	p15140coll15	Name:	Lippman Collection of Civil War Postal Covers
+All Grabbed:	41	Grabbed cpd:	3	CDM:	41	House:	44	Alias:	LSU_LHC	Name:	Louis Hasslemans' Musicians Photographs
+All Grabbed:	173	Grabbed cpd:	0	CDM:	173	House:	173	Alias:	p16313coll48	Name:	Joseph H. Fichter, S.J. Tapes
+All Grabbed:	209	Grabbed cpd:	0	CDM:	209	House:	210	Alias:	RJR	Name:	Louisiana Coastal Ecology, Richard J. Russell Collection
+All Grabbed:	307	Grabbed cpd:	59	CDM:	306	House:	367	Alias:	p16313coll65	Name:	Louisiana Decoys and Wildfowl Artifacts
+All Grabbed:	574	Grabbed cpd:	0	CDM:	573	House:	576	Alias:	p16313coll45	Name:	Louisiana Department of Wildlife and Fisheries Documents - LSU Libraries
+All Grabbed:	0	Grabbed cpd:	0	CDM:	0	House:	0	Alias:	p16313coll67	Name:	Louisiana Documents of the State Library
+All Grabbed:	220	Grabbed cpd:	218	CDM:	218	House:	941	Alias:	p15140coll41	Name:	Louisiana Early English Corpus
+All Grabbed:	1092	Grabbed cpd:	0	CDM:	1092	House:	1097	Alias:	LSU_PVC	Name:	Louisiana Ecology and Conservation, The Percy Viosca Jr. Collection
+All Grabbed:	1	Grabbed cpd:	0	CDM:	1	House:	1	Alias:	p16313coll62	Name:	Louisiana Ephemera at the University of New Orleans
+All Grabbed:	220	Grabbed cpd:	4	CDM:	220	House:	255	Alias:	p120701coll13	Name:	Louisiana Hurricane Resources
+All Grabbed:	2125	Grabbed cpd:	0	CDM:	2125	House:	2136	Alias:	p16313coll52	Name:	Louisiana images from the Standard Oil Collection, Univ. of Louisville
+All Grabbed:	1040	Grabbed cpd:	0	CDM:	1040	House:	1046	Alias:	p15140coll58	Name:	Louisiana Menu and Restaurant Collection
+All Grabbed:	85	Grabbed cpd:	80	CDM:	85	House:	3150	Alias:	LSU_LNP	Name:	Louisiana Newspaper Access Program - LaNeAP
+All Grabbed:	131	Grabbed cpd:	4	CDM:	130	House:	194	Alias:	p16313coll22	Name:	Louisiana Photographs Collection
+All Grabbed:	46	Grabbed cpd:	18	CDM:	46	House:	81	Alias:	p15140coll37	Name:	Louisiana Political Ephemera, 1860-1920
+All Grabbed:	101	Grabbed cpd:	42	CDM:	101	House:	295	Alias:	LPC	Name:	Louisiana Purchase and Louisiana Colonial History
+All Grabbed:	929	Grabbed cpd:	879	CDM:	921	House:	23668	Alias:	lapur	Name:	Louisiana Purchase Bicentennial Collection
+All Grabbed:	128	Grabbed cpd:	0	CDM:	128	House:	129	Alias:	p16313coll79	Name:	Louisiana Railroad Depot Photograph Collection
+All Grabbed:	1556	Grabbed cpd:	171	CDM:	1553	House:	314	Alias:	p16313coll80	Name:	Louisiana Runaway Slave Advertisements, 1836-1865
+All Grabbed:	0	Grabbed cpd:	0	CDM:	0	House:	0	Alias:	LST	Name:	Louisiana Science and Technology Collection
+All Grabbed:	2250	Grabbed cpd:	0	CDM:	2250	House:	2262	Alias:	p15140coll21	Name:	Louisiana Sea Grant Digital Images Collection
+All Grabbed:	212	Grabbed cpd:	0	CDM:	212	House:	213	Alias:	p15140coll35	Name:	Louisiana Sea Grant Digital Maps Collection
+All Grabbed:	628	Grabbed cpd:	0	CDM:	626	House:	630	Alias:	p15140coll47	Name:	Louisiana Sheet Music
+All Grabbed:	4675	Grabbed cpd:	0	CDM:	4675	House:	4699	Alias:	LSAP	Name:	Louisiana State Aerial Photographs
+All Grabbed:	810	Grabbed cpd:	0	CDM:	812	House:	807	Alias:	p16313coll77	Name:	Louisiana State University Agricultural Experiment Station Reports
+All Grabbed:	11024	Grabbed cpd:	85	CDM:	15247	House:	15652	Alias:	p267101coll4	Name:	Louisiana State Documents Digital Archive
+All Grabbed:	94	Grabbed cpd:	2	CDM:	94	House:	98	Alias:	HLM	Name:	Louisiana State Museum
+All Grabbed:	666	Grabbed cpd:	0	CDM:	665	House:	668	Alias:	LSM_CCC	Name:	Louisiana State Museum Carnival Collection
+All Grabbed:	273	Grabbed cpd:	0	CDM:	273	House:	274	Alias:	LCT	Name:	Louisiana State Museum Costumes and Textiles Collection
+All Grabbed:	284	Grabbed cpd:	0	CDM:	283	House:	285	Alias:	LSM_NCC	Name:	Louisiana State Museum Currency Collection
+All Grabbed:	179	Grabbed cpd:	0	CDM:	179	House:	180	Alias:	LHC	Name:	Louisiana State Museum Historical Map Collection
+All Grabbed:	4	Grabbed cpd:	4	CDM:	4	House:	37	Alias:	LSM_KOH	Name:	Louisiana State Museum Hurricane Katrina Oral History Project
+All Grabbed:	3483	Grabbed cpd:	0	CDM:	3483	House:	3501	Alias:	JAZ	Name:	Louisiana State Museum Jazz Collection
+All Grabbed:	386	Grabbed cpd:	0	CDM:	385	House:	387	Alias:	LSM_NAC	Name:	Louisiana State Museum Newcomb College Arts and Crafts
+All Grabbed:	183	Grabbed cpd:	1	CDM:	183	House:	192	Alias:	LSM_MPC	Name:	Louisiana State Museum Photography Collection
+All Grabbed:	329	Grabbed cpd:	0	CDM:	329	House:	330	Alias:	p120701coll18	Name:	Louisiana State Museum Trade Labels
+All Grabbed:	320	Grabbed cpd:	0	CDM:	319	House:	321	Alias:	LSM_FQA	Name:	Louisiana State Museum W.P.A. French Quarter Architectural Record
+All Grabbed:	0	Grabbed cpd:	0	CDM:	0	House:	0	Alias:	p120701coll14	Name:	Louisiana State Sovereignty Commission Pamphlets of the Civil Rights Era
+All Grabbed:	2063	Grabbed cpd:	21	CDM:	2063	House:	2597	Alias:	p16313coll31	Name:	Louisiana Sugar Resources Digital Collection
+All Grabbed:	4693	Grabbed cpd:	1435	CDM:	4693	House:	8828	Alias:	LWP	Name:	Louisiana Works Progress Administration (WPA)
+All Grabbed:	2008	Grabbed cpd:	2008	CDM:	2008	House:	20041	Alias:	LMNP01	Name:	Loyola University Maroon
+All Grabbed:	0	Grabbed cpd:	0	CDM:	0	House:	0	Alias:	p16313coll87	Name:	Loyola University New Orleans Community and Resilience Collection
+All Grabbed:	192	Grabbed cpd:	191	CDM:	192	House:	1	Alias:	LOYOLA_ETD	Name:	Loyola University New Orleans Electronic Theses
+All Grabbed:	34	Grabbed cpd:	34	CDM:	34	House:	68	Alias:	p16313coll44	Name:	Loyola University New Orleans Finding Aids
+All Grabbed:	0	Grabbed cpd:	0	CDM:	0	House:	None	Alias:	p16313coll98	Name:	Loyola University New Orleans Library History Collection
+All Grabbed:	15	Grabbed cpd:	15	CDM:	15	House:	758	Alias:	p16313coll91	Name:	Loyola University New Orleans Scrapbook Collection
+All Grabbed:	26	Grabbed cpd:	18	CDM:	26	House:	273	Alias:	p16313coll5	Name:	Loyola University New Orleans Special Collections and Archives Online
+All Grabbed:	6703	Grabbed cpd:	0	CDM:	6703	House:	6738	Alias:	p16313coll28	Name:	Loyola University New Orleans University Photographs Collection
+All Grabbed:	162	Grabbed cpd:	0	CDM:	162	House:	163	Alias:	TLD	Name:	LSU Architectural Drawings by Theodore Link
+All Grabbed:	128	Grabbed cpd:	128	CDM:	128	House:	0	Alias:	p15140coll49	Name:	LSU Health Sciences Center New Orleans - Catalog and Bulletin
+All Grabbed:	7576	Grabbed cpd:	228	CDM:	7576	House:	7521	Alias:	LSUHSC_NCC	Name:	LSU Health Sciences Center New Orleans Newspaper Clippings Collection
+All Grabbed:	4	Grabbed cpd:	1	CDM:	4	House:	3	Alias:	p15140coll44	Name:	LSU Health Sciences Center Shreveport Audiovisual Collection
+All Grabbed:	1641	Grabbed cpd:	1641	CDM:	1641	House:	1770	Alias:	p15140coll23	Name:	LSU Health Sciences Center Shreveport Newspaper Clippings
+All Grabbed:	740	Grabbed cpd:	0	CDM:	738	House:	853	Alias:	LSUHSCS_GWM	Name:	LSU Health Sciences Center Shreveport Photograph Collection
+All Grabbed:	19	Grabbed cpd:	19	CDM:	19	House:	328	Alias:	p120701coll12	Name:	LSU Libraries Louisiana and Lower Mississippi Valley Collections
+All Grabbed:	41	Grabbed cpd:	24	CDM:	41	House:	407	Alias:	p15140coll17	Name:	LSU Libraries Mardi Gras Collection
+All Grabbed:	0	Grabbed cpd:	0	CDM:	0	House:	0	Alias:	p15140coll11	Name:	LSU Libraries Political Papers Collection
+All Grabbed:	603	Grabbed cpd:	598	CDM:	598	House:	1216	Alias:	p16313coll10	Name:	LSU Libraries Postcard Collections
+All Grabbed:	2	Grabbed cpd:	2	CDM:	2	House:	535	Alias:	LSU_RBC	Name:	LSU Libraries' Rare Books Collection - Selected materials
+All Grabbed:	94	Grabbed cpd:	20	CDM:	94	House:	247	Alias:	p16313coll35	Name:	LSU Libraries Louisiana Waterways Management Collection
+All Grabbed:	729	Grabbed cpd:	7	CDM:	727	House:	756	Alias:	p16313coll69	Name:	LSU Music Resources Sheet Music Collection
+All Grabbed:	6	Grabbed cpd:	6	CDM:	6	House:	76	Alias:	p120701coll7	Name:	LSU School of Dentistry Historic Photographs
+All Grabbed:	48	Grabbed cpd:	13	CDM:	48	House:	86	Alias:	LSU_SCE	Name:	LSU Special Collections Online
+All Grabbed:	481	Grabbed cpd:	199	CDM:	479	House:	1039	Alias:	LSU_UAP	Name:	LSU University Archives Photographs Collection
+All Grabbed:	21	Grabbed cpd:	11	CDM:	21	House:	207	Alias:	p120701coll24	Name:	LSU University Archives Print Materials Collection
+All Grabbed:	60	Grabbed cpd:	0	CDM:	60	House:	60	Alias:	p16313coll85	Name:	Lumières - A Publication of the Friends of the LSU Libraries
+All Grabbed:	10	Grabbed cpd:	10	CDM:	10	House:	20	Alias:	p16313coll59	Name:	M. O. Gershenzon Archive
+All Grabbed:	122	Grabbed cpd:	0	CDM:	122	House:	122	Alias:	p15140coll28	Name:	Maps from the Historic New Orleans Collection
+All Grabbed:	23	Grabbed cpd:	1	CDM:	23	House:	55	Alias:	LMP	Name:	Maps of Louisiana Collection
+All Grabbed:	49	Grabbed cpd:	49	CDM:	49	House:	0	Alias:	p15140coll42	Name:	Marcus Christian Collection
+All Grabbed:	200	Grabbed cpd:	200	CDM:	200	House:	400	Alias:	LSU_MDP	Name:	Marshall Dunham Photograph Album
+All Grabbed:	1	Grabbed cpd:	1	CDM:	1	House:	5	Alias:	MPF	Name:	Martin-Pugh Family Papers
+All Grabbed:	1114	Grabbed cpd:	99	CDM:	1111	House:	1317	Alias:	p16313coll43	Name:	Mary McMurran and Conner Family
+All Grabbed:	96	Grabbed cpd:	0	CDM:	96	House:	90	Alias:	p16313coll74	Name:	McNeese State University Electronic Theses
+All Grabbed:	29	Grabbed cpd:	29	CDM:	29	House:	109	Alias:	MMF	Name:	Medieval Manuscript Facsimiles Inventory
+All Grabbed:	0	Grabbed cpd:	0	CDM:	0	House:	0	Alias:	p15140coll57	Name:	Menus, restaurant brochures, and food advertising flyers from the Louisiana Re
+All Grabbed:	18	Grabbed cpd:	1	CDM:	18	House:	31	Alias:	p16313coll37	Name:	Mesoamerican Painted Manuscripts at the Latin American Library
+All Grabbed:	10	Grabbed cpd:	0	CDM:	10	House:	10	Alias:	p16313coll15	Name:	Mexican Incunabula (1559-1600) at the Latin American Library
+All Grabbed:	167	Grabbed cpd:	0	CDM:	167	House:	168	Alias:	MPA	Name:	Millspaugh Photographs
+All Grabbed:	32	Grabbed cpd:	0	CDM:	32	House:	32	Alias:	p16313coll54	Name:	Mingo Family African American Photographs, 1887-1955
+All Grabbed:	214	Grabbed cpd:	0	CDM:	214	House:	215	Alias:	LSU_MRF	Name:	Mississippi River Flood of 1927 Photograph Album
+All Grabbed:	20	Grabbed cpd:	0	CDM:	20	House:	20	Alias:	p15140coll29	Name:	Mistick Krewe of Comus 1910 Float Designs
+All Grabbed:	101	Grabbed cpd:	0	CDM:	101	House:	101	Alias:	p15140coll3	Name:	Mistick Krewe of Comus 1873 Missing Links Parade Costume Designs
+All Grabbed:	19	Grabbed cpd:	7	CDM:	19	House:	28	Alias:	LSU_NMI	Name:	Natchez, MS
+All Grabbed:	191	Grabbed cpd:	0	CDM:	191	House:	192	Alias:	LOH	Name:	Natchitoches Cane River Civil Rights Oral Histories - Louisiana State Museum
+All Grabbed:	399	Grabbed cpd:	0	CDM:	398	House:	400	Alias:	NCC	Name:	Natchitoches Chamber of Commerce Collection
+All Grabbed:	234	Grabbed cpd:	1	CDM:	234	House:	237	Alias:	MSW	Name:	Native Flora of Louisiana - Watercolor drawings by Margaret Stones
+All Grabbed:	9	Grabbed cpd:	9	CDM:	9	House:	1697	Alias:	p15140coll39	Name:	Newcomb College Scrapbooks
+All Grabbed:	65	Grabbed cpd:	65	CDM:	65	House:	130	Alias:	LSU_NOE	Name:	New Orleans Centennial Exposition Stereoscopic Views
+All Grabbed:	979	Grabbed cpd:	0	CDM:	977	House:	982	Alias:	CCA	Name:	New Orleans Chamber of Commerce Photographs
+All Grabbed:	61	Grabbed cpd:	0	CDM:	61	House:	61	Alias:	NewOrleans	Name:	New Orleans Image Collections at the LSU Libraries
+All Grabbed:	37	Grabbed cpd:	0	CDM:	37	House:	37	Alias:	p16313coll84	Name:	New Orleans Independent Music Digital Collection
+All Grabbed:	65	Grabbed cpd:	0	CDM:	65	House:	65	Alias:	NONegExposures	Name:	New Orleans Negative Exposures and Prints, circa 1900-1930
+All Grabbed:	102	Grabbed cpd:	102	CDM:	102	House:	None	Alias:	p16313coll95	Name:	New Orleans Opera Association Archives
+All Grabbed:	54	Grabbed cpd:	54	CDM:	54	House:	0	Alias:	p16313coll93	Name:	New Orleans Review Collection
+All Grabbed:	57	Grabbed cpd:	0	CDM:	57	House:	57	Alias:	p16313coll78	Name:	Nicaraguan Presidential Papers
+All Grabbed:	47	Grabbed cpd:	37	CDM:	47	House:	86	Alias:	p16313coll68	Name:	NOLA Hip Hop and Bounce Archive
+All Grabbed:	254	Grabbed cpd:	9	CDM:	253	House:	355	Alias:	p15140coll27	Name:	Northeast Louisiana Historic Images Collection
+All Grabbed:	71	Grabbed cpd:	0	CDM:	71	House:	71	Alias:	NWM	Name:	Northwest Louisiana Map Collection
+All Grabbed:	485	Grabbed cpd:	0	CDM:	484	House:	486	Alias:	OMSA	Name:	Ogden Museum of Southern Art
+All Grabbed:	186	Grabbed cpd:	0	CDM:	186	House:	187	Alias:	OSC	Name:	Olide Schexnayder Collection
+All Grabbed:	18	Grabbed cpd:	18	CDM:	18	House:	7510	Alias:	p15140coll4	Name:	Orleans Parish School Board Meeting Minutes
+All Grabbed:	3	Grabbed cpd:	3	CDM:	3	House:	114	Alias:	p16313coll72	Name:	Orleans Parish School Board Meeting Minutes -- Indexes
+All Grabbed:	1689	Grabbed cpd:	20	CDM:	1689	House:	1717	Alias:	LPH	Name:	Painting in Louisiana from the Historic New Orleans Collection
+All Grabbed:	714	Grabbed cpd:	0	CDM:	713	House:	715	Alias:	LPS	Name:	Paintings from the Louisiana State Museum
+All Grabbed:	76	Grabbed cpd:	0	CDM:	76	House:	76	Alias:	SartainEngravings	Name:	Perine-Giles-Sartain Engravings, circa 19th century
+All Grabbed:	168	Grabbed cpd:	0	CDM:	168	House:	169	Alias:	p16313coll42	Name:	Print Culture of the Civil Rights Movement, 1950-1980
+All Grabbed:	784	Grabbed cpd:	0	CDM:	782	House:	786	Alias:	p16313coll4	Name:	Ralston Crawford Collection of Jazz Photography
+All Grabbed:	18	Grabbed cpd:	0	CDM:	18	House:	18	Alias:	RTP	Name:	Reconstruction Through Progressivism Collection
+All Grabbed:	131	Grabbed cpd:	131	CDM:	131	House:	592	Alias:	p15140coll60	Name:	Records of the French Superior Council (1714-1769)
+All Grabbed:	11	Grabbed cpd:	11	CDM:	11	House:	240	Alias:	p16313coll83	Name:	Records of the Spanish Cabildo (1769-1803)
+All Grabbed:	3	Grabbed cpd:	3	CDM:	3	House:	231	Alias:	p15140coll34	Name:	Registre Du Comite Medical De La Nouvelle Orleans, 1816-1854
+All Grabbed:	0	Grabbed cpd:	0	CDM:	0	House:	0	Alias:	p16313coll61	Name:	Rene Grandjean Collection - Seance Registers
+All Grabbed:	828	Grabbed cpd:	0	CDM:	826	House:	830	Alias:	RMC	Name:	Robert S.Maestri Photograph Collection
+All Grabbed:	344	Grabbed cpd:	0	CDM:	344	House:	345	Alias:	RTC	Name:	Robert Tebbs Photograph
+All Grabbed:	380	Grabbed cpd:	0	CDM:	379	House:	381	Alias:	RSP	Name:	Rowles Stereograph Collection
+All Grabbed:	82	Grabbed cpd:	75	CDM:	82	House:	5204	Alias:	p120701coll19	Name:	Sidonie de la Houssaye Collection
+All Grabbed:	48	Grabbed cpd:	0	CDM:	48	House:	48	Alias:	p15140coll56	Name:	Sobre las Olas- Mexican Music from Nineteenth-Century New Orleans
+All Grabbed:	246	Grabbed cpd:	0	CDM:	245	House:	246	Alias:	p16313coll46	Name:	Social Framework - Photographs by Marion Palfi, 1945-1960
+All Grabbed:	4	Grabbed cpd:	4	CDM:	4	House:	8	Alias:	p16313coll66	Name:	Sounding Translation
+All Grabbed:	14	Grabbed cpd:	10	CDM:	14	House:	25	Alias:	p16313coll64	Name:	Sounds of Louisiana
+All Grabbed:	2511	Grabbed cpd:	0	CDM:	2511	House:	2524	Alias:	SIP	Name:	Southwestern Louisiana Institute Photographs, 1923-1940
+All Grabbed:	10558	Grabbed cpd:	1	CDM:	10558	House:	10605	Alias:	LHP	Name:	State Library of Louisiana Historic Photograph Collection
+All Grabbed:	370	Grabbed cpd:	370	CDM:	370	House:	2890	Alias:	p16313coll2	Name:	StoryCorps
+All Grabbed:	89	Grabbed cpd:	0	CDM:	89	House:	89	Alias:	STC	Name:	Strand Theater Collection
+All Grabbed:	5	Grabbed cpd:	0	CDM:	5	House:	5	Alias:	THW	Name:	T. Harry Williams Center for Oral History
+All Grabbed:	5	Grabbed cpd:	0	CDM:	5	House:	5	Alias:	LSU_FCC	Name:	T. Harry Williams Center for Oral History Four Corners of Louisiana Collection
+All Grabbed:	7	Grabbed cpd:	0	CDM:	7	House:	7	Alias:	LSU_RBO	Name:	T. Harry Williams Center for Oral History Floods, Storms and Levee Breaks
+All Grabbed:	8	Grabbed cpd:	1	CDM:	8	House:	9	Alias:	p120701coll22	Name:	T. Harry Williams Center for Oral History Military History Collection
+All Grabbed:	6	Grabbed cpd:	1	CDM:	6	House:	16	Alias:	p15140coll14	Name:	T. Harry Williams Center for Oral History Political Collection
+All Grabbed:	5	Grabbed cpd:	0	CDM:	5	House:	5	Alias:	p120701coll23	Name:	T. Harry Williams Center for Oral History University History Collection
+All Grabbed:	1	Grabbed cpd:	1	CDM:	1	House:	155	Alias:	p120701coll8	Name:	Telling-Grandon Scrapbook
+All Grabbed:	106	Grabbed cpd:	0	CDM:	106	House:	106	Alias:	Tensas	Name:	Tensas River National Wildlife Refuge Ivory Billed Woodpecker Records
+All Grabbed:	0	Grabbed cpd:	0	CDM:	0	House:	0	Alias:	p16313coll49	Name:	The Daily Reveille - Louisiana State University
+All Grabbed:	431	Grabbed cpd:	430	CDM:	430	House:	230	Alias:	p15140coll52	Name:	The STAR- Radiating the Light of Truth on Hansen's Disease
+All Grabbed:	160	Grabbed cpd:	0	CDM:	160	House:	161	Alias:	LSU_TJP	Name:	Thomas H. and Joan W. Gandy Photograph Collection
+All Grabbed:	530	Grabbed cpd:	0	CDM:	529	House:	532	Alias:	p15140coll16	Name:	Tiger Rag – Student newspapers of LSU School of Medicine, New Orleans
+All Grabbed:	115	Grabbed cpd:	6	CDM:	115	House:	161	Alias:	LSUS_TBP	Name:	Tom Bell Papers, 1895-1999
+All Grabbed:	8	Grabbed cpd:	0	CDM:	8	House:	8	Alias:	p16313coll27	Name:	Tulane Library Speaker Series
+All Grabbed:	57	Grabbed cpd:	42	CDM:	57	House:	199	Alias:	HTU	Name:	Tulane University
+All Grabbed:	94	Grabbed cpd:	32	CDM:	93	House:	263	Alias:	p16313coll14	Name:	Tulane University Band Historical Collection
+All Grabbed:	187	Grabbed cpd:	0	CDM:	187	House:	187	Alias:	p16313coll13	Name:	Tulane University Football Programs
+All Grabbed:	4924	Grabbed cpd:	1	CDM:	4925	House:	4951	Alias:	p16313coll12	Name:	Tulane University Theses and Dissertations Archive
+All Grabbed:	1561	Grabbed cpd:	1561	CDM:	1561	House:	0	Alias:	p120701coll25	Name:	United States House and Senate Committee Hearings and Publications
+All Grabbed:	138	Grabbed cpd:	138	CDM:	138	House:	139	Alias:	UNO_ANI	Name:	University of New Orleans Anniversary
+All Grabbed:	242	Grabbed cpd:	239	CDM:	242	House:	3	Alias:	p15140coll7	Name:	University of New Orleans Senior Honors Theses
+All Grabbed:	1071	Grabbed cpd:	1071	CDM:	1071	House:	21770	Alias:	UNO_SCC	Name:	UNO Historical Archives of the Supreme Court of Louisiana
+All Grabbed:	532	Grabbed cpd:	479	CDM:	531	House:	632	Alias:	p15140coll50	Name:	U.S. Army 64th General Hospital, organized by LSU Medical School
+All Grabbed:	36	Grabbed cpd:	0	CDM:	36	House:	36	Alias:	VBC	Name:	Verla Birrell Textiles and Designs
+All Grabbed:	367	Grabbed cpd:	1	CDM:	366	House:	368	Alias:	p15140coll51	Name:	Veterans of Southeast Louisiana
+All Grabbed:	248	Grabbed cpd:	0	CDM:	248	House:	249	Alias:	p16313coll58	Name:	William Barth Photographs of Mississippi and Atchafalaya River operations
+All Grabbed:	17	Grabbed cpd:	6	CDM:	17	House:	23	Alias:	p15140coll19	Name:	William Branks Stewart Collection
+All Grabbed:	60	Grabbed cpd:	0	CDM:	60	House:	60	Alias:	p15140coll54	Name:	William J. Thornton Music Collection
+All Grabbed:	153	Grabbed cpd:	30	CDM:	153	House:	184	Alias:	p16313coll57	Name:	William Waller Survey Collection
+All Grabbed:	0	Grabbed cpd:	0	CDM:	0	House:	0	Alias:	WIS	Name:	Wiseman Photograph Collection
+All Grabbed:	0	Grabbed cpd:	0	CDM:	0	House:	0	Alias:	p16313coll90	Name:	World War I Maxillofacial Wounds Photo Album
+All Grabbed:	16	Grabbed cpd:	2	CDM:	16	House:	18	Alias:	wri-boy	Name:	Wright-Boyd Family Papers at LSU Libraries
+All Grabbed:	231	Grabbed cpd:	0	CDM:	231	House:	231	Alias:	p16313coll11	Name:	WTUL - a collection from Tulane University's independent radio station
+All Grabbed:	312	Grabbed cpd:	0	CDM:	312	House:	None	Alias:	p16313coll96	Name:	WYES Informed Sources Archive
