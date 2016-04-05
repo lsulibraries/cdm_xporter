@@ -7,7 +7,7 @@ import itertools
 import csv
 
 from owner_col import owner_col_dict
-
+from cmp_coll_list import cpd_collections
 
 def make_alias_terms_set():
     dict_a = dict()
@@ -19,8 +19,9 @@ def make_alias_terms_set():
         if alias in ('LST', 'p15140coll11', 'p16313coll61', 'p16313coll67', 'p16313coll87', 'p16313coll90', 'p16313coll98', 'p120701coll11', 'p120701coll14'):
             continue  # ignore collection with no objects
         if alias in owner_col_dict['Tulane']:
-            print(alias, "tulane")
             continue  # ignore Tulane collections
+        if alias in cpd_collections:
+            continue  # ignore compound collections
         for filepath in (x for x in alias_dir.iterdir() if x.name == 'Collection_Fields.xml'):
             with open(str(filepath), 'r') as f:
                 xmltext = f.read()
