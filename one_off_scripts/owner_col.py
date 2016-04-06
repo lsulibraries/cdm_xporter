@@ -3,7 +3,6 @@
 import csv
 import os
 
-os.chdir('..')
 
 def owner_col_dict():
     owner_col_dict = dict()
@@ -16,12 +15,15 @@ def owner_col_dict():
     return owner_col_dict
 
 if __name__ == '__main__':
+    current_dir = os.getcwd()
+    os.chdir('..')
     owner_col_dict = owner_col_dict()
     for key in owner_col_dict.keys():
         print('\t\"{}\": ['.format(key))
         for item in owner_col_dict[key]:
             print('\t\t\"{}\",'.format(item))
         print('\t\t],')
+    os.chdir(os.getcwd())
 
 owner_col_dict = {
     "LSUHSCNO": [
