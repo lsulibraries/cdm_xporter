@@ -69,20 +69,20 @@ def just_so_i_can_call_it(alias):
             xml_elems_in_coll = read_file('{}/Collections/{}/Elems_in_Collection_{}.xml'.format(os.getcwd(), alias, starting_pointer))
         elems_in_coll_tree = etree.fromstring(bytes(bytearray(xml_elems_in_coll, encoding='utf-8')))
 
-        """ Careful method of getting each object contentdm says is in a collection"""
-        pointers_filetypes = [(single_record.find('dmrecord').text,
-                               single_record.find('filetype').text,
-                               ) for single_record in elems_in_coll_tree.findall('.//record')]
-        for pointer, filetype in pointers_filetypes:
-            if not pointer:  # skips file if a derivative -- only gets original versions
-                print('{} {} not pointer, filetype'.format(pointer, filetype))
+        # """ Careful method of getting each object contentdm says is in a collection"""
+        # pointers_filetypes = [(single_record.find('dmrecord').text,
+        #                        single_record.find('filetype').text,
+        #                        ) for single_record in elems_in_coll_tree.findall('.//record')]
+        # for pointer, filetype in pointers_filetypes:
+        #     if not pointer:  # skips file if a derivative -- only gets original versions
+        #         print('{} {} not pointer, filetype'.format(pointer, filetype))
 
-            elif '{}.xml'.format(pointer) not in os.listdir('{}/Collections/{}'.format(os.getcwd(), alias)):
-                item_metadata = p.retrieve_item_metadata(alias, pointer)
-                local_etree = etree.fromstring(bytes(bytearray(item_metadata, encoding='utf-8')))
-                # local_etree = xmlify.add_tag_attributes(local_etree, collection_fields_etree)
-                # local_etree = xmlify.clean_up_tags(alias, pointer, local_etree, collection_fields_etree)
-                p.write_xml_to_file(etree.tostring(local_etree, encoding="unicode", method="xml"), alias, pointer)
+        #     elif '{}.xml'.format(pointer) not in os.listdir('{}/Collections/{}'.format(os.getcwd(), alias)):
+        #         item_metadata = p.retrieve_item_metadata(alias, pointer)
+        #         local_etree = etree.fromstring(bytes(bytearray(item_metadata, encoding='utf-8')))
+        #         # local_etree = xmlify.add_tag_attributes(local_etree, collection_fields_etree)
+        #         # local_etree = xmlify.clean_up_tags(alias, pointer, local_etree, collection_fields_etree)
+        #         p.write_xml_to_file(etree.tostring(local_etree, encoding="unicode", method="xml"), alias, pointer)
 
             # if etree.fromstring(item_metadata).find('object'):  # "find" is contentdm's abbr for 'contentdm file name'
             #     binary = p.retrieve_binaries(alias, pointer, "something")
@@ -115,6 +115,8 @@ if __name__ == '__main__':
 
     """ Call all collections, retrieve all metadata """
     coll_list_txt = p.retrieve_collections_list()
+    if 'Collections' not in os.listdir(os.getcwd()):
+        os.mkdir('{}/Collections'.format(os.getcwd()))
     p.write_xml_to_file(coll_list_txt, '.', 'Collections_List')
     coll_list_xml = etree.fromstring(bytes(bytearray(coll_list_txt, encoding='utf-8')))
     for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')]:

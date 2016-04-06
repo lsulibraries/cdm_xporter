@@ -1,106 +1,247 @@
 	Collection name	Owner	Size (GB)	Total	Compound Objects	BMP	DB	DOC	DOCM	DOCX	GIF	HTM	HTML	JP2	JPF	JPG	LNK	M4V	MHT	MOV	MP3	MP4	Null	PDF	PNG	RAM	RM	SID	TIF	TXT	URL	WAV	WMV	XLS	XLSX
-CLF	Charles L. Franck and Franck-Bertacci	HNOC	55.43	10646	0	0	0	0	0	0	0	0	0	10646	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p15140coll1	John T. Mendes Photograph Collection	HNOC	0.54	609	0	0	0	0	0	0	0	0	0	609	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p15140coll28	Maps from the Historic New Orleans Collection	HNOC	0.69	122	0	0	0	0	0	0	0	0	0	122	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p15140coll33	Jay Dearborn Edwards Photograph Collection	HNOC	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p15140coll43	Leon Trice Photograph Collection	HNOC	0.74	832	0	0	0	0	0	0	0	0	0	832	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p15140coll61	Designing Carnival- Mardi Gras Costume and Float Designs	HNOC	0.09	76	0	0	0	0	0	0	0	0	0	76	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll21	Clarence John Laughlin Photograph Collection	HNOC	11.89	1878	0	0	0	0	0	0	0	0	0	1878	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p120701coll11	Israel Shreve Letters	La Tech	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll70	Jack Ritchie Collection	La Tech	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+AAW	America at War	TAHIL	0.57	1079	129	0	0	0	0	0	0	0	0	1	0	748	0	0	0	0	0	0	0	0	0	0	0	201	0	0	0	0	0	0	0
+ABW	America Between the Wars 1920-1940	TAHIL	0.03	153	6	0	0	0	0	0	0	0	0	0	0	139	0	0	0	0	0	0	0	0	0	0	0	8	0	0	0	0	0	0	0
+ACC	Archives of Cajun and Creole Folklore	ULL	0.08	163	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	163	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+APC	Antebellum Period	TAHIL	0.07	235	10	0	0	0	0	0	0	0	0	0	0	201	0	0	0	0	0	0	0	0	0	0	0	24	0	0	0	0	0	0	0
+AWW	Alfred and William Waud Collection	HNOC	15.74	2732	4	0	0	0	0	0	0	0	0	2728	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+BBA	Baby Boom American Collection	TAHIL	0.01	36	5	0	0	0	0	0	0	0	0	0	0	27	0	0	0	0	0	0	0	0	0	0	0	4	0	0	0	0	0	0	0
+BRS	Beachrock Research Slides of Richard J. Russell Collection	LSU	0.13	497	0	0	0	0	0	0	0	0	0	0	0	497	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+BTW	Ben Treadaway WWII Shell Beach Collection	Nunez Community College?	0.01	64	7	0	0	0	0	0	0	0	0	0	0	57	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 CCA	New Orleans Chamber of Commerce Photographs	Louisiana State Museum	0.07	982	0	0	0	0	0	0	0	0	0	0	0	982	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+CLF	Charles L. Franck and Franck-Bertacci	HNOC	55.43	10646	0	0	0	0	0	0	0	0	0	10646	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+CMPRT	Camp Ruston Collection	La Tech	0.05	246	2	0	0	0	0	0	0	0	0	1	0	243	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+CRD	Colville River Delta, Alaska Collection	LSU	0	2142	0	0	0	0	0	0	2116	0	0	0	0	1	0	0	0	0	0	0	0	25	0	0	0	0	0	0	0	0	0	0	0
+CWD	Caroline Wogan Durieux Works of Art	LSU	0.97	232	0	0	0	0	0	0	0	0	0	222	0	0	0	0	0	0	0	0	0	0	0	0	0	10	0	0	0	0	0	0	0
+																																			
+FBM	Frank B. Moore Collection	UNO	0.09	545	0	0	0	0	0	0	0	0	0	0	0	545	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 FJC	Frances B. Johnston Photograph Collection	Louisiana State Museum	0.04	438	0	0	0	0	0	0	0	0	0	0	0	438	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 GFM	George Francois Mugnier Collection	Louisiana State Museum	0.1	1174	0	0	0	0	0	0	0	0	0	0	0	1174	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+HHN	Historic New Orleans Collection	HNOC	0.05	336	12	0	0	0	0	0	0	0	0	0	0	324	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+HIC	Higgins Industries	UNO	2.14	639	0	0	0	0	0	0	0	0	0	639	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+HLM	Louisiana State Museum	Louisiana State Museum	0.05	100	2	0	0	0	0	0	0	0	0	0	0	54	0	0	0	0	0	0	0	0	0	0	0	44	0	0	0	0	0	0	0
+HNF	Hebert Nuremburg Files	LSU	0.1	467	36	0	0	0	0	0	7	0	0	0	0	424	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+HPL	Huey P. Long Collection	TAHIL	0.06	213	12	0	0	0	0	0	0	0	0	0	0	181	0	0	0	0	0	0	0	0	0	0	0	20	0	0	0	0	0	0	0
+HWJ	Harper's Weekly Journal of Civilization and Frank Leslie's Illustrated Newspaper	SUBR	0.34	490	0	0	0	0	0	0	0	0	0	0	0	490	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+IBE	Integration and the Black Experience at LSU	LSU	0.06	30	3	0	0	0	0	0	0	0	0	0	0	3	0	0	0	0	0	0	0	11	0	11	2	0	0	0	0	0	0	0	0
 JAZ	Louisiana State Museum Jazz Collection	Louisiana State Museum	4.1	3501	0	0	0	0	0	0	0	0	0	2351	0	3	0	0	0	0	0	0	0	0	0	1147	0	0	0	0	0	0	0	0	0
 JNT	John Norris Teunisson Photographs	Louisiana State Museum	0.05	467	0	0	0	0	0	0	0	0	0	0	0	467	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+JSN	Jesuit scrapbooks from the New Orleans Province	Loyola	0.09	260	1	0	0	0	0	0	0	0	0	0	0	259	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+lapur	Louisiana Purchase Bicentennial Collection	LSU	10.44	24553	885	0	0	0	0	0	0	0	0	12	0	23072	0	0	0	0	0	0	0	0	0	0	0	0	584	0	0	0	0	0	0
 LCT	Louisiana State Museum Costumes and Textiles Collection	Louisiana State Museum	1.2	274	0	0	0	0	0	0	0	0	0	274	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 LHC	Louisiana State Museum Historical Map Collection	Louisiana State Museum	0.3	180	0	0	0	0	0	0	0	0	0	180	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+LHP	State Library of Louisiana Historic Photograph Collection	State Library 	2.83	10606	1	0	0	0	0	0	0	0	0	1873	0	8732	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+LMNP01	Loyola University Maroon	Loyola	68.79	22059	2018	0	0	0	0	0	0	0	0	20041	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+LMP	Maps of Louisiana Collection	LSU	0.07	56	1	0	0	0	0	0	0	0	0	35	0	20	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 LOH	Natchitoches Cane River Civil Rights Oral Histories - Louisiana State Museum	Louisiana State Museum	0	192	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	192	0	0	0	0	0	0	0	0	0
+LOU	LCOC - LOUIS Collection of Collections	N/A	0.01	204	0	0	0	0	0	0	0	0	0	2	0	192	0	0	0	0	0	0	0	0	10	0	0	0	0	0	0	0	0	0	0
+LOU_RANDOM	LCOC Random image generator	N/A	0	98	0	0	0	0	0	0	0	0	0	0	0	98	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+LOYOLA_ETD	Loyola University New Orleans Electronic Theses	Loyola	0.91	195	194	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0
+LPC	Louisiana Purchase and Louisiana Colonial History	TAHIL	0.14	337	42	0	0	0	0	0	0	0	0	2	0	282	0	0	0	0	0	0	0	0	0	0	0	11	0	0	0	0	0	0	0
+LPH	Painting in Louisiana from the Historic New Orleans Collection	HNOC	12.68	1737	20	0	0	0	0	0	0	0	0	1547	0	170	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 LPS	Paintings from the Louisiana State Museum	Louisiana State Museum	9.92	715	0	0	0	0	0	0	0	0	0	713	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+LSA	Center for Louisiana Studies Archive	ULL	0.15	1237	0	0	0	0	0	0	0	0	0	0	0	1237	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+LSAP	Louisiana State Aerial Photographs	LSU	1.19	4699	0	0	0	0	0	0	0	0	0	0	0	4699	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 LSM_CCC	Louisiana State Museum Carnival Collection	Louisiana State Museum	16.81	668	0	0	0	0	0	0	0	0	0	667	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 LSM_FQA	Louisiana State Museum W.P.A. French Quarter Architectural Record	Louisiana State Museum	1.43	321	0	0	0	0	0	0	0	0	0	321	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+LSM_KOH	Louisiana State Museum Hurricane Katrina Oral History Project	Louisiana State Museum	0	41	4	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	37	0	0	0	0	0	0	0	0	0
+LSM_MPC	Louisiana State Museum Photography Collection	Louisiana State Museum	0.19	193	1	0	0	0	0	0	0	0	0	115	0	77	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 LSM_NAC	Louisiana State Museum Newcomb College Arts and Crafts	Louisiana State Museum	5.09	387	0	0	0	0	0	0	0	0	0	387	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 LSM_NCC	Louisiana State Museum Currency Collection	Louisiana State Museum	1.49	285	0	0	0	0	0	0	0	0	0	285	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 LST	Louisiana Science and Technology Collection	Louisiana State Museum	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-OSC	Olide Schexnayder Collection	Louisiana State Museum	0.14	187	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	187	0	0	0	0	0	0	0
-p120701coll18	Louisiana State Museum Trade Labels	Louisiana State Museum	0.49	330	0	0	0	0	0	0	0	0	0	330	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p15140coll22	Louisiana State Museum Historical Center	Louisiana State Museum	0.01	8	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	8	0	0	0	0	0	0	0	0	0	0	0
-p15140coll55	Historic Louisiana Library Photographs	Louisiana State Museum	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-RMC	Robert S.Maestri Photograph Collection	Louisiana State Museum	0.07	830	0	0	0	0	0	0	0	0	0	0	0	830	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-RSP	Rowles Stereograph Collection	Louisiana State Museum	0.04	381	0	0	0	0	0	0	0	0	0	0	0	381	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-RTC	Robert Tebbs Photograph	Louisiana State Museum	0.04	345	0	0	0	0	0	0	0	0	0	0	0	345	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p120701coll27	Loyola University New Orleans Athletics Collection	Loyola	13.5	38	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	38	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll20	Germany’s Wild Medicinal Plants (Deutschlands wildwachsende Arzney-Pflanzen)	Loyola	0.23	49	0	0	0	0	0	0	0	0	0	49	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll24	John Gould's Birds of Great Britain	Loyola	0.27	37	0	0	0	0	0	0	0	0	0	37	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll28	Loyola University New Orleans University Photographs Collection	Loyola	3.49	6738	0	0	0	0	0	0	0	0	0	6724	0	14	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll48	Joseph H. Fichter, S.J. Tapes	Loyola	6.07	173	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	173	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll87	Loyola University New Orleans Community and Resilience Collection	Loyola	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-BRS	Beachrock Research Slides of Richard J. Russell Collection	LSU	0.13	497	0	0	0	0	0	0	0	0	0	0	0	497	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-CRD	Colville River Delta, Alaska Collection	LSU	0	2142	0	0	0	0	0	0	2116	0	0	0	0	1	0	0	0	0	0	0	0	25	0	0	0	0	0	0	0	0	0	0	0
-CWD	Caroline Wogan Durieux Works of Art	LSU	0.97	232	0	0	0	0	0	0	0	0	0	222	0	0	0	0	0	0	0	0	0	0	0	0	0	10	0	0	0	0	0	0	0
-LSAP	Louisiana State Aerial Photographs	LSU	1.19	4699	0	0	0	0	0	0	0	0	0	0	0	4699	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+LSU_ACT	Actors and Musicians Photographs, 1880-1920	LSU	0.01	192	64	0	0	0	0	0	0	0	0	4	0	124	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+LSU_BRT	Historic Images of Baton Rouge from LSU Libraries	LSU	0.01	14	3	0	0	0	0	0	0	0	0	1	0	10	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+LSU_CFF	Early Louisiana French Correspondence	LSU	0.49	527	101	0	0	0	0	0	0	0	0	1	0	316	0	0	0	0	0	0	0	101	0	0	0	0	8	0	0	0	0	0	0
 LSU_CLT	Charles L. Thompson Photographs	LSU	0.02	19	0	0	0	0	0	0	0	0	0	0	0	19	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+LSU_CNP	Chickamauga and Chattanooga National Military Park Photographs	LSU	0.01	87	29	0	0	0	0	0	0	0	0	0	0	58	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+LSU_CWP	Civil War Photograph Album, 1862-1900	LSU	0.02	402	134	0	0	0	0	0	0	0	0	0	0	268	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 LSU_DYP	Donn Young Photographs	LSU	0.07	285	0	0	0	0	0	0	0	0	0	0	0	285	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 LSU_FCC	T. Harry Williams Center for Oral History Four Corners of Louisiana Collection	LSU	0	5	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	5	0	0	0	0	0	0	0	0	0	0	0
 LSU_GCS	George C. Strong Photograph Album	LSU	0	44	0	0	0	0	0	0	0	0	0	0	0	44	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 LSU_GFM	George Francois Mugnier New Orleans Scenes	LSU	0.12	61	0	0	0	0	0	0	0	0	0	0	0	61	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+LSU_GSC	G. H. Suydam Photograph Album	LSU	0.06	60	20	0	0	0	0	0	0	0	0	0	0	40	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 LSU_HPL	Huey P. Long Photograph Album, 1928-1935	LSU	0.01	31	0	0	0	0	0	0	0	0	0	0	0	31	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 LSU_JJA	John James Audubon in Louisiana	LSU	2.23	39	0	0	0	0	0	0	0	0	0	39	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+LSU_LHC	Louis Hasslemans' Musicians Photographs	LSU	0.03	47	3	0	0	0	0	0	0	0	0	0	0	44	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+LSU_LNP	Louisiana Newspaper Access Program - LaNeAP	LSU	11.46	3230	80	0	0	0	0	0	0	0	0	3067	0	0	0	0	0	0	0	0	0	83	0	0	0	0	0	0	0	0	0	0	0
+LSU_MDP	Marshall Dunham Photograph Album	LSU	0.58	600	200	0	0	0	0	0	0	0	0	0	0	400	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 LSU_MRF	Mississippi River Flood of 1927 Photograph Album	LSU	0.02	215	0	0	0	0	0	0	0	0	0	0	0	215	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+LSU_NMI	Natchez, MS	LSU	0.28	35	7	0	0	0	0	0	0	0	0	4	0	24	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+LSU_NOE	New Orleans Centennial Exposition Stereoscopic Views	LSU	0.44	195	65	0	0	0	0	0	0	0	0	0	0	130	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 LSU_PVC	Louisiana Ecology and Conservation, The Percy Viosca Jr. Collection	LSU	1.15	1097	0	0	0	0	0	0	0	0	0	0	0	1096	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0
+LSU_RBC	LSU Libraries' Rare Books Collection - Selected materials	LSU	0.28	537	2	0	0	0	0	0	0	0	0	224	0	311	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 LSU_RBO	T. Harry Williams Center for Oral History Floods, Storms and Levee Breaks	LSU	0.08	7	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	7	0	0	0	0	0	0	0	0	0	0	0
+LSU_SCE	LSU Special Collections Online	LSU	0.2	100	14	0	0	0	0	0	0	0	0	57	0	3	0	0	0	0	0	0	0	14	0	11	0	0	1	0	0	0	0	0	0
 LSU_TJP	Thomas H. and Joan W. Gandy Photograph Collection	LSU	0.17	161	0	0	0	0	0	0	0	0	0	0	0	161	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+LSU_UAP	LSU University Archives Photographs Collection	LSU	25.23	1239	200	0	0	0	0	0	0	0	0	314	0	725	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 LSU_WLS	John Langdon Ward Lantern Slides	LSU	0.01	107	0	0	0	0	0	0	0	0	0	0	0	107	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+LSUBK01	Aristides Agramonte Yellow Fever Collection	LSUHSCNO	16.22	12058	136	0	0	0	0	0	0	0	0	11908	0	0	0	0	0	0	0	0	0	14	0	0	0	0	0	0	0	0	0	0	0
+LSUHSC_NCC	LSU Health Sciences Center New Orleans Newspaper Clippings Collection	LSUHSCNO	6.44	7749	228	0	0	0	0	0	0	0	0	3252	0	4266	0	0	0	0	0	0	0	0	0	0	0	0	3	0	0	0	0	0	0
+LSUHSCS_GWM	LSU Health Sciences Center Shreveport Photograph Collection	LSUHSCS	0.14	853	0	0	0	0	0	0	0	0	0	39	0	814	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+LSUHSCS_JCM	John C. McDonald	LSUHSCS	0	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+LSUS_TBP	Tom Bell Papers, 1895-1999	LSUS	0.04	168	7	0	0	0	0	0	0	0	0	0	0	161	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+LWP	Louisiana Works Progress Administration (WPA)	State Library 	2.44	10273	1445	0	0	0	0	0	0	0	0	27	0	8801	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+MMF	Medieval Manuscript Facsimiles Inventory	LSU	4.14	138	29	0	0	0	0	0	0	0	0	36	0	73	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+MPA	Millspaugh Photographs	Northwestern State University	0.02	168	0	0	0	0	0	0	0	0	0	0	0	168	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+MPF	Martin-Pugh Family Papers	Nicholls	0	6	1	0	0	0	0	0	0	0	0	0	0	5	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+MSW	Native Flora of Louisiana - Watercolor drawings by Margaret Stones	LSU	0.96	238	1	0	0	0	0	0	0	0	0	237	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+NCC	Natchitoches Chamber of Commerce Collection	Northwestern State University	0.06	400	0	0	0	0	0	0	0	0	0	0	0	400	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 NewOrleans	New Orleans Image Collections at the LSU Libraries	LSU	0.08	61	0	0	0	0	0	0	0	0	0	0	0	61	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+NOD																																			
 NONegExposures	New Orleans Negative Exposures and Prints, circa 1900-1930	LSU	0.01	65	0	0	0	0	0	0	0	0	0	0	0	65	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+NWM	Northwest Louisiana Map Collection	LSUS	0.14	71	0	0	0	0	0	0	0	0	0	71	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+OMSA	Ogden Museum of Southern Art	UNO	0.54	486	0	0	0	0	0	0	0	0	0	0	0	202	0	0	0	0	0	0	0	0	0	0	0	284	0	0	0	0	0	0	0
+OSC	Olide Schexnayder Collection	Louisiana State Museum	0.14	187	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	187	0	0	0	0	0	0	0
+p120701coll10	Griffin 1932 Flood Collection	ULM	3.29	310	0	0	0	0	0	0	0	0	0	310	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p120701coll11	Israel Shreve Letters	La Tech	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p120701coll12	LSU Libraries Louisiana and Lower Mississippi Valley Collections	LSU	0.58	347	19	0	0	0	0	0	0	0	0	328	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p120701coll13	Louisiana Hurricane Resources	UNO	0.21	259	4	0	0	0	0	0	0	0	0	1	0	217	0	0	0	0	0	0	0	37	0	0	0	0	0	0	0	0	0	0	0
+p120701coll14	Louisiana State Sovereignty Commission Pamphlets of the Civil Rights Era	McNeese	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p120701coll15	Abe L. Shushan Collection	UNO	0.06	424	4	0	0	0	0	0	0	0	0	0	0	420	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p120701coll17	Anthony J. Stanonis Pamphlet Collection	Loyola	0.29	34	1	0	0	0	0	0	0	0	0	18	0	0	0	0	0	0	0	0	0	0	0	0	0	0	15	0	0	0	0	0	0
+p120701coll18	Louisiana State Museum Trade Labels	Louisiana State Museum	0.49	330	0	0	0	0	0	0	0	0	0	330	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p120701coll19	Sidonie de la Houssaye Collection	LSU	5.09	5279	75	0	0	0	0	0	0	0	0	0	0	5128	0	0	0	0	0	0	0	0	0	0	0	0	76	0	0	0	0	0	0
+p120701coll20	Charity Hospital Archive	LSUHSCNO	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p120701coll21																																			
+p120701coll22	T. Harry Williams Center for Oral History Military History Collection	LSU	0.07	10	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	8	0	0	0	0	0	0	0	0	0	0	0
 p120701coll23	T. Harry Williams Center for Oral History University History Collection	LSU	0	5	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	5	0	0	0	0	0	0	0	0	0	0	0
+p120701coll24	LSU University Archives Print Materials Collection	LSU	0.17	218	11	0	0	0	0	0	0	0	0	35	0	171	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0
+p120701coll25	United States House and Senate Committee Hearings and Publications	UNO	62.96	1569	1569	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p120701coll26	Graduation Programs of the LSU Health Sciences Center, New Orleans	LSUHSCNO	0.15	2038	149	0	0	0	0	0	0	0	0	0	0	1889	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p120701coll27	Loyola University New Orleans Athletics Collection	Loyola	13.5	38	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	38	0	0	0	0	0	0	0	0	0	0	0	0	0
+p120701coll28	Joseph-Aurélien Cornet, F.S.C. Collection	Loyola	8.83	7231	41	0	0	0	0	0	0	0	0	7190	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p120701coll29	Isidore Newman School Archives	UNO	0.26	178	23	0	0	0	0	0	0	0	0	155	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p120701coll6	LSU TEST	LSU	0.22	186	8	0	0	0	0	0	0	0	0	10	3	146	0	0	0	0	1	0	0	17	0	0	0	0	0	0	1	0	0	0	0
+p120701coll7	LSU School of Dentistry Historic Photographs	LSUHSCNO	0.01	82	6	0	0	0	0	0	0	0	0	0	0	76	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p120701coll8	Telling-Grandon Scrapbook	UNO	0.55	156	1	0	0	0	0	0	0	0	0	0	0	155	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p120701coll9	Lafcadio Hearn Correspondence	Loyola	0.62	61	10	0	0	0	0	0	0	0	0	51	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p15140coll1	John T. Mendes Photograph Collection	HNOC	0.54	609	0	0	0	0	0	0	0	0	0	609	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p15140coll10	Civil War Context and Conflict at LSU Libraries	LSU	24.6	4314	128	0	0	0	0	0	0	0	0	4173	0	0	0	0	0	0	0	0	0	13	0	0	0	0	0	0	0	0	0	0	0
 p15140coll11	LSU Libraries Political Papers Collection	LSU	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 p15140coll12	'Andrew D. Lytle's Baton Rouge' Photograph Collection	LSU	0.9	799	0	0	0	0	0	0	0	0	0	799	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 p15140coll13	LSU Libraries Exhibitions	LSU	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p15140coll14	T. Harry Williams Center for Oral History Political Collection	LSU	0.77	17	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	5	0	0	10	0	0	0	0	0	0	0	0	0	0	0
+p15140coll16	Tiger Rag – Student newspapers of LSU School of Medicine, New Orleans	LSUHSCNO	0.9	532	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	532	0	0	0	0	0	0	0	0	0	0	0
+p15140coll17	LSU Libraries Mardi Gras Collection	LSU	1.52	431	24	0	0	0	0	0	0	0	0	406	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0
+p15140coll18	Hermann Moyse, Sr. World War I Collection	LSU	12.04	1414	20	0	0	0	0	0	0	0	0	1394	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p15140coll19	William Branks Stewart Collection	LSUHSCNO	0	29	6	0	0	0	0	0	0	0	0	0	0	23	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p15140coll2	History of Louisiana Dental Education Archives	LSUHSCNO	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 p15140coll20	T. Harry Williams Center for Oral History Presentations and Publications	LSU	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0
 p15140coll21	Louisiana Sea Grant Digital Images Collection	LSU	5.34	2262	0	0	0	0	0	0	0	0	0	2262	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p15140coll22	Louisiana State Museum Historical Center	Louisiana State Museum	0.01	8	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	8	0	0	0	0	0	0	0	0	0	0	0
+p15140coll23	LSU Health Sciences Center Shreveport Newspaper Clippings	LSUHSCS	1.04	3421	1651	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1770	0	0	0	0	0	0	0	0	0	0	0
+p15140coll26	Edna Tiny Tarbutton Collection	ULM	15.27	934	13	0	0	0	0	0	0	0	0	920	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p15140coll27	Northeast Louisiana Historic Images Collection	ULM	1.83	363	8	0	0	0	0	0	0	0	0	355	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p15140coll28	Maps from the Historic New Orleans Collection	HNOC	0.69	122	0	0	0	0	0	0	0	0	0	122	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p15140coll30	Aleman Estate (Hathaway Gibbens) Collection	UNO	1.32	214	71	0	0	0	0	0	0	0	0	143	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p15140coll31	Judge John Minor Wisdom Collection	UNO	21.69	1438	221	0	0	0	0	0	0	0	0	1217	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p15140coll32	UNO Test Collection	UNO	0.17	91	1	0	0	0	0	0	0	0	0	90	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p15140coll33	Jay Dearborn Edwards Photograph Collection	HNOC	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 p15140coll35	Louisiana Sea Grant Digital Maps Collection	LSU	6.54	213	0	0	0	0	0	0	0	0	0	213	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 p15140coll36	Louisiana Sea Grant Multimedia Collection	LSU	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p15140coll4	Orleans Parish School Board Meeting Minutes	UNO	16.31	7528	18	0	0	0	0	0	0	0	0	7510	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p15140coll41	Louisiana Early English Corpus	LSU	1.25	1161	220	0	0	0	0	0	0	0	0	529	0	1	0	0	0	0	0	0	0	411	0	0	0	0	0	0	0	0	0	0	0
+p15140coll42	Marcus Christian Collection	UNO	0.03	49	49	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p15140coll43	Leon Trice Photograph Collection	HNOC	0.74	832	0	0	0	0	0	0	0	0	0	832	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p15140coll44	LSU Health Sciences Center Shreveport Audiovisual Collection	LSUHSCS	0.05	4	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 p15140coll46	Fonville Winans’ Aerial Views of Baton Rouge	LSU	8.05	459	0	0	0	0	0	0	0	0	0	459	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p15140coll50	U.S. Army 64th General Hospital, organized by LSU Medical School	LSUHSCNO	0.85	1112	480	0	0	0	0	0	0	0	0	632	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p15140coll51	Veterans of Southeast Louisiana	Nicholls	3.11	369	1	0	0	0	0	0	0	0	0	202	0	63	0	99	0	1	0	0	0	2	0	0	0	0	0	0	0	0	1	0	0
+p15140coll52	The STAR- Radiating the Light of Truth on Hansen's Disease	LSUHSCNO	5.94	661	431	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	230	0	0	0	0	0	0	0	0	0	0	0
+p15140coll53	The Southern Food and Beverage Museum Menus Collection	UNO	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 p15140coll54	William J. Thornton Music Collection	LSU	0.5	60	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	60	0	0	0	0	0	0	0	0	0	0	0
+p15140coll55	Historic Louisiana Library Photographs	Louisiana State Museum	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 p15140coll56	Sobre las Olas- Mexican Music from Nineteenth-Century New Orleans	LSU	0.21	48	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	48	0	0	0	0	0	0	0	0	0	0	0
+p15140coll6	Lettres de Louisiane	LSU	0.25	174	38	0	0	0	0	0	0	0	0	98	0	0	0	0	0	0	0	0	0	38	0	0	0	0	0	0	0	0	0	0	0
+p15140coll60	Records of the French Superior Council (1714-1769)	Louisiana State Museum	20.66	723	131	0	0	0	0	0	0	0	0	592	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p15140coll61	Designing Carnival- Mardi Gras Costume and Float Designs	HNOC	0.09	76	0	0	0	0	0	0	0	0	0	76	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p15140coll7	University of New Orleans Senior Honors Theses	UNO	4.27	242	239	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	2	0	1	0	0	0	0	0	0	0	0	0	0	0
+p16313coll1	Andrew Augustus Gunby Photograph Collection	ULM	0.76	419	30	0	0	0	0	0	0	0	0	389	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll10	LSU Libraries Postcard Collections	LSU	2.65	1824	608	0	0	0	0	0	0	0	0	1030	0	186	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll17	Gulf South Decorative and Fine Arts Database	HNOC	34.88	8533	949	0	0	0	0	0	0	0	0	7584	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll18	University of New Orleans Yearbook	UNO	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll19	Lindy Boggs Collection	LSUHSCNO	0.14	41	3	0	0	0	0	0	0	0	0	38	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll2	StoryCorps	UNO	19.48	3261	371	0	0	0	0	0	0	0	0	41	0	1700	0	0	0	0	390	0	0	758	0	0	0	0	0	0	0	1	0	0	0
+p16313coll20	Germany’s Wild Medicinal Plants (Deutschlands wildwachsende Arzney-Pflanzen)	Loyola	0.23	49	0	0	0	0	0	0	0	0	0	49	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll21	Clarence John Laughlin Photograph Collection	HNOC	11.89	1878	0	0	0	0	0	0	0	0	0	1878	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll22	Louisiana Photographs Collection	UNO	0.12	198	4	0	0	0	0	0	0	0	0	0	0	194	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll23	Charles V. Booth Collection	UNO	0.18	859	0	0	0	0	0	0	0	0	0	859	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll24	John Gould's Birds of Great Britain	Loyola	0.27	37	0	0	0	0	0	0	0	0	0	37	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll25	L'Acadien Yearbooks	ULL	0.3	218	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	216	0	0	0	0	0	0	0	0	0	0	0
+p16313coll26	Ernest J. Gaines Papers	ULL	0.05	59	3	0	0	0	0	0	0	0	0	33	0	23	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll28	Loyola University New Orleans University Photographs Collection	Loyola	3.49	6738	0	0	0	0	0	0	0	0	0	6724	0	14	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll3	LSU Health Sciences Center Shreveport Alumni Collection	LSUHSCS	0.72	73	1	0	0	0	0	0	0	0	0	64	0	0	0	0	0	0	0	0	0	8	0	0	0	0	0	0	0	0	0	0	0
+p16313coll31	Louisiana Sugar Resources Digital Collection	LSU	12.85	2618	21	0	0	0	0	0	0	0	0	567	0	0	0	0	0	0	0	0	0	2030	0	0	0	0	0	0	0	0	0	0	0
+p16313coll32	Diacritics TEST Armand Duplantier Family Letters, LSU Libraries	LSU	0.25	641	93	0	0	0	0	0	0	0	0	0	0	362	0	0	0	0	0	0	0	186	0	0	0	0	0	0	0	0	0	0	0
+p16313coll34	Armand Duplantier Family Letters, LSU Libraries	LSU	2.34	655	95	0	0	0	0	0	0	0	0	370	0	0	0	0	0	0	0	0	0	190	0	0	0	0	0	0	0	0	0	0	0
+p16313coll35	LSU Libraries Louisiana Waterways Management Collection	LSU	1.84	267	20	0	0	0	0	0	0	0	0	38	0	41	0	0	0	0	0	0	0	168	0	0	0	0	0	0	0	0	0	0	0
+p16313coll36	Louisiana Furniture Image Database	HNOC	0	12	2	0	0	0	0	0	0	0	0	10	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll43	Mary McMurran and Conner Family	ULM	0.62	1416	99	0	0	0	0	0	0	0	0	1317	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll44	Loyola University New Orleans Finding Aids	Loyola	0.04	102	34	0	0	0	0	0	0	0	68	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 p16313coll45	Louisiana Department of Wildlife and Fisheries Documents - LSU Libraries	LSU	2.2	576	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	576	0	0	0	0	0	0	0	0	0	0	0
+p16313coll48	Joseph H. Fichter, S.J. Tapes	Loyola	6.07	173	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	173	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 p16313coll49	The Daily Reveille - Louisiana State University	LSU	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll5	Loyola University New Orleans Special Collections and Archives Online	Loyola	4.92	291	18	0	0	0	0	0	0	0	0	269	0	1	0	0	0	0	0	3	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll50	Gumbo - Louisiana State University's Yearbook	LSU	33.01	38762	102	0	0	0	0	0	0	0	0	38660	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll51	Free People of Color in Louisiana	LSU	25.31	31938	1885	0	0	0	0	0	0	0	0	30053	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 p16313coll52	Louisiana images from the Standard Oil Collection, Univ. of Louisville	LSU	0.38	2136	0	0	0	0	0	0	0	0	0	2136	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 p16313coll54	Mingo Family African American Photographs, 1887-1955	LSU	0.08	32	0	0	0	0	0	0	0	0	0	32	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 p16313coll55	Collection de caricatures et de charges pour servir à l'histoire de la guerre et	LSU	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 p16313coll56	Col. Joseph S. Tate Photograph Album	LSU	34.88	103	0	0	0	0	0	0	0	0	0	103	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll57	William Waller Survey Collection	LSU	0.67	214	30	0	0	0	0	0	0	0	0	184	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 p16313coll58	William Barth Photographs of Mississippi and Atchafalaya River operations	LSU	0.78	249	0	0	0	0	0	0	0	0	0	249	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll60	Orleans Parish School Board Photographs	UNO	0.1	2416	0	0	0	0	0	0	0	0	0	2416	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll61	Rene Grandjean Collection - Seance Registers	UNO	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll62	Louisiana Ephemera at the University of New Orleans	UNO	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0
+p16313coll65	Louisiana Decoys and Wildfowl Artifacts	HNOC	3.28	426	59	0	0	0	0	0	0	0	0	367	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll67	Louisiana Documents of the State Library	State Library 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll69	LSU Music Resources Sheet Music Collection	LSU	2.54	763	7	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	756	0	0	0	0	0	0	0	0	0	0	0
+p16313coll7	Driftwood - Student newspapers at the University of New Orleans	UNO	0.04	8	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	8	0	0	0	0	0	0	0	0	0	0	0
+p16313coll70	Jack Ritchie Collection	La Tech	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll72	Orleans Parish School Board Meeting Minutes -- Indexes	UNO	0.12	117	3	0	0	0	0	0	0	0	0	114	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll74	McNeese State University Electronic Theses	McNeese	0.37	90	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	90	0	0	0	0	0	0	0	0	0	0	0
+p16313coll76	Doussan family papers, 1827-1872	LSU	0.28	455	94	0	0	0	0	0	0	0	0	361	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 p16313coll77	Louisiana State University Agricultural Experiment Station Reports	LSU	6.9	807	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	807	0	0	0	0	0	0	0	0	0	0	0
 p16313coll79	Louisiana Railroad Depot Photograph Collection	LSU	0.01	129	0	0	0	0	0	0	0	0	0	129	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll8	Gras-Lauzin Family Papers	LSU	0.36	357	70	0	0	0	0	0	0	0	0	247	0	0	0	0	0	0	0	0	0	40	0	0	0	0	0	0	0	0	0	0	0
+p16313coll80	Louisiana Runaway Slave Advertisements, 1836-1865	LSU	0.04	354	40	0	0	0	0	0	0	0	0	314	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll81	John B. Heroman, Sr. photograph collection, circa 1885-1940	LSU	6.01	815	15	0	0	0	0	0	0	0	0	800	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll83	Records of the Spanish Cabildo (1769-1803)	Louisiana State Museum	0.18	251	11	0	0	0	0	0	0	0	0	240	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 p16313coll85	Lumières - A Publication of the Friends of the LSU Libraries	LSU	0.63	60	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	60	0	0	0	0	0	0	0	0	0	0	0
+p16313coll86	Ex Parte Plessy (Plessy v. Ferguson)	UNO	0.13	159	14	0	0	0	0	0	0	0	0	145	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll87	Loyola University New Orleans Community and Resilience Collection	Loyola	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll88	David R. Williams Collection	ULL	0.51	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 p16313coll89	Cenobium - LSU School of Veterinary Medicine's Yearbook	LSU	0.21	14	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	14	0	0	0	0	0	0	0	0	0	0	0
+p16313coll9	Edith Dabney Doll Collection	LSU	0.34	416	82	0	0	0	0	0	0	0	0	334	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll91	Loyola University New Orleans Scrapbook Collection	Loyola	1.66	773	15	0	0	0	0	0	0	0	0	758	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p16313coll93	New Orleans Review Collection	Loyola	0.55	54	54	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p267101coll4	Louisiana State Documents Digital Archive	State Library 	20.5	15739	87	1	1	191	10	3	0	1	1	7	0	0	0	0	587	0	0	0	0	12324	0	0	0	0	0	9	2514	0	0	3	0
+PSL	Historic Photographs of Southwest Louisiana	McNeese	4.53	5636	2	0	0	0	0	0	52	0	0	3149	0	2376	0	0	0	0	0	0	0	0	0	0	0	0	57	0	0	0	0	0	0
 RJR	Louisiana Coastal Ecology, Richard J. Russell Collection	LSU	0.24	210	0	0	0	0	0	0	0	0	0	0	0	123	0	0	0	0	0	0	0	74	0	13	0	0	0	0	0	0	0	0	0
+RMC	Robert S.Maestri Photograph Collection	Louisiana State Museum	0.07	830	0	0	0	0	0	0	0	0	0	0	0	830	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+RSP	Rowles Stereograph Collection	Louisiana State Museum	0.04	381	0	0	0	0	0	0	0	0	0	0	0	381	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+RTC	Robert Tebbs Photograph	Louisiana State Museum	0.04	345	0	0	0	0	0	0	0	0	0	0	0	345	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+RTP	Reconstruction Through Progressivism Collection	TAHIL	0.01	18	0	0	0	0	0	0	0	0	0	0	0	7	0	0	0	0	0	0	0	0	0	0	0	11	0	0	0	0	0	0	0
 SartainEngravings	Perine-Giles-Sartain Engravings, circa 19th century	LSU	0.02	76	0	0	0	0	0	0	0	0	0	0	0	76	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+SIP	Southwestern Louisiana Institute Photographs, 1923-1940	ULL	0.33	2524	0	0	0	0	0	0	0	0	0	0	0	2524	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+STC	Strand Theater Collection	LSUS	0.02	89	0	0	0	0	0	0	0	0	0	0	0	89	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+TAH	Teaching American History Collection	TAHIL	0.01	51	0	0	0	51	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 Tensas	Tensas River National Wildlife Refuge Ivory Billed Woodpecker Records	LSU	0.08	106	0	0	0	0	0	0	0	0	0	0	0	106	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 THW	T. Harry Williams Center for Oral History	LSU	0.02	5	0	0	0	0	0	0	0	0	0	5	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 TLD	LSU Architectural Drawings by Theodore Link	LSU	0.04	163	0	0	0	0	0	0	0	0	0	0	0	163	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-WIS	Wiseman Photograph Collection	LSU	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-	Great Southern Lumber Company, 1924-1938	LSU	0.06	128	0	0	0	0	0	0	0	0	0	0	0	126	0	0	0	0	0	0	0	2	0	0	0	0	0	0	0	0	0	0	0
-p120701coll20	Charity Hospital Archive	LSUHSCNO	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p15140coll16	Tiger Rag – Student newspapers of LSU School of Medicine, New Orleans	LSUHSCNO	0.9	532	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	532	0	0	0	0	0	0	0	0	0	0	0
-p15140coll2	History of Louisiana Dental Education Archives	LSUHSCNO	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-LSUHSCS_GWM	LSU Health Sciences Center Shreveport Photograph Collection	LSUHSCS	0.14	853	0	0	0	0	0	0	0	0	0	39	0	814	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-LSUHSCS_JCM	John C. McDonald	LSUHSCS	0	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-NWM	Northwest Louisiana Map Collection	LSUS	0.14	71	0	0	0	0	0	0	0	0	0	71	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-STC	Strand Theater Collection	LSUS	0.02	89	0	0	0	0	0	0	0	0	0	0	0	89	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p120701coll14	Louisiana State Sovereignty Commission Pamphlets of the Civil Rights Era	McNeese	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll74	McNeese State University Electronic Theses	McNeese	0.37	90	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	90	0	0	0	0	0	0	0	0	0	0	0
-DUBLIN2	Generic Collection Template (Dublin 2)	N/A	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-LOU	LCOC - LOUIS Collection of Collections	N/A	0.01	204	0	0	0	0	0	0	0	0	0	2	0	192	0	0	0	0	0	0	0	0	10	0	0	0	0	0	0	0	0	0	0
-LOU_RANDOM	LCOC Random image generator	N/A	0	98	0	0	0	0	0	0	0	0	0	0	0	98	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-MPA	Millspaugh Photographs	Northwestern State University	0.02	168	0	0	0	0	0	0	0	0	0	0	0	168	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-NCC	Natchitoches Chamber of Commerce Collection	Northwestern State University	0.06	400	0	0	0	0	0	0	0	0	0	0	0	400	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll67	Louisiana Documents of the State Library	State Library 	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-HWJ	Harper's Weekly Journal of Civilization and Frank Leslie's Illustrated Newspaper	SUBR	0.34	490	0	0	0	0	0	0	0	0	0	0	0	490	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+UNO_ANI	University of New Orleans Anniversary	UNO	2.98	277	138	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	139	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+UNO_JBF	Joseph Bauer Family Album	UNO	0.12	222	1	0	0	0	0	0	0	0	0	0	0	221	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+UNO_SCC	UNO Historical Archives of the Supreme Court of Louisiana	UNO	17.44	22846	1076	0	0	0	0	0	0	0	0	0	0	21770	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 VBC	Verla Birrell Textiles and Designs	SUBR	0	36	0	0	0	0	0	0	0	0	0	0	0	36	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-RTP	Reconstruction Through Progressivism Collection	TAHIL	0.01	18	0	0	0	0	0	0	0	0	0	0	0	7	0	0	0	0	0	0	0	0	0	0	0	11	0	0	0	0	0	0	0
-TAH	Teaching American History Collection	TAHIL	0.01	51	0	0	0	51	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+wri-boy	Wright-Boyd Family Papers at LSU Libraries	LSU	0.01	20	2	0	0	0	0	0	0	0	0	0	0	18	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+	Great Southern Lumber Company, 1924-1938	LSU	0.06	128	0	0	0	0	0	0	0	0	0	0	0	126	0	0	0	0	0	0	0	2	0	0	0	0	0	0	0	0	0	0	0
+	ZEEs TEST COLLECTION	N/A	0.13	57	7	0	0	0	0	0	0	0	0	44	0	0	0	0	0	0	0	0	0	2	0	0	0	0	0	0	4	0	0	0	0
+	World War I Maxillofacial Wounds Photo Album		0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+																																			
+DUBLIN2	Generic Collection Template (Dublin 2)	N/A	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+p15140coll49	LSU Health Sciences Center New Orleans - Catalog and Bulletin	LSUHSCNO	2.5	128	128	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+WIS	Wiseman Photograph Collection	LSU	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+																																			
+																																			
 AMA	American Missionary Association Photographs, 1839-1954	Tulane	0.36	3342	0	0	0	0	0	0	0	0	0	0	0	3342	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 p15140coll15	Lippman Collection of Civil War Postal Covers	Tulane	0.03	40	0	0	0	0	0	0	0	0	0	40	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 p15140coll24	Matas Health Sciences Library Historic Photographs	Tulane	0.38	67	0	0	0	0	0	0	0	0	0	67	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
@@ -132,161 +273,22 @@ p16313coll75	The Architect's Eye	Tulane	1.85	116	0	0	0	0	0	0	0	0	0	110	0	0	0	0	0
 p16313coll78	Nicaraguan Presidential Papers	Tulane	0.12	57	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	57	0	0	0	0	0	0	0	0	0	0	0
 p16313coll82	OECS Test	Tulane	0.01	3	0	0	0	0	0	0	0	0	0	0	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0
 p16313coll84	New Orleans Independent Music Digital Collection	Tulane	0.23	37	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	37	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-ACC	Archives of Cajun and Creole Folklore	ULL	0.08	163	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	163	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-LSA	Center for Louisiana Studies Archive	ULL	0.15	1237	0	0	0	0	0	0	0	0	0	0	0	1237	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll88	David R. Williams Collection	ULL	0.51	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-SIP	Southwestern Louisiana Institute Photographs, 1923-1940	ULL	0.33	2524	0	0	0	0	0	0	0	0	0	0	0	2524	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p120701coll10	Griffin 1932 Flood Collection	ULM	3.29	310	0	0	0	0	0	0	0	0	0	310	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-FBM	Frank B. Moore Collection	UNO	0.09	545	0	0	0	0	0	0	0	0	0	0	0	545	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-HIC	Higgins Industries	UNO	2.14	639	0	0	0	0	0	0	0	0	0	639	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-OMSA	Ogden Museum of Southern Art	UNO	0.54	486	0	0	0	0	0	0	0	0	0	0	0	202	0	0	0	0	0	0	0	0	0	0	0	284	0	0	0	0	0	0	0
-p15140coll53	The Southern Food and Beverage Museum Menus Collection	UNO	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll18	University of New Orleans Yearbook	UNO	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll23	Charles V. Booth Collection	UNO	0.18	859	0	0	0	0	0	0	0	0	0	859	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll60	Orleans Parish School Board Photographs	UNO	0.1	2416	0	0	0	0	0	0	0	0	0	2416	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll61	Rene Grandjean Collection - Seance Registers	UNO	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll62	Louisiana Ephemera at the University of New Orleans	UNO	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0
-p16313coll7	Driftwood - Student newspapers at the University of New Orleans	UNO	0.04	8	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	8	0	0	0	0	0	0	0	0	0	0	0
-	World War I Maxillofacial Wounds Photo Album		0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-LSM_MPC	Louisiana State Museum Photography Collection	Louisiana State Museum	0.19	193	1	0	0	0	0	0	0	0	0	115	0	77	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-JSN	Jesuit scrapbooks from the New Orleans Province	Loyola	0.09	260	1	0	0	0	0	0	0	0	0	0	0	259	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p120701coll17	Anthony J. Stanonis Pamphlet Collection	Loyola	0.29	34	1	0	0	0	0	0	0	0	0	18	0	0	0	0	0	0	0	0	0	0	0	0	0	0	15	0	0	0	0	0	0
-LMP	Maps of Louisiana Collection	LSU	0.07	56	1	0	0	0	0	0	0	0	0	35	0	20	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-MSW	Native Flora of Louisiana - Watercolor drawings by Margaret Stones	LSU	0.96	238	1	0	0	0	0	0	0	0	0	237	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p120701coll22	T. Harry Williams Center for Oral History Military History Collection	LSU	0.07	10	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	8	0	0	0	0	0	0	0	0	0	0	0
-p15140coll14	T. Harry Williams Center for Oral History Political Collection	LSU	0.77	17	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	5	0	0	10	0	0	0	0	0	0	0	0	0	0	0
-p15140coll44	LSU Health Sciences Center Shreveport Audiovisual Collection	LSUHSCS	0.05	4	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll3	LSU Health Sciences Center Shreveport Alumni Collection	LSUHSCS	0.72	73	1	0	0	0	0	0	0	0	0	64	0	0	0	0	0	0	0	0	0	8	0	0	0	0	0	0	0	0	0	0	0
-MPF	Martin-Pugh Family Papers	Nicholls	0	6	1	0	0	0	0	0	0	0	0	0	0	5	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p15140coll51	Veterans of Southeast Louisiana	Nicholls	3.11	369	1	0	0	0	0	0	0	0	0	202	0	63	0	99	0	1	0	0	0	2	0	0	0	0	0	0	0	0	1	0	0
-LHP	State Library of Louisiana Historic Photograph Collection	State Library 	2.83	10606	1	0	0	0	0	0	0	0	0	1873	0	8732	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 p15140coll45	Essai d'Anatomie	Tulane	0.12	28	1	0	0	0	0	0	0	0	0	27	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 p16313coll12	Tulane University Theses and Dissertations Archive	Tulane	3	4952	1	0	0	0	0	0	0	0	0	42	0	1	0	0	0	0	0	0	4482	425	0	0	0	0	0	0	0	0	0	0	1
 p16313coll37	Mesoamerican Painted Manuscripts at the Latin American Library	Tulane	0.36	32	1	0	0	0	0	0	0	0	0	15	0	2	0	0	0	0	0	0	0	14	0	0	0	0	0	0	0	0	0	0	0
 p16313coll41	Images from the Civil War and Reconstruction	Tulane	5.45	1061	1	0	0	0	0	0	0	0	0	1057	0	0	0	0	0	0	0	0	0	3	0	0	0	0	0	0	0	0	0	0	0
 p16313coll63	The Crescent City Pictorial	Tulane	0.09	36	1	0	0	0	0	0	0	0	0	35	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p120701coll8	Telling-Grandon Scrapbook	UNO	0.55	156	1	0	0	0	0	0	0	0	0	0	0	155	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p15140coll32	UNO Test Collection	UNO	0.17	91	1	0	0	0	0	0	0	0	0	90	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-UNO_JBF	Joseph Bauer Family Album	UNO	0.12	222	1	0	0	0	0	0	0	0	0	0	0	221	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll36	Louisiana Furniture Image Database	HNOC	0	12	2	0	0	0	0	0	0	0	0	10	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-CMPRT	Camp Ruston Collection	La Tech	0.05	246	2	0	0	0	0	0	0	0	0	1	0	243	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-HLM	Louisiana State Museum	Louisiana State Museum	0.05	100	2	0	0	0	0	0	0	0	0	0	0	54	0	0	0	0	0	0	0	0	0	0	0	44	0	0	0	0	0	0	0
-LSU_RBC	LSU Libraries' Rare Books Collection - Selected materials	LSU	0.28	537	2	0	0	0	0	0	0	0	0	224	0	311	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-wri-boy	Wright-Boyd Family Papers at LSU Libraries	LSU	0.01	20	2	0	0	0	0	0	0	0	0	0	0	18	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-PSL	Historic Photographs of Southwest Louisiana	McNeese	4.53	5636	2	0	0	0	0	0	52	0	0	3149	0	2376	0	0	0	0	0	0	0	0	0	0	0	0	57	0	0	0	0	0	0
 p16313coll71	John Kennedy Toole Papers	Tulane	0.06	202	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	200	0	0	0	0	0	0	0	0	0	0	0
-p16313coll25	L'Acadien Yearbooks	ULL	0.3	218	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	216	0	0	0	0	0	0	0	0	0	0	0
-IBE	Integration and the Black Experience at LSU	LSU	0.06	30	3	0	0	0	0	0	0	0	0	0	0	3	0	0	0	0	0	0	0	11	0	11	2	0	0	0	0	0	0	0	0
-LSU_BRT	Historic Images of Baton Rouge from LSU Libraries	LSU	0.01	14	3	0	0	0	0	0	0	0	0	1	0	10	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-LSU_LHC	Louis Hasslemans' Musicians Photographs	LSU	0.03	47	3	0	0	0	0	0	0	0	0	0	0	44	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll19	Lindy Boggs Collection	LSUHSCNO	0.14	41	3	0	0	0	0	0	0	0	0	38	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 p15140coll34	Registre Du Comite Medical De La Nouvelle Orleans, 1816-1854	Tulane	0.28	234	3	0	0	0	0	0	0	0	0	231	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll26	Ernest J. Gaines Papers	ULL	0.05	59	3	0	0	0	0	0	0	0	0	33	0	23	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll72	Orleans Parish School Board Meeting Minutes -- Indexes	UNO	0.12	117	3	0	0	0	0	0	0	0	0	114	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-AWW	Alfred and William Waud Collection	HNOC	15.74	2732	4	0	0	0	0	0	0	0	0	2728	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-LSM_KOH	Louisiana State Museum Hurricane Katrina Oral History Project	Louisiana State Museum	0	41	4	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	37	0	0	0	0	0	0	0	0	0
 p16313coll66	Sounding Translation	Tulane	0.11	12	4	0	0	0	0	0	0	0	0	0	0	4	0	0	0	0	4	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p120701coll13	Louisiana Hurricane Resources	UNO	0.21	259	4	0	0	0	0	0	0	0	0	1	0	217	0	0	0	0	0	0	0	37	0	0	0	0	0	0	0	0	0	0	0
-p120701coll15	Abe L. Shushan Collection	UNO	0.06	424	4	0	0	0	0	0	0	0	0	0	0	420	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll22	Louisiana Photographs Collection	UNO	0.12	198	4	0	0	0	0	0	0	0	0	0	0	194	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-BBA	Baby Boom American Collection	TAHIL	0.01	36	5	0	0	0	0	0	0	0	0	0	0	27	0	0	0	0	0	0	0	0	0	0	0	4	0	0	0	0	0	0	0
-p120701coll7	LSU School of Dentistry Historic Photographs	LSUHSCNO	0.01	82	6	0	0	0	0	0	0	0	0	0	0	76	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p15140coll19	William Branks Stewart Collection	LSUHSCNO	0	29	6	0	0	0	0	0	0	0	0	0	0	23	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-ABW	America Between the Wars 1920-1940	TAHIL	0.03	153	6	0	0	0	0	0	0	0	0	0	0	139	0	0	0	0	0	0	0	0	0	0	0	8	0	0	0	0	0	0	0
-LSU_NMI	Natchez, MS	LSU	0.28	35	7	0	0	0	0	0	0	0	0	4	0	24	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll69	LSU Music Resources Sheet Music Collection	LSU	2.54	763	7	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	756	0	0	0	0	0	0	0	0	0	0	0
-LSUS_TBP	Tom Bell Papers, 1895-1999	LSUS	0.04	168	7	0	0	0	0	0	0	0	0	0	0	161	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-	ZEEs TEST COLLECTION	N/A	0.13	57	7	0	0	0	0	0	0	0	0	44	0	0	0	0	0	0	0	0	0	2	0	0	0	0	0	0	4	0	0	0	0
-BTW	Ben Treadaway WWII Shell Beach Collection	Nunez Community College?	0.01	64	7	0	0	0	0	0	0	0	0	0	0	57	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p120701coll6	LSU TEST	LSU	0.22	186	8	0	0	0	0	0	0	0	0	10	3	146	0	0	0	0	1	0	0	17	0	0	0	0	0	0	1	0	0	0	0
-p15140coll27	Northeast Louisiana Historic Images Collection	ULM	1.83	363	8	0	0	0	0	0	0	0	0	355	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 p15140coll39	Newcomb College Scrapbooks	Tulane	1.99	1706	9	0	0	0	0	0	0	0	0	1697	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p120701coll9	Lafcadio Hearn Correspondence	Loyola	0.62	61	10	0	0	0	0	0	0	0	0	51	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-APC	Antebellum Period	TAHIL	0.07	235	10	0	0	0	0	0	0	0	0	0	0	201	0	0	0	0	0	0	0	0	0	0	0	24	0	0	0	0	0	0	0
 p16313coll59	M. O. Gershenzon Archive	Tulane	0.08	30	10	0	0	0	0	0	0	0	0	20	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 p16313coll64	Sounds of Louisiana	Tulane	0.1	35	10	0	0	0	0	0	0	0	0	0	0	11	0	0	0	0	11	0	0	0	0	0	0	0	0	0	0	3	0	0	0
-p16313coll83	Records of the Spanish Cabildo (1769-1803)	Louisiana State Museum	0.18	251	11	0	0	0	0	0	0	0	0	240	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p120701coll24	LSU University Archives Print Materials Collection	LSU	0.17	218	11	0	0	0	0	0	0	0	0	35	0	171	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0
-HHN	Historic New Orleans Collection	HNOC	0.05	336	12	0	0	0	0	0	0	0	0	0	0	324	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-HPL	Huey P. Long Collection	TAHIL	0.06	213	12	0	0	0	0	0	0	0	0	0	0	181	0	0	0	0	0	0	0	0	0	0	0	20	0	0	0	0	0	0	0
 p16313coll30	Guiseppe Ferrata Score Collection	Tulane	0.19	78	12	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	66	0	0	0	0	0	0	0	0	0	0	0
-p15140coll26	Edna Tiny Tarbutton Collection	ULM	15.27	934	13	0	0	0	0	0	0	0	0	920	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-LSU_SCE	LSU Special Collections Online	LSU	0.2	100	14	0	0	0	0	0	0	0	0	57	0	3	0	0	0	0	0	0	0	14	0	11	0	0	1	0	0	0	0	0	0
-p16313coll86	Ex Parte Plessy (Plessy v. Ferguson)	UNO	0.13	159	14	0	0	0	0	0	0	0	0	145	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll91	Loyola University New Orleans Scrapbook Collection	Loyola	1.66	773	15	0	0	0	0	0	0	0	0	758	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll81	John B. Heroman, Sr. photograph collection, circa 1885-1940	LSU	6.01	815	15	0	0	0	0	0	0	0	0	800	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll5	Loyola University New Orleans Special Collections and Archives Online	Loyola	4.92	291	18	0	0	0	0	0	0	0	0	269	0	1	0	0	0	0	0	3	0	0	0	0	0	0	0	0	0	0	0	0	0
 p15140coll37	Louisiana Political Ephemera, 1860-1920	Tulane	0.45	99	18	0	0	0	0	0	0	0	0	81	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p15140coll4	Orleans Parish School Board Meeting Minutes	UNO	16.31	7528	18	0	0	0	0	0	0	0	0	7510	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p120701coll12	LSU Libraries Louisiana and Lower Mississippi Valley Collections	LSU	0.58	347	19	0	0	0	0	0	0	0	0	328	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-LPH	Painting in Louisiana from the Historic New Orleans Collection	HNOC	12.68	1737	20	0	0	0	0	0	0	0	0	1547	0	170	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-LSU_GSC	G. H. Suydam Photograph Album	LSU	0.06	60	20	0	0	0	0	0	0	0	0	0	0	40	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p15140coll18	Hermann Moyse, Sr. World War I Collection	LSU	12.04	1414	20	0	0	0	0	0	0	0	0	1394	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll35	LSU Libraries Louisiana Waterways Management Collection	LSU	1.84	267	20	0	0	0	0	0	0	0	0	38	0	41	0	0	0	0	0	0	0	168	0	0	0	0	0	0	0	0	0	0	0
-p16313coll31	Louisiana Sugar Resources Digital Collection	LSU	12.85	2618	21	0	0	0	0	0	0	0	0	567	0	0	0	0	0	0	0	0	0	2030	0	0	0	0	0	0	0	0	0	0	0
-p120701coll29	Isidore Newman School Archives	UNO	0.26	178	23	0	0	0	0	0	0	0	0	155	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p15140coll17	LSU Libraries Mardi Gras Collection	LSU	1.52	431	24	0	0	0	0	0	0	0	0	406	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0
-LSU_CNP	Chickamauga and Chattanooga National Military Park Photographs	LSU	0.01	87	29	0	0	0	0	0	0	0	0	0	0	58	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-MMF	Medieval Manuscript Facsimiles Inventory	LSU	4.14	138	29	0	0	0	0	0	0	0	0	36	0	73	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll57	William Waller Survey Collection	LSU	0.67	214	30	0	0	0	0	0	0	0	0	184	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll1	Andrew Augustus Gunby Photograph Collection	ULM	0.76	419	30	0	0	0	0	0	0	0	0	389	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 p16313coll14	Tulane University Band Historical Collection	Tulane	0.59	296	33	0	0	0	0	0	0	0	0	1	0	14	0	0	0	0	248	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll44	Loyola University New Orleans Finding Aids	Loyola	0.04	102	34	0	0	0	0	0	0	0	68	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-HNF	Hebert Nuremburg Files	LSU	0.1	467	36	0	0	0	0	0	7	0	0	0	0	424	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p15140coll6	Lettres de Louisiane	LSU	0.25	174	38	0	0	0	0	0	0	0	0	98	0	0	0	0	0	0	0	0	0	38	0	0	0	0	0	0	0	0	0	0	0
 p16313coll68	NOLA Hip Hop and Bounce Archive	Tulane	24.97	124	38	0	0	0	0	0	0	0	0	38	0	0	0	0	0	0	0	48	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll80	Louisiana Runaway Slave Advertisements, 1836-1865	LSU	0.04	354	40	0	0	0	0	0	0	0	0	314	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p120701coll28	Joseph-Aurélien Cornet, F.S.C. Collection	Loyola	8.83	7231	41	0	0	0	0	0	0	0	0	7190	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-LPC	Louisiana Purchase and Louisiana Colonial History	TAHIL	0.14	337	42	0	0	0	0	0	0	0	0	2	0	282	0	0	0	0	0	0	0	0	0	0	0	11	0	0	0	0	0	0	0
 HTU	Tulane University	Tulane	0.25	241	42	0	0	0	0	0	0	0	0	0	0	196	0	0	0	0	1	2	0	0	0	0	0	0	0	0	0	0	0	0	0
-p15140coll42	Marcus Christian Collection	UNO	0.03	49	49	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll93	New Orleans Review Collection	Loyola	0.55	54	54	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 p15140coll40	Carnival Collection	Tulane	46.73	5657	56	0	0	0	0	0	0	0	0	5601	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll65	Louisiana Decoys and Wildfowl Artifacts	HNOC	3.28	426	59	0	0	0	0	0	0	0	0	367	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-LSU_ACT	Actors and Musicians Photographs, 1880-1920	LSU	0.01	192	64	0	0	0	0	0	0	0	0	4	0	124	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-LSU_NOE	New Orleans Centennial Exposition Stereoscopic Views	LSU	0.44	195	65	0	0	0	0	0	0	0	0	0	0	130	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll8	Gras-Lauzin Family Papers	LSU	0.36	357	70	0	0	0	0	0	0	0	0	247	0	0	0	0	0	0	0	0	0	40	0	0	0	0	0	0	0	0	0	0	0
-p15140coll30	Aleman Estate (Hathaway Gibbens) Collection	UNO	1.32	214	71	0	0	0	0	0	0	0	0	143	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p120701coll19	Sidonie de la Houssaye Collection	LSU	5.09	5279	75	0	0	0	0	0	0	0	0	0	0	5128	0	0	0	0	0	0	0	0	0	0	0	0	76	0	0	0	0	0	0
-LSU_LNP	Louisiana Newspaper Access Program - LaNeAP	LSU	11.46	3230	80	0	0	0	0	0	0	0	0	3067	0	0	0	0	0	0	0	0	0	83	0	0	0	0	0	0	0	0	0	0	0
-p16313coll9	Edith Dabney Doll Collection	LSU	0.34	416	82	0	0	0	0	0	0	0	0	334	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p267101coll4	Louisiana State Documents Digital Archive	State Library 	20.5	15739	87	1	1	191	10	3	0	1	1	7	0	0	0	0	587	0	0	0	0	12324	0	0	0	0	0	9	2514	0	0	3	0
-p16313coll32	Diacritics TEST Armand Duplantier Family Letters, LSU Libraries	LSU	0.25	641	93	0	0	0	0	0	0	0	0	0	0	362	0	0	0	0	0	0	0	186	0	0	0	0	0	0	0	0	0	0	0
-p16313coll76	Doussan family papers, 1827-1872	LSU	0.28	455	94	0	0	0	0	0	0	0	0	361	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll34	Armand Duplantier Family Letters, LSU Libraries	LSU	2.34	655	95	0	0	0	0	0	0	0	0	370	0	0	0	0	0	0	0	0	0	190	0	0	0	0	0	0	0	0	0	0	0
-p16313coll43	Mary McMurran and Conner Family	ULM	0.62	1416	99	0	0	0	0	0	0	0	0	1317	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-LSU_CFF	Early Louisiana French Correspondence	LSU	0.49	527	101	0	0	0	0	0	0	0	0	1	0	316	0	0	0	0	0	0	0	101	0	0	0	0	8	0	0	0	0	0	0
-p16313coll50	Gumbo - Louisiana State University's Yearbook	LSU	33.01	38762	102	0	0	0	0	0	0	0	0	38660	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 p15140coll25	Charity Hospital Reports	Tulane	2.08	114	114	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 p16313coll29	French Colonial, Spanish Colonial, and Nineteenth-Century Louisiana Documents	Tulane	3.14	1510	122	0	0	0	0	0	0	0	0	29	0	0	0	0	0	0	0	0	0	1359	0	0	0	0	0	0	0	0	0	0	0
-p15140coll10	Civil War Context and Conflict at LSU Libraries	LSU	24.6	4314	128	0	0	0	0	0	0	0	0	4173	0	0	0	0	0	0	0	0	0	13	0	0	0	0	0	0	0	0	0	0	0
-p15140coll49	LSU Health Sciences Center New Orleans - Catalog and Bulletin	LSUHSCNO	2.5	128	128	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-AAW	America at War	TAHIL	0.57	1079	129	0	0	0	0	0	0	0	0	1	0	748	0	0	0	0	0	0	0	0	0	0	0	201	0	0	0	0	0	0	0
-p15140coll60	Records of the French Superior Council (1714-1769)	Louisiana State Museum	20.66	723	131	0	0	0	0	0	0	0	0	592	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-LSU_CWP	Civil War Photograph Album, 1862-1900	LSU	0.02	402	134	0	0	0	0	0	0	0	0	0	0	268	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-LSUBK01	Aristides Agramonte Yellow Fever Collection	LSUHSCNO	16.22	12058	136	0	0	0	0	0	0	0	0	11908	0	0	0	0	0	0	0	0	0	14	0	0	0	0	0	0	0	0	0	0	0
-UNO_ANI	University of New Orleans Anniversary	UNO	2.98	277	138	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	139	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p120701coll26	Graduation Programs of the LSU Health Sciences Center, New Orleans	LSUHSCNO	0.15	2038	149	0	0	0	0	0	0	0	0	0	0	1889	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-LOYOLA_ETD	Loyola University New Orleans Electronic Theses	Loyola	0.91	195	194	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0
-LSU_MDP	Marshall Dunham Photograph Album	LSU	0.58	600	200	0	0	0	0	0	0	0	0	0	0	400	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-LSU_UAP	LSU University Archives Photographs Collection	LSU	25.23	1239	200	0	0	0	0	0	0	0	0	314	0	725	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p15140coll41	Louisiana Early English Corpus	LSU	1.25	1161	220	0	0	0	0	0	0	0	0	529	0	1	0	0	0	0	0	0	0	411	0	0	0	0	0	0	0	0	0	0	0
-p15140coll31	Judge John Minor Wisdom Collection	UNO	21.69	1438	221	0	0	0	0	0	0	0	0	1217	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-LSUHSC_NCC	LSU Health Sciences Center New Orleans Newspaper Clippings Collection	LSUHSCNO	6.44	7749	228	0	0	0	0	0	0	0	0	3252	0	4266	0	0	0	0	0	0	0	0	0	0	0	0	3	0	0	0	0	0	0
-p15140coll7	University of New Orleans Senior Honors Theses	UNO	4.27	242	239	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	2	0	1	0	0	0	0	0	0	0	0	0	0	0
-p16313coll2	StoryCorps	UNO	19.48	3261	371	0	0	0	0	0	0	0	0	41	0	1700	0	0	0	0	390	0	0	758	0	0	0	0	0	0	0	1	0	0	0
-p15140coll52	The STAR- Radiating the Light of Truth on Hansen's Disease	LSUHSCNO	5.94	661	431	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	230	0	0	0	0	0	0	0	0	0	0	0
-p15140coll50	U.S. Army 64th General Hospital, organized by LSU Medical School	LSUHSCNO	0.85	1112	480	0	0	0	0	0	0	0	0	632	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p16313coll10	LSU Libraries Postcard Collections	LSU	2.65	1824	608	0	0	0	0	0	0	0	0	1030	0	186	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-lapur	Louisiana Purchase Bicentennial Collection	LSU	10.44	24553	885	0	0	0	0	0	0	0	0	12	0	23072	0	0	0	0	0	0	0	0	0	0	0	0	584	0	0	0	0	0	0
-p16313coll17	Gulf South Decorative and Fine Arts Database	HNOC	34.88	8533	949	0	0	0	0	0	0	0	0	7584	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-UNO_SCC	UNO Historical Archives of the Supreme Court of Louisiana	UNO	17.44	22846	1076	0	0	0	0	0	0	0	0	0	0	21770	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-LWP	Louisiana Works Progress Administration (WPA)	State Library 	2.44	10273	1445	0	0	0	0	0	0	0	0	27	0	8801	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p120701coll25	United States House and Senate Committee Hearings and Publications	UNO	62.96	1569	1569	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-p15140coll23	LSU Health Sciences Center Shreveport Newspaper Clippings	LSUHSCS	1.04	3421	1651	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1770	0	0	0	0	0	0	0	0	0	0	0
-p16313coll51	Free People of Color in Louisiana	LSU	25.31	31938	1885	0	0	0	0	0	0	0	0	30053	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-LMNP01	Loyola University Maroon	Loyola	68.79	22059	2018	0	0	0	0	0	0	0	0	20041	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-NOD																																			
-p120701coll21																																			
-	All collections		900.72	380287	18591	1	1	242	10	3	2175	1	69	212031	3	108903	1	99	587	166	1142	103	4483	26157	10	1411	2	804	754	10	2519	4	1	3	1
-	Total		900.72	326290	14688	1	1	242	10	3	2175	1	69	161937	3	108903	1	99	587	166	1142	103	4483	26157	10	1411	2	804	754	10	2519	4	1	3	1
