@@ -42,102 +42,113 @@ def just_so_i_can_call_it(alias):
         os.mkdir(str('{}/Cached_Cdm_files/{}').format(os.getcwd(), alias))
 
     if 'Collection_Metadata.xml' not in os.listdir(alias_dir):
-        p.write_xml_to_file(p.retrieve_collection_metadata(alias), alias, 'Collection_Metadata')
+        p.write_xml_to_file(
+            p.retrieve_collection_metadata(alias),
+            alias,
+            'Collection_Metadata')
 
     if 'Collection_TotalRecs.xml' not in os.listdir(alias_dir):
-        p.write_xml_to_file(p.retrieve_collection_total_recs(alias), alias, 'Collection_TotalRecs')
+        p.write_xml_to_file(
+            p.retrieve_collection_total_recs(alias),
+            alias,
+            'Collection_TotalRecs')
 
     if 'Collection_Fields.xml' not in os.listdir(alias_dir):
         collection_fields = p.retrieve_collection_fields(alias)
-        p.write_xml_to_file(collection_fields, alias, 'Collection_Fields')
+        p.write_xml_to_file(
+            collection_fields,
+            alias,
+            'Collection_Fields')
     else:
-        collection_fields = read_file('{}/Cached_Cdm_files/{}/Collection_Fields.xml'.format(os.getcwd(), alias))
-    collection_fields_etree = etree.fromstring(bytes(bytearray(collection_fields, encoding='utf-8')))
+        collection_fields = read_file(
+            '{}/Cached_Cdm_files/{}/Collection_Fields.xml'.format(os.getcwd(), alias))
 
     total_recs_etree = etree.fromstring(bytes(bytearray(p.retrieve_collection_total_recs(alias), encoding='utf-8')))
     num_of_pointers = int(total_recs_etree.xpath('.//total')[0].text)
     groups_of_100 = (num_of_pointers // 100) + 1
 
     for num in range(groups_of_100):
-        starting_pointer = (num * 100) + 1                         # why the heavens does contentdm start counting at 1?
-                                                                    # also, why can't cdm cound above 10000??
+        starting_pointer = (num * 100) + 1
         if 'Elems_in_Collection_{}.xml'.format(starting_pointer) not in os.listdir('{}/Cached_Cdm_files/{}/'.format(os.getcwd(), alias)):
             fields_to_retrieve = ['source', 'dmrecord', 'dmimage', 'find']
-            xml_elems_in_coll = p.retrieve_elems_in_collection(alias, fields_to_retrieve, starting_pointer, 'xml')
+            xml_elems_in_coll = p.retrieve_elems_xml(alias, fields_to_retrieve, starting_pointer)
             p.write_xml_to_file(xml_elems_in_coll, alias, 'Elems_in_Collection_{}'.format(starting_pointer))
 
-        else:
-            xml_elems_in_coll = read_file('{}/Cached_Cdm_files/{}/Elems_in_Collection_{}.xml'.format(os.getcwd(), alias, starting_pointer))
-        print(xml_elems_in_coll)
-        elems_in_coll_tree = etree.fromstring(bytes(bytearray(xml_elems_in_coll, encoding='utf-8')))
+        elems_in_coll_tree = etree.parse(
+            '{}/Cached_Cdm_files/{}/Elems_in_Collection_{}.xml'.format(os.getcwd(), alias, starting_pointer))
 
         if 'Elems_in_Collection_{}.json'.format(starting_pointer) not in os.listdir('{}/Cached_Cdm_files/{}/'.format(os.getcwd(), alias)):
             fields_to_retrieve = ['source', 'dmrecord', 'dmimage', 'find']
-            json_elems_in_coll = p.retrieve_elems_in_collection(alias, fields_to_retrieve, starting_pointer, 'json')
+            json_elems_in_coll = p.retrieve_elems_json(alias, fields_to_retrieve, starting_pointer)
+            p.write_json_to_file(json_elems_in_coll, alias, 'Elems_in_Collection_{}'.format(starting_pointer))
 
         """ Careful method of getting each object contentdm says is in a collection"""
         pointers_filetypes = [(single_record.find('dmrecord').text,
                                single_record.find('filetype').text,
                                ) for single_record in elems_in_coll_tree.findall('.//record')]
 
-        if 'Elems_in_Collection_{}.json'.format(starting_pointer) not in os.listdir('{}/Cached_Cdm_files/{}/'.format(os.getcwd(), alias)):
-            fields_to_retrieve = ['dmcreated']
-            json_elems_in_coll = p.retrieve_elems_in_collection(alias, fields_to_retrieve, starting_pointer, 'json')
-            p.write_json_to_file(json_elems_in_coll, alias, 'Elems_in_Collection_{}'.format(starting_pointer))        
-
         for pointer, filetype in pointers_filetypes:
             if not pointer:  # skips file if a derivative -- only gets original versions
-                print('{} {} not pointer, filetype'.format(pointer, filetype))
-                print('does if')
+                continue
 
-            elif '{}.json'.format(pointer) not in os.listdir('{}/Cached_Cdm_files/{}'.format(os.getcwd(), alias)):
-                item_metadata = p.retrieve_item_metadata(alias, pointer, 'json')
-                p.write_xml_to_file(item_metadata, alias, pointer)
-                print('does elif')
+            if filetype != 'cpd':
+
+                if '{}.json'.format(pointer) not in os.listdir('{}/Cached_Cdm_files/{}'.format(os.getcwd(), alias)):
+                    item_json = p.retrieve_item_metadata(alias, pointer, 'json')
+                    p.write_json_to_file(item_json, alias, pointer)
+
+
+                if '{}.xml'.format(pointer) not in os.listdir('{}/Cached_Cdm_files/{}'.format(os.getcwd(), alias)):
+                    item_xml = p.retrieve_item_metadata(alias, pointer, 'xml')
+                    p.write_xml_to_file(item_xml, alias, pointer)
+
+                item_xml_file = '{}/Cached_Cdm_files/{}/{}.xml'.format(os.getcwd(), alias, pointer)
+                item_etree = etree.parse(item_xml_file)
+                if item_etree.find('find') is not None:  # "find" is contentdm's abbr for 'contentdm file name'
+                    pass
+                    # binary = p.retrieve_binaries(alias, pointer, "_")
+                    # p.write_binary_to_file(binary, alias, pointer, filetype)
+
+            elif filetype == 'cpd':
+                if 'Cpd' not in os.listdir('{}/Cached_Cdm_files/{}'.format(os.getcwd(), alias)):
+                    os.mkdir('{}/Cached_Cdm_files/{}/Cpd'.format(os.getcwd(), alias))
+
+                if '{}.json'.format(pointer) not in os.listdir('{}/Cached_Cdm_files/{}/Cpd'.format(os.getcwd(), alias)):
+                    item_json = p.retrieve_item_metadata(alias, pointer, 'json')
+                    p.write_json_to_file(item_json, '{}/Cpd'.format(alias), pointer)
+
+
+                if '{}.xml'.format(pointer) not in os.listdir('{}/Cached_Cdm_files/{}/Cpd'.format(os.getcwd(), alias)):
+                    item_xml = p.retrieve_item_metadata(alias, pointer, 'xml')
+                    p.write_xml_to_file(item_xml, '{}/Cpd'.format(alias), pointer)
+
+                item_xml_file = '{}/Cached_Cdm_files/{}/Cpd/{}.xml'.format(os.getcwd(), alias, pointer)
+                item_etree = etree.parse(item_xml_file)
+
+                if '{}_cpd.xml'.format(pointer) not in os.listdir('{}/Cached_Cdm_files/{}/Cpd'.format(os.getcwd(), alias)):
+                    item_xml = p.retrieve_compound_object(alias, pointer)
+                    p.write_xml_to_file(item_xml, '{}/Cpd'.format(alias), '{}_cpd'.format(pointer))
+                    
+
 
             else:
-                item_metadata_file = read_file('{}/Cached_Cdm_files/{}/{}.xml'.format(os.getcwd(), alias, pointer))
-                item_metadata = bytes(bytearray(item_metadata_file, encoding='utf-8'))
-                print('does else')
-
-            item_etree = etree.fromstring(item_metadata)
-            if item_etree.find('object'):  # "find" is contentdm's abbr for 'contentdm file name'
-                binary = p.retrieve_binaries(alias, pointer, "something")
-                p.write_binary_to_file(binary, alias, pointer, filetype)
+                print('{} {}, not pointer filetype'.format(pointer, filetype))
 
             # p.write_binary_to_file(p.retrieve_binaries(alias, pointer, filetype), alias, pointer, filetype)
 
-    # """Brute force method of getting every possible object from a collection, even if contentdm doesn't say it's inside"""
-
-    # blank_count = 0
-    # for i in range(31000):
-    #     if '{}.xml'.format(i) not in os.listdir('{}/Cached_Cdm_files/{}'.format(os.getcwd(), alias)):
-    #         url = 'https://server16313.contentdm.oclc.org/dmwebservices/index.php?q=dmGetItemInfo/{}/{}/xml'.format(alias, str(i))
-    #         with urllib.request.urlopen(url) as response:
-    #             html_text = response.read()
-    #             if '<message>Requested item not found</message>' in html_text.decode('utf-8'):
-    #                 print('found blank site', i)
-    #                 blank_count += 1
-    #             else:
-    #                 item_metadata = p.retrieve_item_metadata(alias, i)
-    #                 local_etree = etree.fromstring(item_metadata)
-    #                 p.write_xml_to_file(etree.tostring(local_etree, encoding="unicode", method="xml"), alias, i)
-    #                 print(alias, i)
-    #                 blank_count = 0
-
 
 if __name__ == '__main__':
-    """ Call just one collection, retrieve all metadata """
-    if 'Cached_Cdm_files' not in os.listdir(os.getcwd()):
-        os.mkdir('{}/Cached_Cdm_files'.format(os.getcwd()))
-    just_so_i_can_call_it('LSU_JJA')
-
-    # """ Call all collections, retrieve all metadata """
-    # coll_list_txt = p.retrieve_collections_list()
+    # """ Call just one collection, retrieve all metadata """
     # if 'Cached_Cdm_files' not in os.listdir(os.getcwd()):
     #     os.mkdir('{}/Cached_Cdm_files'.format(os.getcwd()))
-    # p.write_xml_to_file(coll_list_txt, '.', 'Collections_List')
-    # coll_list_xml = etree.fromstring(bytes(bytearray(coll_list_txt, encoding='utf-8')))
-    # for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')]:
-    #     print(alias)
-    #     just_so_i_can_call_it(alias)
+    # just_so_i_can_call_it('LSU_JJA')
+
+    """ Call all collections, retrieve all metadata """
+    coll_list_txt = p.retrieve_collections_list()
+    if 'Cached_Cdm_files' not in os.listdir(os.getcwd()):
+        os.mkdir('{}/Cached_Cdm_files'.format(os.getcwd()))
+    p.write_xml_to_file(coll_list_txt, '.', 'Collections_List')
+    coll_list_xml = etree.fromstring(bytes(bytearray(coll_list_txt, encoding='utf-8')))
+    for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')]:
+        print(alias)
+        just_so_i_can_call_it(alias)
