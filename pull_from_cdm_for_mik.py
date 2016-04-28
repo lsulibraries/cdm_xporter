@@ -31,8 +31,8 @@ def retrieve_collection_fields(collection_alias):
         return response.read().decode(encoding='utf-8')
 
 
-def retrieve_elems_in_collection(collection_alias, fields_list, starting_pointer, form):
-    url = '{}dmQuery/{}/0/{}/dmcreated!dmrecord/100/{}/1/0/0/0/{}'.format(url_prefix, collection_alias, '!'.join(fields_list), starting_pointer, form)
+def retrieve_elems_in_collection(collection_alias, fields_list, starting_pointer):
+    url = '{}dmQuery/{}/0/{}/fullrs!find!dmaccess!dmimage!dmcreated!dmmodified!dmoclcno!dmrecord/100/{}/1/0/0/0/json'.format(url_prefix, collection_alias, '!'.join(fields_list), starting_pointer)
     with urllib.request.urlopen(url) as response:
         return response.read().decode(encoding='utf-8')
 
