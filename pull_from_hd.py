@@ -48,24 +48,17 @@ def retrieve_compound_object(collection_alias, item_pointer):
 
 
 def write_binary_to_file(binary, alias, new_filename, filetype):
-    make_directory_tree(alias)
+    os.makedirs('Sourced_from_HD_Collections/{}'.format(alias), exist_ok=True)
     filename = 'Sourced_from_HD_Collections/{}/{}.{}'.format(alias, new_filename, filetype)
     with open(filename, 'bw') as f:
         f.write(binary)
 
 
 def write_xml_to_file(xml_text, alias, new_filename):
-    make_directory_tree(alias)
+    os.makedirs('Sourced_from_HD_Collections/{}'.format(alias), exist_ok=True)
     filename = 'Sourced_from_HD_Collections/{}/{}.xml'.format(alias, new_filename)
     with open(filename, 'w') as f:
         f.write(xml_text)
-
-
-def make_directory_tree(alias):
-    if 'Sourced_from_HD_Collections' not in os.listdir(os.getcwd()):
-        os.mkdir('Sourced_from_HD_Collections')
-    if alias not in os.listdir(os.getcwd() + '/Sourced_from_HD_Collections') and alias not in ('.', '..'):
-        os.mkdir('Sourced_from_HD_Collections/{}'.format(alias))
 
 
 if __name__ == '__main__':
