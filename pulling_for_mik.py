@@ -38,8 +38,7 @@ def just_so_i_can_call_it(alias):
     repo_dir = '{}/{}'.format(os.getcwd(), 'Cached_Cdm_files')
     alias_dir = '{}/{}'.format(repo_dir, alias)
 
-    if alias not in os.listdir(repo_dir):
-        os.mkdir(str('{}/Cached_Cdm_files/{}').format(os.getcwd(), alias))
+    os.makedirs('Cached_Cdm_files/{}'.format(alias), exist_ok=True)
 
     if 'Collection_Metadata.xml' not in os.listdir(alias_dir):
         p.write_xml_to_file(
@@ -110,8 +109,7 @@ def just_so_i_can_call_it(alias):
                     # p.write_binary_to_file(binary, alias, pointer, filetype)
 
             elif filetype == 'cpd':
-                if 'Cpd' not in os.listdir('{}/Cached_Cdm_files/{}'.format(os.getcwd(), alias)):
-                    os.mkdir('{}/Cached_Cdm_files/{}/Cpd'.format(os.getcwd(), alias))
+                os.makedirs('Cached_Cdm_files/{}/Cpd'.format(alias), exist_ok=True)
 
                 if '{}.json'.format(pointer) not in os.listdir('{}/Cached_Cdm_files/{}/Cpd'.format(os.getcwd(), alias)):
                     item_json = p.retrieve_item_metadata(alias, pointer, 'json')
@@ -139,14 +137,10 @@ def just_so_i_can_call_it(alias):
 
 if __name__ == '__main__':
     # """ Call just one collection, retrieve all metadata """
-    # if 'Cached_Cdm_files' not in os.listdir(os.getcwd()):
-    #     os.mkdir('{}/Cached_Cdm_files'.format(os.getcwd()))
     # just_so_i_can_call_it('LSU_JJA')
 
     """ Call all collections, retrieve all metadata """
     coll_list_txt = p.retrieve_collections_list()
-    if 'Cached_Cdm_files' not in os.listdir(os.getcwd()):
-        os.mkdir('{}/Cached_Cdm_files'.format(os.getcwd()))
     p.write_xml_to_file(coll_list_txt, '.', 'Collections_List')
     coll_list_xml = etree.fromstring(bytes(bytearray(coll_list_txt, encoding='utf-8')))
     for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')]:

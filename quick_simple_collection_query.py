@@ -37,8 +37,7 @@ def just_so_i_can_call_it(alias):
     repo_dir = '{}/{}'.format(os.getcwd(), 'Collections')
     alias_dir = '{}/{}'.format(repo_dir, alias)
 
-    if alias not in os.listdir(repo_dir):
-        os.mkdir(str('{}/Collections/{}').format(os.getcwd(), alias))
+    os.makedirs('Collections/{}'.format(alias), exist_ok=True)
 
     if 'Collection_Metadata.xml' not in os.listdir(alias_dir):
         p.write_xml_to_file(p.retrieve_collection_metadata(alias), alias, 'Collection_Metadata')
@@ -119,15 +118,14 @@ def just_so_i_can_call_it(alias):
 
 
 if __name__ == '__main__':
-    """ Call just one collection, retrieve all metadata """
-    just_so_i_can_call_it('LOU')
+    # """ Call just one collection, retrieve all metadata """
+    # just_so_i_can_call_it('LOU')
 
-    # """ Call all collections, retrieve all metadata """
-    # coll_list_txt = p.retrieve_collections_list()
-    # if 'Collections' not in os.listdir(os.getcwd()):
-    #     os.mkdir('{}/Collections'.format(os.getcwd()))
-    # p.write_xml_to_file(coll_list_txt, '.', 'Collections_List')
-    # coll_list_xml = etree.fromstring(bytes(bytearray(coll_list_txt, encoding='utf-8')))
-    # for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')]:
-    #     print(alias)
-    #     just_so_i_can_call_it(alias)
+    """ Call all collections, retrieve all metadata """
+    coll_list_txt = p.retrieve_collections_list()
+    p.write_xml_to_file(coll_list_txt, '.', 'Collections_List')
+
+    coll_list_xml = etree.fromstring(bytes(bytearray(coll_list_txt, encoding='utf-8')))
+    for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')]:
+        print(alias)
+        just_so_i_can_call_it(alias)
