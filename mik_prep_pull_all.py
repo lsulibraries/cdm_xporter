@@ -34,7 +34,7 @@ def read_file(filename):
     with open(filename) as f:
         return f.read()
 
-@retry(wait_random_min=1000, wait_random_max=20000)
+# @retry(wait_random_min=1000, wait_random_max=20000)
 def just_so_i_can_call_it(alias):
     repo_dir = '{}/{}'.format(os.getcwd(), 'Cached_Cdm_files')
     alias_dir = '{}/{}'.format(repo_dir, alias)
@@ -116,7 +116,6 @@ def just_so_i_can_call_it(alias):
                     item_json = p.retrieve_item_metadata(alias, pointer, 'json')
                     p.write_json_to_file(item_json, '{}/Cpd'.format(alias), pointer)
 
-
                 if '{}.xml'.format(pointer) not in os.listdir('{}/Cached_Cdm_files/{}/Cpd'.format(os.getcwd(), alias)):
                     item_xml = p.retrieve_item_metadata(alias, pointer, 'xml')
                     p.write_xml_to_file(item_xml, '{}/Cpd'.format(alias), pointer)
@@ -137,6 +136,9 @@ def just_so_i_can_call_it(alias):
                 cpd_pointer = file.split('_')[0]
                 small_etree = etree.parse(os.path.join(alias_dir, 'Cpd', file))
                 subpointer_list = small_etree.findall('.//pageptr')
+                file_element = subpointer_list[0].getparent().xpath('./pagefile')
+                if file_element and 'pdfpage' in file_element[0].text:
+                        continue  # we don't want pdfpage objects
                 os.makedirs('Cached_Cdm_files/{}/Cpd/{}'.format(alias, cpd_pointer), exist_ok=True)
                 for elem in subpointer_list:
                     if alias == 'LSU_SCE' and elem.text in ('269', '308', '258', '261'):
@@ -150,7 +152,7 @@ def just_so_i_can_call_it(alias):
 
 if __name__ == '__main__':
     """ Call just one collection, retrieve all metadata """
-    # just_so_i_can_call_it('LSU_SCE')
+    # just_so_i_can_call_it('LSU_LNP')
 
     """ Call all collections, retrieve all metadata """
 
