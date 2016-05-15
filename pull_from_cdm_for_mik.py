@@ -25,8 +25,14 @@ def retrieve_collection_total_recs(collection_alias):
         return response.read().decode(encoding='utf-8')
 
 
-def retrieve_collection_fields(collection_alias):
+def retrieve_collection_fields_xml(collection_alias):
     url = '{}dmGetCollectionFieldInfo/{}/xml'.format(url_prefix, collection_alias)
+    with urllib.request.urlopen(url) as response:
+        return response.read().decode(encoding='utf-8')
+
+
+def retrieve_collection_fields_json(collection_alias):
+    url = '{}dmGetCollectionFieldInfo/{}/json'.format(url_prefix, collection_alias)
     with urllib.request.urlopen(url) as response:
         return response.read().decode(encoding='utf-8')
 
