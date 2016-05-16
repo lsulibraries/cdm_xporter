@@ -31,14 +31,21 @@ def just_so_i_can_call_it(alias):
             alias,
             'Collection_TotalRecs')
 
+    if not os.path.isfile('{}/Collection_Fields.json'.format(alias_dir)):
+        collection_fields_json = p.retrieve_collection_fields_json(alias)
+        p.write_json_to_file(
+            collection_fields_json,
+            alias,
+            'Collection_Fields')
+
     if not os.path.isfile('{}/Collection_Fields.xml'.format(alias_dir)):
-        collection_fields = p.retrieve_collection_fields(alias)
+        collection_fields_xml = p.retrieve_collection_fields_xml(alias)
         p.write_xml_to_file(
-            collection_fields,
+            collection_fields_xml,
             alias,
             'Collection_Fields')
     else:
-        collection_fields = read_file(
+        collection_fields_xml = read_file(
             '{}/Cached_Cdm_files/{}/Collection_Fields.xml'.format(os.getcwd(), alias))
 
     total_recs_etree = etree.fromstring(bytes(bytearray(p.retrieve_collection_total_recs(alias), encoding='utf-8')))
@@ -151,14 +158,19 @@ def just_so_i_can_call_it(alias):
 
 if __name__ == '__main__':
     """ Call just one collection, retrieve all metadata """
-    # just_so_i_can_call_it('LSU_LNP')
+    # just_so_i_can_call_it('p16313coll54')
 
     """ Call all collections, retrieve all metadata """
-
 
     coll_list_txt = p.retrieve_collections_list()
     p.write_xml_to_file(coll_list_txt, '.', 'Collections_List')
     coll_list_xml = etree.fromstring(bytes(bytearray(coll_list_txt, encoding='utf-8')))
+    not_all_binaries = []
     for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')]:
-        print(alias)
-        just_so_i_can_call_it(alias)
+        try:
+            print(alias)
+            just_so_i_can_call_it(alias)
+        except:
+            not_all_binaries.append(alias)
+            print('oops')
+    print(not_all_binaries)
