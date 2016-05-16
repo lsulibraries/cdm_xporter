@@ -9,10 +9,14 @@ def report_expected_objs(filename):
         csv_reader = csv.reader(f, delimiter='\t')
         full_set_pointers = {'cpd': set(), 'simple': set()}
 
+        headers = next(csv_reader)
+        alias_col_num = headers.index('CONTENTdm number')
+        filename_col_num = headers.index('CONTENTdm file name')
+
         for row in csv_reader:
-            alias = row[0]
+            alias = row[alias_col_num]
             if alias not in ('CONTENTdm number'):
-                filename = row[1]
+                filename = row[filename_col_num]
                 if os.path.splitext(filename)[-1].lower().replace('.', '') == ('cpd'):
                     full_set_pointers['cpd'].add(alias)
                 else:
@@ -43,17 +47,18 @@ def report_pulled_objs(alias):
                         full_set_downloaded_pointers['simple'].add(os.path.splitext(subfile)[0])
     return full_set_downloaded_pointers
 
+my_alias = 'p267101coll4'
 
-# expected_sets = report_expected_objs('/home/garrett_armstrong/Desktop/lapur_items.csv')
-# print(len(expected_sets['simple']))
-# print(len(expected_sets['cpd']))
+expected_sets = report_expected_objs('/home/garrett_armstrong/Desktop/over_10000/{}.csv'.format(my_alias))
+print('AdminPanel Smpl Objs:', len(expected_sets['simple']))
+print('AdminPanel Cmpd Objs:', len(expected_sets['cpd']))
 
-pulled_sets = report_pulled_objs('CLF')
-print(len(pulled_sets['simple']))
-print(len(pulled_sets['cpd']))
+pulled_sets = report_pulled_objs(my_alias)
+print('WebApi Smpl Objs:', len(pulled_sets['simple']))
+print('WebApi Cmpd Objs:', len(pulled_sets['cpd']))
 
 
-# print("Them minus us Simple", expected_sets['simple'].difference(pulled_sets['simple']))
-# print('Us minus them Simple', pulled_sets['simple'].difference(expected_sets['simple']))
-# print('Them minus us Cpd', expected_sets['cpd'].difference(pulled_sets['cpd']))
-# print('Us minus them Cpd', pulled_sets['cpd'].difference(expected_sets['cpd']))
+print("AdminPanel extras Simple:", len(expected_sets['simple'].difference(pulled_sets['simple'])), expected_sets['simple'].difference(pulled_sets['simple']))
+print('WebApi extras Simple:', len(pulled_sets['simple'].difference(expected_sets['simple'])), pulled_sets['simple'].difference(expected_sets['simple']))
+print('AdminPanel extras Cpd:', len(expected_sets['cpd'].difference(pulled_sets['cpd'])), expected_sets['cpd'].difference(pulled_sets['cpd']))
+print('WebApi extras Cpd:', len(pulled_sets['cpd'].difference(expected_sets['cpd'])), pulled_sets['cpd'].difference(expected_sets['cpd']))
