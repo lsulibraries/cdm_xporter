@@ -25,8 +25,14 @@ def retrieve_collection_total_recs(collection_alias):
         return response.read().decode(encoding='utf-8')
 
 
-def retrieve_collection_fields(collection_alias):
+def retrieve_collection_fields_xml(collection_alias):
     url = '{}dmGetCollectionFieldInfo/{}/xml'.format(url_prefix, collection_alias)
+    with urllib.request.urlopen(url) as response:
+        return response.read().decode(encoding='utf-8')
+
+
+def retrieve_collection_fields_json(collection_alias):
+    url = '{}dmGetCollectionFieldInfo/{}/json'.format(url_prefix, collection_alias)
     with urllib.request.urlopen(url) as response:
         return response.read().decode(encoding='utf-8')
 
@@ -76,8 +82,8 @@ def write_xml_to_file(xml_text, alias, new_filename):
         f.write(xml_text)
 
 
-def write_json_to_file(xml_text, alias, new_filename):
+def write_json_to_file(json_text, alias, new_filename):
     os.makedirs('Cached_Cdm_files/{}'.format(alias), exist_ok=True)
     filename = 'Cached_Cdm_files/{}/{}.json'.format(alias, new_filename)
     with open(filename, 'w') as f:
-        f.write(xml_text)
+        f.write(json_text)
