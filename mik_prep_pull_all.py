@@ -45,8 +45,8 @@ def just_so_i_can_call_it(alias):
             alias,
             'Collection_Fields')
     else:
-        collection_fields_xml = read_file(
-            '{}/Cached_Cdm_files/{}/Collection_Fields.xml'.format(os.getcwd(), alias))
+        collection_fields = read_file(
+            '{}/Collection_Fields.xml'.format(alias_dir))
 
     total_recs_etree = etree.fromstring(bytes(bytearray(p.retrieve_collection_total_recs(alias), encoding='utf-8')))
     num_of_pointers = int(total_recs_etree.xpath('.//total')[0].text)
@@ -129,7 +129,7 @@ def just_so_i_can_call_it(alias):
                 subpointer_list = small_etree.findall('.//pageptr')
                 file_element = subpointer_list[0].getparent().xpath('./pagefile')
                 if file_element and 'pdfpage' in file_element[0].text:
-                        continue  # we don't want pdfpage objects
+                    continue  # we don't want pdfpage objects
                 os.makedirs('Cached_Cdm_files/{}/Cpd/{}'.format(alias, cpd_pointer), exist_ok=True)
                 for elem in subpointer_list:
                     simple_pointer = elem.text
