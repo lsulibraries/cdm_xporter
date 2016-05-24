@@ -47,9 +47,9 @@ def report_pulled_objs(alias):
                         full_set_downloaded_pointers['simple'].add(os.path.splitext(subfile)[0])
     return full_set_downloaded_pointers
 
-my_alias = 'p267101coll4'
+my_alias = 'AAW'
 
-expected_sets = report_expected_objs('/home/garrett_armstrong/Desktop/over_10000/{}.csv'.format(my_alias))
+expected_sets = report_expected_objs('/home/james/Desktop/txtExportedfromCDM/{}.csv'.format(my_alias))
 print('AdminPanel Smpl Objs:', len(expected_sets['simple']))
 print('AdminPanel Cmpd Objs:', len(expected_sets['cpd']))
 
