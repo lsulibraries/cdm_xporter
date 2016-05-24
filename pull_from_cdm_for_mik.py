@@ -68,6 +68,12 @@ def retrieve_compound_object(collection_alias, item_pointer):
         return response.read().decode(encoding='utf-8')
 
 
+def retrieve_parent_info(collection_alias, item_pointer, filetype):
+    url = '{}GetParent/{}/{}/{}'.format(url_prefix, collection_alias, item_pointer, filetype)
+    with urllib.request.urlopen(url) as response:
+        return response.read().decode(encoding='utf-8')
+
+
 def write_binary_to_file(binary, alias, new_filename, filetype):
     os.makedirs('Cached_Cdm_files/{}'.format(alias), exist_ok=True)
     filename = 'Cached_Cdm_files/{}/{}.{}'.format(alias, new_filename, filetype)
