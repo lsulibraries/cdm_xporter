@@ -93,3 +93,24 @@ def write_json_to_file(json_text, alias, new_filename):
     filename = 'Cached_Cdm_files/{}/{}.json'.format(alias, new_filename)
     with open(filename, 'w') as f:
         f.write(json_text)
+
+
+def write_admin_binary_to_file(binary, alias, new_filename, filetype):
+    os.makedirs('AdminPanel_Cdm_files/{}'.format(alias), exist_ok=True)
+    filename = 'AdminPanel_Cdm_files/{}/{}.{}'.format(alias, new_filename, filetype)
+    with open(filename, 'bw') as f:
+        f.write(binary)
+
+
+def write_admin_xml_to_file(xml_text, alias, new_filename):
+    os.makedirs('AdminPanel_Cdm_files/{}'.format(alias), exist_ok=True)
+    filename = 'AdminPanel_Cdm_files/{}/{}.xml'.format(alias, new_filename)
+    with open(filename, 'w') as f:
+        f.write(xml_text)
+
+
+def write_admin_json_to_file(json_text, alias, new_filename):
+    os.makedirs('AdminPanel_Cdm_files/{}'.format(alias), exist_ok=True)
+    filename = 'AdminPanel_Cdm_files/{}/{}.json'.format(alias, new_filename)
+    with open(filename, 'w') as f:
+        f.write(json_text)
