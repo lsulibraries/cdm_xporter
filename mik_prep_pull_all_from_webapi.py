@@ -184,19 +184,19 @@ def just_so_i_can_call_it(alias):
 
 if __name__ == '__main__':
     """ Call just one collection, retrieve all metadata """
-    just_so_i_can_call_it('AAW')
+    # just_so_i_can_call_it('AAW')
 
     """ Call all collections, retrieve all metadata """
 
-    # coll_list_txt = p.retrieve_collections_list()
-    # p.write_xml_to_file(coll_list_txt, '.', 'Collections_List')
-    # coll_list_xml = etree.fromstring(bytes(bytearray(coll_list_txt, encoding='utf-8')))
-    # not_all_binaries = []
-    # for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')]:
-    #     try:
-    #         print(alias)
-    #         just_so_i_can_call_it(alias)
-    #     except:
-    #         not_all_binaries.append(alias)
-    #         print('oops')
-    # print(not_all_binaries)
+    coll_list_txt = p.retrieve_collections_list()
+    p.write_xml_to_file(coll_list_txt, '.', 'Collections_List')
+    coll_list_xml = etree.fromstring(bytes(bytearray(coll_list_txt, encoding='utf-8')))
+    not_all_binaries = []
+    for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')]:
+        try:
+            print(alias)
+            just_so_i_can_call_it(alias)
+        except:
+            not_all_binaries.append(alias)
+            print('oops')
+    print(not_all_binaries)
