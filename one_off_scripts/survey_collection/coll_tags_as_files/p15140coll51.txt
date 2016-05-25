@@ -1,0 +1,1 @@
+LocationofMilitaryService DateofService CONTENTdmnumber Notes Language DateofInterview Format Datecreated Datemodified Rank CollectionName Archivalfile Type CiteAs OCLCnumber BranchofService Subjectterms-Places Description Unit CollectionNumber Veteran Subjectterms Rights CONTENTdmfilename URL Interviewer Source

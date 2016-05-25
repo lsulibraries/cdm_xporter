@@ -1,0 +1,1 @@
+DateofRecording CONTENTdmnumber AudioSampleRate Language GeographicCoordinates AudioBitDepth FileType PlaceofRecording Datecreated ObjectFileName Datemodified Relation RecordingDescription Archivalfile Title SoundEngineer Contributors OCLCnumber Creator Subject LengthofRecording TimeofRecording Rights AudioFormat Identifier CONTENTdmfilename Interviewer Source

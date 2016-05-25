@@ -1,0 +1,1 @@
+Coverage CONTENTdmnumber Notes Language Cataloger ItemNumber Datecreated Datemodified CatalogDate Date DigitalFormat ItemURL Restrictions Title Contributors Publisher Type CiteAs OCLCnumber Subject Description Photographer CollectionURL Fullresolution CONTENTdmfilename ContactandOrderingInformation Source

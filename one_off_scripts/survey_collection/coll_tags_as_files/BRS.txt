@@ -1,0 +1,1 @@
+CONTENTdmnumber Notes Language ItemNumber Datecreated Datemodified Date ItemURL CollectionName Restrictions Title Type Repository CiteAs OCLCnumber Creator Description CollectionURL Fullresolution Subjects CONTENTdmfilename ContactandOrderingInformation

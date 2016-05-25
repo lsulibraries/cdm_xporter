@@ -1,0 +1,1 @@
+Series FullText CONTENTdmnumber UniqueIdentifier Language PhysicalDescription Format Datecreated Datemodified ItemURL PublicationDate Copyright Archivalfile Title Author Contributor Publisher Type Repository CiteAs OCLCnumber Subject CollectionURL Issue Part CONTENTdmfilename PlaceofPublication ContactandOrderingInformation

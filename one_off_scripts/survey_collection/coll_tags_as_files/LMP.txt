@@ -1,0 +1,1 @@
+Coverage CONTENTdmnumber Notes Language Cataloger GeneralType OriginalFormat Format Datecreated ObjectFileName Datemodified CatalogDate Date ItemURL Restrictions Title Contributors Publisher Type Repository CiteAs OCLCnumber Creator Description Geographicterm CollectionURL Fullresolution BiographicalNote Subjects CONTENTdmfilename ContactandOrderingInformation

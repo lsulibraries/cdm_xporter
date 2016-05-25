@@ -1,0 +1,1 @@
+Coverage CONTENTdmnumber Notes Language FileName Format Datecreated Datemodified Relation PublicationDate Copyright Archivalfile Title Author Publisher Type OCLCnumber Subject Description Audience CallNumber Volume Issue CONTENTdmfilename

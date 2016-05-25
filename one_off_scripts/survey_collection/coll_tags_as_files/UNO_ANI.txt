@@ -1,0 +1,1 @@
+Coverage CONTENTdmnumber CatalogedBy Notes Language Format Datecreated ObjectFileName Datemodified CatalogDate PlayingTime Date Relation Title Type OCLCnumber Subject Description Fullresolution Rights Identifier CONTENTdmfilename Interviewee Interviewer UserInformation Source

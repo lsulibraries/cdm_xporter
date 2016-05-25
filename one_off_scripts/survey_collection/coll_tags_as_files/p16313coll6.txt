@@ -1,0 +1,1 @@
+CONTENTdmnumber Language Cataloger BrowserNotice FileSize FiletoUpload Format CatalogedDate Datecreated ObjectFileName Datemodified Date Editor Archivalfile Title Publisher Type OCLCnumber Creator Subject Description NumberofPages ContactInformation Fulltext Rights Identifier CONTENTdmfilename Coverage-Spatial Source

@@ -1,0 +1,1 @@
+DigitalType CollectionSource CONTENTdmnumber Notes DigitalSize ItemNumber Datecreated Datemodified Date CollectionName Title OriginalType/Size Compound IndexTerms CiteAs OCLCnumber Photographer Fullresolution Rights CONTENTdmfilename ContactandOrderingInformation Source
