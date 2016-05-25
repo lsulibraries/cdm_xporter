@@ -6,6 +6,7 @@ from retrying import retry
 
 import pull_from_cdm_for_mik as p
 
+
 #   expects (('p16313coll7', (('311', 'jpg'), ('324', 'png'), )
 def get_everything(alias, pointerfiletype_tuple):
     repo_dir = '{}/{}'.format(os.getcwd(), 'AdminPanel_Cdm_files')
@@ -42,8 +43,10 @@ def get_everything(alias, pointerfiletype_tuple):
 
         elif (filetype != 'cpd') and ('{}.xml'.format(pointer) not in os.walk(alias_dir)):
 
+            ''' this part doesn't work yet.  It's supposed to look for pointers, check parent level 
+            & save or skip'''
             if os.path.isfile('{}/{}_parent.xml'.format(alias_dir, pointer)):
-                pointer_parent_info_xml = etree.parse('{}/{}.xml'.format(alias_dir, pointer))
+                pointer_parent_info_xml = etree.parse('{}/{}_parent.xml'.format(alias_dir, pointer))
                 print(pointer_parent_info_xml)
 
             if not os.path.isfile('{}/{}_parent.xml'.format(alias_dir, pointer)):
@@ -121,4 +124,5 @@ def get_everything(alias, pointerfiletype_tuple):
                         print('wrote', alias, cpd_pointer, simple_pointer, simple_filetype)
 
 if __name__ == '__main__':
-    get_everything('p16313coll28', ('3632', 'jpg'))
+    get_everything('p16313coll28', (('3632', 'jpg'),))
+
