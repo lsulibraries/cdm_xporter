@@ -38,18 +38,23 @@ def report_pulled_objs(alias):
         for file in os.listdir(os.path.join(cached_alias_dir, 'Cpd')):
 
             if os.path.isfile(os.path.join(cached_alias_dir, 'Cpd', file)):
+                if 'parent' in file:
+                    continue
                 if os.path.splitext(file)[-1].lower().replace('.', '') == 'json':
                     full_set_downloaded_pointers['cpd'].add(os.path.splitext(file)[0])
 
             if os.path.isdir(os.path.join(cached_alias_dir, 'Cpd', file)):
                 for subfile in os.listdir(os.path.join(cached_alias_dir, 'Cpd', file)):
                     if os.path.splitext(subfile)[-1].lower().replace('.', '') == 'json':
+                        if 'parent' in subfile:
+                            continue
                         full_set_downloaded_pointers['simple'].add(os.path.splitext(subfile)[0])
     return full_set_downloaded_pointers
 
-my_alias = 'AAW'
+my_alias = 'FJC'
+filepath = '/home/james/Desktop/txtExportfromCDM/{}.csv'.format(my_alias)
 
-expected_sets = report_expected_objs('/home/james/Desktop/txtExportfromCDM/{}.csv'.format(my_alias))
+expected_sets = report_expected_objs(filepath)
 print('AdminPanel Smpl Objs:', len(expected_sets['simple']))
 print('AdminPanel Cmpd Objs:', len(expected_sets['cpd']))
 
