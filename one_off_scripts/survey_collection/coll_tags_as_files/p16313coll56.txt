@@ -1,0 +1,1 @@
+Citeas CONTENTdmnumber Notes PhysicalDescription ItemNumber CallNumber/ShelvingLocation Datecreated Datemodified Date DigitalFormat ItemURL Restrictions Archivalfile Title Type Repository OCLCnumber DigitalReproductionInformation Photographer CollectionURL RepositoryCollectionGuide Subjects CONTENTdmfilename ContactandOrderingInformation DigitalCollection

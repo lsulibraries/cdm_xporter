@@ -1,0 +1,1 @@
+DigitizedBy FullText CONTENTdmnumber CatalogedBy Notes Language Format CatalogedDate Datecreated Datemodified Date Relation Archivalfile Title Publisher Type OCLCnumber Creator Subject Description Coverage-Temporal ContactInformation FileID DigitizedDate Rights Identifier CONTENTdmfilename Coverage-Spatial Source

@@ -1,0 +1,1 @@
+CONTENTdmnumber Notes PhysicalDescription ItemNumber FileName Datecreated Datemodified Date ItemURL Restrictions Archivalfile Title Type Repository CiteAs OCLCnumber Photographer CollectionURL RepositoryCollectionGuide Subjects CONTENTdmfilename ContactandOrderingInformation DigitalCollection ShelvingLocation

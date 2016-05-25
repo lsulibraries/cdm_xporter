@@ -1,0 +1,1 @@
+CONTENTdmnumber Language Filename Caption Format Datecreated Datemodified Date Relation Region Archivalfile Title Contributors City Publisher Type Vol# Repository CiteAs OCLCnumber Subject Photographer Audience Negative# RepositoryCollectionGuide Rights CONTENTdmfilename ContactandOrderingInformation DigitalCollection

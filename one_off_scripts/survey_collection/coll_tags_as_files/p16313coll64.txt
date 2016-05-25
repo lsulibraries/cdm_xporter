@@ -1,0 +1,1 @@
+Location CONTENTdmnumber AudioBitDepth Language Length_of_Recording AudioFormat FileType Object_file_name Title/NameofRecording Datecreated Datemodified Date Relation RecordingDescription Email Archivalfile Contributors Time OCLCnumber Creator Subject ContactInformation Rights Identifier Geographic_Coordinates CONTENTdmfilename AudioSampleRate Source

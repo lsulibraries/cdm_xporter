@@ -1,0 +1,1 @@
+Coverage ViewerInformation CONTENTdmnumber Notes Language Cataloger Format Datecreated Datemodified CatalogDate Date ContactInfo ItemURL Restrictions Title Contributors Publisher OCLCnumber Subject Description CollectionURL Artist Fullresolution ObjectFileName CONTENTdmfilename Source

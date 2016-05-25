@@ -1,0 +1,1 @@
+Coverage ViewerInformation CONTENTdmnumber Notes Language Cataloger AccessionNumber Format Datecreated Datemodified CatalogDate Date Relation Title Transcript/Translation Contributors Publisher Type OCLCnumber Creator Subject Description ContactInformation Object_File_Name Fullresolution Rights Identifier CONTENTdmfilename Source

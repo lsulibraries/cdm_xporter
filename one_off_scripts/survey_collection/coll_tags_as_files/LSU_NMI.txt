@@ -1,0 +1,1 @@
+CollectionSource CONTENTdmnumber Notes IndexNumber GeneralType Datecreated ToOrder Datemodified Date ContactInfo DigitalFormat ItemURL OriginalFormat/Size CollectionName Restrictions Title Compound Type Repository CiteAs OCLCnumber Photographer CollectionURL Transcript Fullresolution Subjects CONTENTdmfilename

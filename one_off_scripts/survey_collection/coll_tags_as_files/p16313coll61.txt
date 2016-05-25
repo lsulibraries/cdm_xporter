@@ -1,0 +1,1 @@
+Catalogedby CONTENTdmnumber Language Format Datecreated ObjectFileName Datemodified Date Relation Digitizeddate Archivalfile Title Type OCLCnumber Subject Coverage-Temporal RGNumber Catalogeddate ContactInformation Digitizedby StartDate FileID Rights Identifier CONTENTdmfilename UNONumber Coverage-Spatial EndDate Source

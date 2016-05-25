@@ -1,0 +1,1 @@
+CallNumber/ShelvingLocation Citeas Series CONTENTdmnumber Language PhysicalDescription Datecreated Datemodified Date DigitalFormat ItemURL Restrictions Archivalfile Title Summary Type Repository OCLCnumber DigitalReproductionInformation Creator Description CollectionURL RepositoryCollectionGuide Subjects CONTENTdmfilename ContactandOrderingInformation

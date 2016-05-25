@@ -1,0 +1,1 @@
+Coverage CONTENTdmnumber Notes Language Cataloger Format Datecreated Datemodified CatalogDate Date Relation Title Contributors Publisher Type OCLCnumber Creator Subject Description ContactInformation Fullresolution Rights Identifier ObjectFileName CONTENTdmfilename Source

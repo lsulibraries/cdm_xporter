@@ -1,0 +1,1 @@
+CallNumber/ShelvingLocation CONTENTdmnumber Language PhysicalDescription Datecreated Datemodified Date Restrictions Archivalfile Title Type Repository OCLCnumber Creator CONTENTdmfilename ContactandOrderingInformation Description/Notes

@@ -1,0 +1,1 @@
+Coverage CONTENTdmnumber Language Cataloger FiletoUpload Format CatalogedDate Datecreated ObjectFileName Datemodified Date FileSize(Archival) Archivalfile Title Contributors Publisher Type OCLCnumber Creator Subject Description NumberofPages ContactInformation Volume Fulltext Rights Identifier CONTENTdmfilename Source

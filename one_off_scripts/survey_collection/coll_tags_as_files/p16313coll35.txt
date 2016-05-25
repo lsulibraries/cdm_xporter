@@ -1,0 +1,1 @@
+SubjectTerms CONTENTdmnumber Notes Language PhysicalDescription FILENAME Format Datecreated Datemodified Date Relation GeographicTerms Archivalfile Title Author Contributors Type OCLCnumber CallNo./Stackslocation Audience Category PublicationInformation Rights CONTENTdmfilename
