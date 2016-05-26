@@ -160,6 +160,7 @@ def report_expected_objs(filepath):
                     full_set_pointers['cpd'].add(alias)
                 else:
                     full_set_pointers['simple'].add(alias)
+
     return full_set_pointers
 
 def report_pulled_objs(alias):
@@ -199,12 +200,13 @@ if __name__ == '__main__':
             print(alias)
 
             alias_csv = '{}.csv'.format(alias)
-            csv_filepath = os.path.join(os.path.pardir , 'txtExportfromCDM', alias_csv)
+            csv_filepath = os.path.join(os.path.pardir, 'txtExportfromCDM', alias_csv)
             expected_sets = report_expected_objs(csv_filepath)
             pulled_sets = report_pulled_objs(alias)
 
             sought_pointers = tuple(expected_sets['cpd'].difference(pulled_sets['cpd']).union(
-                                               expected_sets['simple'].difference(pulled_sets['simple'])))
+                                    expected_sets['simple'].difference(pulled_sets['simple'])))
+            print(sought_pointers)
 
             alias_dir = os.path.join('AdminPanel_Cdm_files', alias)
             os.makedirs(alias_dir, exist_ok=True)
