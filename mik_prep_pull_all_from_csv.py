@@ -210,7 +210,9 @@ if __name__ == '__main__':
 
             alias_dir = os.path.join('AdminPanel_Cdm_files', alias)
             os.makedirs(alias_dir, exist_ok=True)
+            print((alias, alias_dir, sought_pointers))
             # get_everything(alias, alias_dir, sought_pointers)
+
         except:
             not_all_binaries.append(alias)
             print('oops')

@@ -27,7 +27,7 @@ def check_csvs_for_corruption(filename, encoding='utf-8'):
         print(pointers_num)
 
 if __name__ == '__main__':
-    csv_dir = '/media/james/U/txtExportfromCDM/problems/questioning'
+    csv_dir = os.path.join(os.pardir, os.pardir, os.pardir, 'txtExportfromCDM')
     # csv_dir = '/home/james/Desktop/trash'
     for file in os.listdir(csv_dir):
         print(file)
