@@ -79,6 +79,7 @@ def just_so_i_can_call_it(alias):
                                ) for single_record in elems_in_coll_tree.findall('.//record')]
 
         for pointer, filetype in pointers_filetypes:
+            print(pointer)
             if not pointer:
                 continue  # skips file if a derivative -- only gets original versions
 
@@ -149,8 +150,7 @@ def just_so_i_can_call_it(alias):
                 os.makedirs('{}/Cpd/{}'.format(alias_dir, cpd_pointer), exist_ok=True)
                 for elem in subpointer_list:
                     simple_pointer = elem.text
-                    # if alias == 'LSU_SCE' and simple_pointer in ('269', '308', '258', '261'):
-                    #     continue    # skipping known bad objects
+                    print(simple_pointer)
 
                     if not os.path.isfile('{}/Cpd/{}/{}.xml'.format(alias_dir, cpd_pointer, simple_pointer)):
                         item_xml = p.retrieve_item_metadata(alias, simple_pointer, 'xml')
@@ -182,6 +182,19 @@ def just_so_i_can_call_it(alias):
                         p.write_binary_to_file(binary, alias, simple_filepath, simple_filetype)
                         print('wrote', alias, cpd_pointer, simple_pointer, simple_filetype)
 
+            # when pdf is at root of compound object
+            if '.xml' in file and ('_cpd' not in file) and ('_parent' not in file):
+                root_cpd_etree = etree.parse(os.path.join(alias_dir, 'Cpd', file))
+                root_cpd_filename_etree = root_cpd_etree.findall('.//object')
+                if os.path.splitext(root_cpd_filename_etree[0].text)[-1] == '.pdf':
+                    pointer = root_cpd_etree.findall('.//dmrecord')[0].text
+                    if not os.path.isfile('{}/Cpd/{}.pdf'.format(alias_dir, pointer)):
+                        binary = p.retrieve_binaries(alias, pointer, 'pdf')
+                        root_cpd_filepath = 'Cpd/{}'.format(pointer)
+                        p.write_binary_to_file(binary, alias, root_cpd_filepath, 'pdf')
+                        print(root_cpd_filepath, 'binary written')
+
+
 if __name__ == '__main__':
     """ Call just one collection, retrieve all metadata """
     # just_so_i_can_call_it('AAW')
@@ -193,6 +206,7 @@ if __name__ == '__main__':
     coll_list_xml = etree.fromstring(bytes(bytearray(coll_list_txt, encoding='utf-8')))
     not_all_binaries = []
     for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')]:
+    # for alias in ('p120701coll27', ):
         try:
             print(alias)
             just_so_i_can_call_it(alias)
