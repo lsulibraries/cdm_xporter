@@ -14,7 +14,7 @@ def read_file(filename):
 
 # @retry(wait_random_min=1000, wait_random_max=20000)
 def just_so_i_can_call_it(alias):
-    repo_dir = '{}/{}'.format(os.getcwd(), 'Cached_Cdm_files')
+    repo_dir = os.path.join('..', 'Cached_Cdm_files')
     alias_dir = '{}/{}'.format(repo_dir, alias)
 
     os.makedirs(alias_dir, exist_ok=True)
@@ -205,8 +205,8 @@ if __name__ == '__main__':
     p.write_xml_to_file(coll_list_txt, '.', 'Collections_List')
     coll_list_xml = etree.fromstring(bytes(bytearray(coll_list_txt, encoding='utf-8')))
     not_all_binaries = []
-    for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')]:
-    # for alias in ('p120701coll27', ):
+    # for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')]:
+    for alias in ('NCC', 'LSUHSCS_GWM', 'p16313coll21', 'JAZ', ):
         try:
             print(alias)
             just_so_i_can_call_it(alias)
