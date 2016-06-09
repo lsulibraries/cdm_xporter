@@ -186,13 +186,15 @@ def just_so_i_can_call_it(alias):
             if '.xml' in file and ('_cpd' not in file) and ('_parent' not in file):
                 root_cpd_etree = etree.parse(os.path.join(alias_dir, 'Cpd', file))
                 root_cpd_filename_etree = root_cpd_etree.findall('.//object')
-                if os.path.splitext(root_cpd_filename_etree[0].text)[-1] == '.pdf':
-                    pointer = root_cpd_etree.findall('.//dmrecord')[0].text
-                    if not os.path.isfile('{}/Cpd/{}.pdf'.format(alias_dir, pointer)):
-                        binary = p.retrieve_binaries(alias, pointer, 'pdf')
-                        root_cpd_filepath = 'Cpd/{}'.format(pointer)
-                        p.write_binary_to_file(binary, alias, root_cpd_filepath, 'pdf')
-                        print(root_cpd_filepath, 'binary written')
+                print(root_cpd_filename_etree[0].text)
+                if root_cpd_filename_etree[0].text and os.path.splitext(root_cpd_filename_etree[0].text)[-1]:
+                    if os.path.splitext(root_cpd_filename_etree[0].text)[-1] == '.pdf':
+                        pointer = root_cpd_etree.findall('.//dmrecord')[0].text
+                        if not os.path.isfile('{}/Cpd/{}.pdf'.format(alias_dir, pointer)):
+                            binary = p.retrieve_binaries(alias, pointer, 'pdf')
+                            root_cpd_filepath = 'Cpd/{}'.format(pointer)
+                            p.write_binary_to_file(binary, alias, root_cpd_filepath, 'pdf')
+                            print(root_cpd_filepath, 'binary written')
 
 
 if __name__ == '__main__':
@@ -206,11 +208,11 @@ if __name__ == '__main__':
     coll_list_xml = etree.fromstring(bytes(bytearray(coll_list_txt, encoding='utf-8')))
     not_all_binaries = []
     # for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')]:
-    for alias in ('NCC', 'LSUHSCS_GWM', 'p16313coll21', 'JAZ', ):
-        try:
-            print(alias)
-            just_so_i_can_call_it(alias)
-        except:
-            not_all_binaries.append(alias)
-            print('oops')
+    for alias in ('p15140coll27', ):
+        # try:
+        print(alias)
+        just_so_i_can_call_it(alias)
+        # except:
+        #     not_all_binaries.append(alias)
+        #     print('oops')
     print(not_all_binaries)
