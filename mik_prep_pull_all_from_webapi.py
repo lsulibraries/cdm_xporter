@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 
 import os
+import re
 import lxml.etree as etree
 from retrying import retry
 
@@ -140,61 +141,73 @@ def just_so_i_can_call_it(alias):
 
     if 'Cpd' in os.listdir(alias_dir):
         for file in os.listdir(os.path.join(alias_dir, 'Cpd')):
-            if '_cpd.xml' in file:
-                cpd_pointer = file.split('_')[0]
-                small_etree = etree.parse(os.path.join(alias_dir, 'Cpd', file))
-                subpointer_list = small_etree.findall('.//pageptr')
-                file_element = subpointer_list[0].getparent().xpath('./pagefile')
-                if file_element and 'pdfpage' in file_element[0].text:
-                    continue  # we don't want pdfpage objects
-                os.makedirs('{}/Cpd/{}'.format(alias_dir, cpd_pointer), exist_ok=True)
-                for elem in subpointer_list:
-                    simple_pointer = elem.text
-                    print(simple_pointer)
+            if os.path.isfile(os.path.join(alias_dir, 'Cpd', file)):
+                print('passed')
+                if '_cpd.xml' in file:
+                    print('passed')
+                    cpd_pointer = file.split('_')[0]
+                    print(cpd_pointer, 'cpd pointer')
+                    small_etree = etree.parse(os.path.join(alias_dir, 'Cpd', file))
+                    subpointer_list = small_etree.findall('.//pageptr')
+                    print(subpointer_list)
+                    file_element = subpointer_list[0].getparent().xpath('./pagefile')
+                    if file_element and 'pdfpage' in file_element[0].text:
+                        continue  # we don't want pdfpage objects
+                    os.makedirs('{}/Cpd/{}'.format(alias_dir, cpd_pointer), exist_ok=True)
+                    for elem in subpointer_list:
+                        simple_pointer = elem.text
+                        print(simple_pointer)
 
-                    if not os.path.isfile('{}/Cpd/{}/{}.xml'.format(alias_dir, cpd_pointer, simple_pointer)):
-                        item_xml = p.retrieve_item_metadata(alias, simple_pointer, 'xml')
-                        p.write_xml_to_file(item_xml, alias, 'Cpd/{}/{}'.format(cpd_pointer, simple_pointer))
+                        if not os.path.isfile('{}/Cpd/{}/{}.xml'.format(alias_dir, cpd_pointer, simple_pointer)):
+                            item_xml = p.retrieve_item_metadata(alias, simple_pointer, 'xml')
+                            p.write_xml_to_file(item_xml, alias, 'Cpd/{}/{}'.format(cpd_pointer, simple_pointer))
 
-                    else:
-                        item_xml = read_file(
-                            '{}/Cpd/{}/{}.xml'.format(alias_dir, cpd_pointer, simple_pointer))
+                        else:
+                            item_xml = read_file(
+                                '{}/Cpd/{}/{}.xml'.format(alias_dir, cpd_pointer, simple_pointer))
 
-                    if not os.path.isfile('{}/Cpd/{}/{}.json'.format(alias_dir, cpd_pointer, simple_pointer)):
-                        item_json = p.retrieve_item_metadata(alias, simple_pointer, 'json')
-                        p.write_json_to_file(item_json, alias, 'Cpd/{}/{}'.format(cpd_pointer, simple_pointer))
+                        if not os.path.isfile('{}/Cpd/{}/{}.json'.format(alias_dir, cpd_pointer, simple_pointer)):
+                            item_json = p.retrieve_item_metadata(alias, simple_pointer, 'json')
+                            p.write_json_to_file(item_json, alias, 'Cpd/{}/{}'.format(cpd_pointer, simple_pointer))
 
-                    if not os.path.isfile('{}/Cpd/{}/{}_parent.xml'.format(alias_dir, cpd_pointer, simple_pointer)):
-                        parent_xml = p.retrieve_parent_info(alias, simple_pointer, 'xml')
-                        p.write_xml_to_file(parent_xml, alias, 'Cpd/{}/{}_parent'.format(cpd_pointer, simple_pointer))
+                        if not os.path.isfile('{}/Cpd/{}/{}_parent.xml'.format(alias_dir, cpd_pointer, simple_pointer)):
+                            parent_xml = p.retrieve_parent_info(alias, simple_pointer, 'xml')
+                            p.write_xml_to_file(parent_xml, alias, 'Cpd/{}/{}_parent'.format(cpd_pointer, simple_pointer))
 
-                    if not os.path.isfile('{}/Cpd/{}/{}_parent.json'.format(alias_dir, cpd_pointer, simple_pointer)):
-                        parent_json = p.retrieve_parent_info(alias, simple_pointer, 'json')
-                        p.write_json_to_file(parent_json, alias, 'Cpd/{}/{}_parent'.format(cpd_pointer, simple_pointer))
+                        if not os.path.isfile('{}/Cpd/{}/{}_parent.json'.format(alias_dir, cpd_pointer, simple_pointer)):
+                            parent_json = p.retrieve_parent_info(alias, simple_pointer, 'json')
+                            p.write_json_to_file(parent_json, alias, 'Cpd/{}/{}_parent'.format(cpd_pointer, simple_pointer))
 
 
-                    simple_etree = etree.fromstring(bytes(bytearray(item_xml, encoding='utf-8')))
-                    orig_filename = simple_etree.find('find').text
-                    simple_filetype = os.path.splitext(orig_filename)[-1].replace('.', '')
-                    if not os.path.isfile('{}/Cpd/{}/{}.{}'.format(alias_dir, cpd_pointer, simple_pointer, simple_filetype)):
-                        binary = p.retrieve_binaries(alias, simple_pointer, "arbitary")
-                        simple_filepath = 'Cpd/{}/{}'.format(cpd_pointer, simple_pointer)
-                        p.write_binary_to_file(binary, alias, simple_filepath, simple_filetype)
-                        print('wrote', alias, cpd_pointer, simple_pointer, simple_filetype)
+                        simple_etree = etree.fromstring(bytes(bytearray(item_xml, encoding='utf-8')))
+                        orig_filename = simple_etree.find('find').text
+                        simple_filetype = os.path.splitext(orig_filename)[-1].replace('.', '')
+                        if not os.path.isfile('{}/Cpd/{}/{}.{}'.format(alias_dir, cpd_pointer, simple_pointer, simple_filetype)):
+                            binary = p.retrieve_binaries(alias, simple_pointer, "arbitary")
+                            simple_filepath = 'Cpd/{}/{}'.format(cpd_pointer, simple_pointer)
+                            p.write_binary_to_file(binary, alias, simple_filepath, simple_filetype)
+                            print('wrote', alias, cpd_pointer, simple_pointer, simple_filetype)
 
-            # when pdf is at root of compound object
-            if '.xml' in file and ('_cpd' not in file) and ('_parent' not in file):
-                root_cpd_etree = etree.parse(os.path.join(alias_dir, 'Cpd', file))
-                root_cpd_filename_etree = root_cpd_etree.findall('.//object')
-                print(root_cpd_filename_etree[0].text)
-                if root_cpd_filename_etree[0].text and os.path.splitext(root_cpd_filename_etree[0].text)[-1]:
-                    if os.path.splitext(root_cpd_filename_etree[0].text)[-1] == '.pdf':
-                        pointer = root_cpd_etree.findall('.//dmrecord')[0].text
-                        if not os.path.isfile('{}/Cpd/{}.pdf'.format(alias_dir, pointer)):
-                            binary = p.retrieve_binaries(alias, pointer, 'pdf')
-                            root_cpd_filepath = 'Cpd/{}'.format(pointer)
-                            p.write_binary_to_file(binary, alias, root_cpd_filepath, 'pdf')
-                            print(root_cpd_filepath, 'binary written')
+                # when pdf is at root of compound object
+                match = re.search(r'[0-9]+.xml', file)
+                if match:
+                    print('match')
+                    root_cpd_etree = etree.parse(os.path.join(alias_dir, 'Cpd', file))
+                    root_cpd_filename_etree = root_cpd_etree.findall('.//object')
+                    try:
+                        print('trying')
+                        if os.path.splitext(root_cpd_filename_etree[0].text)[-1] == '.pdf':
+                            print('found pdf in //object')
+                            pointer = root_cpd_etree.findall('.//dmrecord')[0].text
+                            if not os.path.isfile('{}/Cpd/{}.pdf'.format(alias_dir, pointer)):
+                                print('no pdf of that name written yet')
+                                binary = p.retrieve_binaries(alias, pointer, 'pdf')
+                                root_cpd_filepath = 'Cpd/{}'.format(pointer)
+                                p.write_binary_to_file(binary, alias, root_cpd_filepath, 'pdf')
+                                print(root_cpd_filepath, 'binary written')
+                    except:
+                        print('excepted')
+                        pass
 
 
 if __name__ == '__main__':
@@ -207,8 +220,8 @@ if __name__ == '__main__':
     p.write_xml_to_file(coll_list_txt, '.', 'Collections_List')
     coll_list_xml = etree.fromstring(bytes(bytearray(coll_list_txt, encoding='utf-8')))
     not_all_binaries = []
-    # for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')]:
-    for alias in ('p15140coll27', ):
+    for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')]:
+    # for alias in ('LSU_ACT', ):
         # try:
         print(alias)
         just_so_i_can_call_it(alias)
