@@ -142,9 +142,7 @@ def just_so_i_can_call_it(alias):
     if 'Cpd' in os.listdir(alias_dir):
         for file in os.listdir(os.path.join(alias_dir, 'Cpd')):
             if os.path.isfile(os.path.join(alias_dir, 'Cpd', file)):
-                print('passed')
                 if '_cpd.xml' in file:
-                    print('passed')
                     cpd_pointer = file.split('_')[0]
                     print(cpd_pointer, 'cpd pointer')
                     small_etree = etree.parse(os.path.join(alias_dir, 'Cpd', file))
@@ -206,7 +204,7 @@ def just_so_i_can_call_it(alias):
                                 p.write_binary_to_file(binary, alias, root_cpd_filepath, 'pdf')
                                 print(root_cpd_filepath, 'binary written')
                     except:
-                        print('excepted')
+                        print('excepted -- doesnt match pdf in root of cpd')
                         pass
 
 
@@ -216,14 +214,37 @@ if __name__ == '__main__':
 
     """ Call all collections, retrieve all metadata """
 
+    we_dont_migrate = {'p16313coll70', 'p120701coll11', 'LSUHSCS_JCM', 'UNO_SCC', 'p15140coll36', 'p15140coll57',
+                       'p15140coll13', 'p15140coll11', 'p16313coll32', 'p16313coll49', 'p16313coll50',
+                       'p16313coll90', 'p120701coll14', 'p120701coll20', 'p120701coll21', 'DUBLIN2',
+                       'HHN', 'p15140coll55', 'NOD', 'WIS', 'p16313coll55', 'LOU_RANDOM', 'p120701coll11',
+                       'p16313coll67', 'AMA', 'HTU', 'p15140coll3', 'p15140coll15', 'p15140coll25',
+                       'p15140coll29', 'p15140coll34', 'p15140coll37', 'p15140coll38', 'p15140coll39',
+                       'p15140coll40', 'p15140coll45', 'p15140coll47', 'p15140coll58', 'p16313coll4',
+                       'p16313coll6', 'p16313coll11', 'p16313coll12', 'p16313coll13', 'p16313coll14',
+                       'p16313coll15', 'p16313coll16', 'p16313coll29', 'p16313coll27', 'p16313coll30',
+                       'p16313coll33', 'p16313coll37', 'p16313coll38', 'p16313coll39', 'p16313coll41',
+                       'p16313coll42', 'p16313coll46', 'p16313coll47', 'p16313coll53', 'p16313coll59',
+                       'p16313coll63', 'p16313coll64', 'p16313coll66', 'p16313coll68', 'p16313coll71',
+                       'p16313coll73', 'p16313coll75', 'p16313coll78', 'p16313coll84',
+                       'p15140coll32', 'p16313coll82', 'p120701coll6', }
+
     coll_list_txt = p.retrieve_collections_list()
     p.write_xml_to_file(coll_list_txt, '.', 'Collections_List')
     coll_list_xml = etree.fromstring(bytes(bytearray(coll_list_txt, encoding='utf-8')))
     not_all_binaries = []
-    for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')]:
-    # for alias in ('LSU_ACT', ):
+    # for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')]:
+    #     if alias in we_dont_migrate:
+    #         continue
+    for alias in (
+                  'p267101coll4',
+                  'LSU_DYP', 'p120701coll12', 'p120701coll15', 'p15140coll7', 'p15140coll10', 'p15140coll23',
+                  'p15140coll49', 'p15140coll4', 'p15140coll50', 'p15140coll52', 'p16313coll17', 'p16313coll80',
+                  'p16313coll91', 'p16313coll93', 'p16313coll98', 'p16313coll5', 'p16313coll88', 'LOYOLA_ETD',
+                  'p267101coll4', 'p16313coll17', 'HNF', 'p15140coll12', 'p16313coll52', 'p15140coll21',
+                  'LHP', 'LMNP01', 'LPH', 'LSUBK01', 'LSUHSC_NCC', 'LSU_LNP', 'MSW', ):
         # try:
-        print(alias)
+        print('{} '.format(alias) * 10)
         just_so_i_can_call_it(alias)
         # except:
         #     not_all_binaries.append(alias)
