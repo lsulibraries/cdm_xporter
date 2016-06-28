@@ -142,9 +142,7 @@ def just_so_i_can_call_it(alias):
     if 'Cpd' in os.listdir(alias_dir):
         for file in os.listdir(os.path.join(alias_dir, 'Cpd')):
             if os.path.isfile(os.path.join(alias_dir, 'Cpd', file)):
-                print('passed')
                 if '_cpd.xml' in file:
-                    print('passed')
                     cpd_pointer = file.split('_')[0]
                     print(cpd_pointer, 'cpd pointer')
                     small_etree = etree.parse(os.path.join(alias_dir, 'Cpd', file))
@@ -220,8 +218,8 @@ if __name__ == '__main__':
     p.write_xml_to_file(coll_list_txt, '.', 'Collections_List')
     coll_list_xml = etree.fromstring(bytes(bytearray(coll_list_txt, encoding='utf-8')))
     not_all_binaries = []
-    for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')]:
-    # for alias in ('LSU_ACT', ):
+    # for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')]:
+    for alias in ('p16313coll73', ):
         # try:
         print(alias)
         just_so_i_can_call_it(alias)
