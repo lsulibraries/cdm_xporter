@@ -40,54 +40,57 @@ all_collections = ['p120701coll15', 'LSU_ACT', 'p15140coll30', 'AWW', 'AAW', 'AB
 
 for alias in all_collections:
     print(alias)
-    os.makedirs('Landings_scraped/{}'.format(alias), exist_ok=True)
-    if os.path.isfile('Landings_scraped/{}/{}.html'.format(alias, alias)):
-        with open('Landings_scraped/{}/{}.html'.format(alias, alias), 'r') as f:
+    os.makedirs('Abouts_scraped/{}'.format(alias), exist_ok=True)
+    if os.path.isfile('Abouts_scraped/{}/{}.html'.format(alias, alias)):
+        with open('Abouts_scraped/{}/{}.html'.format(alias, alias), 'r') as f:
             soup = BeautifulSoup(f, 'lxml')
     else:
-        url = 'http://cdm16313.contentdm.oclc.org/cdm/landingpage/collection/{}'.format(alias)
+        url = 'http://cdm16313.contentdm.oclc.org/cdm/about/collection/{}'.format(alias)
         page = urllib.request.urlopen(url).read()
         soup = BeautifulSoup(page, 'lxml')
-        with open('Landings_scraped/{}/{}.html'.format(alias, alias), 'w') as f:
+        if "The LOUISiana Digital Library (LDL) is an online library of Louisiana institutions that provides over 144,000 digital materials." in soup.prettify():
+            continue
+        with open('Abouts_scraped/{}/{}.html'.format(alias, alias), 'w') as f:
             f.write(soup.prettify())
 
-    if not os.path.isfile('Landings_scraped/{}/{}_condensedtext.txt'.format(alias, alias)):
-        about_this = [i for i in soup.find_all("div") if "id" in i.attrs and 'description_container' in i["id"]]
-        header_text = [i.get_text() for i in about_this[0].find_all("h2")]
+    if not os.path.isfile('Abouts_scraped/{}/{}_condensedtext.txt'.format(alias, alias)):
+        about_this = [i for i in soup.find_all("div") if "id" in i.attrs and 'top_content' in i["id"]]
+        header_text = [i.get_text() for i in about_this[0].find_all("p")]
         about_header = " ".join(i.strip() for i in header_text if i)
         paragraph_texts = [i.get_text().replace('\n', ' ').strip() for i in about_this[0].find_all("p") if i]
         paragraph = ' '.join(i.strip() for i in paragraph_texts)
         paragraph = ' '.join(paragraph.split())
-        with open('Landings_scraped/{}/{}_condensedtext.txt'.format(alias, alias), 'w') as f:
+        print(paragraph)
+        with open('Abouts_scraped/{}/{}_condensedtext.txt'.format(alias, alias), 'w') as f:
             f.write(paragraph)
 
-    if not os.path.isfile('Landings_scraped/{}/{}_strippedtext.txt'.format(alias, alias)):
-        about_this = [i for i in soup.find_all("div") if "id" in i.attrs and 'description_container' in i["id"]]
-        header_text = [i.string for i in about_this[0].find_all("h2")]
+    if not os.path.isfile('Abouts_scraped/{}/{}_strippedtext.txt'.format(alias, alias)):
+        about_this = [i for i in soup.find_all("div") if "id" in i.attrs and 'top_content' in i["id"]]
+        header_text = [i.string for i in about_this[0].find_all("p")]
         if header_text:
             about_header = " ".join(i.strip() for i in header_text if i)
             paragraph_texts = " ".join(str(i).strip() for i in about_this[0].find_all("p"))
-
-            with open('Landings_scraped/{}/{}_strippedtext.txt'.format(alias, alias), 'w') as f:
+            print(paragraph_texts.strip())
+            with open('Abouts_scraped/{}/{}_strippedtext.txt'.format(alias, alias), 'w') as f:
                 f.write(paragraph_texts.strip())
 
     for imglink in (i for i in soup.find_all('img')):
-        os.makedirs('Landings_scraped/{}/images/staticcontent'.format(alias), exist_ok=True)
+        os.makedirs('Abouts_scraped/{}/images/staticcontent'.format(alias), exist_ok=True)
         if 'getstaticcontent' in imglink['src']:
             continue
             namelist = imglink['src'].split('/')
             name = namelist[-3]
-            filename = 'Landings_scraped/{}/images/staticcontent/{}'.format(alias, name)
+            filename = 'Abouts_scraped/{}/images/staticcontent/{}'.format(alias, name)
             imgurl = 'https://cdm16313.contentdm.oclc.org/{}'.format(imglink['src'])
         elif 'getthumbnail' in imglink['src']:
             continue
-            os.makedirs('Landings_scraped/{}/images/sidebarthumbs/'.format(alias), exist_ok=True)
+            os.makedirs('Abouts_scraped/{}/images/sidebarthumbs/'.format(alias), exist_ok=True)
             namelist = imglink['src'].split('/')
             name = namelist[-1]
-            filename = 'Landings_scraped/{}/images/sidebarthumbs/{}'.format(alias, name)
+            filename = 'Abouts_scraped/{}/images/sidebarthumbs/{}'.format(alias, name)
             imgurl = 'https://cdm16313.contentdm.oclc.org/{}'.format(imglink['src'])
         else:
-            os.makedirs('Landings_scraped/{}/images/good/'.format(alias), exist_ok=True)
+            os.makedirs('Abouts_scraped/{}/images/good/'.format(alias), exist_ok=True)
             namelist = imglink['src'].split('/')
             name = namelist[-1]
             if '.png' in name or '.jpg' in name or '.gif' in name:
@@ -95,7 +98,7 @@ for alias in all_collections:
             else:
                 filetype = '.jpg'
             name = "".join(i for i in name if i.isalnum() or i == ".")
-            filename = 'Landings_scraped/{}/images/good/{}{}'.format(alias, name, filetype)
+            filename = 'Abouts_scraped/{}/images/good/{}{}'.format(alias, name, filetype)
             if '.org' in imglink['src'] or '.com' in imglink['src'] or '.edu' in imglink['src']:
                 imgurl = imglink['src']
             else:
