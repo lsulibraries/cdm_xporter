@@ -3,7 +3,6 @@
 import os
 import re
 import lxml.etree as etree
-from retrying import retry
 
 import pull_from_cdm_for_mik as p
 
@@ -13,7 +12,6 @@ def read_file(filename):
         return f.read()
 
 
-# @retry(wait_random_min=1000, wait_random_max=20000)
 def just_so_i_can_call_it(alias):
     repo_dir = os.path.join('..', 'Cached_Cdm_files')
     alias_dir = '{}/{}'.format(repo_dir, alias)
@@ -49,7 +47,7 @@ def just_so_i_can_call_it(alias):
         collection_fields_xml = read_file(
             '{}/Collection_Fields.xml'.format(alias_dir))
 
-    total_recs_etree = etree.fromstring(bytes(bytearray(p.retrieve_collection_total_recs(alias), encoding='utf-8')))
+    total_recs_etree = etree.parse(os.path.join(alias_dir, 'Collection_TotalRecs.xml'))
     num_of_pointers = int(total_recs_etree.xpath('.//total')[0].text)
     groups_of_100 = (num_of_pointers // 100) + 1
 
@@ -74,16 +72,14 @@ def just_so_i_can_call_it(alias):
                 alias,
                 'Elems_in_Collection_{}'.format(starting_pointer))
 
-        """ Careful method of getting each object contentdm says is in a collection"""
         pointers_filetypes = [(single_record.find('dmrecord').text,
                                single_record.find('filetype').text,
                                ) for single_record in elems_in_coll_tree.findall('.//record')]
 
         for pointer, filetype in pointers_filetypes:
-            print(pointer)
             if not pointer:
                 continue  # skips file if a derivative -- only gets original versions
-
+            print(alias, pointer, filetype)
             if filetype != 'cpd':
 
                 if not os.path.isfile('{}/{}.json'.format(alias_dir, pointer)):
@@ -106,9 +102,13 @@ def just_so_i_can_call_it(alias):
                 item_etree = etree.parse(item_xml_filepath)
                 if item_etree.find('find') is not None:  # "find" is contentdm's abbr for 'file name'
                     if not os.path.isfile('{}/{}.{}'.format(alias_dir, pointer, filetype)):
-                        binary = p.retrieve_binaries(alias, pointer, "_")
-                        p.write_binary_to_file(binary, alias, pointer, filetype)
-                        print('wrote', alias, pointer, filetype)
+                        try:
+                            binary = p.retrieve_binaries(alias, pointer, "_")
+                            p.write_binary_to_file(binary, alias, pointer, filetype)
+                            print('wrote', alias, pointer, filetype)
+                        except:
+                            broken_pointers.add(pointer)
+                            continue
 
             elif filetype == 'cpd':
                 os.makedirs('{}/Cpd'.format(alias_dir), exist_ok=True)
@@ -136,18 +136,41 @@ def just_so_i_can_call_it(alias):
                     item_xml = p.retrieve_compound_object(alias, pointer)
                     p.write_xml_to_file(item_xml, '{}/Cpd'.format(alias), '{}_cpd'.format(pointer))
 
-            else:
-                print('{} {}, not pointer filetype'.format(pointer, filetype))
 
     if 'Cpd' in os.listdir(alias_dir):
         for file in os.listdir(os.path.join(alias_dir, 'Cpd')):
+            # if file[0] != '9':
+            #     continue
             if os.path.isfile(os.path.join(alias_dir, 'Cpd', file)):
+
+                # retrying hack to get pdf at compound root of known collections
+                if alias in ('p16313coll5', 'p15140coll7', 'p15140coll42', 'p15140coll44', 'p15140coll49', 'p15140coll50', 'p16313coll91',
+                    'p16313coll95', 'p16313coll98', 'p120701coll12', 'p120701coll26', 'LOYOLA_ETD', 'LOYOLA_ETDa', 'LOYOLA_ETDb', 'lapur',):
+                    match = re.search(r'[0-9]+.xml', file)
+                    # if match:
+                    if file == '25303.xml':
+                        root_cpd_etree = etree.parse(os.path.join(alias_dir, 'Cpd', file))
+                        pointer = root_cpd_etree.findall('.//dmrecord')[0].text
+                        filetype = root_cpd_etree.findall('.//format')[0].text
+                        if not os.path.isfile('{}/Cpd/{}.{}'.format(alias_dir, pointer, filetype)):
+                            try:
+                                binary = p.retrieve_binaries(alias, pointer, filetype)
+                                try:
+                                    binary.decode('utf-8')
+                                    print(alias, pointer)
+                                    print('normal xxx_cpd.xml isnt a binary at root')
+                                except:
+                                    root_cpd_filepath = 'Cpd/{}'.format(pointer)
+                                    p.write_binary_to_file(binary, alias, root_cpd_filepath, 'pdf')
+                                    print(root_cpd_filepath, 'wrote root binary')
+                                    continue
+                            except: 
+                                incomplete_collection.append((alias, pointer))
                 if '_cpd.xml' in file:
+                    print(file)
                     cpd_pointer = file.split('_')[0]
-                    print(cpd_pointer, 'cpd pointer')
                     small_etree = etree.parse(os.path.join(alias_dir, 'Cpd', file))
                     subpointer_list = small_etree.findall('.//pageptr')
-                    print(subpointer_list)
                     file_element = subpointer_list[0].getparent().xpath('./pagefile')
                     if file_element and 'pdfpage' in file_element[0].text:
                         continue  # we don't want pdfpage objects
@@ -176,41 +199,37 @@ def just_so_i_can_call_it(alias):
                             parent_json = p.retrieve_parent_info(alias, simple_pointer, 'json')
                             p.write_json_to_file(parent_json, alias, 'Cpd/{}/{}_parent'.format(cpd_pointer, simple_pointer))
 
-
                         simple_etree = etree.fromstring(bytes(bytearray(item_xml, encoding='utf-8')))
-                        orig_filename = simple_etree.find('find').text
-                        simple_filetype = os.path.splitext(orig_filename)[-1].replace('.', '')
-                        if not os.path.isfile('{}/Cpd/{}/{}.{}'.format(alias_dir, cpd_pointer, simple_pointer, simple_filetype)):
-                            binary = p.retrieve_binaries(alias, simple_pointer, "arbitary")
-                            simple_filepath = 'Cpd/{}/{}'.format(cpd_pointer, simple_pointer)
-                            p.write_binary_to_file(binary, alias, simple_filepath, simple_filetype)
-                            print('wrote', alias, cpd_pointer, simple_pointer, simple_filetype)
+                        try:
+                            orig_filename = simple_etree.find('find').text
+                            simple_filetype = os.path.splitext(orig_filename)[-1].replace('.', '')
+                            if not os.path.isfile('{}/Cpd/{}/{}.{}'.format(alias_dir, cpd_pointer, simple_pointer, simple_filetype)):
+                                try:
+                                    binary = p.retrieve_binaries(alias, simple_pointer, "arbitary")
+                                    simple_filepath = 'Cpd/{}/{}'.format(cpd_pointer, simple_pointer)
+                                    print(simple_filepath)
+                                    p.write_binary_to_file(binary, alias, simple_filepath, simple_filetype)
+                                    print('wrote', alias, cpd_pointer, simple_pointer, simple_filetype)
+                                except:
+                                    print('failed to grab, excepting')
+                        except:
+                            print('not real xml', file)
+                            broken_pointers.add((cpd_pointer, simple_pointer))
 
-                # when pdf is at root of compound object
-                match = re.search(r'[0-9]+.xml', file)
-                if match:
-                    print('match')
-                    root_cpd_etree = etree.parse(os.path.join(alias_dir, 'Cpd', file))
-                    root_cpd_filename_etree = root_cpd_etree.findall('.//object')
-                    try:
-                        print('trying')
-                        if os.path.splitext(root_cpd_filename_etree[0].text)[-1] == '.pdf':
-                            print('found pdf in //object')
-                            pointer = root_cpd_etree.findall('.//dmrecord')[0].text
-                            if not os.path.isfile('{}/Cpd/{}.pdf'.format(alias_dir, pointer)):
-                                print('no pdf of that name written yet')
-                                binary = p.retrieve_binaries(alias, pointer, 'pdf')
-                                root_cpd_filepath = 'Cpd/{}'.format(pointer)
-                                p.write_binary_to_file(binary, alias, root_cpd_filepath, 'pdf')
-                                print(root_cpd_filepath, 'binary written')
-                    except:
-                        print('excepted -- doesnt match pdf in root of cpd')
-                        pass
+
 
 
 if __name__ == '__main__':
     """ Call just one collection, retrieve all metadata """
-    # just_so_i_can_call_it('AAW')
+    incomplete_collection = []
+    for alias in ('LSUHSC_NCC', ):
+        print(alias)
+        broken_pointers = set()
+        just_so_i_can_call_it(alias)
+        incomplete_collection.append('{} {}'.format(alias, broken_pointers))
+    print('Reason: LSUHSC_NCC still missing binaries for whatever reason')
+    print(incomplete_collection)
+
 
     """ Call all collections, retrieve all metadata """
 
@@ -227,26 +246,28 @@ if __name__ == '__main__':
                        'p16313coll42', 'p16313coll46', 'p16313coll47', 'p16313coll53', 'p16313coll59',
                        'p16313coll63', 'p16313coll64', 'p16313coll66', 'p16313coll68', 'p16313coll71',
                        'p16313coll73', 'p16313coll75', 'p16313coll78', 'p16313coll84',
-                       'p15140coll32', 'p16313coll82', 'p120701coll6', }
+                       'p15140coll32', 'p16313coll82', 'p120701coll6', 'p267101coll4',
+                       'p16313coll44', 'p16313coll88', 'p16313coll94', 'JSN', 'p15140coll24',
+                       'p15140coll9', 'p15140coll59', 'p16313coll40', 'p15140coll53', 'p16313coll97',
+                       'p16313coll18', 'p15140coll33', 'LST', 'MPF', 'p15140coll2', }
 
-    coll_list_txt = p.retrieve_collections_list()
-    p.write_xml_to_file(coll_list_txt, '.', 'Collections_List')
-    coll_list_xml = etree.fromstring(bytes(bytearray(coll_list_txt, encoding='utf-8')))
-    not_all_binaries = []
+    # repo_dir = '../Cached_Cdm_files'
+    # if not os.path.isfile(os.path.join(repo_dir, 'Collections_List.xml')):
+    #     coll_list_txt = p.retrieve_collections_list()
+    #     p.write_xml_to_file(coll_list_txt, '.', 'Collections_List')
+    #     coll_list_xml = etree.fromstring(bytes(bytearray(coll_list_txt, encoding='utf-8')))
+    # else:
+    #     coll_list_xml = etree.parse(os.path.join(repo_dir, 'Collections_List.xml'))
+    # not_all_binaries = []
     # for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')]:
+    #     broken_pointers = set()
     #     if alias in we_dont_migrate:
     #         continue
-    for alias in (
-                  'p267101coll4',
-                  'LSU_DYP', 'p120701coll12', 'p120701coll15', 'p15140coll7', 'p15140coll10', 'p15140coll23',
-                  'p15140coll49', 'p15140coll4', 'p15140coll50', 'p15140coll52', 'p16313coll17', 'p16313coll80',
-                  'p16313coll91', 'p16313coll93', 'p16313coll98', 'p16313coll5', 'p16313coll88', 'LOYOLA_ETD',
-                  'p267101coll4', 'p16313coll17', 'HNF', 'p15140coll12', 'p16313coll52', 'p15140coll21',
-                  'LHP', 'LMNP01', 'LPH', 'LSUBK01', 'LSUHSC_NCC', 'LSU_LNP', 'MSW', ):
-        # try:
-        print('{} '.format(alias) * 10)
-        just_so_i_can_call_it(alias)
-        # except:
-        #     not_all_binaries.append(alias)
-        #     print('oops')
-    print(not_all_binaries)
+    #     # try:
+    #     #     print('{} '.format(alias) * 10)
+    #     just_so_i_can_call_it(alias)
+    #     # except:
+    #     #     not_all_binaries.append((alias, broken_pointers))
+    #     print(alias)
+    #     print(broken_pointers)
+    # print(not_all_binaries)
