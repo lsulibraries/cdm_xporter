@@ -6,7 +6,7 @@ import lxml.etree as etree
 file_formats = set()
 broken_files = []
 
-for root, dirs, files in os.walk('/media/garrett_armstrong/Data/Cached_Cdm_files'):
+for root, dirs, files in os.walk('/media/james/BlackToshiba/Cached_Cdm_files'):
     if ('AWW' in root) or ('LPH' in root) or ('LSUHSC_NCC' in root) or \
     ('p15140coll28' in root) or ('LSU_JJA' in root) or ('p120701coll24' in root) or \
     ('p15140coll43' in root) or ('p16313coll51' in root) or ('Tensas' in root) or \
