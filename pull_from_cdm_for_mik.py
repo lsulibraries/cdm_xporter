@@ -38,13 +38,13 @@ def retrieve_collection_fields_json(collection_alias):
 
 
 def retrieve_elems_xml(collection_alias, fields_list, starting_pointer):
-    url = '{}dmQuery/{}/0/{}/fullrs!find!dmaccess!dmimage!dmcreated!dmmodified!dmoclcno!dmrecord/100/{}/1/0/0/0/xml'.format(url_prefix, collection_alias, '!'.join(fields_list), starting_pointer)
+    url = '{}dmQuery/{}/0/{}/nosort/100/dmcreated!dmrecord/1/0/0/0/0/0/xml'.format(url_prefix, collection_alias, starting_pointer)
     with urllib.request.urlopen(url) as response:
         return response.read().decode(encoding='utf-8')
 
 
 def retrieve_elems_json(collection_alias, fields_list, starting_pointer):
-    url = '{}dmQuery/{}/0/{}/fullrs!find!dmaccess!dmimage!dmcreated!dmmodified!dmoclcno!dmrecord/100/{}/1/0/0/0/json'.format(url_prefix, collection_alias, '!'.join(fields_list), starting_pointer)
+    url = '{}dmQuery/{}/0/{}/nosort/100/dmcreated!dmrecord/1/0/0/0/0/0/json'.format(url_prefix, collection_alias, starting_pointer)
     with urllib.request.urlopen(url) as response:
         return response.read().decode(encoding='utf-8')
 
