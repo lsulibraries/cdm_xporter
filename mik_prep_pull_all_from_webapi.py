@@ -69,6 +69,7 @@ def do_root_level_objects(alias):
     for num in range(num_chunks):
         starting_position = (num * chunk_size) + 1
         write_chunk_of_elems_in_collection(alias, starting_position, chunk_size)
+
     all_root_pointers_filetypes = find_root_pointers_filetypes(alias_dir)
     for pointer, filetype in all_root_pointers_filetypes:
         process_root_level_objects(alias, pointer, filetype)
@@ -94,22 +95,23 @@ def write_chunk_of_elems_in_collection(alias, starting_position, chunk_size):
 
 
 def find_root_pointers_filetypes(alias_dir):
-    Elems_filelist = [i for i in os.listdir(alias_dir) if ('Elems_in_Collection' in i and '.xml' in i)]
+    Elems_filelist = [file for file in os.listdir(alias_dir)
+                      if 'Elems_in_Collection' in file and
+                      '.xml' in file]
     pointers_filetypes = []
     for file in Elems_filelist:
         elems_in_col_etree = ET.parse(os.path.join(alias_dir, file))
         for single_record in elems_in_col_etree.findall('.//record'):
             pointer = single_record.find('dmrecord').text or single_record.find('pointer').text
             filetype = single_record.find('filetype').text.lower()
-            pointers_filetypes.append((pointer, filetype))
+            if pointer and filetype:
+                pointers_filetypes.append((pointer, filetype))
     return pointers_filetypes
 
 
 def process_root_level_objects(alias, pointer, filetype):
     alias_dir = os.path.join('..', 'Cached_Cdm_files', alias)
     cpd_dir = os.path.join(alias_dir, 'Cpd')
-    if not pointer:
-        return  # skips file if a derivative -- only gets original versions
     if filetype != 'cpd':
         write_metadata(alias_dir, alias, pointer, 'simple')
         process_binary(alias_dir, alias, pointer, filetype)
@@ -119,7 +121,6 @@ def process_root_level_objects(alias, pointer, filetype):
 
 def write_metadata(target_dir, alias, pointer, simple_or_cpd):
     print(pointer)
-    # we should test if the nnn.xml contentDM is returning contains a failure code.
     if not os.path.isfile('{}/{}.xml'.format(target_dir, pointer)):
         xml_text = p.retrieve_item_metadata(alias, pointer, 'xml')
         if is_it_a_404_xml(xml_text):
@@ -193,51 +194,11 @@ def process_binary(target_dir, alias, pointer, filetype):
 def do_compound_objects(alias):
     cpd_dir = os.path.join('..', 'Cached_Cdm_files', alias, 'Cpd')
     if os.path.isdir(cpd_dir):
-        for file in os.listdir(cpd_dir):
-            if os.path.isfile(os.path.join(cpd_dir, file)):
-                if '_cpd.xml' in file:
-                    # contentdm sometimes creates a pseudocompound object for pdfs with derivatives.
-                    # this hack gets the pdf at root if present, then skips getting its derivatives.
-                    # if there's no pdf at root (E.g., a normal compound), it gets the children.
-                    # Look into making this automatic instead of hard-coded.
-                    # if alias in ('p16313coll5', 'p15140coll7', 'p15140coll42', 'p15140coll44',
-                    #              'p15140coll49', 'p15140coll50', 'p16313coll91', 'p16313coll95',
-                    #              'p16313coll98', 'p120701coll12', 'p120701coll26', 'LOYOLA_ETD',
-                    #              'LOYOLA_ETDa', 'LOYOLA_ETDb', 'lapur',):
-                    #     if try_to_get_a_hidden_pdf_at_root_of_cpd(alias, file):
-                    #         continue
-
-                    write_child_data(alias, file)
-
-                # we could make a list of all pdfpage cpds,
-                # then do try_to_get_ here for these collections
-                # write_child_data finds all the pdfpage cpds.
-
-
-def try_to_get_a_hidden_pdf_at_root_of_cpd(alias, index_file):
-    cpd_dir = os.path.join('..', 'Cached_Cdm_files', alias, 'Cpd')
-    xml_file = "{}.xml".format(index_file.split('_')[0])
-    root_cpd_etree = ET.parse(os.path.join(cpd_dir, xml_file))
-    pointer = root_cpd_etree.findall('.//dmrecord')[0].text
-    filetype = root_cpd_etree.findall('.//format')[0].text.lower()
-    if not os.path.isfile('{}/{}.{}'.format(cpd_dir, pointer, filetype)):
-        try:
-            binary = p.retrieve_binary(alias, pointer)
-        except urllib.error.HTTPError:
-            print('HTTP error caught on binary')
-            unavailable_binaries.append((alias, pointer, filetype))
-            return
-
-        # in some cases, contentDM gives an xml instead of a binary.
-        # we're happy to ignore this "binary" if it's a xml,
-        # but we're hoping it fails and that it's a pdf,
-        # which will throw an exception & we'll then write the binary to file.
-        try:
-            binary.decode('utf-8')
-            print('{} {}_cpd.xml isnt a binary at root'.format(cpd_dir, pointer))
-        except UnicodeDecodeError:
-            p.write_binary_to_file(binary, cpd_dir, pointer, filetype)
-            print(cpd_dir, pointer, 'wrote root binary')
+        index_file_list = [i for i in os.listdir(cpd_dir)
+                           if os.path.isfile(os.path.join(cpd_dir, i)) and
+                           '_cpd.xml' in i]
+        for file in index_file_list:
+            write_child_data(alias, file)
 
 
 def write_child_data(alias, index_file):
@@ -261,6 +222,34 @@ def write_child_data(alias, index_file):
         process_binary(cpd_object_dir, alias, child_pointer, child_filetype)
 
 
+def try_to_get_a_hidden_pdf_at_root_of_cpd(alias, index_file):
+    cpd_dir = os.path.join('..', 'Cached_Cdm_files', alias, 'Cpd')
+    xml_file = "{}.xml".format(index_file.split('_')[0])
+    root_cpd_etree = ET.parse(os.path.join(cpd_dir, xml_file))
+    pointer = root_cpd_etree.findall('.//dmrecord')[0].text
+    filetype = root_cpd_etree.findall('.//format')[0].text.lower()
+    if not os.path.isfile('{}/{}.{}'.format(cpd_dir, pointer, filetype)):
+        try:
+            binary = p.retrieve_binary(alias, pointer)
+        except urllib.error.HTTPError:
+            print('HTTP error caught on binary')
+            unavailable_binaries.append((alias, pointer, filetype))
+            return
+
+        # in some cases, contentDM gives an xml instead of a binary.
+        # it's easier to discern whether something is an xml, than to discern
+        # whether its one of millions of types of valid binaries.
+        # we're going to try to decode the binary or xml into unicode.
+        # if it succeeds, it's an xml & we'll discard it.
+        # if it fails, it's a binary, which we'll write to file.
+        try:
+            binary.decode('utf-8')
+            print('{} {}_cpd.xml isnt a binary at root'.format(cpd_dir, pointer))
+        except UnicodeDecodeError:
+            p.write_binary_to_file(binary, cpd_dir, pointer, filetype)
+            print(cpd_dir, pointer, 'wrote root binary')
+
+
 def has_pdfpage_elems(children_elements_list):
     file_elems = children_elements_list[0].getparent().xpath('./pagefile')
     if file_elems and 'pdfpage' in file_elems[0].text:
@@ -277,7 +266,7 @@ def parse_binary_original_filetype(folder, pointer):
 
 
 if __name__ == '__main__':
-    """ Call just one collection, retrieve all metadata """
+    """ Get specific collections' metadata/binaries """
     unavailable_binaries = []
     incomplete_collection = []
     for alias in ('p16313coll51', 'LWP', 'LSUHSC_NCC', ):
@@ -287,7 +276,7 @@ if __name__ == '__main__':
     print('incomplete:', incomplete_collection)
     print('unavailable binaries:', unavailable_binaries)
 
-    """ Call all collections, retrieve all metadata """
+    """ Get all collections' metadata/binaries """
 
     we_dont_migrate = {'p16313coll70', 'p120701coll11', 'LSUHSCS_JCM', 'UNO_SCC', 'p15140coll36', 'p15140coll57',
                        'p15140coll13', 'p15140coll11', 'p16313coll32', 'p16313coll49', 'p16313coll50',
