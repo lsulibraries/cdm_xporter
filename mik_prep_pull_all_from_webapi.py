@@ -1,235 +1,292 @@
 #! /usr/bin/env python3
 
 import os
-import re
-import lxml.etree as etree
+import urllib
+from lxml import etree as ET
+import json
 
 import pull_from_cdm_for_mik as p
 
 
-def read_file(filename):
-    with open(filename) as f:
-        return f.read()
+"""
+"alias" is contentDM's term for collections.
+"pointer" is contentDM's term for objects.
+
+An alias will have pointers at its root, which may be simple or compound objects.
+A compound object will have simple objects at its root.
+
+This script outputs a collection as:
+Cachec_Cdm_files-
+    Alias-
+        Pointer1
+        Pointer2
+        Pointer3-
+            Pointer4
+            Pointer5
+        Pointer6
+(where pointers 1, 2, and 6 are simple objects.  Pointers 4 and 5 are the simple object children
+ of compound object pointer 3).
+"""
 
 
-def just_so_i_can_call_it(alias):
-    repo_dir = os.path.join('..', 'Cached_Cdm_files')
-    alias_dir = '{}/{}'.format(repo_dir, alias)
+def main(alias):
+    print(alias)
+    write_collection_level_metadata(alias)
+    do_root_level_objects(alias)
+    do_compound_objects(alias)
 
+
+def write_collection_level_metadata(alias):
+    alias_dir = os.path.join('..', 'Cached_Cdm_files', alias)
     os.makedirs(alias_dir, exist_ok=True)
-
     if not os.path.isfile('{}/Collection_Metadata.xml'.format(alias_dir)):
         p.write_xml_to_file(
             p.retrieve_collection_metadata(alias),
-            alias,
+            alias_dir,
             'Collection_Metadata')
-
     if not os.path.isfile('{}/Collection_TotalRecs.xml'.format(alias_dir)):
         p.write_xml_to_file(
             p.retrieve_collection_total_recs(alias),
-            alias,
+            alias_dir,
             'Collection_TotalRecs')
-
     if not os.path.isfile('{}/Collection_Fields.json'.format(alias_dir)):
-        collection_fields_json = p.retrieve_collection_fields_json(alias)
         p.write_json_to_file(
-            collection_fields_json,
-            alias,
+            p.retrieve_collection_fields_json(alias),
+            alias_dir,
             'Collection_Fields')
-
     if not os.path.isfile('{}/Collection_Fields.xml'.format(alias_dir)):
-        collection_fields_xml = p.retrieve_collection_fields_xml(alias)
         p.write_xml_to_file(
-            collection_fields_xml,
-            alias,
+            p.retrieve_collection_fields_xml(alias),
+            alias_dir,
             'Collection_Fields')
-    else:
-        collection_fields_xml = read_file(
-            '{}/Collection_Fields.xml'.format(alias_dir))
-
-    total_recs_etree = etree.parse(os.path.join(alias_dir, 'Collection_TotalRecs.xml'))
-    num_of_pointers = int(total_recs_etree.xpath('.//total')[0].text)
-    groups_of_100 = (num_of_pointers // 100) + 1
-
-    for num in range(groups_of_100):
-        starting_pointer = (num * 100) + 1
-        if not os.path.isfile('{}/Elems_in_Collection_{}.xml'.format(alias_dir, starting_pointer)):
-            fields_to_retrieve = ['source', 'dmrecord', 'dmimage', 'find']
-            xml_elems_in_coll = p.retrieve_elems_xml(alias, fields_to_retrieve, starting_pointer)
-            p.write_xml_to_file(
-                xml_elems_in_coll,
-                alias,
-                'Elems_in_Collection_{}'.format(starting_pointer))
-
-        elems_in_coll_tree = etree.parse(
-            '{}/Elems_in_Collection_{}.xml'.format(alias_dir, starting_pointer))
-
-        if not os.path.isfile('{}/Elems_in_Collection_{}.json'.format(alias_dir, starting_pointer)):
-            fields_to_retrieve = ['source', 'dmrecord', 'dmimage', 'find']
-            json_elems_in_coll = p.retrieve_elems_json(alias, fields_to_retrieve, starting_pointer)
-            p.write_json_to_file(
-                json_elems_in_coll,
-                alias,
-                'Elems_in_Collection_{}'.format(starting_pointer))
-
-        pointers_filetypes = [(single_record.find('dmrecord').text,
-                               single_record.find('filetype').text,
-                               ) for single_record in elems_in_coll_tree.findall('.//record')]
-
-        for pointer, filetype in pointers_filetypes:
-            if not pointer:
-                continue  # skips file if a derivative -- only gets original versions
-            print(alias, pointer, filetype)
-            if filetype != 'cpd':
-
-                if not os.path.isfile('{}/{}.json'.format(alias_dir, pointer)):
-                    item_json = p.retrieve_item_metadata(alias, pointer, 'json')
-                    p.write_json_to_file(item_json, alias, pointer)
-
-                if not os.path.isfile('{}/{}.xml'.format(alias_dir, pointer)):
-                    item_xml = p.retrieve_item_metadata(alias, pointer, 'xml')
-                    p.write_xml_to_file(item_xml, alias, pointer)
-
-                if not os.path.isfile('{}/{}_parent.xml'.format(alias_dir, pointer)):
-                    parent_xml = p.retrieve_parent_info(alias, pointer, 'xml')
-                    p.write_xml_to_file(parent_xml, alias, '{}_parent'.format(pointer))
-
-                if not os.path.isfile('{}/{}_parent.json'.format(alias_dir, pointer)):
-                    parent_json = p.retrieve_parent_info(alias, pointer, 'json')
-                    p.write_json_to_file(parent_json, alias, '{}_parent'.format(pointer))
-
-                item_xml_filepath = '{}/{}.xml'.format(alias_dir, pointer)
-                item_etree = etree.parse(item_xml_filepath)
-                if item_etree.find('find') is not None:  # "find" is contentdm's abbr for 'file name'
-                    if not os.path.isfile('{}/{}.{}'.format(alias_dir, pointer, filetype)):
-                        try:
-                            binary = p.retrieve_binaries(alias, pointer, "_")
-                            p.write_binary_to_file(binary, alias, pointer, filetype)
-                            print('wrote', alias, pointer, filetype)
-                        except:
-                            broken_pointers.add(pointer)
-                            continue
-
-            elif filetype == 'cpd':
-                os.makedirs('{}/Cpd'.format(alias_dir), exist_ok=True)
-
-                if not os.path.isfile('{}/Cpd/{}.json'.format(alias_dir, pointer)):
-                    item_json = p.retrieve_item_metadata(alias, pointer, 'json')
-                    p.write_json_to_file(item_json, '{}/Cpd'.format(alias), pointer)
-
-                if not os.path.isfile('{}/Cpd/{}.xml'.format(alias_dir, pointer)):
-                    item_xml = p.retrieve_item_metadata(alias, pointer, 'xml')
-                    p.write_xml_to_file(item_xml, '{}/Cpd'.format(alias), pointer)
-
-                if not os.path.isfile('{}/Cpd/{}_parent.xml'.format(alias_dir, pointer)):
-                    parent_xml = p.retrieve_parent_info(alias, pointer, 'xml')
-                    p.write_xml_to_file(parent_xml, '{}/Cpd'.format(alias), '{}_parent'.format(pointer))
-
-                if not os.path.isfile('{}/Cpd/{}_parent.json'.format(alias_dir, pointer)):
-                    parent_json = p.retrieve_parent_info(alias, pointer, 'json')
-                    p.write_json_to_file(parent_json, '{}/Cpd'.format(alias), '{}_parent'.format(pointer))
-
-                item_xml_filepath = '{}/Cpd/{}.xml'.format(alias_dir, pointer)
-                item_etree = etree.parse(item_xml_filepath)
-
-                if not os.path.isfile('{}/Cpd/{}_cpd.xml'.format(alias_dir, pointer)):
-                    item_xml = p.retrieve_compound_object(alias, pointer)
-                    p.write_xml_to_file(item_xml, '{}/Cpd'.format(alias), '{}_cpd'.format(pointer))
 
 
-    if 'Cpd' in os.listdir(alias_dir):
-        for file in os.listdir(os.path.join(alias_dir, 'Cpd')):
-            # if file[0] != '9':
-            #     continue
-            if os.path.isfile(os.path.join(alias_dir, 'Cpd', file)):
+def do_root_level_objects(alias):
+    alias_dir = os.path.join('..', 'Cached_Cdm_files', alias)
+    num_root_objects = count_root_objects(alias_dir)
+    chunk_size = 100
+    num_chunks = (num_root_objects // chunk_size) + 1
+    for num in range(num_chunks):
+        starting_position = (num * chunk_size) + 1
+        write_chunk_of_elems_in_collection(alias, starting_position, chunk_size)
+    all_root_pointers_filetypes = find_root_pointers_filetypes(alias_dir)
+    for pointer, filetype in all_root_pointers_filetypes:
+        process_root_level_objects(alias, pointer, filetype)
 
-                # retrying hack to get pdf at compound root of known collections
-                if alias in ('p16313coll5', 'p15140coll7', 'p15140coll42', 'p15140coll44', 'p15140coll49', 'p15140coll50', 'p16313coll91',
-                    'p16313coll95', 'p16313coll98', 'p120701coll12', 'p120701coll26', 'LOYOLA_ETD', 'LOYOLA_ETDa', 'LOYOLA_ETDb', 'lapur',):
-                    match = re.search(r'[0-9]+.xml', file)
-                    # if match:
-                    if file == '25303.xml':
-                        root_cpd_etree = etree.parse(os.path.join(alias_dir, 'Cpd', file))
-                        pointer = root_cpd_etree.findall('.//dmrecord')[0].text
-                        filetype = root_cpd_etree.findall('.//format')[0].text
-                        if not os.path.isfile('{}/Cpd/{}.{}'.format(alias_dir, pointer, filetype)):
-                            try:
-                                binary = p.retrieve_binaries(alias, pointer, filetype)
-                                try:
-                                    binary.decode('utf-8')
-                                    print(alias, pointer)
-                                    print('normal xxx_cpd.xml isnt a binary at root')
-                                except:
-                                    root_cpd_filepath = 'Cpd/{}'.format(pointer)
-                                    p.write_binary_to_file(binary, alias, root_cpd_filepath, 'pdf')
-                                    print(root_cpd_filepath, 'wrote root binary')
-                                    continue
-                            except: 
-                                incomplete_collection.append((alias, pointer))
+
+def count_root_objects(alias_dir):
+    total_recs_etree = ET.parse(os.path.join(alias_dir, 'Collection_TotalRecs.xml'))
+    return int(total_recs_etree.xpath('.//total')[0].text)
+
+
+def write_chunk_of_elems_in_collection(alias, starting_position, chunk_size):
+    alias_dir = os.path.join('..', 'Cached_Cdm_files', alias)
+    if not os.path.isfile('{}/Elems_in_Collection_{}.json'.format(alias_dir, starting_position)):
+        p.write_json_to_file(
+            p.retrieve_elems_json(alias, starting_position, chunk_size),
+            alias_dir,
+            'Elems_in_Collection_{}'.format(starting_position))
+    if not os.path.isfile('{}/Elems_in_Collection_{}.xml'.format(alias_dir, starting_position)):
+        p.write_xml_to_file(
+            p.retrieve_elems_xml(alias, starting_position, chunk_size),
+            alias_dir,
+            'Elems_in_Collection_{}'.format(starting_position))
+
+
+def find_root_pointers_filetypes(alias_dir):
+    Elems_filelist = [i for i in os.listdir(alias_dir) if ('Elems_in_Collection' in i and '.xml' in i)]
+    pointers_filetypes = []
+    for file in Elems_filelist:
+        elems_in_col_etree = ET.parse(os.path.join(alias_dir, file))
+        for single_record in elems_in_col_etree.findall('.//record'):
+            pointer = single_record.find('dmrecord').text or single_record.find('pointer').text
+            filetype = single_record.find('filetype').text.lower()
+            pointers_filetypes.append((pointer, filetype))
+    return pointers_filetypes
+
+
+def process_root_level_objects(alias, pointer, filetype):
+    alias_dir = os.path.join('..', 'Cached_Cdm_files', alias)
+    cpd_dir = os.path.join(alias_dir, 'Cpd')
+    if not pointer:
+        return  # skips file if a derivative -- only gets original versions
+    if filetype != 'cpd':
+        write_metadata(alias_dir, alias, pointer, 'simple')
+        process_binary(alias_dir, alias, pointer, filetype)
+    elif filetype == 'cpd':
+        write_metadata(cpd_dir, alias, pointer, 'cpd')
+
+
+def write_metadata(target_dir, alias, pointer, simple_or_cpd):
+    print(pointer)
+    # we should test if the nnn.xml contentDM is returning contains a failure code.
+    if not os.path.isfile('{}/{}.xml'.format(target_dir, pointer)):
+        xml_text = p.retrieve_item_metadata(alias, pointer, 'xml')
+        if is_it_a_404_xml(xml_text):
+            broken_pointers.add((alias, pointer))
+        else:
+            p.write_xml_to_file(xml_text, target_dir, pointer)
+
+    if not os.path.isfile('{}/{}.json'.format(target_dir, pointer)):
+        json_text = p.retrieve_item_metadata(alias, pointer, 'json')
+        if is_it_a_404_json(json_text):
+            broken_pointers.add((alias, pointer))
+        else:
+            p.write_json_to_file(json_text, target_dir, pointer)
+
+    if not os.path.isfile('{}/{}_parent.xml'.format(target_dir, pointer)):
+        xml_parent_text = p.retrieve_parent_info(alias, pointer, 'xml')
+        if is_it_a_404_xml(xml_parent_text):
+            broken_pointers.add((alias, pointer))
+        else:
+            p.write_xml_to_file(xml_parent_text, target_dir, '{}_parent'.format(pointer))
+
+    if not os.path.isfile('{}/{}_parent.json'.format(target_dir, pointer)):
+        json_parent_text = p.retrieve_parent_info(alias, pointer, 'json')
+        if is_it_a_404_json(json_parent_text):
+            broken_pointers.add((alias, pointer))
+        else:
+            p.write_json_to_file(json_parent_text, target_dir, '{}_parent'.format(pointer))
+
+    if simple_or_cpd == 'cpd':
+        if not os.path.isfile('{}/{}_cpd.xml'.format(target_dir, pointer)):
+            index_file_text = p.retrieve_compound_object(alias, pointer)
+            if is_it_a_404_xml(index_file_text):
+                broken_pointers.add((alias, pointer))
+            else:
+                p.write_xml_to_file(index_file_text, target_dir, '{}_cpd'.format(pointer))
+
+
+def is_it_a_404_xml(xml_text):
+    xmldata = bytes(bytearray(xml_text, encoding='utf-8'))
+    element_tree = ET.fromstring(xmldata)
+    message_elem = element_tree.xpath('./message')
+    if message_elem and message_elem[0].text == 'Requested item not found':
+        return True
+    return False
+
+
+def is_it_a_404_json(json_text):
+    parsed_json = json.loads(json_text)
+    if 'message' in parsed_json and parsed_json['message'] == 'Requested item not found':
+        return True
+    return False
+
+
+def process_binary(target_dir, alias, pointer, filetype):
+    # item_xml_filepath = '{}/{}.xml'.format(target_dir, pointer)
+    # item_etree = ET.parse(item_xml_filepath)
+    # if item_etree.find('find') is not None:    # i.e., does this pointer have a file
+    return
+    if not os.path.isfile('{}/{}.{}'.format(target_dir, pointer, filetype)):
+        try:
+            p.write_binary_to_file(
+                p.retrieve_binary(alias, pointer),
+                target_dir,
+                pointer,
+                filetype)
+            print('wrote', alias, pointer, filetype)
+        except urllib.error.HTTPError as e:
+            print('HTTP error caught on binary')
+            unavailable_binaries.append((alias, pointer, filetype))
+
+
+def do_compound_objects(alias):
+    cpd_dir = os.path.join('..', 'Cached_Cdm_files', alias, 'Cpd')
+    if os.path.isdir(cpd_dir):
+        for file in os.listdir(cpd_dir):
+            if os.path.isfile(os.path.join(cpd_dir, file)):
                 if '_cpd.xml' in file:
-                    print(file)
-                    cpd_pointer = file.split('_')[0]
-                    small_etree = etree.parse(os.path.join(alias_dir, 'Cpd', file))
-                    subpointer_list = small_etree.findall('.//pageptr')
-                    file_element = subpointer_list[0].getparent().xpath('./pagefile')
-                    if file_element and 'pdfpage' in file_element[0].text:
-                        continue  # we don't want pdfpage objects
-                    os.makedirs('{}/Cpd/{}'.format(alias_dir, cpd_pointer), exist_ok=True)
-                    for elem in subpointer_list:
-                        simple_pointer = elem.text
-                        print(simple_pointer)
+                    # contentdm sometimes creates a pseudocompound object for pdfs with derivatives.
+                    # this hack gets the pdf at root if present, then skips getting its derivatives.
+                    # if there's no pdf at root (E.g., a normal compound), it gets the children.
+                    # Look into making this automatic instead of hard-coded.
+                    # if alias in ('p16313coll5', 'p15140coll7', 'p15140coll42', 'p15140coll44',
+                    #              'p15140coll49', 'p15140coll50', 'p16313coll91', 'p16313coll95',
+                    #              'p16313coll98', 'p120701coll12', 'p120701coll26', 'LOYOLA_ETD',
+                    #              'LOYOLA_ETDa', 'LOYOLA_ETDb', 'lapur',):
+                    #     if try_to_get_a_hidden_pdf_at_root_of_cpd(alias, file):
+                    #         continue
 
-                        if not os.path.isfile('{}/Cpd/{}/{}.xml'.format(alias_dir, cpd_pointer, simple_pointer)):
-                            item_xml = p.retrieve_item_metadata(alias, simple_pointer, 'xml')
-                            p.write_xml_to_file(item_xml, alias, 'Cpd/{}/{}'.format(cpd_pointer, simple_pointer))
+                    write_child_data(alias, file)
 
-                        else:
-                            item_xml = read_file(
-                                '{}/Cpd/{}/{}.xml'.format(alias_dir, cpd_pointer, simple_pointer))
-
-                        if not os.path.isfile('{}/Cpd/{}/{}.json'.format(alias_dir, cpd_pointer, simple_pointer)):
-                            item_json = p.retrieve_item_metadata(alias, simple_pointer, 'json')
-                            p.write_json_to_file(item_json, alias, 'Cpd/{}/{}'.format(cpd_pointer, simple_pointer))
-
-                        if not os.path.isfile('{}/Cpd/{}/{}_parent.xml'.format(alias_dir, cpd_pointer, simple_pointer)):
-                            parent_xml = p.retrieve_parent_info(alias, simple_pointer, 'xml')
-                            p.write_xml_to_file(parent_xml, alias, 'Cpd/{}/{}_parent'.format(cpd_pointer, simple_pointer))
-
-                        if not os.path.isfile('{}/Cpd/{}/{}_parent.json'.format(alias_dir, cpd_pointer, simple_pointer)):
-                            parent_json = p.retrieve_parent_info(alias, simple_pointer, 'json')
-                            p.write_json_to_file(parent_json, alias, 'Cpd/{}/{}_parent'.format(cpd_pointer, simple_pointer))
-
-                        simple_etree = etree.fromstring(bytes(bytearray(item_xml, encoding='utf-8')))
-                        try:
-                            orig_filename = simple_etree.find('find').text
-                            simple_filetype = os.path.splitext(orig_filename)[-1].replace('.', '')
-                            if not os.path.isfile('{}/Cpd/{}/{}.{}'.format(alias_dir, cpd_pointer, simple_pointer, simple_filetype)):
-                                try:
-                                    binary = p.retrieve_binaries(alias, simple_pointer, "arbitary")
-                                    simple_filepath = 'Cpd/{}/{}'.format(cpd_pointer, simple_pointer)
-                                    print(simple_filepath)
-                                    p.write_binary_to_file(binary, alias, simple_filepath, simple_filetype)
-                                    print('wrote', alias, cpd_pointer, simple_pointer, simple_filetype)
-                                except:
-                                    print('failed to grab, excepting')
-                        except:
-                            print('not real xml', file)
-                            broken_pointers.add((cpd_pointer, simple_pointer))
+                # we could make a list of all pdfpage cpds,
+                # then do try_to_get_ here for these collections
+                # write_child_data finds all the pdfpage cpds.
 
 
+def try_to_get_a_hidden_pdf_at_root_of_cpd(alias, index_file):
+    cpd_dir = os.path.join('..', 'Cached_Cdm_files', alias, 'Cpd')
+    xml_file = "{}.xml".format(index_file.split('_')[0])
+    root_cpd_etree = ET.parse(os.path.join(cpd_dir, xml_file))
+    pointer = root_cpd_etree.findall('.//dmrecord')[0].text
+    filetype = root_cpd_etree.findall('.//format')[0].text.lower()
+    if not os.path.isfile('{}/{}.{}'.format(cpd_dir, pointer, filetype)):
+        try:
+            binary = p.retrieve_binary(alias, pointer)
+        except urllib.error.HTTPError as e:
+            print('HTTP error caught on binary')
+            unavailable_binaries.append((alias, pointer, filetype))
+            return
+
+        # in some cases, contentDM gives an xml instead of a binary.
+        # we're happy to ignore this "binary" if it's a xml,
+        # but we're hoping it fails and that it's a pdf,
+        # which will throw an exception & we'll then write the binary to file.
+        try:
+            binary.decode('utf-8')
+            print('{} {}_cpd.xml isnt a binary at root'.format(cpd_dir, pointer))
+        except UnicodeDecodeError as e:
+            p.write_binary_to_file(binary, cpd_dir, pointer, filetype)
+            print(cpd_dir, pointer, 'wrote root binary')
+
+
+def write_child_data(alias, index_file):
+    cpd_pointer = index_file.split('_')[0]
+    cpd_object_dir = os.path.join('..', 'Cached_Cdm_files', alias, 'Cpd', cpd_pointer)
+    index_file_path = os.path.join('..', 'Cached_Cdm_files', alias, 'Cpd', index_file)
+    children_elements_list = ET.parse(index_file_path).findall('.//pageptr')
+
+    if has_pdfpage_elems(children_elements_list):
+        try_to_get_a_hidden_pdf_at_root_of_cpd(alias, index_file)
+        return False        # abort processing this psuedo-compound's children
+
+    for child in children_elements_list:
+        child_pointer = child.text
+        write_metadata(cpd_object_dir, alias, child_pointer, 'simple')
+        try:
+            child_filetype = parse_binary_original_filetype(cpd_object_dir, child_pointer)
+        except OSError:
+            broken_pointers.add((alias, child_pointer))
+            return    
+        process_binary(cpd_object_dir, alias, child_pointer, child_filetype)
+
+
+def has_pdfpage_elems(children_elements_list):
+    file_elems = children_elements_list[0].getparent().xpath('./pagefile')
+    if file_elems and 'pdfpage' in file_elems[0].text:
+        return True
+    return False
+
+
+def parse_binary_original_filetype(folder, pointer):
+    filepath = '{}/{}.xml'.format(folder, pointer)
+    parsed_etree = ET.parse(filepath)
+    orig_name = parsed_etree.find('find').text
+    filetype = os.path.splitext(orig_name)[-1].replace('.', '').lower()
+    return filetype
 
 
 if __name__ == '__main__':
     """ Call just one collection, retrieve all metadata """
+    unavailable_binaries = []
     incomplete_collection = []
-    for alias in ('LSUHSC_NCC', ):
-        print(alias)
+    for alias in ('p16313coll51', 'LWP', 'LSUHSC_NCC', ):
         broken_pointers = set()
-        just_so_i_can_call_it(alias)
+        main(alias)
         incomplete_collection.append('{} {}'.format(alias, broken_pointers))
-    print('Reason: LSUHSC_NCC still missing binaries for whatever reason')
-    print(incomplete_collection)
-
+    print('incomplete:', incomplete_collection)
+    print('unavailable binaries:', unavailable_binaries)
 
     """ Call all collections, retrieve all metadata """
 
@@ -254,10 +311,8 @@ if __name__ == '__main__':
     # repo_dir = '../Cached_Cdm_files'
     # if not os.path.isfile(os.path.join(repo_dir, 'Collections_List.xml')):
     #     coll_list_txt = p.retrieve_collections_list()
-    #     p.write_xml_to_file(coll_list_txt, '.', 'Collections_List')
-    #     coll_list_xml = etree.fromstring(bytes(bytearray(coll_list_txt, encoding='utf-8')))
-    # else:
-    #     coll_list_xml = etree.parse(os.path.join(repo_dir, 'Collections_List.xml'))
+    #     p.write_xml_to_file(coll_list_txt, repo_dir, 'Collections_List')
+    # coll_list_xml = ET.parse(os.path.join(repo_dir, 'Collections_List.xml'))
     # not_all_binaries = []
     # for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')]:
     #     broken_pointers = set()
@@ -265,7 +320,7 @@ if __name__ == '__main__':
     #         continue
     #     # try:
     #     #     print('{} '.format(alias) * 10)
-    #     just_so_i_can_call_it(alias)
+    #     main(alias)
     #     # except:
     #     #     not_all_binaries.append((alias, broken_pointers))
     #     print(alias)
