@@ -177,7 +177,6 @@ def process_binary(target_dir, alias, pointer, filetype):
     # item_xml_filepath = '{}/{}.xml'.format(target_dir, pointer)
     # item_etree = ET.parse(item_xml_filepath)
     # if item_etree.find('find') is not None:    # i.e., does this pointer have a file
-    return
     if not os.path.isfile('{}/{}.{}'.format(target_dir, pointer, filetype)):
         try:
             p.write_binary_to_file(
@@ -186,7 +185,7 @@ def process_binary(target_dir, alias, pointer, filetype):
                 pointer,
                 filetype)
             print('wrote', alias, pointer, filetype)
-        except urllib.error.HTTPError as e:
+        except urllib.error.HTTPError:
             print('HTTP error caught on binary')
             unavailable_binaries.append((alias, pointer, filetype))
 
@@ -224,7 +223,7 @@ def try_to_get_a_hidden_pdf_at_root_of_cpd(alias, index_file):
     if not os.path.isfile('{}/{}.{}'.format(cpd_dir, pointer, filetype)):
         try:
             binary = p.retrieve_binary(alias, pointer)
-        except urllib.error.HTTPError as e:
+        except urllib.error.HTTPError:
             print('HTTP error caught on binary')
             unavailable_binaries.append((alias, pointer, filetype))
             return
@@ -236,7 +235,7 @@ def try_to_get_a_hidden_pdf_at_root_of_cpd(alias, index_file):
         try:
             binary.decode('utf-8')
             print('{} {}_cpd.xml isnt a binary at root'.format(cpd_dir, pointer))
-        except UnicodeDecodeError as e:
+        except UnicodeDecodeError:
             p.write_binary_to_file(binary, cpd_dir, pointer, filetype)
             print(cpd_dir, pointer, 'wrote root binary')
 
@@ -258,7 +257,7 @@ def write_child_data(alias, index_file):
             child_filetype = parse_binary_original_filetype(cpd_object_dir, child_pointer)
         except OSError:
             broken_pointers.add((alias, child_pointer))
-            return    
+            continue
         process_binary(cpd_object_dir, alias, child_pointer, child_filetype)
 
 
