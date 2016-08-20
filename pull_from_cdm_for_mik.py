@@ -3,6 +3,9 @@
 import urllib.request
 import os
 
+# "alias" is contentDM's term for collection name
+# "pointer" is contentDM's term for item name
+
 
 url_prefix = 'https://server16313.contentdm.oclc.org/dmwebservices/index.php?q='
 
@@ -13,104 +16,85 @@ def retrieve_collections_list():
         return response.read().decode(encoding='utf-8')
 
 
-def retrieve_collection_metadata(collection_alias):
-    url = '{}dmGetCollectionArchivalInfo/{}/xml'.format(url_prefix, collection_alias)
+def retrieve_collection_metadata(alias):
+    url = '{}dmGetCollectionArchivalInfo/{}/xml'.format(url_prefix, alias)
     with urllib.request.urlopen(url) as response:
         return response.read().decode(encoding='utf-8')
 
 
-def retrieve_collection_total_recs(collection_alias):
-    url = '{}dmQueryTotalRecs/{}|0/xml'.format(url_prefix, collection_alias)
+def retrieve_collection_total_recs(alias):
+    url = '{}dmQueryTotalRecs/{}|0/xml'.format(url_prefix, alias)
     with urllib.request.urlopen(url) as response:
         return response.read().decode(encoding='utf-8')
 
 
-def retrieve_collection_fields_xml(collection_alias):
-    url = '{}dmGetCollectionFieldInfo/{}/xml'.format(url_prefix, collection_alias)
+def retrieve_collection_fields_xml(alias):
+    url = '{}dmGetCollectionFieldInfo/{}/xml'.format(url_prefix, alias)
     with urllib.request.urlopen(url) as response:
         return response.read().decode(encoding='utf-8')
 
 
-def retrieve_collection_fields_json(collection_alias):
-    url = '{}dmGetCollectionFieldInfo/{}/json'.format(url_prefix, collection_alias)
+def retrieve_collection_fields_json(alias):
+    url = '{}dmGetCollectionFieldInfo/{}/json'.format(url_prefix, alias)
     with urllib.request.urlopen(url) as response:
         return response.read().decode(encoding='utf-8')
 
 
-def retrieve_elems_xml(collection_alias, fields_list, starting_pointer):
-    url = '{}dmQuery/{}/0/{}/nosort/100/dmcreated!dmrecord/1/0/0/0/0/0/xml'.format(url_prefix, collection_alias, starting_pointer)
+def retrieve_elems_xml(alias, starting_position, chunk_size):
+    url = '{}dmQuery/{}/0/dmcreated!dmrecord!pointer/nosort/{}/{}/1/0/0/0/0/0/xml'.format(
+        url_prefix, alias, chunk_size, starting_position,)
     with urllib.request.urlopen(url) as response:
         return response.read().decode(encoding='utf-8')
 
 
-def retrieve_elems_json(collection_alias, fields_list, starting_pointer):
-    url = '{}dmQuery/{}/0/{}/nosort/100/dmcreated!dmrecord/1/0/0/0/0/0/json'.format(url_prefix, collection_alias, starting_pointer)
+def retrieve_elems_json(alias, starting_position, chunk_size):
+    url = '{}dmQuery/{}/0/dmcreated!dmrecord!pointer/nosort/{}/{}/1/0/0/0/0/0/json'.format(
+        url_prefix, alias, chunk_size, starting_position)
     with urllib.request.urlopen(url) as response:
         return response.read().decode(encoding='utf-8')
 
 
-def retrieve_item_metadata(collection_alias, item_pointer, form):
-    url = '{}dmGetItemInfo/{}/{}/{}'.format(url_prefix, collection_alias, item_pointer, form)
+def retrieve_item_metadata(alias, pointer, xml_or_json):
+    url = '{}dmGetItemInfo/{}/{}/{}'.format(url_prefix, alias, pointer, xml_or_json)
     with urllib.request.urlopen(url) as response:
         return response.read().decode(encoding='utf-8')
 
 
-def retrieve_binaries(collection_alias, item_pointer, filetype):
-    url = 'https://cdm16313.contentdm.oclc.org/utils/getfile/collection/{}/id/{}/filename/unused.{}'.format(
-        collection_alias, item_pointer, filetype)
+def retrieve_compound_object(alias, pointer):
+    url = '{}dmGetCompoundObjectInfo/{}/{}/xml'.format(url_prefix, alias, pointer)
+    with urllib.request.urlopen(url) as response:
+        return response.read().decode(encoding='utf-8')
+
+
+def retrieve_parent_info(alias, pointer, xml_or_json):
+    url = '{}GetParent/{}/{}/{}'.format(url_prefix, alias, pointer, xml_or_json)
+    with urllib.request.urlopen(url) as response:
+        return response.read().decode(encoding='utf-8')
+
+
+def retrieve_binary(alias, pointer):
+    cdm_binary_url = 'https://cdm16313.contentdm.oclc.org/utils/getfile/collection'
+    url = '{}/{}/id/{}/filename/unused.unused'.format(cdm_binary_url, alias, pointer)
     with urllib.request.urlopen(url) as response:
         return response.read()
 
 
-def retrieve_compound_object(collection_alias, item_pointer):
-    url = '{}dmGetCompoundObjectInfo/{}/{}/xml'.format(url_prefix, collection_alias, item_pointer)
-    with urllib.request.urlopen(url) as response:
-        return response.read().decode(encoding='utf-8')
-
-
-def retrieve_parent_info(collection_alias, item_pointer, filetype):
-    url = '{}GetParent/{}/{}/{}'.format(url_prefix, collection_alias, item_pointer, filetype)
-    with urllib.request.urlopen(url) as response:
-        return response.read().decode(encoding='utf-8')
-
-
-def write_binary_to_file(binary, alias, new_filename, filetype):
-    os.makedirs('../Cached_Cdm_files/{}'.format(alias), exist_ok=True)
-    filename = '../Cached_Cdm_files/{}/{}.{}'.format(alias, new_filename, filetype)
-    with open(filename, 'bw') as f:
-        f.write(binary)
-
-
-def write_xml_to_file(xml_text, alias, new_filename):
-    os.makedirs('../Cached_Cdm_files/{}'.format(alias), exist_ok=True)
-    filename = '../Cached_Cdm_files/{}/{}.xml'.format(alias, new_filename)
-    with open(filename, 'w') as f:
+def write_xml_to_file(xml_text, folder, filename):
+    os.makedirs(folder, exist_ok=True)
+    filepath = os.path.join(folder, '{}.xml'.format(filename))
+    with open(filepath, 'w') as f:
         f.write(xml_text)
 
 
-def write_json_to_file(json_text, alias, new_filename):
-    os.makedirs('../Cached_Cdm_files/{}'.format(alias), exist_ok=True)
-    filename = '../Cached_Cdm_files/{}/{}.json'.format(alias, new_filename)
-    with open(filename, 'w') as f:
+def write_json_to_file(json_text, folder, filename):
+    os.makedirs(folder, exist_ok=True)
+    filepath = os.path.join(folder, '{}.json'.format(filename))
+    with open(filepath, 'w') as f:
         f.write(json_text)
 
 
-def write_admin_binary_to_file(binary, alias, new_filename, filetype):
-    os.makedirs('../AdminPanel_Cdm_files/{}'.format(alias), exist_ok=True)
-    filename = '../AdminPanel_Cdm_files/{}/{}.{}'.format(alias, new_filename, filetype)
-    with open(filename, 'bw') as f:
+def write_binary_to_file(binary, folder, filename, filetype):
+    os.makedirs(folder, exist_ok=True)
+    filepath = os.path.join(folder, '{}.{}'.format(filename, filetype))
+    with open(filepath, 'bw') as f:
         f.write(binary)
-
-
-def write_admin_xml_to_file(xml_text, alias, new_filename):
-    os.makedirs('AdminPanel_Cdm_files/{}'.format(alias), exist_ok=True)
-    filename = '../AdminPanel_Cdm_files/{}/{}.xml'.format(alias, new_filename)
-    with open(filename, 'w') as f:
-        f.write(xml_text)
-
-
-def write_admin_json_to_file(json_text, alias, new_filename):
-    os.makedirs('AdminPanel_Cdm_files/{}'.format(alias), exist_ok=True)
-    filename = '../AdminPanel_Cdm_files/{}/{}.json'.format(alias, new_filename)
-    with open(filename, 'w') as f:
-        f.write(json_text)
