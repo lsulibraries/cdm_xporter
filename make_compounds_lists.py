@@ -4,7 +4,8 @@ import os
 import lxml.etree as etree
 
 
-starting_dir = '/media/garrett_armstrong/U/Cached_Cdm_files'
+starting_dir = '../Cached_Cdm_files'
+
 
 def identify_simpl_compound_pointers(root, files):
     simple_pointers = []
@@ -13,8 +14,12 @@ def identify_simpl_compound_pointers(root, files):
 
     for elems_file in elems_files:
         elems_etree = etree.parse(os.path.join(root, elems_file))
-        simples_sublist = [i.text for i in elems_etree.findall('.//pointer') if [j for j in i.itersiblings(tag='find') if 'cpd' not in j.text]]
-        compound_sublist = [i.text for i in elems_etree.findall('.//pointer') if [j for j in i.itersiblings(tag='find') if 'cpd' in j.text]]
+        simples_sublist = [i.text for i in elems_etree.findall('.//pointer')
+                           if [j for j in i.itersiblings(tag='find')
+                               if 'cpd' not in j.text]]
+        compound_sublist = [i.text for i in elems_etree.findall('.//pointer')
+                            if [j for j in i.itersiblings(tag='find')
+                                if 'cpd' in j.text]]
         for i in simples_sublist:
             simple_pointers.append(i)
         for i in compound_sublist:
