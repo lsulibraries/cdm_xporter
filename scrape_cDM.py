@@ -5,7 +5,7 @@ import urllib
 from lxml import etree as ET
 import json
 
-import cDM_api_calls.py as cDM
+import cDM_api_calls as cDM
 
 WE_DONT_MIGRATE = {'p16313coll70', 'p120701coll11', 'LSUHSCS_JCM', 'UNO_SCC', 'p15140coll36', 'p15140coll57',
                    'p15140coll13', 'p15140coll11', 'p16313coll32', 'p16313coll49', 'p16313coll50',
@@ -49,34 +49,35 @@ Cachec_Cdm_files-
 
 def main(alias):
     print(alias)
-    write_collection_level_metadata(alias)
-    do_root_level_objects(alias)
-    do_compound_objects(alias)
+    alias_source_tree = [i for i in os.walk(os.path.realpath(os.path.join('..', 'Cached_Cdm_files', alias)))]
+    write_collection_level_metadata(alias, alias_source_tree)
+    # do_root_level_objects(alias)
+    # do_compound_objects(alias)
 
 
-def write_collection_level_metadata(alias):
-    alias_dir = os.path.join('..', 'Cached_Cdm_files', alias)
-    os.makedirs(alias_dir, exist_ok=True)
-    if not os.path.isfile('{}/Collection_Metadata.xml'.format(alias_dir)):
-        cDM.write_xml_to_file(
-            cDM.retrieve_collection_metadata(alias),
-            alias_dir,
-            'Collection_Metadata')
-    if not os.path.isfile('{}/Collection_TotalRecs.xml'.format(alias_dir)):
-        cDM.write_xml_to_file(
-            cDM.retrieve_collection_total_recs(alias),
-            alias_dir,
-            'Collection_TotalRecs')
-    if not os.path.isfile('{}/Collection_Fields.json'.format(alias_dir)):
-        cDM.write_json_to_file(
-            cDM.retrieve_collection_fields_json(alias),
-            alias_dir,
-            'Collection_Fields')
-    if not os.path.isfile('{}/Collection_Fields.xml'.format(alias_dir)):
-        cDM.write_xml_to_file(
-            cDM.retrieve_collection_fields_xml(alias),
-            alias_dir,
-            'Collection_Fields')
+def write_collection_level_metadata(alias, alias_source_tree):
+    for root, dirs, files in alias_source_tree:
+        if os.path.split(root)[-1] == alias:
+            if 'Collection_Metadata.xml' not in files:
+                cDM.write_xml_to_file(
+                    cDM.retrieve_collection_metadata(alias),
+                    root,
+                    'Collection_Metadata')
+            if 'Collection_TotalRecs.xml' not in files:
+                cDM.write_xml_to_file(
+                    cDM.retrieve_collection_total_recs(alias),
+                    root,
+                    'Collection_TotalRecs')
+            if 'Collection_Fields.json' not in files:
+                cDM.write_json_to_file(
+                    cDM.retrieve_collection_fields_json(alias),
+                    root,
+                    'Collection_Fields')
+            if 'Collection_Fields.xml' not in files:
+                cDM.write_xml_to_file(
+                    cDM.retrieve_collection_fields_xml(alias),
+                    root,
+                    'Collection_Fields')
 
 
 def do_root_level_objects(alias):
