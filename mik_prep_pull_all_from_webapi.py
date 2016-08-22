@@ -7,6 +7,24 @@ import json
 
 import pull_from_cdm_for_mik as p
 
+WE_DONT_MIGRATE = {'p16313coll70', 'p120701coll11', 'LSUHSCS_JCM', 'UNO_SCC', 'p15140coll36', 'p15140coll57',
+                   'p15140coll13', 'p15140coll11', 'p16313coll32', 'p16313coll49', 'p16313coll50',
+                   'p16313coll90', 'p120701coll14', 'p120701coll20', 'p120701coll21', 'DUBLIN2',
+                   'HHN', 'p15140coll55', 'NOD', 'WIS', 'p16313coll55', 'LOU_RANDOM', 'p120701coll11',
+                   'p16313coll67', 'AMA', 'HTU', 'p15140coll3', 'p15140coll15', 'p15140coll25',
+                   'p15140coll29', 'p15140coll34', 'p15140coll37', 'p15140coll38', 'p15140coll39',
+                   'p15140coll40', 'p15140coll45', 'p15140coll47', 'p15140coll58', 'p16313coll4',
+                   'p16313coll6', 'p16313coll11', 'p16313coll12', 'p16313coll13', 'p16313coll14',
+                   'p16313coll15', 'p16313coll16', 'p16313coll29', 'p16313coll27', 'p16313coll30',
+                   'p16313coll33', 'p16313coll37', 'p16313coll38', 'p16313coll39', 'p16313coll41',
+                   'p16313coll42', 'p16313coll46', 'p16313coll47', 'p16313coll53', 'p16313coll59',
+                   'p16313coll63', 'p16313coll64', 'p16313coll66', 'p16313coll68', 'p16313coll71',
+                   'p16313coll73', 'p16313coll75', 'p16313coll78', 'p16313coll84',
+                   'p15140coll32', 'p16313coll82', 'p120701coll6', 'p267101coll4',
+                   'p16313coll44', 'p16313coll88', 'p16313coll94', 'JSN', 'p15140coll24',
+                   'p15140coll9', 'p15140coll59', 'p16313coll40', 'p15140coll53', 'p16313coll97',
+                   'p16313coll18', 'p15140coll33', 'LST', 'MPF', 'p15140coll2', }
+
 
 """
 "alias" is contentDM's term for collections.
@@ -84,12 +102,12 @@ def write_chunk_of_elems_in_collection(alias, starting_position, chunk_size):
     alias_dir = os.path.join('..', 'Cached_Cdm_files', alias)
     if not os.path.isfile('{}/Elems_in_Collection_{}.json'.format(alias_dir, starting_position)):
         p.write_json_to_file(
-            p.retrieve_elems_json(alias, starting_position, chunk_size),
+            p.retrieve_elems_in_collection(alias, starting_position, chunk_size, 'json'),
             alias_dir,
             'Elems_in_Collection_{}'.format(starting_position))
     if not os.path.isfile('{}/Elems_in_Collection_{}.xml'.format(alias_dir, starting_position)):
         p.write_xml_to_file(
-            p.retrieve_elems_xml(alias, starting_position, chunk_size),
+            p.retrieve_elems_in_collection(alias, starting_position, chunk_size, 'xml'),
             alias_dir,
             'Elems_in_Collection_{}'.format(starting_position))
 
@@ -127,6 +145,7 @@ def write_metadata(target_dir, alias, pointer, simple_or_cpd):
             broken_pointers.add((alias, pointer))
         else:
             p.write_xml_to_file(xml_text, target_dir, pointer)
+            print('wrote xml_text')
 
     if not os.path.isfile('{}/{}.json'.format(target_dir, pointer)):
         json_text = p.retrieve_item_metadata(alias, pointer, 'json')
@@ -134,6 +153,7 @@ def write_metadata(target_dir, alias, pointer, simple_or_cpd):
             broken_pointers.add((alias, pointer))
         else:
             p.write_json_to_file(json_text, target_dir, pointer)
+        print('wrote json_text')
 
     if not os.path.isfile('{}/{}_parent.xml'.format(target_dir, pointer)):
         xml_parent_text = p.retrieve_parent_info(alias, pointer, 'xml')
@@ -141,6 +161,7 @@ def write_metadata(target_dir, alias, pointer, simple_or_cpd):
             broken_pointers.add((alias, pointer))
         else:
             p.write_xml_to_file(xml_parent_text, target_dir, '{}_parent'.format(pointer))
+        print('wrote xml_parent_text')
 
     if not os.path.isfile('{}/{}_parent.json'.format(target_dir, pointer)):
         json_parent_text = p.retrieve_parent_info(alias, pointer, 'json')
@@ -148,6 +169,7 @@ def write_metadata(target_dir, alias, pointer, simple_or_cpd):
             broken_pointers.add((alias, pointer))
         else:
             p.write_json_to_file(json_parent_text, target_dir, '{}_parent'.format(pointer))
+        print('wrote json_parent_text')
 
     if simple_or_cpd == 'cpd':
         if not os.path.isfile('{}/{}_cpd.xml'.format(target_dir, pointer)):
@@ -156,6 +178,7 @@ def write_metadata(target_dir, alias, pointer, simple_or_cpd):
                 broken_pointers.add((alias, pointer))
             else:
                 p.write_xml_to_file(index_file_text, target_dir, '{}_cpd'.format(pointer))
+            print('wrote xml_index_file_text')
 
 
 def is_it_a_404_xml(xml_text):
@@ -175,6 +198,7 @@ def is_it_a_404_json(json_text):
 
 
 def process_binary(target_dir, alias, pointer, filetype):
+    return
     # item_xml_filepath = '{}/{}.xml'.format(target_dir, pointer)
     # item_etree = ET.parse(item_xml_filepath)
     # if item_etree.find('find') is not None:    # i.e., does this pointer have a file
@@ -266,10 +290,12 @@ def parse_binary_original_filetype(folder, pointer):
 
 
 if __name__ == '__main__':
+
     """ Get specific collections' metadata/binaries """
     unavailable_binaries = []
     incomplete_collection = []
-    for alias in ('p16313coll51', 'LWP', 'LSUHSC_NCC', ):
+    # for alias in ('p120701coll17',):
+    for alias in ('p120701coll17',):
         broken_pointers = set()
         main(alias)
         incomplete_collection.append('{} {}'.format(alias, broken_pointers))
@@ -277,24 +303,6 @@ if __name__ == '__main__':
     print('unavailable binaries:', unavailable_binaries)
 
     """ Get all collections' metadata/binaries """
-
-    we_dont_migrate = {'p16313coll70', 'p120701coll11', 'LSUHSCS_JCM', 'UNO_SCC', 'p15140coll36', 'p15140coll57',
-                       'p15140coll13', 'p15140coll11', 'p16313coll32', 'p16313coll49', 'p16313coll50',
-                       'p16313coll90', 'p120701coll14', 'p120701coll20', 'p120701coll21', 'DUBLIN2',
-                       'HHN', 'p15140coll55', 'NOD', 'WIS', 'p16313coll55', 'LOU_RANDOM', 'p120701coll11',
-                       'p16313coll67', 'AMA', 'HTU', 'p15140coll3', 'p15140coll15', 'p15140coll25',
-                       'p15140coll29', 'p15140coll34', 'p15140coll37', 'p15140coll38', 'p15140coll39',
-                       'p15140coll40', 'p15140coll45', 'p15140coll47', 'p15140coll58', 'p16313coll4',
-                       'p16313coll6', 'p16313coll11', 'p16313coll12', 'p16313coll13', 'p16313coll14',
-                       'p16313coll15', 'p16313coll16', 'p16313coll29', 'p16313coll27', 'p16313coll30',
-                       'p16313coll33', 'p16313coll37', 'p16313coll38', 'p16313coll39', 'p16313coll41',
-                       'p16313coll42', 'p16313coll46', 'p16313coll47', 'p16313coll53', 'p16313coll59',
-                       'p16313coll63', 'p16313coll64', 'p16313coll66', 'p16313coll68', 'p16313coll71',
-                       'p16313coll73', 'p16313coll75', 'p16313coll78', 'p16313coll84',
-                       'p15140coll32', 'p16313coll82', 'p120701coll6', 'p267101coll4',
-                       'p16313coll44', 'p16313coll88', 'p16313coll94', 'JSN', 'p15140coll24',
-                       'p15140coll9', 'p15140coll59', 'p16313coll40', 'p15140coll53', 'p16313coll97',
-                       'p16313coll18', 'p15140coll33', 'LST', 'MPF', 'p15140coll2', }
 
     # repo_dir = '../Cached_Cdm_files'
     # if not os.path.isfile(os.path.join(repo_dir, 'Collections_List.xml')):
@@ -304,7 +312,7 @@ if __name__ == '__main__':
     # not_all_binaries = []
     # for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')]:
     #     broken_pointers = set()
-    #     if alias in we_dont_migrate:
+    #     if alias in WE_DONT_MIGRATE:
     #         continue
     #     # try:
     #     #     print('{} '.format(alias) * 10)

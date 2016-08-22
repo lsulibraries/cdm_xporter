@@ -40,16 +40,10 @@ def retrieve_collection_fields_json(alias):
         return response.read().decode(encoding='utf-8')
 
 
-def retrieve_elems_xml(alias, starting_position, chunk_size):
-    url = '{}dmQuery/{}/0/dmcreated!dmrecord!pointer/nosort/{}/{}/1/0/0/0/0/0/xml'.format(
-        url_prefix, alias, chunk_size, starting_position,)
-    with urllib.request.urlopen(url) as response:
-        return response.read().decode(encoding='utf-8')
-
-
-def retrieve_elems_json(alias, starting_position, chunk_size):
-    url = '{}dmQuery/{}/0/dmcreated!dmrecord!pointer/nosort/{}/{}/1/0/0/0/0/0/json'.format(
-        url_prefix, alias, chunk_size, starting_position)
+def retrieve_elems_in_collection(alias, starting_position, chunk_size, xml_or_json):
+    fields = 'fullrs!find!dmaccess!dmimage!dmcreated!dmmodified!dmoclcno!dmrecord'
+    url = '{}dmQuery/{}/0/{}/nosort/{}/{}/1/0/0/0/0/0/{}'.format(
+        url_prefix, alias, fields, chunk_size, starting_position, xml_or_json)
     with urllib.request.urlopen(url) as response:
         return response.read().decode(encoding='utf-8')
 
@@ -61,7 +55,7 @@ def retrieve_item_metadata(alias, pointer, xml_or_json):
 
 
 def retrieve_compound_object(alias, pointer):
-    url = '{}dmGetCompoundObjectInfo/{}/{}/xml'.format(url_prefix, alias, pointer)
+    url = '{}dmGetCompoundObjectInfo/{}/{}/{}'.format(url_prefix, alias, pointer)
     with urllib.request.urlopen(url) as response:
         return response.read().decode(encoding='utf-8')
 
