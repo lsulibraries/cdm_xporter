@@ -7,6 +7,8 @@ import json
 
 import cDM_api_calls as cDM
 
+# weird bug where it won't get objects the first pass.  Requires two runs, for any collection with no previous data.
+
 WE_DONT_MIGRATE = {'p16313coll70', 'p120701coll11', 'LSUHSCS_JCM', 'UNO_SCC', 'p15140coll36', 'p15140coll57',
                    'p15140coll13', 'p15140coll11', 'p16313coll32', 'p16313coll49', 'p16313coll50',
                    'p16313coll90', 'p120701coll14', 'p120701coll20', 'p120701coll21', 'DUBLIN2',
@@ -49,6 +51,7 @@ Cachec_Cdm_files-
 
 def main(alias):
     print(alias)
+    os.makedirs('../Cached_Cdm_files/{}'.format(alias), exist_ok=True)
     alias_source_tree = [i for i in os.walk(os.path.realpath(os.path.join('..', 'Cached_Cdm_files', alias)))]
     write_collection_level_metadata(alias, alias_source_tree)
     do_root_level_objects(alias, alias_source_tree)
