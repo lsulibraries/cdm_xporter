@@ -51,8 +51,9 @@ Cachec_Cdm_files-
 
 def main(alias):
     print(alias)
-    os.makedirs('../Cached_Cdm_files/{}'.format(alias), exist_ok=True)
+    os.makedirs('../Cached_Cdm_files/{}/Cpd'.format(alias), exist_ok=True)
     alias_source_tree = [i for i in os.walk(os.path.realpath(os.path.join('..', 'Cached_Cdm_files', alias)))]
+    print('56 finished making filetree')
     write_collection_level_metadata(alias, alias_source_tree)
     do_root_level_objects(alias, alias_source_tree)
     do_compound_objects(alias, alias_source_tree)
@@ -62,12 +63,16 @@ def write_collection_level_metadata(alias, alias_source_tree):
     # searching our directory tree for the path ending in our alias.
     path, files = [(path, files) for path, dirs, files in alias_source_tree if os.path.split(path)[-1] == alias][0]
     if 'Collection_TotalRecs.xml' not in files:
+        print('65')
         cDM.write_xml_to_file(cDM.retrieve_collection_total_recs(alias), path, 'Collection_TotalRecs')
     if 'Collection_Metadata.xml' not in files:
+        print('68')
         cDM.write_xml_to_file(cDM.retrieve_collection_metadata(alias), path, 'Collection_Metadata')
     if 'Collection_Fields.json' not in files:
+        print('69')
         cDM.write_json_to_file(cDM.retrieve_collection_fields_json(alias), path, 'Collection_Fields')
     if 'Collection_Fields.xml' not in files:
+        print('70')
         cDM.write_xml_to_file(cDM.retrieve_collection_fields_xml(alias), path, 'Collection_Fields')
 
 
@@ -93,11 +98,13 @@ def count_root_objects(alias_dir):
 def write_chunk_of_elems_in_collection(alias, pos, chunksize, alias_source_tree):
     path, files = [(path, files) for path, dirs, files in alias_source_tree if os.path.split(path)[-1] == alias][0]
     if 'Elems_in_Collection_{}.json'.format(pos) not in files:
+        print('100')
         cDM.write_json_to_file(
             cDM.retrieve_elems_in_collection(alias, pos, chunksize, 'json'),
             path,
             'Elems_in_Collection_{}'.format(pos))
     if 'Elems_in_Collection_{}.xml'.format(pos) not in files:
+        print('106')
         cDM.write_xml_to_file(
             cDM.retrieve_elems_in_collection(alias, pos, chunksize, 'xml'),
             path,
@@ -129,49 +136,53 @@ def process_root_level_objects(alias, pointer, filetype, alias_source_tree):
 
 
 def write_metadata(target_dir, alias, pointer, alias_source_tree, simple_or_cpd):
-    print(pointer)
     path, files = [(path, files) for path, dirs, files in alias_source_tree if target_dir == path][0]
 
     if "{}.xml".format(pointer) not in files:
+        print('141')
         xml_text = cDM.retrieve_item_metadata(alias, pointer, 'xml')
         if is_it_a_404_xml(xml_text):
             broken_pointers.add((alias, pointer))
         else:
             cDM.write_xml_to_file(xml_text, target_dir, pointer)
-            print('wrote xml_text')
+            print(alias, pointer, 'wrote xml_text')
 
     if '{}.json'.format(pointer) not in files:
+        print('150')
         json_text = cDM.retrieve_item_metadata(alias, pointer, 'json')
         if is_it_a_404_json(json_text):
             broken_pointers.add((alias, pointer))
         else:
             cDM.write_json_to_file(json_text, target_dir, pointer)
-        print('wrote json_text')
+        print(alias, pointer, 'wrote json_text')
 
     if '{}_parent.xml'.format(pointer) not in files:
+        print('159')
         xml_parent_text = cDM.retrieve_parent_info(alias, pointer, 'xml')
         if is_it_a_404_xml(xml_parent_text):
             broken_pointers.add((alias, pointer))
         else:
             cDM.write_xml_to_file(xml_parent_text, target_dir, '{}_parent'.format(pointer))
-        print('wrote xml_parent_text')
+        print(alias, pointer, 'wrote xml_parent_text')
 
     if '{}_parent.json'.format(pointer) not in files:
+        print('168')
         json_parent_text = cDM.retrieve_parent_info(alias, pointer, 'json')
         if is_it_a_404_json(json_parent_text):
             broken_pointers.add((alias, pointer))
         else:
             cDM.write_json_to_file(json_parent_text, target_dir, '{}_parent'.format(pointer))
-        print('wrote json_parent_text')
+        print(alias, pointer, 'wrote json_parent_text')
 
     if simple_or_cpd == 'cpd':
         if '{}_cpd.xml'.format(pointer) not in files:
+            print('178')
             index_file_text = cDM.retrieve_compound_object(alias, pointer)
             if is_it_a_404_xml(index_file_text):
                 broken_pointers.add((alias, pointer))
             else:
                 cDM.write_xml_to_file(index_file_text, target_dir, '{}_cpd'.format(pointer))
-            print('wrote xml_index_file_text')
+            print(alias, pointer, 'wrote xml_index_file_text')
 
 
 def is_it_a_404_xml(xml_text):
@@ -194,6 +205,7 @@ def process_binary(target_dir, alias, pointer, filetype, alias_source_tree):
     path, files = [(path, files) for path, dirs, files in alias_source_tree if target_dir == path][0]
 
     if '{}.{}'.format(pointer, filetype) not in files:
+        print('207')
         try:
             cDM.write_binary_to_file(
                 cDM.retrieve_binary(alias, pointer),
@@ -202,7 +214,7 @@ def process_binary(target_dir, alias, pointer, filetype, alias_source_tree):
                 filetype)
             print('wrote', alias, pointer, filetype)
         except urllib.error.HTTPError:
-            print('HTTP error caught on binary')
+            print(alias, pointer, 'HTTP error caught on binary')
             unavailable_binaries.append((alias, pointer, filetype))
 
 
@@ -234,16 +246,22 @@ def write_child_data(alias, index_file, alias_source_tree):
 
 
 def try_to_get_a_hidden_pdf_at_root_of_cpd(alias, index_file, alias_source_tree):
+    print(index_file)
     path, files = [(path, files) for path, dirs, files in alias_source_tree if index_file in files][0]
     xml_file = "{}.xml".format(index_file.split('_')[0])
     root_cpd_etree = ET.parse(os.path.join(path, xml_file))
     pointer = root_cpd_etree.findall('.//dmrecord')[0].text
-    filetype = root_cpd_etree.findall('.//format')[0].text.lower()
+    filetype = root_cpd_etree.findall('.//format')[0].text
+    if filetype:
+        filetype = filetype.lower()
+    else:
+        filetype = 'pdf'
     if '{}.{}'.format(pointer, filetype) not in files:
+        print('255')
         try:
             binary = cDM.retrieve_binary(alias, pointer)
         except urllib.error.HTTPError:
-            print('HTTP error caught on binary')
+            print(alias, pointer, 'HTTP error caught on binary')
             unavailable_binaries.append((alias, pointer, filetype))
             return
         # in some cases, contentDM gives an xml instead of a binary.
@@ -278,32 +296,26 @@ def parse_binary_original_filetype(folder, pointer):
 if __name__ == '__main__':
 
     """ Get specific collections' metadata/binaries """
-    unavailable_binaries = []
-    incomplete_collection = []
-    for alias in ('p120701coll17',):
-        broken_pointers = set()
-        main(alias)
-        incomplete_collection.append('{} {}'.format(alias, broken_pointers))
-    print('Incompletes:\n'.format('\n\t'.join(i for i in incomplete_collection)))
-    print('Unavailable binaries:\n\t{}'.format('\n\t'.join(i for i in unavailable_binaries)))
+    # unavailable_binaries = []
+    # incomplete_collection = []
+    # for alias in ('LSU_LNP',):
+    #     broken_pointers = set()
+    #     main(alias)
+    #     incomplete_collection.append('{} {}'.format(alias, broken_pointers))
+    # print('Incompletes:\n'.format('\n\t'.join(i for i in incomplete_collection)))
+    # print('Unavailable binaries:\n\t{}'.format('\n\t'.join(i for i in unavailable_binaries)))
 
     """ Get all collections' metadata/binaries """
 
-    # repo_dir = '../Cached_Cdm_files'
-    # if not os.path.isfile(os.path.join(repo_dir, 'Collections_List.xml')):
-    #     coll_list_txt = cDM.retrieve_collections_list()
-    #     cDM.write_xml_to_file(coll_list_txt, repo_dir, 'Collections_List')
-    # coll_list_xml = ET.parse(os.path.join(repo_dir, 'Collections_List.xml'))
-    # not_all_binaries = []
-    # for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')]:
-    #     broken_pointers = set()
-    #     if alias in WE_DONT_MIGRATE:
-    #         continue
-    #     # try:
-    #     #     print('{} '.format(alias) * 10)
-    #     main(alias)
-    #     # except:
-    #     #     not_all_binaries.append((alias, broken_pointers))
-    #     print(alias)
-    #     print(broken_pointers)
-    # print(not_all_binaries)
+    repo_dir = '../Cached_Cdm_files'
+    if not os.path.isfile(os.path.join(repo_dir, 'Collections_List.xml')):
+        coll_list_txt = cDM.retrieve_collections_list()
+        cDM.write_xml_to_file(coll_list_txt, repo_dir, 'Collections_List')
+    coll_list_xml = ET.parse(os.path.join(repo_dir, 'Collections_List.xml'))
+    not_all_binaries = []
+    for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')]:
+        broken_pointers = set()
+        if alias in WE_DONT_MIGRATE:
+            continue
+        main(alias)
+    print(not_all_binaries)
