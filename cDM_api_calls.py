@@ -55,7 +55,7 @@ def retrieve_item_metadata(alias, pointer, xml_or_json):
 
 
 def retrieve_compound_object(alias, pointer):
-    url = '{}dmGetCompoundObjectInfo/{}/{}/{}'.format(url_prefix, alias, pointer)
+    url = '{}dmGetCompoundObjectInfo/{}/{}/xml'.format(url_prefix, alias, pointer)
     with urllib.request.urlopen(url) as response:
         return response.read().decode(encoding='utf-8')
 
