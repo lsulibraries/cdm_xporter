@@ -8,8 +8,6 @@ import json
 import cDM_api_calls as cDM
 
 
-# weird bug where it won't get objects the first pass.  Requires two runs, for any collection with no previous data.
-
 WE_DONT_MIGRATE = {'p16313coll70', 'p120701coll11', 'LSUHSCS_JCM', 'UNO_SCC', 'p15140coll36', 'p15140coll57',
                    'p15140coll13', 'p15140coll11', 'p16313coll32', 'p16313coll49', 'p16313coll50',
                    'p16313coll90', 'p120701coll14', 'p120701coll20', 'p120701coll21', 'DUBLIN2',
@@ -300,11 +298,31 @@ if __name__ == '__main__':
 
     """ Get specific collections' metadata/binaries """
 
-    for alias in ('p120701coll17',):
+    # for alias in ('p120701coll17',):
+    #     scrapealias = ScrapeAlias(alias)
+    #     scrapealias.main()
+    #     all_unavailable_metadata[alias] = scrapealias.unavailable_metadata
+    #     all_unavailable_binaries[alias] = scrapealias.unavailable_binaries
+
+
+    """ Get all collections' metadata/binaries """
+
+    repo_dir = '../Cached_Cdm_files'
+    os.makedirs(repo_dir, exist_ok=True)
+    if not os.path.isfile(os.path.join(repo_dir, 'Collections_List.xml')):
+        coll_list_txt = cDM.retrieve_collections_list()
+        cDM.write_xml_to_file(coll_list_txt, repo_dir, 'Collections_List')
+    coll_list_xml = ET.parse(os.path.join(repo_dir, 'Collections_List.xml'))
+    not_all_binaries = []
+    for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')]:
+        if alias in WE_DONT_MIGRATE:
+            continue
         scrapealias = ScrapeAlias(alias)
         scrapealias.main()
         all_unavailable_metadata[alias] = scrapealias.unavailable_metadata
         all_unavailable_binaries[alias] = scrapealias.unavailable_binaries
+
+
     print('\n\nUnavailable metadata:')
     for k, v in all_unavailable_metadata.items():
         if len(v):
@@ -316,18 +334,3 @@ if __name__ == '__main__':
             print(k)
             print('\n'.join(i for i in v))
     print('\n\n')
-
-    """ Get all collections' metadata/binaries """
-
-    # repo_dir = '../Cached_Cdm_files'
-    # if not os.path.isfile(os.path.join(repo_dir, 'Collections_List.xml')):
-    #     coll_list_txt = cDM.retrieve_collections_list()
-    #     cDM.write_xml_to_file(coll_list_txt, repo_dir, 'Collections_List')
-    # coll_list_xml = ET.parse(os.path.join(repo_dir, 'Collections_List.xml'))
-    # not_all_binaries = []
-    # for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')]:
-    #     if alias in WE_DONT_MIGRATE:
-    #         continue
-    #     main(alias)
-    # print('Incompletes:\n'.format('\n\t'.join(i for i in incomplete_collection)))
-    # print('Unavailable binaries:\n\t{}'.format('\n\t'.join(i for i in unavailable_binaries)))
