@@ -81,11 +81,13 @@ class ScrapeAlias():
                 path,
                 'Collection_Metadata')
         if 'Collection_Fields.json' not in files:
-            cDM.write_json_to_file(cDM.retrieve_collection_fields_json(alias),
+            cDM.write_json_to_file(
+                cDM.retrieve_collection_fields_json(alias),
                 path,
                 'Collection_Fields')
         if 'Collection_Fields.xml' not in files:
-            cDM.write_xml_to_file(cDM.retrieve_collection_fields_xml(alias),
+            cDM.write_xml_to_file(
+                cDM.retrieve_collection_fields_xml(alias),
                 path,
                 'Collection_Fields')
 
@@ -192,7 +194,7 @@ class ScrapeAlias():
     def process_binary(self, target_dir, pointer, filetype):
         files = [file for root, dirs, files in self.tree_snapshot for file in files if target_dir == root]
 
-        if '{}.{}'.format(pointer, filetype) not in files:
+        if '{}.{}'.format(pointer, filetype) not in files and '{}.{}'.format(pointer, filetype.lower()) not in files:
             try:
                 cDM.write_binary_to_file(
                     cDM.retrieve_binary(self.alias, pointer),
@@ -245,7 +247,7 @@ class ScrapeAlias():
                 binary = cDM.retrieve_binary(self.alias, pointer)
             except urllib.error.HTTPError:
                 print(self.alias, pointer, 'HTTP error caught on binary')
-                self.unavailable_binaries.append((pointer, filetype))
+                self.unavailable_binaries.add((pointer, filetype))
                 return
             # in some cases, contentDM gives an xml instead of a binary.
             # it's easier to discern whether something is an xml, than to discern
@@ -288,8 +290,22 @@ def parse_binary_original_filetype(folder, pointer):
     filepath = '{}/{}.xml'.format(folder, pointer)
     parsed_etree = ET.parse(filepath)
     orig_name = parsed_etree.find('find').text
-    filetype = os.path.splitext(orig_name)[-1].replace('.', '').lower()
+    filetype = os.path.splitext(orig_name)[-1].replace('.', '')
     return filetype
+
+
+def make_pretty_printout(all_unavailable_binaries, all_unavailable_metadata):
+    print('\n\nUnavailable metadata:')
+    for k, v in all_unavailable_metadata.items():
+        if len(v):
+            print(k)
+            print('\n'.join(i for i in v))
+    print('\nUnavailable binaries:')
+    for k, v in all_unavailable_binaries.items():
+        if len(v):
+            print(k)
+            print('\n'.join(i for i in v))
+    print('\n\n')
 
 
 if __name__ == '__main__':
@@ -298,12 +314,12 @@ if __name__ == '__main__':
 
     """ Get specific collections' metadata/binaries """
 
-    # for alias in ('p120701coll17',):
+    # for alias in ('lapur',):
     #     scrapealias = ScrapeAlias(alias)
     #     scrapealias.main()
     #     all_unavailable_metadata[alias] = scrapealias.unavailable_metadata
     #     all_unavailable_binaries[alias] = scrapealias.unavailable_binaries
-
+    # make_pretty_printout(all_unavailable_binaries, all_unavailable_metadata)
 
     """ Get all collections' metadata/binaries """
 
@@ -321,16 +337,4 @@ if __name__ == '__main__':
         scrapealias.main()
         all_unavailable_metadata[alias] = scrapealias.unavailable_metadata
         all_unavailable_binaries[alias] = scrapealias.unavailable_binaries
-
-
-    print('\n\nUnavailable metadata:')
-    for k, v in all_unavailable_metadata.items():
-        if len(v):
-            print(k)
-            print('\n'.join(i for i in v))
-    print('\nUnavailable binaries:')
-    for k, v in all_unavailable_binaries.items():
-        if len(v):
-            print(k)
-            print('\n'.join(i for i in v))
-    print('\n\n')
+    make_pretty_printout(all_unavailable_binaries, all_unavailable_metadata)
