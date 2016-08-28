@@ -92,9 +92,8 @@ class ScrapeAlias():
                 'Collection_Fields')
 
     def do_root_level_objects(self):
-        num_root_objects = self.count_root_objects()
         chunksize = 100
-        num_chunks = (num_root_objects // chunksize) + 1
+        num_chunks = self.calculate_chunks(chunksize)
         for num in range(num_chunks):
             starting_position = (num * chunksize) + 1
             self.write_chunk_of_elems_in_collection(starting_position, chunksize)
@@ -102,9 +101,14 @@ class ScrapeAlias():
         for pointer, filetype in self.find_root_pointers_filetypes():
             self.process_root_level_objects(pointer, filetype)
 
+    def calculate_chunks(self, chunksize):
+        num_root_objects = self.count_root_objects()
+        return (num_root_objects // chunksize) + 1
+
     def count_root_objects(self):
         total_recs_etree = ET.parse(os.path.join(self.alias_dir, 'Collection_TotalRecs.xml'))
-        return int(total_recs_etree.xpath('.//total')[0].text)
+        this_elem = total_recs_etree.xpath('.//total')
+        return int(this_elem[0].text)
 
     def write_chunk_of_elems_in_collection(self, starting_position, chunksize):
         path = self.alias_dir
@@ -314,27 +318,27 @@ if __name__ == '__main__':
 
     """ Get specific collections' metadata/binaries """
 
-    # for alias in ('lapur',):
-    #     scrapealias = ScrapeAlias(alias)
-    #     scrapealias.main()
-    #     all_unavailable_metadata[alias] = scrapealias.unavailable_metadata
-    #     all_unavailable_binaries[alias] = scrapealias.unavailable_binaries
-    # make_pretty_printout(all_unavailable_binaries, all_unavailable_metadata)
-
-    """ Get all collections' metadata/binaries """
-
-    repo_dir = '../Cached_Cdm_files'
-    os.makedirs(repo_dir, exist_ok=True)
-    if not os.path.isfile(os.path.join(repo_dir, 'Collections_List.xml')):
-        coll_list_txt = cDM.retrieve_collections_list()
-        cDM.write_xml_to_file(coll_list_txt, repo_dir, 'Collections_List')
-    coll_list_xml = ET.parse(os.path.join(repo_dir, 'Collections_List.xml'))
-    not_all_binaries = []
-    for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')]:
-        if alias in WE_DONT_MIGRATE:
-            continue
+    for alias in ('p120701coll17',):
         scrapealias = ScrapeAlias(alias)
         scrapealias.main()
         all_unavailable_metadata[alias] = scrapealias.unavailable_metadata
         all_unavailable_binaries[alias] = scrapealias.unavailable_binaries
     make_pretty_printout(all_unavailable_binaries, all_unavailable_metadata)
+
+    """ Get all collections' metadata/binaries """
+
+    # repo_dir = '../Cached_Cdm_files'
+    # os.makedirs(repo_dir, exist_ok=True)
+    # if not os.path.isfile(os.path.join(repo_dir, 'Collections_List.xml')):
+    #     coll_list_txt = cDM.retrieve_collections_list()
+    #     cDM.write_xml_to_file(coll_list_txt, repo_dir, 'Collections_List')
+    # coll_list_xml = ET.parse(os.path.join(repo_dir, 'Collections_List.xml'))
+    # not_all_binaries = []
+    # for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')]:
+    #     if alias in WE_DONT_MIGRATE:
+    #         continue
+    #     scrapealias = ScrapeAlias(alias)
+    #     scrapealias.main()
+    #     all_unavailable_metadata[alias] = scrapealias.unavailable_metadata
+    #     all_unavailable_binaries[alias] = scrapealias.unavailable_binaries
+    # make_pretty_printout(all_unavailable_binaries, all_unavailable_metadata)
