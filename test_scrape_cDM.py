@@ -60,3 +60,24 @@ def test_count_root_objects(mock_ET, make_coll_total_recs_etree):
     scrapealias.alias_dir = 'imag_alias_dir'
     assert scrapealias.count_root_objects() == 20
     mock_ET.parse.assert_called_with('imag_alias_dir/Collection_TotalRecs.xml')
+
+
+@mock.patch('scrape_cDM.ScrapeAlias.count_root_objects')
+def test_calculate_chunks(mock_count_root_objects):
+    scrapealias = scrape_cDM.ScrapeAlias('_')
+    scrapealias.count_root_objects.return_value = 900
+    assert scrapealias.calculate_chunks(100) == 10
+    mock_count_root_objects.assert_called_with()
+
+# @mock.patch('scrape_cDM.ScrapeAlias')
+# def test_do_root_level_objects(mock_scrapealias):
+#     scrapealias = mock_scrapealias('_')
+#     # scrapealias.count_root_objects = mock_scrapealias.count_root_objects
+#     # scrapealias.write_chunks_of_elems_in_collection = mock_scrapealias.write_chunks_of_elems_in_collection
+#     # scrapealias.find_root_pointers_filetypes = mock_scrapealias.find_root_pointers_filetypes
+#     # scrapealias.process_root_level_objects = mock_scrapealias.process_root_level_objects
+#     scrapealias.count_root_objects.return_value = 1
+#     assert scrapealias.num_chunks == 1
+#     scrapealias.write_chunks_of_elems_in_collection = mock_scrapealias.write_chunks_of_elems_in_collection
+#     scrapealias.find_root_pointers_filetypes = mock_scrapealias.find_root_pointers_filetypes
+#     scrapealias.process_root_level_objects = mock_scrapealias.process_root_level_objects
