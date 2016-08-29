@@ -5,7 +5,7 @@ import urllib
 from lxml import etree as ET
 import json
 
-import cDM_api_calls as cDM
+import cDM_api_calls as CdmAPI
 
 
 WE_DONT_MIGRATE = {'p16313coll70', 'p120701coll11', 'LSUHSCS_JCM', 'UNO_SCC', 'p15140coll36', 'p15140coll57',
@@ -67,28 +67,28 @@ class ScrapeAlias():
         self.do_compound_objects()
 
     def do_collection_level_metadata(self):
-        path = self.alias_dir
-        os.makedirs(path, exist_ok=True)
-        files = [i for i in os.listdir(path)]
+        filepath = self.alias_dir
+        os.makedirs(filepath, exist_ok=True)
+        files = [i for i in os.listdir(filepath)]
         if 'Collection_TotalRecs.xml' not in files:
-            cDM.write_xml_to_file(
-                cDM.retrieve_collection_total_recs(alias),
-                path,
+            CdmAPI.write_xml_to_file(
+                CdmAPI.retrieve_collection_total_recs(alias),
+                filepath,
                 'Collection_TotalRecs')
         if 'Collection_Metadata.xml' not in files:
-            cDM.write_xml_to_file(
-                cDM.retrieve_collection_metadata(alias),
-                path,
+            CdmAPI.write_xml_to_file(
+                CdmAPI.retrieve_collection_metadata(alias),
+                filepath,
                 'Collection_Metadata')
         if 'Collection_Fields.json' not in files:
-            cDM.write_json_to_file(
-                cDM.retrieve_collection_fields_json(alias),
-                path,
+            CdmAPI.write_json_to_file(
+                CdmAPI.retrieve_collection_fields_json(alias),
+                filepath,
                 'Collection_Fields')
         if 'Collection_Fields.xml' not in files:
-            cDM.write_xml_to_file(
-                cDM.retrieve_collection_fields_xml(alias),
-                path,
+            CdmAPI.write_xml_to_file(
+                CdmAPI.retrieve_collection_fields_xml(alias),
+                filepath,
                 'Collection_Fields')
 
     def do_root_level_objects(self):
@@ -111,25 +111,25 @@ class ScrapeAlias():
         return int(this_elem[0].text)
 
     def write_chunk_of_elems_in_collection(self, starting_position, chunksize):
-        path = self.alias_dir
-        files = [i for i in os.listdir(path)]
+        filepath = self.alias_dir
+        files = [i for i in os.listdir(filepath)]
         if 'Elems_in_Collection_{}.json'.format(starting_position) not in files:
-            cDM.write_json_to_file(
-                cDM.retrieve_elems_in_collection(self.alias, starting_position, chunksize, 'json'),
-                path,
+            CdmAPI.write_json_to_file(
+                CdmAPI.retrieve_elems_in_collection(self.alias, starting_position, chunksize, 'json'),
+                filepath,
                 'Elems_in_Collection_{}'.format(starting_position))
         if 'Elems_in_Collection_{}.xml'.format(starting_position) not in files:
-            cDM.write_xml_to_file(
-                cDM.retrieve_elems_in_collection(alias, starting_position, chunksize, 'xml'),
-                path,
+            CdmAPI.write_xml_to_file(
+                CdmAPI.retrieve_elems_in_collection(alias, starting_position, chunksize, 'xml'),
+                filepath,
                 'Elems_in_Collection_{}'.format(starting_position))
 
     def find_root_pointers_filetypes(self):
-        path = self.alias_dir
-        files = [file for file in os.listdir(path) if 'Elems_in_Collection' in file and '.xml' in file]
+        filepath = self.alias_dir
+        files = [file for file in os.listdir(filepath) if 'Elems_in_Collection' in file and '.xml' in file]
         pointers_filetypes = []
         for file in files:
-            elems_in_col_etree = ET.parse(os.path.join(path, file))
+            elems_in_col_etree = ET.parse(os.path.join(filepath, file))
             for single_record in elems_in_col_etree.findall('.//record'):
                 pointer = single_record.find('dmrecord').text or single_record.find('pointer').text
                 filetype = single_record.find('filetype').text.lower()
@@ -152,47 +152,47 @@ class ScrapeAlias():
         # there can be up to 4000 files checked here per alias,
         # so it is useful to take a snapshot of the directory tree beforehand,
         # instead of reading from the harddrive for each file.
-        files = [file for path, dirs, files in self.tree_snapshot for file in files if target_dir == path]
+        files = [file for root, dirs, files in self.tree_snapshot for file in files if target_dir == root]
 
         if "{}.xml".format(pointer) not in files:
-            xml_text = cDM.retrieve_item_metadata(self.alias, pointer, 'xml')
+            xml_text = CdmAPI.retrieve_item_metadata(self.alias, pointer, 'xml')
             if is_it_a_404_xml(xml_text):
                 self.unavailable_metadata.add(pointer)
             else:
-                cDM.write_xml_to_file(xml_text, target_dir, pointer)
+                CdmAPI.write_xml_to_file(xml_text, target_dir, pointer)
                 print(self.alias, pointer, 'wrote xml_text')
 
         if '{}.json'.format(pointer) not in files:
-            json_text = cDM.retrieve_item_metadata(self.alias, pointer, 'json')
+            json_text = CdmAPI.retrieve_item_metadata(self.alias, pointer, 'json')
             if is_it_a_404_json(json_text):
                 self.unavailable_metadata.add(pointer)
             else:
-                cDM.write_json_to_file(json_text, target_dir, pointer)
+                CdmAPI.write_json_to_file(json_text, target_dir, pointer)
             print(self.alias, pointer, 'wrote json_text')
 
         if '{}_parent.xml'.format(pointer) not in files:
-            xml_parent_text = cDM.retrieve_parent_info(self.alias, pointer, 'xml')
+            xml_parent_text = CdmAPI.retrieve_parent_info(self.alias, pointer, 'xml')
             if is_it_a_404_xml(xml_parent_text):
                 self.unavailable_metadata.add(pointer)
             else:
-                cDM.write_xml_to_file(xml_parent_text, target_dir, '{}_parent'.format(pointer))
+                CdmAPI.write_xml_to_file(xml_parent_text, target_dir, '{}_parent'.format(pointer))
             print(self.alias, pointer, 'wrote xml_parent_text')
 
         if '{}_parent.json'.format(pointer) not in files:
-            json_parent_text = cDM.retrieve_parent_info(self.alias, pointer, 'json')
+            json_parent_text = CdmAPI.retrieve_parent_info(self.alias, pointer, 'json')
             if is_it_a_404_json(json_parent_text):
                 self.unavailable_metadata.add(pointer)
             else:
-                cDM.write_json_to_file(json_parent_text, target_dir, '{}_parent'.format(pointer))
+                CdmAPI.write_json_to_file(json_parent_text, target_dir, '{}_parent'.format(pointer))
             print(self.alias, pointer, 'wrote json_parent_text')
 
         if simple_or_cpd == 'cpd':
             if '{}_cpd.xml'.format(pointer) not in files:
-                index_file_text = cDM.retrieve_compound_object(self.alias, pointer)
+                index_file_text = CdmAPI.retrieve_compound_object(self.alias, pointer)
                 if is_it_a_404_xml(index_file_text):
                     self.unavailable_metadata.add(pointer)
                 else:
-                    cDM.write_xml_to_file(index_file_text, target_dir, '{}_cpd'.format(pointer))
+                    CdmAPI.write_xml_to_file(index_file_text, target_dir, '{}_cpd'.format(pointer))
                 print(self.alias, pointer, 'wrote xml_index_file_text')
 
     def process_binary(self, target_dir, pointer, filetype):
@@ -200,8 +200,8 @@ class ScrapeAlias():
 
         if '{}.{}'.format(pointer, filetype) not in files and '{}.{}'.format(pointer, filetype.lower()) not in files:
             try:
-                cDM.write_binary_to_file(
-                    cDM.retrieve_binary(self.alias, pointer),
+                CdmAPI.write_binary_to_file(
+                    CdmAPI.retrieve_binary(self.alias, pointer),
                     target_dir,
                     pointer,
                     filetype)
@@ -235,36 +235,57 @@ class ScrapeAlias():
                 continue
             self.process_binary(child_dir, child_pointer, child_filetype)
 
-    def try_to_get_a_hidden_pdf_at_root_of_cpd(self, index_file):
-        path = os.path.join(self.alias_dir, 'Cpd')
-        sibling_files = [file for root, dirs, files in self.tree_snapshot for file in files if index_file in files]
-        xml_file = "{}.xml".format(index_file.split('_')[0])
-        root_cpd_etree = ET.parse(os.path.join(path, xml_file))
-        pointer = root_cpd_etree.find('.//dmrecord').text or root_cpd_etree.find('.//pointer').text
-        filetype = root_cpd_etree.find('.//format').text
-        if filetype:
-            filetype = filetype.lower()
-        else:
-            filetype = 'pdf'
+    def try_to_get_a_hidden_pdf_at_root_of_cpd(self, index_filename):
+        filepath = os.path.join(self.alias_dir, 'Cpd')
+        pointer, filetype = self.find_cpd_object_original_pointer_filetype(filepath, index_filename)
+        sibling_files = self.find_sibling_files(index_filename)
         if '{}.{}'.format(pointer, filetype) not in sibling_files:
-            try:
-                binary = cDM.retrieve_binary(self.alias, pointer)
-            except urllib.error.HTTPError:
-                print(self.alias, pointer, 'HTTP error caught on binary')
-                self.unavailable_binaries.add((pointer, filetype))
-                return
-            # in some cases, contentDM gives an xml instead of a binary.
-            # it's easier to discern whether something is an xml, than to discern
-            # whether its one of millions of types of valid binaries.
-            # we're going to try to decode the binary or xml into unicode.
-            # if it succeeds, it's an xml & we'll discard it.
-            # if it fails, it's a binary, which we'll write to file.
-            try:
-                binary.decode('utf-8')
-                print('{} {}_cpd.xml isnt a binary at root'.format(path, pointer))
-            except UnicodeDecodeError:
-                cDM.write_binary_to_file(binary, path, pointer, filetype)
-                print(path, pointer, 'wrote root binary')
+            binary = self.try_getting_hidden_pdf(pointer, filetype)
+            if binary:
+                self.write_hidden_pdf_to_file(binary, filepath, pointer, filetype)
+
+    def find_sibling_files(self, filename):
+        return [file
+                for root, dirs, files in self.tree_snapshot
+                for file in files
+                if filename in files]
+
+    def try_getting_hidden_pdf(self, pointer, filetype):
+        try:
+            binary = CdmAPI.retrieve_binary(self.alias, pointer)
+        except urllib.error.HTTPError:
+            print(self.alias, pointer, 'HTTP error caught on binary')
+            self.unavailable_binaries.add((pointer, filetype))
+            return False
+        return binary
+
+    def write_hidden_pdf_if_a_binary(self, binary, filepath, pointer, filetype):
+        # in some cases, contentDM gives an xml instead of a binary.
+        # it's easier to discern whether something is an xml, than to discern
+        # whether its one of millions of types of valid binaries.
+        # we're going to try to decode the binary or xml into unicode.
+        # if it succeeds, it's an xml & we'll discard it.
+        # if it fails, it's a binary, which we'll write to file.
+        try:
+            binary.decode('utf-8')
+            print('{} {}_cpd.xml isnt a hidden_pdf at root'.format(filepath, pointer))
+            return False
+        except UnicodeDecodeError:
+            CdmAPI.write_binary_to_file(binary, filepath, pointer, filetype)
+            print(filepath, pointer, 'wrote root hidden_pdf')
+            return True
+
+
+def find_cpd_object_original_pointer_filetype(filepath, index_filename):
+    xml_file = "{}.xml".format(index_filename.split('_')[0])
+    root_cpd_etree = ET.parse(os.path.join(filepath, xml_file))
+    pointer = root_cpd_etree.find('.//dmrecord').text or root_cpd_etree.find('.//pointer').text
+    filetype = root_cpd_etree.find('.//format').text
+    if filetype:
+        filetype = filetype.lower()
+    else:
+        filetype = 'pdf'
+    return pointer, filetype
 
 
 def is_it_a_404_xml(xml_text):
@@ -330,8 +351,8 @@ if __name__ == '__main__':
     # repo_dir = '../Cached_Cdm_files'
     # os.makedirs(repo_dir, exist_ok=True)
     # if not os.path.isfile(os.path.join(repo_dir, 'Collections_List.xml')):
-    #     coll_list_txt = cDM.retrieve_collections_list()
-    #     cDM.write_xml_to_file(coll_list_txt, repo_dir, 'Collections_List')
+    #     coll_list_txt = CdmAPI.retrieve_collections_list()
+    #     CdmAPI.write_xml_to_file(coll_list_txt, repo_dir, 'Collections_List')
     # coll_list_xml = ET.parse(os.path.join(repo_dir, 'Collections_List.xml'))
     # not_all_binaries = []
     # for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')]:
