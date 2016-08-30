@@ -237,12 +237,12 @@ class ScrapeAlias():
 
     def try_to_get_a_hidden_pdf_at_root_of_cpd(self, index_filename):
         filepath = os.path.join(self.alias_dir, 'Cpd')
-        pointer, filetype = self.find_cpd_object_original_pointer_filetype(filepath, index_filename)
+        pointer, filetype = find_cpd_object_original_pointer_filetype(filepath, index_filename)
         sibling_files = self.find_sibling_files(index_filename)
         if '{}.{}'.format(pointer, filetype) not in sibling_files:
             binary = self.try_getting_hidden_pdf(pointer, filetype)
             if binary:
-                self.write_hidden_pdf_to_file(binary, filepath, pointer, filetype)
+                self.write_hidden_pdf_if_a_binary(binary, filepath, pointer, filetype)
 
     def find_sibling_files(self, filename):
         return [file
