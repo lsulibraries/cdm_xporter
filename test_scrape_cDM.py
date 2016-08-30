@@ -17,6 +17,22 @@ def simple_object_etree_fixture():
 
 
 @pytest.fixture
+def binary_decodes_fixture():
+    class Binary():
+        def decode(self, *args, **kwargs):
+            return True
+    return Binary()
+
+
+@pytest.fixture
+def binary_doesnt_decode_fixture():
+    class Binary():
+        def decode(self, *args, **kwargs):
+            raise UnicodeDecodeError('imag', b"", 42, 43, 'imag_exception occurredd')
+    return Binary()
+
+
+@pytest.fixture
 def cpd_object_etree_fixture():
     from lxml import etree as ET
     cpd_object_filetext = """<?xml version="1.0" encoding="UTF-8"?><xml><title>Guide book of New Orleans (complete work)</title><creato></creato><contri>Stanonis, Anthony J. (Anthony Joseph)</contri><subjec>New Orleans (La.) -- Description and travel; New Orleans (La.) -- Guidebooks; New Orleans (La.) -- Tours</subjec><descri>Complete contents of a guidebook from the Louisiana State Hotel Clerks Association</descri><notes>On cover: Charter 32.....Greeters of America. Week on Sunday Mar. 12, 1916</notes><publis>Louisiana State Hotel Clerks Association</publis><date>1916-03-12</date><type>Text</type><format>jpeg</format><identi>See &#x27;reference url&#x27; on the navigational bars.</identi><source>Loyola University New Orleans Special Collections &amp; Archives, New Orleans, LA. http://library.loyno.edu/research/speccoll/</source><langua>en</langua><relati>http://louisdl.louislibraries.org/cdm/landingpage/collection/p120701coll17</relati><covera>New Orleans (La.); Vieux CarrÃ© (New Orleans, La.)</covera><coverb>1910</coverb><rights>Physical rights are held by Loyola University New Orleans. Copyright is retained in accordance with U.S. copyright law.</rights><catlog>TOG</catlog><catalo>2008-11-19</catalo><object>as010004</object><plugin></plugin><image></image><imaga></imaga><color></color><extent></extent><imagb></imagb><file></file><hardwa></hardwa><digiti></digiti><digita></digita><fullte></fullte><contac>For information or permission to use/publish, contact: mailto:archives@loyno.edu</contac><fullrs></fullrs><find>34.cpd</find><dmaccess></dmaccess><dmimage></dmimage><dmcreated>2008-11-19</dmcreated><dmmodified>2008-12-08</dmmodified><dmoclcno></dmoclcno><dmrecord>33</dmrecord><restrictionCode>1</restrictionCode><cdmfilesize>1691</cdmfilesize><cdmfilesizeformatted>0.00 MB</cdmfilesizeformatted><cdmprintpdf>0</cdmprintpdf><cdmhasocr>0</cdmhasocr><cdmisnewspaper>0</cdmisnewspaper></xml>"""
@@ -90,12 +106,64 @@ def test_cpd_object_original_pointer_filetype(mock_ET, cpd_object_etree_fixture)
     mock_ET.parse.assert_called_with('imag_filepath/imagpointer.xml')
 
 
-@patch('scrape_cDM.CdmAPI')
-def test_write_hidden_pdf_if_a_binary__xml_received_instead_of_binary(mock_API, indexfile_etree_fixture):
-    binary = """<?xml version="1.0" encoding="utf-8"?><cpd><type>Document-PDF</type><page><pagetitle>Page 1</pagetitle><pagefile>3605.pdfpage</pagefile><pageptr>3604</pageptr></page></cpd>""".encode('utf-8')
+@patch('scrape_cDM.CdmAPI.write_binary_to_file')
+def test_write_hidden_pdf_if_a_binary__xml_received_instead_of_binary_failure(mock_API, binary_decodes_fixture):
+    # binary = """<?xml version="1.0" encoding="utf-8"?><cpd><type>Document-PDF</type><page><pagetitle>Page 1</pagetitle><pagefile>3605.pdfpage</pagefile><pageptr>3604</pageptr></page></cpd>""".encode('utf-8')
     filepath, pointer, filetype = 'imag_filepath', 'imag_pointer', 'imag_filetype'
     scrapealias = scrape_cDM.ScrapeAlias('_')
-    assert scrapealias.write_hidden_pdf_if_a_binary(binary, filepath, pointer, filetype) == False
+    assert scrapealias.write_hidden_pdf_if_a_binary(binary_decodes_fixture, filepath, pointer, filetype) is False
+
+
+@patch('scrape_cDM.CdmAPI.write_binary_to_file')
+def test_write_hidden_pdf_if_a_binary__xml_received_instead_of_binary_success(mock_API, binary_doesnt_decode_fixture):
+    # binary = """<?xml version="1.0" encoding="utf-8"?><cpd><type>Document-PDF</type><page><pagetitle>Page 1</pagetitle><pagefile>3605.pdfpage</pagefile><pageptr>3604</pageptr></page></cpd>""".encode('utf-8')
+    filepath, pointer, filetype = 'imag_filepath', 'imag_pointer', 'imag_filetype'
+    scrapealias = scrape_cDM.ScrapeAlias('_')
+    assert scrapealias.write_hidden_pdf_if_a_binary(binary_doesnt_decode_fixture, filepath, pointer, filetype) is True
+    mock_API.assert_called_with(binary_doesnt_decode_fixture, 'imag_filepath', 'imag_pointer', 'imag_filetype')
+
+
+def test_find_sibling_files():
+    scrapealias = scrape_cDM.ScrapeAlias('_')
+    scrapealias.tree_snapshot = [['imag_a', ['imagd_1'], ['a1', 'a2', 'a3']], [['imag_b'], [], ['b1', 'b2']], [['imag_c'], [], ['c1', 'c2', 'c3', 'c4']]]
+    assert set(scrapealias.find_sibling_files('a1')) == {'a1', 'a2', 'a3'}
+    assert set(scrapealias.find_sibling_files('b2')) == {'b1', 'b2'}
+    assert set(scrapealias.find_sibling_files('c3')) == {'c1', 'c2', 'c3', 'c4'}
+
+
+@patch('scrape_cDM.ScrapeAlias.write_hidden_pdf_if_a_binary')
+@patch('scrape_cDM.ScrapeAlias.try_getting_hidden_pdf')
+@patch('scrape_cDM.ScrapeAlias.find_sibling_files')
+@patch('scrape_cDM.find_cpd_object_original_pointer_filetype')
+def test_try_to_get_a_hidden_pdf_at_root_of_cpd(mock_findcpd, mock_findsibl, mock_tryhidden, mock_writehidden):
+    # if binary already on disk.
+    scrapealias = scrape_cDM.ScrapeAlias('_')
+    scrapealias.alias_dir = 'fake/filepath'
+    scrapealias.find_sibling_files = mock_findsibl
+    scrapealias.try_getting_hidden_pdf = mock_tryhidden
+    scrapealias.write_hidden_pdf_if_a_binary = mock_writehidden
+    mock_findcpd.return_value = ('imag1', 'img')
+    mock_findsibl.return_value = ['imag1.img', 'imag2.img', 'imag3.img']
+    scrapealias.try_to_get_a_hidden_pdf_at_root_of_cpd('fakefile')
+    mock_findcpd.assert_called_with('fake/filepath/Cpd', 'fakefile')
+    mock_findsibl.assert_called_with('fakefile')
+    assert not mock_tryhidden.called
+    assert not mock_writehidden.called
+
+    # if binary not already on disk
+    scrapealias = scrape_cDM.ScrapeAlias('_')
+    scrapealias.alias_dir = 'fake/filepath'
+    scrapealias.find_sibling_files = mock_findsibl
+    scrapealias.try_getting_hidden_pdf = mock_tryhidden
+    scrapealias.write_hidden_pdf_if_a_binary = mock_writehidden
+    mock_findcpd.return_value = ('imag1', 'other')
+    mock_findsibl.return_value = ['imag1.img', 'imag2.img', 'imag3.img']
+    mock_tryhidden.return_value = 'imag_binary'
+    scrapealias.try_to_get_a_hidden_pdf_at_root_of_cpd('fakefile')
+    mock_findcpd.assert_called_with('fake/filepath/Cpd', 'fakefile')
+    mock_findsibl.assert_called_with('fakefile')
+    mock_tryhidden.assert_called_with('imag1', 'other')
+    mock_writehidden.assert_called_with('imag_binary', 'fake/filepath/Cpd', 'imag1', 'other')
 
 
 # @patch('scrapt_cDM.ET')
