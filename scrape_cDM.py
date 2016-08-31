@@ -72,22 +72,22 @@ class ScrapeAlias():
         files = [i for i in os.listdir(filepath)]
         if 'Collection_TotalRecs.xml' not in files:
             CdmAPI.write_xml_to_file(
-                CdmAPI.retrieve_collection_total_recs(alias),
+                CdmAPI.retrieve_collection_total_recs(self.alias),
                 filepath,
                 'Collection_TotalRecs')
         if 'Collection_Metadata.xml' not in files:
             CdmAPI.write_xml_to_file(
-                CdmAPI.retrieve_collection_metadata(alias),
+                CdmAPI.retrieve_collection_metadata(self.alias),
                 filepath,
                 'Collection_Metadata')
         if 'Collection_Fields.json' not in files:
             CdmAPI.write_json_to_file(
-                CdmAPI.retrieve_collection_fields_json(alias),
+                CdmAPI.retrieve_collection_fields_json(self.alias),
                 filepath,
                 'Collection_Fields')
         if 'Collection_Fields.xml' not in files:
             CdmAPI.write_xml_to_file(
-                CdmAPI.retrieve_collection_fields_xml(alias),
+                CdmAPI.retrieve_collection_fields_xml(self.alias),
                 filepath,
                 'Collection_Fields')
 
