@@ -166,26 +166,63 @@ def test_try_to_get_a_hidden_pdf_at_root_of_cpd(mock_findcpd, mock_findsibl, moc
     mock_writehidden.assert_called_with('imag_binary', 'fake/filepath/Cpd', 'imag1', 'other')
 
 
-# @patch('scrapt_cDM.ET')
-# @patch('scrape_cDM.ScrapeAlias.find_sibling_files')
-# @patch('scrape_cDM.CdmAPI')
-# def test_try_to_get_a_hidden_pdf_at_root_of_cpd(mock_cDM, mock_find_sibling_files, mock_ET, cpd_object_etree_fixture, '_'):
-#     mock_find_sibling_files.return_value = ['_']
-#     scrapealias.find_sibling_files = mock_find_sibling_files
-#     mock_etree.parse.return_value = cpd_object_etree_fixture
-#     scrapealias = scrape_cDM.ScrapeAlias('_')
+@patch('scrape_cDM.ScrapeAlias.do_collection_level_metadata')
+@patch('scrape_cDM.ScrapeAlias.do_root_level_objects')
+@patch('scrape_cDM.ScrapeAlias.do_compound_objects')
+def test_main_loop(mock_docpd, mock_doroot, mock_docoll):
+    scrapealias = scrape_cDM.ScrapeAlias('_')
+    scrapealias.do_collection_level_metadata = mock_docoll
+    scrapealias.do_root_level_objects = mock_doroot
+    scrapealias.do_compound_objects = mock_docpd
+    assert not mock_docoll.called
+    assert not mock_doroot.called
+    assert not mock_docpd.called
+    scrapealias.main()
+    mock_docoll.assert_called_with()
+    mock_doroot.assert_called_with()
+    mock_docpd.assert_called_with()
 
 
+@patch('scrape_cDM.os')
+@patch('scrape_cDM.CdmAPI')
+def test_do_collection_level_metadata(mock_API, mock_os):
+    mock_os.makedirs.return_value = True
+    mock_API.retrieve_collection_total_recs.return_value = 'total_recs'
+    mock_API.retrieve_collection_metadata.return_value = 'coll_metadata'
+    mock_API.retrieve_collection_fields_json.return_value = 'fields_json'
+    mock_API.retrieve_collecion_fields_xml.return_value = 'fields_xml'
+    scrapealias = scrape_cDM.ScrapeAlias('imag_alias')
+    scrapealias.alias_dir = 'imag_filepath'
 
-# @mock.patch('scrape_cDM.ScrapeAlias')
-# def test_do_root_level_objects(mock_scrapealias):
-#     scrapealias = mock_scrapealias('_')
-#     # scrapealias.count_root_objects = mock_scrapealias.count_root_objects
-#     # scrapealias.write_chunks_of_elems_in_collection = mock_scrapealias.write_chunks_of_elems_in_collection
-#     # scrapealias.find_root_pointers_filetypes = mock_scrapealias.find_root_pointers_filetypes
-#     # scrapealias.process_root_level_objects = mock_scrapealias.process_root_level_objects
-#     scrapealias.count_root_objects.return_value = 1
-#     assert scrapealias.num_chunks == 1
-#     scrapealias.write_chunks_of_elems_in_collection = mock_scrapealias.write_chunks_of_elems_in_collection
-#     scrapealias.find_root_pointers_filetypes = mock_scrapealias.find_root_pointers_filetypes
-#     scrapealias.process_root_level_objects = mock_scrapealias.process_root_level_objects
+    mock_os.listdir.return_value = ('Collection_TotalRecs.xml', 'Collection_Metadata.xml', 'Collection_Fields.json', 'Collection_Fields.xml')
+    scrapealias.do_collection_level_metadata()
+    assert not mock_API.retrieve_collection_total_recs.called
+    assert not mock_API.retrieve_collection_metadata.called
+    assert not mock_API.retrieve_collection_fields_json.called
+    assert not mock_API.retrieve_collection_fields_xml.called
+
+    mock_os.listdir.return_value = ('')
+    scrapealias.do_collection_level_metadata()
+    mock_API.retrieve_collection_total_recs.assert_called_with('imag_alias')
+    mock_API.retrieve_collection_metadata.assert_called_with('imag_alias')
+    mock_API.retrieve_collection_fields_json.assert_called_with('imag_alias')
+    mock_API.retrieve_collection_fields_xml.assert_called_with('imag_alias')
+    fake_json_fields_call = mock_API.retrieve_collection_fields_json('imag_alias')
+    fake_xml_fields_call = mock_API.retrieve_collection_fields_xml('imag_alias')
+    assert mock_API.write_xml_to_file.call_count == 3
+    assert mock_API.write_json_to_file.call_count == 1
+    mock_API.write_json_to_file.assert_called_with(fake_json_fields_call, 'imag_filepath', 'Collection_Fields')
+    mock_API.write_xml_to_file.assert_called_with(fake_xml_fields_call, 'imag_filepath', 'Collection_Fields')
+    # only the last call to each mock_API.fn seems to be recorded, so here we just test the last call to each fn.
+
+
+@patch('scrape_cDM.CdmAPI')
+def test_try_getting_hidden_pdf(mock_API):
+    scrapealias = scrape_cDM.ScrapeAlias('imag_alias')
+    import urllib
+    mock_API.retrieve_binary.return_value = 'actual_imag_binary'
+    assert scrapealias.try_getting_hidden_pdf('imag_pointer', 'imag_filetype') == 'actual_imag_binary'
+    assert scrapealias.unavailable_binaries == set()
+    mock_API.retrieve_binary.side_effect = urllib.error.HTTPError('imag', b"", 42, 43, 'imag_exception occurredd')
+    assert scrapealias.try_getting_hidden_pdf('imag_pointer', 'imag_filetype') is False
+    assert scrapealias.unavailable_binaries == {('imag_pointer', 'imag_filetype'), }
