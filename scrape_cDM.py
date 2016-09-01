@@ -216,14 +216,7 @@ class ScrapeAlias():
             self.write_child_data(parent_pointer)
 
     def write_child_data(self, parent_pointer):
-        index_filename = '{}_cpd.xml'.format(parent_pointer)
-        index_filepath = os.path.join(self.alias_dir, 'Cpd', index_filename)
-        children_pointers_list = ET.parse(index_filepath).findall('.//pageptr')
-
-        if has_pdfpage_elems(children_pointers_list):
-            self.try_to_get_a_hidden_pdf_at_root_of_cpd(index_filename)
-            return False        # Psuedo-compound pdf object -- skip processing its children.
-
+        children_pointers_list = self.parse_children_of_cpd(parent_pointer)
         child_dir = os.path.realpath(os.path.join(self.alias_dir, 'Cpd', parent_pointer))
         for child in children_pointers_list:
             child_pointer = child.text
@@ -234,6 +227,20 @@ class ScrapeAlias():
                 self.unavailable_metadata.add(child_pointer)
                 continue
             self.process_binary(child_dir, child_pointer, child_filetype)
+
+    def parse_children_of_cpd(self, parent_pointer):
+        index_filename = '{}_cpd.xml'.format(parent_pointer)
+        index_filepath = os.path.join(self.alias_dir, 'Cpd', index_filename)
+        children_pointers_list = ET.parse(index_filepath).findall('.//pageptr')
+        if self.are_child_pointers_pdfpages(children_pointers_list, index_filename):
+            return False
+        return children_pointers_list
+
+    def are_child_pointers_pdfpages(self, children_pointers_list, index_filename):
+        if has_pdfpage_elems(children_pointers_list):
+            self.try_to_get_a_hidden_pdf_at_root_of_cpd(index_filename)
+            return False        # Psuedo-compound pdf object -- skip processing its children.
+        return True
 
     def try_to_get_a_hidden_pdf_at_root_of_cpd(self, index_filename):
         filepath = os.path.join(self.alias_dir, 'Cpd')
