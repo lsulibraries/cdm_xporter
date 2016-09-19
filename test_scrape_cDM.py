@@ -42,7 +42,6 @@ def ETparse_fixture(*args, **kwargs):
     return ImagParse
 
 
-
 @pytest.fixture
 def cpd_object_etree_fixture():
     from lxml import etree as ET
@@ -270,8 +269,9 @@ def test_parse_children_of_cpd(mock_arepointers, mock_ETparse, ETparse_fixture):
     scrape_cDM.ET.parse = mock_ETparse
     mock_ETparse.return_value = ETparse_fixture
     mock_ETparse.findall = ETparse_fixture
-    assert scrapealias.parse_children_of_cpd('imag_parent') is False
+    mock_arepointers.return_value = False
+    assert scrapealias.parse_children_of_cpd('imag_parent') is None
     mock_ETparse.assert_called_with('imag_dir/Cpd/imag_parent_cpd.xml')
     mock_ETparse.findall.assert_called_with('imag_elem', 'imag_parent_cpd.xml')
-    mock_arepointers.return_value = False
+    mock_arepointers.return_value = True
     assert scrapealias.parse_children_of_cpd('imag_parent') == 'imag_children_pointers_list'
