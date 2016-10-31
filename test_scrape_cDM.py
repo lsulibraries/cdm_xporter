@@ -33,6 +33,16 @@ def binary_doesnt_decode_fixture():
 
 
 @pytest.fixture
+def ETparse_fixture(*args, **kwargs):
+    class ImagParse():
+        def findall(*args, **kwargs):
+            return 'imag_children_pointers_list'
+        def assert_called_with(*args, **kwargs):
+            return (args, kwargs)
+    return ImagParse
+
+
+@pytest.fixture
 def cpd_object_etree_fixture():
     from lxml import etree as ET
     cpd_object_filetext = """<?xml version="1.0" encoding="UTF-8"?><xml><title>Guide book of New Orleans (complete work)</title><creato></creato><contri>Stanonis, Anthony J. (Anthony Joseph)</contri><subjec>New Orleans (La.) -- Description and travel; New Orleans (La.) -- Guidebooks; New Orleans (La.) -- Tours</subjec><descri>Complete contents of a guidebook from the Louisiana State Hotel Clerks Association</descri><notes>On cover: Charter 32.....Greeters of America. Week on Sunday Mar. 12, 1916</notes><publis>Louisiana State Hotel Clerks Association</publis><date>1916-03-12</date><type>Text</type><format>jpeg</format><identi>See &#x27;reference url&#x27; on the navigational bars.</identi><source>Loyola University New Orleans Special Collections &amp; Archives, New Orleans, LA. http://library.loyno.edu/research/speccoll/</source><langua>en</langua><relati>http://louisdl.louislibraries.org/cdm/landingpage/collection/p120701coll17</relati><covera>New Orleans (La.); Vieux CarrÃ© (New Orleans, La.)</covera><coverb>1910</coverb><rights>Physical rights are held by Loyola University New Orleans. Copyright is retained in accordance with U.S. copyright law.</rights><catlog>TOG</catlog><catalo>2008-11-19</catalo><object>as010004</object><plugin></plugin><image></image><imaga></imaga><color></color><extent></extent><imagb></imagb><file></file><hardwa></hardwa><digiti></digiti><digita></digita><fullte></fullte><contac>For information or permission to use/publish, contact: mailto:archives@loyno.edu</contac><fullrs></fullrs><find>34.cpd</find><dmaccess></dmaccess><dmimage></dmimage><dmcreated>2008-11-19</dmcreated><dmmodified>2008-12-08</dmmodified><dmoclcno></dmoclcno><dmrecord>33</dmrecord><restrictionCode>1</restrictionCode><cdmfilesize>1691</cdmfilesize><cdmfilesizeformatted>0.00 MB</cdmfilesizeformatted><cdmprintpdf>0</cdmprintpdf><cdmhasocr>0</cdmhasocr><cdmisnewspaper>0</cdmisnewspaper></xml>"""
@@ -226,3 +236,42 @@ def test_try_getting_hidden_pdf(mock_API):
     mock_API.retrieve_binary.side_effect = urllib.error.HTTPError('imag', b"", 42, 43, 'imag_exception occurredd')
     assert scrapealias.try_getting_hidden_pdf('imag_pointer', 'imag_filetype') is False
     assert scrapealias.unavailable_binaries == {('imag_pointer', 'imag_filetype'), }
+
+
+@patch('scrape_cDM.has_pdfpage_elems')
+@patch('scrape_cDM.ScrapeAlias.try_to_get_a_hidden_pdf_at_root_of_cpd')
+def test_are_child_pointers_pdfpages(mock_try_to_get, mock_has_pdfpage):
+    scrapealias = scrape_cDM.ScrapeAlias('_')
+    scrapealias.try_to_get_a_hidden_pdf_at_root_of_cpd = mock_try_to_get
+    # scrape_cDM.has_pdfpage_elems = mock_has_pdfpage
+    mock_has_pdfpage.return_value = False
+    assert scrapealias.are_child_pointers_pdfpages('imag_list', 'imag_filename') is True
+    mock_has_pdfpage.assert_called_with('imag_list')
+    assert not mock_try_to_get.called
+    mock_has_pdfpage.return_value = True
+    mock_try_to_get.return_value = False
+    assert scrapealias.are_child_pointers_pdfpages('imag_list', 'imag_filename') is False
+    mock_has_pdfpage.assert_called_with('imag_list')
+    mock_try_to_get.assert_called_with('imag_filename')
+    mock_has_pdfpage.return_value = True
+    mock_try_to_get.return_value = True
+    assert scrapealias.are_child_pointers_pdfpages('imag_list', 'imag_filename') is False
+    mock_has_pdfpage.assert_called_with('imag_list')
+    mock_try_to_get.assert_called_with('imag_filename')
+
+
+@patch('scrape_cDM.ET.parse')
+@patch('scrape_cDM.ScrapeAlias.are_child_pointers_pdfpages')
+def test_parse_children_of_cpd(mock_arepointers, mock_ETparse, ETparse_fixture):
+    scrapealias = scrape_cDM.ScrapeAlias('_')
+    scrapealias.alias_dir = 'imag_dir'
+    scrapealias.are_child_pointers_pdfpages = mock_arepointers
+    scrape_cDM.ET.parse = mock_ETparse
+    mock_ETparse.return_value = ETparse_fixture
+    mock_ETparse.findall = ETparse_fixture
+    mock_arepointers.return_value = False
+    assert scrapealias.parse_children_of_cpd('imag_parent') is None
+    mock_ETparse.assert_called_with('imag_dir/Cpd/imag_parent_cpd.xml')
+    mock_ETparse.findall.assert_called_with('imag_elem', 'imag_parent_cpd.xml')
+    mock_arepointers.return_value = True
+    assert scrapealias.parse_children_of_cpd('imag_parent') == 'imag_children_pointers_list'
