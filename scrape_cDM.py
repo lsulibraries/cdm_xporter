@@ -154,7 +154,9 @@ class ScrapeAlias():
         # there can be up to 4000 files checked here per alias,
         # so it is useful to take a snapshot of the directory tree beforehand,
         # instead of reading from the harddrive for each file.
-        files = [file for root, dirs, files in self.tree_snapshot for file in files if target_dir == root]
+        files = [file for root, dirs, files in self.tree_snapshot 
+                 for file in files
+                 if target_dir == root]
 
         if "{}.xml".format(pointer) not in files:
             xml_text = CdmAPI.retrieve_item_metadata(self.alias, pointer, 'xml')
@@ -218,15 +220,11 @@ class ScrapeAlias():
             self.write_child_data(parent_pointer)
 
     def write_child_data(self, parent_pointer):
-        index_filename = '{}_cpd.xml'.format(parent_pointer)
-        index_filepath = os.path.join(self.alias_dir, 'Cpd', index_filename)
-        children_pointers_list = ET.parse(index_filepath).findall('.//pageptr')
-
-        if has_pdfpage_elems(children_pointers_list):
-            self.try_to_get_a_hidden_pdf_at_root_of_cpd(index_filename)
-            return False        # Psuedo-compound pdf object -- skip processing its children.
-
+        children_pointers_list = self.parse_children_of_cpd(parent_pointer)
         child_dir = os.path.realpath(os.path.join(self.alias_dir, 'Cpd', parent_pointer))
+        if not children_pointers_list:
+            print('no children to this compound: {}'.format(parent_pointer))
+            return None
         for child in children_pointers_list:
             child_pointer = child.text
             self.write_metadata(child_dir, child_pointer, 'simple')
@@ -236,6 +234,20 @@ class ScrapeAlias():
                 self.unavailable_metadata.add(child_pointer)
                 continue
             self.process_binary(child_dir, child_pointer, child_filetype)
+
+    def parse_children_of_cpd(self, parent_pointer):
+        index_filename = '{}_cpd.xml'.format(parent_pointer)
+        index_filepath = os.path.join(self.alias_dir, 'Cpd', index_filename)
+        children_pointers_list = ET.parse(index_filepath).findall('.//pageptr')
+        if self.are_child_pointers_pdfpages(children_pointers_list, index_filename):
+            return children_pointers_list
+        return None
+
+    def are_child_pointers_pdfpages(self, children_pointers_list, index_filename):
+        if has_pdfpage_elems(children_pointers_list):
+            self.try_to_get_a_hidden_pdf_at_root_of_cpd(index_filename)
+            return False        # Psuedo-compound pdf object -- skip processing its children.
+        return True
 
     def try_to_get_a_hidden_pdf_at_root_of_cpd(self, index_filename):
         filepath = os.path.join(self.alias_dir, 'Cpd')
@@ -270,7 +282,6 @@ class ScrapeAlias():
         # if it fails, it's a binary, which we'll write to file.
         try:
             binary.decode('utf-8')
-            print('{} {}_cpd.xml isnt a hidden_pdf at root'.format(filepath, pointer))
             return False
         except UnicodeDecodeError:
             CdmAPI.write_binary_to_file(binary, filepath, pointer, filetype)
@@ -341,7 +352,11 @@ if __name__ == '__main__':
 
     """ Get specific collections' metadata/binaries """
 
+<<<<<<< HEAD
     for alias in ('CLF', ):
+=======
+    for alias in ('p16313coll87',):
+>>>>>>> a394fb763a19ccf438b257e2dfea5e175c11bbe0
         scrapealias = ScrapeAlias(alias)
         scrapealias.main()
         all_unavailable_metadata[alias] = scrapealias.unavailable_metadata
