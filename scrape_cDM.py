@@ -352,11 +352,8 @@ if __name__ == '__main__':
 
     """ Get specific collections' metadata/binaries """
 
-<<<<<<< HEAD
+
     for alias in ('CLF', ):
-=======
-    for alias in ('p16313coll87',):
->>>>>>> a394fb763a19ccf438b257e2dfea5e175c11bbe0
         scrapealias = ScrapeAlias(alias)
         scrapealias.main()
         all_unavailable_metadata[alias] = scrapealias.unavailable_metadata
