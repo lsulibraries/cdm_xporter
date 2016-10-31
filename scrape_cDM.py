@@ -92,10 +92,12 @@ class ScrapeAlias():
                 'Collection_Fields')
 
     def do_root_level_objects(self):
-        chunksize = 100
+        chunksize = 1024
         num_chunks = self.calculate_chunks(chunksize)
         for num in range(num_chunks):
             starting_position = (num * chunksize) + 1
+            if starting_position > 10001:
+                starting_position = 10001
             self.write_chunk_of_elems_in_collection(starting_position, chunksize)
         self.tree_snapshot = [i for i in os.walk(self.alias_dir)]
         for pointer, filetype in self.find_root_pointers_filetypes():
@@ -339,7 +341,7 @@ if __name__ == '__main__':
 
     """ Get specific collections' metadata/binaries """
 
-    for alias in ('p16313coll62',):
+    for alias in ('CLF', ):
         scrapealias = ScrapeAlias(alias)
         scrapealias.main()
         all_unavailable_metadata[alias] = scrapealias.unavailable_metadata
