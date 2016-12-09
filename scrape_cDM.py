@@ -92,10 +92,12 @@ class ScrapeAlias():
                 'Collection_Fields')
 
     def do_root_level_objects(self):
-        chunksize = 100
+        chunksize = 1024
         num_chunks = self.calculate_chunks(chunksize)
         for num in range(num_chunks):
             starting_position = (num * chunksize) + 1
+            if starting_position > 10001:
+                starting_position = 10001
             self.write_chunk_of_elems_in_collection(starting_position, chunksize)
         self.tree_snapshot = [i for i in os.walk(self.alias_dir)]
         for pointer, filetype in self.find_root_pointers_filetypes():
@@ -152,7 +154,9 @@ class ScrapeAlias():
         # there can be up to 4000 files checked here per alias,
         # so it is useful to take a snapshot of the directory tree beforehand,
         # instead of reading from the harddrive for each file.
-        files = [file for root, dirs, files in self.tree_snapshot for file in files if target_dir == root]
+        files = [file for root, dirs, files in self.tree_snapshot
+                 for file in files
+                 if target_dir == root]
 
         if "{}.xml".format(pointer) not in files:
             xml_text = CdmAPI.retrieve_item_metadata(self.alias, pointer, 'xml')
@@ -196,9 +200,7 @@ class ScrapeAlias():
                 print(self.alias, pointer, 'wrote xml_index_file_text')
 
     def process_binary(self, target_dir, pointer, filetype):
-        return
         files = [file for root, dirs, files in self.tree_snapshot for file in files if target_dir == root]
-
         if '{}.{}'.format(pointer, filetype) not in files and '{}.{}'.format(pointer, filetype.lower()) not in files:
             try:
                 CdmAPI.write_binary_to_file(
@@ -219,6 +221,9 @@ class ScrapeAlias():
     def write_child_data(self, parent_pointer):
         children_pointers_list = self.parse_children_of_cpd(parent_pointer)
         child_dir = os.path.realpath(os.path.join(self.alias_dir, 'Cpd', parent_pointer))
+        if not children_pointers_list:
+            print('no children to this compound: {}'.format(parent_pointer))
+            return None
         for child in children_pointers_list:
             child_pointer = child.text
             self.write_metadata(child_dir, child_pointer, 'simple')
@@ -276,7 +281,6 @@ class ScrapeAlias():
         # if it fails, it's a binary, which we'll write to file.
         try:
             binary.decode('utf-8')
-            print('{} {}_cpd.xml isnt a hidden_pdf at root'.format(filepath, pointer))
             return False
         except UnicodeDecodeError:
             CdmAPI.write_binary_to_file(binary, filepath, pointer, filetype)
@@ -346,6 +350,7 @@ if __name__ == '__main__':
     all_unavailable_metadata = dict()
 
     """ Get specific collections' metadata/binaries """
+
 
     for alias in ('p15140coll26',):
         scrapealias = ScrapeAlias(alias)
