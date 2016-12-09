@@ -42,7 +42,6 @@ def ETparse_fixture(*args, **kwargs):
     return ImagParse
 
 
-
 @pytest.fixture
 def cpd_object_etree_fixture():
     from lxml import etree as ET
@@ -246,17 +245,17 @@ def test_are_child_pointers_pdfpages(mock_try_to_get, mock_has_pdfpage):
     scrapealias.try_to_get_a_hidden_pdf_at_root_of_cpd = mock_try_to_get
     # scrape_cDM.has_pdfpage_elems = mock_has_pdfpage
     mock_has_pdfpage.return_value = False
-    assert scrapealias.are_child_pointers_pdfpages('imag_list', 'imag_filename') is True
+    assert scrapealias.are_child_pointers_pdfpages('imag_list', 'imag_filename') is False
     mock_has_pdfpage.assert_called_with('imag_list')
     assert not mock_try_to_get.called
     mock_has_pdfpage.return_value = True
     mock_try_to_get.return_value = False
-    assert scrapealias.are_child_pointers_pdfpages('imag_list', 'imag_filename') is False
+    assert scrapealias.are_child_pointers_pdfpages('imag_list', 'imag_filename') is True
     mock_has_pdfpage.assert_called_with('imag_list')
     mock_try_to_get.assert_called_with('imag_filename')
     mock_has_pdfpage.return_value = True
     mock_try_to_get.return_value = True
-    assert scrapealias.are_child_pointers_pdfpages('imag_list', 'imag_filename') is False
+    assert scrapealias.are_child_pointers_pdfpages('imag_list', 'imag_filename') is True
     mock_has_pdfpage.assert_called_with('imag_list')
     mock_try_to_get.assert_called_with('imag_filename')
 
@@ -270,6 +269,7 @@ def test_parse_children_of_cpd(mock_arepointers, mock_ETparse, ETparse_fixture):
     scrape_cDM.ET.parse = mock_ETparse
     mock_ETparse.return_value = ETparse_fixture
     mock_ETparse.findall = ETparse_fixture
+    mock_arepointers.return_value = True
     assert scrapealias.parse_children_of_cpd('imag_parent') is False
     mock_ETparse.assert_called_with('imag_dir/Cpd/imag_parent_cpd.xml')
     mock_ETparse.findall.assert_called_with('imag_elem', 'imag_parent_cpd.xml')
