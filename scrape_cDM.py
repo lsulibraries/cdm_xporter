@@ -196,6 +196,7 @@ class ScrapeAlias():
                 print(self.alias, pointer, 'wrote xml_index_file_text')
 
     def process_binary(self, target_dir, pointer, filetype):
+        return
         files = [file for root, dirs, files in self.tree_snapshot for file in files if target_dir == root]
 
         if '{}.{}'.format(pointer, filetype) not in files and '{}.{}'.format(pointer, filetype.lower()) not in files:
@@ -239,8 +240,8 @@ class ScrapeAlias():
     def are_child_pointers_pdfpages(self, children_pointers_list, index_filename):
         if has_pdfpage_elems(children_pointers_list):
             self.try_to_get_a_hidden_pdf_at_root_of_cpd(index_filename)
-            return False        # Psuedo-compound pdf object -- skip processing its children.
-        return True
+            return True        # Psuedo-compound pdf object -- skip processing its children.
+        return False
 
     def try_to_get_a_hidden_pdf_at_root_of_cpd(self, index_filename):
         filepath = os.path.join(self.alias_dir, 'Cpd')
@@ -346,7 +347,7 @@ if __name__ == '__main__':
 
     """ Get specific collections' metadata/binaries """
 
-    for alias in ('p120701coll17',):
+    for alias in ('p15140coll26',):
         scrapealias = ScrapeAlias(alias)
         scrapealias.main()
         all_unavailable_metadata[alias] = scrapealias.unavailable_metadata
