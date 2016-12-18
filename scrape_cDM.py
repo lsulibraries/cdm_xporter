@@ -4,6 +4,7 @@ import os
 import urllib
 from lxml import etree as ET
 import json
+import logging
 
 import cDM_api_calls as CdmAPI
 
@@ -25,6 +26,7 @@ WE_DONT_MIGRATE = {'p16313coll70', 'p120701coll11', 'LSUHSCS_JCM', 'UNO_SCC', 'p
                    'p16313coll44', 'p16313coll88', 'p16313coll94', 'JSN', 'p15140coll24',
                    'p15140coll9', 'p15140coll59', 'p16313coll40', 'p15140coll53', 'p16313coll97',
                    'p16313coll18', 'p15140coll33', 'LST', 'MPF', 'p15140coll2', }
+
 
 
 """
@@ -49,19 +51,13 @@ Cachec_Cdm_files-
 
 
 class ScrapeAlias():
-    def __init__(self, alias):
+    def __init__(self, repo_dir, alias):
         self.alias = alias
-        self.alias_dir = None
-        self.unavailable_metadata = set()
-        self.unavailable_binaries = set()
+        self.alias_dir = os.path.realpath(os.path.join(repo_dir, self.alias))
         self.compound_parents = []
-        # it's notable that tree_snapshot gets created after the collection level metadata is written
-        # therefore it will be empty until just after the Elems_in_Collection's are written.
         self.tree_snapshot = []
 
     def main(self):
-        print(self.alias)
-        self.alias_dir = os.path.realpath('../Cached_Cdm_files/{}/'.format(self.alias))
         self.do_collection_level_metadata()
         self.do_root_level_objects()
         self.do_compound_objects()
@@ -75,21 +71,25 @@ class ScrapeAlias():
                 CdmAPI.retrieve_collection_total_recs(self.alias),
                 filepath,
                 'Collection_TotalRecs')
+            logging.info('{} Collection_TotalRecs.xml written'.format(self.alias))
         if 'Collection_Metadata.xml' not in files:
             CdmAPI.write_xml_to_file(
                 CdmAPI.retrieve_collection_metadata(self.alias),
                 filepath,
                 'Collection_Metadata')
+            logging.info('{} Collection_Metadata.xml written'.format(self.alias))
         if 'Collection_Fields.json' not in files:
             CdmAPI.write_json_to_file(
                 CdmAPI.retrieve_collection_fields_json(self.alias),
                 filepath,
                 'Collection_Fields')
+            logging.info('{} Collection_Fields.json written'.format(self.alias))
         if 'Collection_Fields.xml' not in files:
             CdmAPI.write_xml_to_file(
                 CdmAPI.retrieve_collection_fields_xml(self.alias),
                 filepath,
                 'Collection_Fields')
+            logging.info('{} Collection_Fields.xml written'.format(self.alias))
 
     def do_root_level_objects(self):
         chunksize = 1024
@@ -120,11 +120,13 @@ class ScrapeAlias():
                 CdmAPI.retrieve_elems_in_collection(self.alias, starting_position, chunksize, 'json'),
                 filepath,
                 'Elems_in_Collection_{}'.format(starting_position))
+            logging.info('{} Elems_in_Collection_{}.json written'.format(self.alias, starting_position))
         if 'Elems_in_Collection_{}.xml'.format(starting_position) not in files:
             CdmAPI.write_xml_to_file(
                 CdmAPI.retrieve_elems_in_collection(alias, starting_position, chunksize, 'xml'),
                 filepath,
                 'Elems_in_Collection_{}'.format(starting_position))
+            logging.info('{} Elems_in_Collection_{}.xml written'.format(self.alias, starting_position))
 
     def find_root_pointers_filetypes(self):
         filepath = self.alias_dir
@@ -140,14 +142,14 @@ class ScrapeAlias():
         return pointers_filetypes
 
     def process_root_level_objects(self, pointer, filetype):
-        if filetype != 'cpd':
-            self.write_metadata(self.alias_dir, pointer, 'simple')
-            self.process_binary(self.alias_dir, pointer, filetype)
-        elif filetype == 'cpd':
+        if filetype == 'cpd':
             cpd_path = os.path.join(self.alias_dir, 'Cpd')
             os.makedirs(cpd_path, exist_ok=True)
             self.write_metadata(cpd_path, pointer, 'cpd')
             self.compound_parents.append(pointer)
+        else:
+            self.write_metadata(self.alias_dir, pointer, 'simple')
+            self.process_binary(self.alias_dir, pointer, filetype)
 
     def write_metadata(self, target_dir, pointer, simple_or_cpd):
         # checks presence of file before calling to contentDM or overwriting file
@@ -161,43 +163,43 @@ class ScrapeAlias():
         if "{}.xml".format(pointer) not in files:
             xml_text = CdmAPI.retrieve_item_metadata(self.alias, pointer, 'xml')
             if is_it_a_404_xml(xml_text):
-                self.unavailable_metadata.add(pointer)
+                logging.warning('{} {}.xml is 404'.format(self.alias, pointer))
             else:
                 CdmAPI.write_xml_to_file(xml_text, target_dir, pointer)
-                print(self.alias, pointer, 'wrote xml_text')
+                logging.info('{} {} xml_text written'.format(self.alias, pointer))
 
         if '{}.json'.format(pointer) not in files:
             json_text = CdmAPI.retrieve_item_metadata(self.alias, pointer, 'json')
             if is_it_a_404_json(json_text):
-                self.unavailable_metadata.add(pointer)
+                logging.warning('{} {}.json is 404'.format(self.alias, pointer))
             else:
                 CdmAPI.write_json_to_file(json_text, target_dir, pointer)
-            print(self.alias, pointer, 'wrote json_text')
+                logging.info('{} {} json_text written'.format(self.alias, pointer))
 
         if '{}_parent.xml'.format(pointer) not in files:
             xml_parent_text = CdmAPI.retrieve_parent_info(self.alias, pointer, 'xml')
             if is_it_a_404_xml(xml_parent_text):
-                self.unavailable_metadata.add(pointer)
+                logging.warning('{} {}_parent.xml is 404'.format(self.alias, pointer))
             else:
                 CdmAPI.write_xml_to_file(xml_parent_text, target_dir, '{}_parent'.format(pointer))
-            print(self.alias, pointer, 'wrote xml_parent_text')
+                logging.info('{} {} xml_parent_text written'.format(self.alias, pointer))
 
         if '{}_parent.json'.format(pointer) not in files:
             json_parent_text = CdmAPI.retrieve_parent_info(self.alias, pointer, 'json')
             if is_it_a_404_json(json_parent_text):
-                self.unavailable_metadata.add(pointer)
+                logging.warning('{} {}_parent.json is 404'.format(self.alias, pointer))
             else:
                 CdmAPI.write_json_to_file(json_parent_text, target_dir, '{}_parent'.format(pointer))
-            print(self.alias, pointer, 'wrote json_parent_text')
+                logging.info('{} {} json_parent_text written'.format(self.alias, pointer))
 
         if simple_or_cpd == 'cpd':
             if '{}_cpd.xml'.format(pointer) not in files:
                 index_file_text = CdmAPI.retrieve_compound_object(self.alias, pointer)
                 if is_it_a_404_xml(index_file_text):
-                    self.unavailable_metadata.add(pointer)
+                    logging.warning('{} {}_cpd.xml is 404'.format(self.alias, pointer))
                 else:
                     CdmAPI.write_xml_to_file(index_file_text, target_dir, '{}_cpd'.format(pointer))
-                print(self.alias, pointer, 'wrote xml_index_file_text')
+                    logging.info('{} {} xml_index_file_text written'.format(self.alias, pointer))
 
     def process_binary(self, target_dir, pointer, filetype):
         files = [file for root, dirs, files in self.tree_snapshot for file in files if target_dir == root]
@@ -208,10 +210,9 @@ class ScrapeAlias():
                     target_dir,
                     pointer,
                     filetype)
-                print('wrote', self.alias, pointer, filetype)
+                logging.info('{} {}.{} written'.format(self.alias, pointer, filetype))
             except urllib.error.HTTPError:
-                print(self.alias, pointer, 'HTTP error caught on binary')
-                self.unavailable_binaries.add((pointer, filetype))
+                logging.warning('{} {} HTTP error caught on binary'.format(self.alias, pointer))
 
     def do_compound_objects(self):
         for parent_pointer in self.compound_parents:
@@ -222,7 +223,7 @@ class ScrapeAlias():
         children_pointers_list = self.parse_children_of_cpd(parent_pointer)
         child_dir = os.path.realpath(os.path.join(self.alias_dir, 'Cpd', parent_pointer))
         if not children_pointers_list:
-            print('no children to this compound: {}'.format(parent_pointer))
+            logging.warning('{} no children to this compound'.format(parent_pointer))
             return None
         for child in children_pointers_list:
             child_pointer = child.text
@@ -230,7 +231,7 @@ class ScrapeAlias():
             try:
                 child_filetype = parse_binary_original_filetype(child_dir, child_pointer)
             except OSError:
-                self.unavailable_metadata.add(child_pointer)
+                logging.warning('{} {} cannot parse original filetype'.format(self.alias, os.path.join(child_dir, child_pointer)))
                 continue
             self.process_binary(child_dir, child_pointer, child_filetype)
 
@@ -267,8 +268,7 @@ class ScrapeAlias():
         try:
             binary = CdmAPI.retrieve_binary(self.alias, pointer)
         except urllib.error.HTTPError:
-            print(self.alias, pointer, 'HTTP error caught on binary')
-            self.unavailable_binaries.add((pointer, filetype))
+            logging.warning('{} {} HTTP error caught on binary'.format(self.alias, pointer))
             return False
         return binary
 
@@ -284,7 +284,7 @@ class ScrapeAlias():
             return False
         except UnicodeDecodeError:
             CdmAPI.write_binary_to_file(binary, filepath, pointer, filetype)
-            print(filepath, pointer, 'wrote root hidden_pdf')
+            logging.info('{} {} root hidden_pdf written'.format(filepath, pointer))
             return True
 
 
@@ -324,55 +324,53 @@ def has_pdfpage_elems(children_elements_list):
 
 
 def parse_binary_original_filetype(folder, pointer):
-    filepath = '{}/{}.xml'.format(folder, pointer)
+    filepath = '{}.xml'.format(os.path.join(folder, pointer))
     parsed_etree = ET.parse(filepath)
     orig_name = parsed_etree.find('find').text
     filetype = os.path.splitext(orig_name)[-1].replace('.', '')
     return filetype
 
 
-def make_pretty_printout(all_unavailable_binaries, all_unavailable_metadata):
-    print('\n\nUnavailable metadata:')
-    for k, v in all_unavailable_metadata.items():
-        if len(v):
-            print(k)
-            print('\n'.join(i for i in v))
-    print('\nUnavailable binaries:')
-    for k, v in all_unavailable_binaries.items():
-        if len(v):
-            print(k)
-            print('\n'.join(i for i in v))
-    print('\n\n')
+def do_collection(alias):
+    logging.info('starting {}'.format(alias))
+    scrapealias = ScrapeAlias(repo_dir, alias)
+    scrapealias.main()
+    logging.info('finished {}'.format(alias))
+
+
+def do_repo_level_objects(repo_dir):
+    os.makedirs(repo_dir, exist_ok=True)
+    if not os.path.isfile(os.path.join(repo_dir, 'Collections_List.xml')):
+        coll_list_txt = CdmAPI.retrieve_collections_list()
+        CdmAPI.write_xml_to_file(coll_list_txt, repo_dir, 'Collections_List')
+        logging.info('Collection_List.xml written')
+
+
+def setup_logging():
+    logging.basicConfig(filename='scrape_cDM_log.txt',
+                        level=logging.INFO,
+                        format='%(asctime)s: %(levelname)-8s %(message)s',
+                        datefmt='%m/%d/%Y %I:%M:%S %p')
+    console = logging.StreamHandler()
+    console.setLevel(logging.WARNING)
+    formatter = logging.Formatter('%(name)-12s: %(levelname)-8s %(message)s')
+    console.setFormatter(formatter)
+    logging.getLogger('').addHandler(console)
 
 
 if __name__ == '__main__':
-    all_unavailable_binaries = dict()
-    all_unavailable_metadata = dict()
+    setup_logging()
+    repo_dir = os.path.join('..', 'Cached_Cdm_files')
 
     """ Get specific collections' metadata/binaries """
 
-
-    for alias in ('p15140coll26',):
-        scrapealias = ScrapeAlias(alias)
-        scrapealias.main()
-        all_unavailable_metadata[alias] = scrapealias.unavailable_metadata
-        all_unavailable_binaries[alias] = scrapealias.unavailable_binaries
-    make_pretty_printout(all_unavailable_binaries, all_unavailable_metadata)
+    for alias in ('p120701coll17',):
+        do_collection(alias)
 
     """ Get all collections' metadata/binaries """
 
-    # repo_dir = '../Cached_Cdm_files'
-    # os.makedirs(repo_dir, exist_ok=True)
-    # if not os.path.isfile(os.path.join(repo_dir, 'Collections_List.xml')):
-    #     coll_list_txt = CdmAPI.retrieve_collections_list()
-    #     CdmAPI.write_xml_to_file(coll_list_txt, repo_dir, 'Collections_List')
+    # do_repo_level_objects(repo_dir)
     # coll_list_xml = ET.parse(os.path.join(repo_dir, 'Collections_List.xml'))
-    # not_all_binaries = []
-    # for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')]:
-    #     if alias in WE_DONT_MIGRATE:
-    #         continue
-    #     scrapealias = ScrapeAlias(alias)
-    #     scrapealias.main()
-    #     all_unavailable_metadata[alias] = scrapealias.unavailable_metadata
-    #     all_unavailable_binaries[alias] = scrapealias.unavailable_binaries
-    # make_pretty_printout(all_unavailable_binaries, all_unavailable_metadata)
+    # for alias in [alias.text.strip('/') for alias in coll_list_xml.findall('.//alias')
+    #               if alias.text.strip('/') not in WE_DONT_MIGRATE]:
+    #     do_collection(alias)

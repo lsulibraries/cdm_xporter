@@ -90,7 +90,7 @@ def test_parse_binary_original_filetype(mock_ET, simple_object_etree_fixture):
 @patch('scrape_cDM.ET')
 def test_count_root_objects(mock_ET, total_recs_etree_fixture):
     mock_ET.parse.return_value = total_recs_etree_fixture
-    scrapealias = scrape_cDM.ScrapeAlias('_')
+    scrapealias = scrape_cDM.ScrapeAlias('_', '_')
     scrapealias.alias_dir = 'imag_alias_dir'
     assert scrapealias.count_root_objects() == 20
     mock_ET.parse.assert_called_with('imag_alias_dir/Collection_TotalRecs.xml')
@@ -98,7 +98,7 @@ def test_count_root_objects(mock_ET, total_recs_etree_fixture):
 
 @patch('scrape_cDM.ScrapeAlias.count_root_objects')
 def test_calculate_chunks(mock_count_root_objects):
-    scrapealias = scrape_cDM.ScrapeAlias('_')
+    scrapealias = scrape_cDM.ScrapeAlias('_', '_')
     for total, chunksize, chunks in ((899, 100, 9),
                                      (900, 100, 10),
                                      (999, 1000, 1),
@@ -120,7 +120,7 @@ def test_cpd_object_original_pointer_filetype(mock_ET, cpd_object_etree_fixture)
 def test_write_hidden_pdf_if_a_binary__xml_received_instead_of_binary_failure(mock_API, binary_decodes_fixture):
     # binary = """<?xml version="1.0" encoding="utf-8"?><cpd><type>Document-PDF</type><page><pagetitle>Page 1</pagetitle><pagefile>3605.pdfpage</pagefile><pageptr>3604</pageptr></page></cpd>""".encode('utf-8')
     filepath, pointer, filetype = 'imag_filepath', 'imag_pointer', 'imag_filetype'
-    scrapealias = scrape_cDM.ScrapeAlias('_')
+    scrapealias = scrape_cDM.ScrapeAlias('_', '_')
     assert scrapealias.write_hidden_pdf_if_a_binary(binary_decodes_fixture, filepath, pointer, filetype) is False
 
 
@@ -128,13 +128,13 @@ def test_write_hidden_pdf_if_a_binary__xml_received_instead_of_binary_failure(mo
 def test_write_hidden_pdf_if_a_binary__xml_received_instead_of_binary_success(mock_API, binary_doesnt_decode_fixture):
     # binary = """<?xml version="1.0" encoding="utf-8"?><cpd><type>Document-PDF</type><page><pagetitle>Page 1</pagetitle><pagefile>3605.pdfpage</pagefile><pageptr>3604</pageptr></page></cpd>""".encode('utf-8')
     filepath, pointer, filetype = 'imag_filepath', 'imag_pointer', 'imag_filetype'
-    scrapealias = scrape_cDM.ScrapeAlias('_')
+    scrapealias = scrape_cDM.ScrapeAlias('_', '_')
     assert scrapealias.write_hidden_pdf_if_a_binary(binary_doesnt_decode_fixture, filepath, pointer, filetype) is True
     mock_API.assert_called_with(binary_doesnt_decode_fixture, 'imag_filepath', 'imag_pointer', 'imag_filetype')
 
 
 def test_find_sibling_files():
-    scrapealias = scrape_cDM.ScrapeAlias('_')
+    scrapealias = scrape_cDM.ScrapeAlias('_', '_')
     scrapealias.tree_snapshot = [['imag_a', ['imagd_1'], ['a1', 'a2', 'a3']], [['imag_b'], [], ['b1', 'b2']], [['imag_c'], [], ['c1', 'c2', 'c3', 'c4']]]
     assert set(scrapealias.find_sibling_files('a1')) == {'a1', 'a2', 'a3'}
     assert set(scrapealias.find_sibling_files('b2')) == {'b1', 'b2'}
@@ -147,7 +147,7 @@ def test_find_sibling_files():
 @patch('scrape_cDM.find_cpd_object_original_pointer_filetype')
 def test_try_to_get_a_hidden_pdf_at_root_of_cpd(mock_findcpd, mock_findsibl, mock_tryhidden, mock_writehidden):
     # if binary already on disk.
-    scrapealias = scrape_cDM.ScrapeAlias('_')
+    scrapealias = scrape_cDM.ScrapeAlias('_', '_')
     scrapealias.alias_dir = 'fake/filepath'
     scrapealias.find_sibling_files = mock_findsibl
     scrapealias.try_getting_hidden_pdf = mock_tryhidden
@@ -161,7 +161,7 @@ def test_try_to_get_a_hidden_pdf_at_root_of_cpd(mock_findcpd, mock_findsibl, moc
     assert not mock_writehidden.called
 
     # if binary not already on disk
-    scrapealias = scrape_cDM.ScrapeAlias('_')
+    scrapealias = scrape_cDM.ScrapeAlias('_', '_')
     scrapealias.alias_dir = 'fake/filepath'
     scrapealias.find_sibling_files = mock_findsibl
     scrapealias.try_getting_hidden_pdf = mock_tryhidden
@@ -180,7 +180,7 @@ def test_try_to_get_a_hidden_pdf_at_root_of_cpd(mock_findcpd, mock_findsibl, moc
 @patch('scrape_cDM.ScrapeAlias.do_root_level_objects')
 @patch('scrape_cDM.ScrapeAlias.do_compound_objects')
 def test_main_loop(mock_docpd, mock_doroot, mock_docoll):
-    scrapealias = scrape_cDM.ScrapeAlias('_')
+    scrapealias = scrape_cDM.ScrapeAlias('_', '_')
     scrapealias.do_collection_level_metadata = mock_docoll
     scrapealias.do_root_level_objects = mock_doroot
     scrapealias.do_compound_objects = mock_docpd
@@ -201,7 +201,7 @@ def test_do_collection_level_metadata(mock_API, mock_os):
     mock_API.retrieve_collection_metadata.return_value = 'coll_metadata'
     mock_API.retrieve_collection_fields_json.return_value = 'fields_json'
     mock_API.retrieve_collecion_fields_xml.return_value = 'fields_xml'
-    scrapealias = scrape_cDM.ScrapeAlias('imag_alias')
+    scrapealias = scrape_cDM.ScrapeAlias('imag_path', 'imag_alias')
     scrapealias.alias_dir = 'imag_filepath'
 
     mock_os.listdir.return_value = ('Collection_TotalRecs.xml', 'Collection_Metadata.xml', 'Collection_Fields.json', 'Collection_Fields.xml')
@@ -228,20 +228,18 @@ def test_do_collection_level_metadata(mock_API, mock_os):
 
 @patch('scrape_cDM.CdmAPI')
 def test_try_getting_hidden_pdf(mock_API):
-    scrapealias = scrape_cDM.ScrapeAlias('imag_alias')
+    scrapealias = scrape_cDM.ScrapeAlias('imag_path', 'imag_alias')
     import urllib
     mock_API.retrieve_binary.return_value = 'actual_imag_binary'
     assert scrapealias.try_getting_hidden_pdf('imag_pointer', 'imag_filetype') == 'actual_imag_binary'
-    assert scrapealias.unavailable_binaries == set()
     mock_API.retrieve_binary.side_effect = urllib.error.HTTPError('imag', b"", 42, 43, 'imag_exception occurredd')
     assert scrapealias.try_getting_hidden_pdf('imag_pointer', 'imag_filetype') is False
-    assert scrapealias.unavailable_binaries == {('imag_pointer', 'imag_filetype'), }
 
 
 @patch('scrape_cDM.has_pdfpage_elems')
 @patch('scrape_cDM.ScrapeAlias.try_to_get_a_hidden_pdf_at_root_of_cpd')
 def test_are_child_pointers_pdfpages(mock_try_to_get, mock_has_pdfpage):
-    scrapealias = scrape_cDM.ScrapeAlias('_')
+    scrapealias = scrape_cDM.ScrapeAlias('_', '_')
     scrapealias.try_to_get_a_hidden_pdf_at_root_of_cpd = mock_try_to_get
     # scrape_cDM.has_pdfpage_elems = mock_has_pdfpage
     mock_has_pdfpage.return_value = False
@@ -263,7 +261,7 @@ def test_are_child_pointers_pdfpages(mock_try_to_get, mock_has_pdfpage):
 @patch('scrape_cDM.ET.parse')
 @patch('scrape_cDM.ScrapeAlias.are_child_pointers_pdfpages')
 def test_parse_children_of_cpd(mock_arepointers, mock_ETparse, ETparse_fixture):
-    scrapealias = scrape_cDM.ScrapeAlias('_')
+    scrapealias = scrape_cDM.ScrapeAlias('_', '_')
     scrapealias.alias_dir = 'imag_dir'
     scrapealias.are_child_pointers_pdfpages = mock_arepointers
     scrape_cDM.ET.parse = mock_ETparse
