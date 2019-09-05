@@ -2,6 +2,7 @@
 
 import os
 import re
+import sys
 
 we_dont_migrate = {'p16313coll70', 'p120701coll11', 'LSUHSCS_JCM', 'UNO_SCC', 'p15140coll36', 'p15140coll57',
                    'p15140coll13', 'p15140coll11', 'p16313coll32', 'p16313coll49', 'p16313coll50',
@@ -23,27 +24,38 @@ we_dont_migrate = {'p16313coll70', 'p120701coll11', 'LSUHSCS_JCM', 'UNO_SCC', 'p
 
 not_converted = []
 
-for root, dirs, files in os.walk('/media/garrett_armstrong/U/Cached_Cdm_files'):
-    if len(root.split('/')) > 5:
-        if root.split('/')[5] in we_dont_migrate:
-            print('skipping', root.split('/')[5])
-            continue
 
-    numeric_file_regex = re.compile('[0-9]+.xml')
-    pointer_xmls = [i for i in files if numeric_file_regex.match(i)]
-    for pointer_xml in pointer_xmls:
-        pointer = pointer_xml.split('.')[0]
-        if "{}_cpd.xml".format(pointer) in files:
-            continue    # skip root level of compound objects
+def check(folder):
+    for root, dirs, files in os.walk(folder):
+        if len(root.split('/')) > 5:
+            if root.split('/')[5] in we_dont_migrate:
+                print('skipping', root.split('/')[5])
+                continue
 
-        if ('{}.jp2'.format(pointer) in files) or \
-           ('{}.pdf'.format(pointer) in files) or \
-           ('{}.mp4'.format(pointer) in files) or \
-           ('{}.mp3'.format(pointer) in files):
-            continue
-        else:
-            not_converted.append("{}/{}".format(root, pointer_xml))
-            print(not_converted[0])
+        numeric_file_regex = re.compile('[0-9]+.xml')
+        pointer_xmls = [i for i in files if numeric_file_regex.match(i)]
+        for pointer_xml in pointer_xmls:
+            pointer = pointer_xml.split('.')[0]
+            if "{}_cpd.xml".format(pointer) in files:
+                continue    # skip root level of compound objects
 
-for i in not_converted:
-    print(i)
+            if ('{}.jp2'.format(pointer) in files) or \
+               ('{}.pdf'.format(pointer) in files) or \
+               ('{}.mp4'.format(pointer) in files) or \
+               ('{}.mp3'.format(pointer) in files):
+                continue
+            else:
+                not_converted.append("{}/{}".format(root, pointer_xml))
+                print(not_converted[0])
+
+    for i in not_converted:
+        print(i)
+
+
+if __name__ == '__main__':
+    try:
+        folder = sys.argv[1]
+    except IndexError:
+        print('\nChange to: "python identify_missing_binaries.py $folder\n')
+        quit()
+    check(folder)

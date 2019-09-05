@@ -2,6 +2,7 @@
 
 import os
 import lxml.etree as etree
+import sys
 
 we_dont_migrate = {'p16313coll70', 'p120701coll11', 'LSUHSCS_JCM', 'UNO_SCC', 'p15140coll36', 'p15140coll57',
                    'p15140coll13', 'p15140coll11', 'p16313coll32', 'p16313coll49', 'p16313coll50',
@@ -22,35 +23,37 @@ we_dont_migrate = {'p16313coll70', 'p120701coll11', 'LSUHSCS_JCM', 'UNO_SCC', 'p
                    'p16313coll18', 'p15140coll33', 'LST', 'MPF', 'LOYOLA_ETDa', 'LOYOLA_ETDb', }
 
 
-root_dir = '/media/garrett_armstrong/U/Cached_Cdm_files/'
-repo_extra_files = []
-for folder in (i for i in os.listdir(root_dir) if os.path.isdir("{}/{}".format(root_dir, i))):
-    if folder in we_dont_migrate:
-        print('skipping', folder)
-        continue
+def scan(root_dir):
+    repo_extra_files = []
+    for folder in (i for i in os.listdir(root_dir) if os.path.isdir("{}/{}".format(root_dir, i))):
+        if folder in we_dont_migrate:
+            print('skipping', folder)
+            continue
 
-    print(folder)
+        subdir = "{}/{}".format(root_dir, folder)
+        collection_pointers = set()
+        for Elems_file in (i for i in os.listdir(subdir) if ("Elems_in_Collection" in i) and (".xml" in i)):
+            elems_file_etree = etree.parse("{}/{}".format(subdir, Elems_file))
+            for pointer in elems_file_etree.findall(".//pointer"):
+                collection_pointers.add(pointer.text)
 
-    subdir = "{}/{}".format(root_dir, folder)
-    collection_pointers = set()
-    for Elems_file in (i for i in os.listdir(subdir) if ("Elems_in_Collection" in i) and (".xml" in i)):
-        elems_file_etree = etree.parse("{}/{}".format(subdir, Elems_file))
-        for pointer in elems_file_etree.findall(".//pointer"):
-            collection_pointers.add(pointer.text)
+        extra_files = set()
+        for file in os.listdir(subdir):
+            if (file.split('.')[0] not in collection_pointers) and (file.split('_')[0] not in collection_pointers):
+                if ('Elems' in file) or ('Collection' in file) or ('Cpd' in file) or ('Thumbs' in file):
+                    continue
+                extra_files.add(file.split('.')[0].split('_')[0])
 
-    extra_files = set()
-    # print(collection_pointers)
-    for file in os.listdir(subdir):
-        if (file.split('.')[0] not in collection_pointers) and (file.split('_')[0] not in collection_pointers):
-            if ('Elems' in file) or ('Collection' in file) or ('Cpd' in file) or ('Thumbs' in file):
-                continue
-            # print(file)
-            extra_files.add(file.split('.')[0].split('_')[0])
+        if extra_files:
+            repo_extra_files.append((folder, extra_files))
 
-    # print(collection_pointers)
-    # print('extra_files', extra_files)
-    if extra_files:
-        repo_extra_files.append((folder, extra_files))
-    print(repo_extra_files)
+    print('repo extra files:', repo_extra_files)
 
-print('repo extra files:', repo_extra_files)
+
+if __name__ == '__main__':
+    try:
+        folder = sys.argv[1]
+    except IndexError:
+        print('\nChange to: "remove_deleted_objects.py $folder\n\n')
+        quit()
+    scan(folder)
