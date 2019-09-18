@@ -8,16 +8,16 @@ from lxml import etree as ET
 file_match = re.compile(r'[0-9]+\.(xml|json)')
 filetype_match = re.compile(r'([0-9]+)\.cpd')
 
-source_dir = 'placeholder/p120701coll26'
+source_dir = '/media/francis/Storage/LNP_Source_datas/CachedCdmFiles/LSU_LNP/'
 starting_file_list = [file for file in os.listdir(source_dir) if (file_match.match(file)) or ('Elems_in' in file)]
-subfolder = [file for file in os.listdir(source_dir) if os.path.isdir('{}/{}/{}'.format(os.getcwd(), source_dir, file))]
+subfolder = [file for file in os.listdir(source_dir) if os.path.isdir(os.path.join(source_dir, file))]
 full_dir = [file for file in os.listdir(source_dir)]
 
 
 for file in starting_file_list:
     if "Elems_in_" in file:
         if '.xml' in file:
-            elems_etree = ET.parse('{}/{}/{}'.format(os.getcwd(), source_dir, file))
+            elems_etree = ET.parse(os.path.join(source_dir, file))
             for elem in elems_etree.findall('.//record'):
                 pointer = [i.text for i in elem if i.tag == 'pointer']
                 filename = [i for i in elem if i.tag == 'find']
@@ -28,16 +28,16 @@ for file in starting_file_list:
                     filename.text = '{}.pdf'.format(pointer)
                     filetype.text = 'pdf'
             print(file, 'elems in collection wrote')
-            elems_etree.write('{}/{}/{}'.format(os.getcwd(), source_dir, file), pretty_print=True)
+            elems_etree.write(os.path.join(source_dir, file), pretty_print=True)
         if '.json' in file:
-            with open('{}/{}/{}'.format(os.getcwd(), source_dir, file), 'r') as f:
+            with open(os.path.join(source_dir, file), 'r') as f:
                 parsed_json = json.loads(f.read())
             for elem in parsed_json['records']:
                 pointer, filename, filetype = elem['pointer'], elem['find'], elem['filetype']
                 if '{}.pdf'.format(pointer) in full_dir:
                     elem['find'] = '{}.pdf'.format(pointer)
                     elem['filetype'] = 'pdf'
-            with open('{}/{}/{}'.format(os.getcwd(), source_dir, file), 'w') as f:
+            with open(os.path.join(source_dir, file), 'w') as f:
                 print(file, 'json elems wrotten')
                 json.dump(parsed_json, f)
         continue
@@ -64,7 +64,6 @@ for file in starting_file_list:
         print('json loop')
         file_text = file_text.replace('"filetype":"cpd",', '"filetype":"pdf",')
 
-
-    with open('{}/{}'.format(source_dir, file), 'w') as f:
+    with open(os.path.join(source_dir, file), 'w') as f:
         print(file, 'normal file wortted')
         f.write(file_text)
